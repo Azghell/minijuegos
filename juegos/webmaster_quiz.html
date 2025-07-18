@@ -1,13 +1,13 @@
-<!-- Este archivo contiene solo la estructura HTML del juego "WebMaster Quiz". -->
-<!-- No incluye el encabezado, pie de página, ni estilos globales, ya que se cargará dinámicamente. -->
+<!-- Este archivo contiene solo la estructura HTML del juego de WebMaster Quiz. -->
+<!-- No incluye el encabezado, pie de página, ni estilos globales. -->
 
 <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">
     WebMaster Quiz
 </h3>
 
-<!-- Menú de Inicio del Juego -->
+<!-- Start Menu -->
 <div id="quiz-start-menu" class="flex flex-col items-center justify-center min-h-[300px] animate-fade-in-down">
-    <p class="text-xl text-gray-700 mb-6">Pon a prueba tus conocimientos de desarrollo web.</p>
+    <p class="text-xl text-gray-700 mb-6">Demuestra tus conocimientos en HTML, CSS y JavaScript.</p>
     <button id="start-quiz-button" class="px-8 py-4 rounded-xl font-bold text-xl
                 bg-blue-600 text-white hover:bg-blue-700
                 transition-all duration-300 ease-in-out
@@ -17,29 +17,29 @@
     </button>
 </div>
 
-<!-- Menú de Selección de Tema -->
+<!-- Topic Selection Menu -->
 <div id="quiz-topic-selection-menu" class="hidden flex-col items-center justify-center min-h-[300px] animate-fade-in-down">
     <h4 class="text-xl font-semibold text-gray-700 mb-6">Selecciona un tema:</h4>
     <div class="grid grid-cols-1 gap-4 w-full max-w-sm">
         <button class="topic-button px-6 py-3 rounded-xl font-semibold text-lg
-                    bg-green-500 text-white hover:bg-green-600
+                    bg-blue-500 text-white hover:bg-blue-600
                     transition-all duration-300 ease-in-out
-                    shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-green-300"
-                    data-topic="html">
+                    shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                data-topic="html">
             HTML
         </button>
         <button class="topic-button px-6 py-3 rounded-xl font-semibold text-lg
-                    bg-red-500 text-white hover:bg-red-600
+                    bg-green-500 text-white hover:bg-green-600
                     transition-all duration-300 ease-in-out
-                    shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-red-300"
-                    data-topic="css">
+                    shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-green-300"
+                data-topic="css">
             CSS
         </button>
         <button class="topic-button px-6 py-3 rounded-xl font-semibold text-lg
-                    bg-purple-500 text-white hover:bg-purple-600
+                    bg-yellow-500 text-white hover:bg-yellow-600
                     transition-all duration-300 ease-in-out
-                    shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300"
-                    data-topic="javascript">
+                    shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-yellow-300"
+                data-topic="javascript">
             JavaScript
         </button>
     </div>
@@ -51,29 +51,30 @@
     </button>
 </div>
 
-<!-- Menú de Selección de Dificultad -->
+<!-- Difficulty Selection Menu -->
 <div id="quiz-difficulty-selection-menu" class="hidden flex-col items-center justify-center min-h-[300px] animate-fade-in-down">
-    <h4 class="text-xl font-semibold text-gray-700 mb-6">Selecciona la dificultad para <span id="selected-topic-display" class="text-blue-600 font-bold"></span>:</h4>
+    <h4 class="text-xl font-semibold text-gray-700 mb-6">Tema: <span id="selected-topic-display" class="text-blue-600"></span></h4>
+    <p class="text-lg text-gray-700 mb-6">Selecciona una dificultad:</p>
     <div class="grid grid-cols-1 gap-4 w-full max-w-sm">
         <button class="difficulty-button px-6 py-3 rounded-xl font-semibold text-lg
-                    bg-blue-500 text-white hover:bg-blue-600
+                    bg-teal-500 text-white hover:bg-teal-600
                     transition-all duration-300 ease-in-out
-                    shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
-                    data-difficulty="basico">
+                    shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-teal-300"
+                data-difficulty="basico">
             Básico
         </button>
         <button class="difficulty-button px-6 py-3 rounded-xl font-semibold text-lg
                     bg-orange-500 text-white hover:bg-orange-600
                     transition-all duration-300 ease-in-out
                     shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-300"
-                    data-difficulty="intermedio">
+                data-difficulty="intermedio">
             Intermedio
         </button>
         <button class="difficulty-button px-6 py-3 rounded-xl font-semibold text-lg
-                    bg-red-600 text-white hover:bg-red-700
+                    bg-red-500 text-white hover:bg-red-600
                     transition-all duration-300 ease-in-out
                     shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-red-300"
-                    data-difficulty="avanzado">
+                data-difficulty="avanzado">
             Avanzado
         </button>
     </div>
@@ -85,106 +86,140 @@
     </button>
 </div>
 
-<!-- Área de Juego (Quiz) -->
+<!-- Game Play Area -->
 <div id="quiz-play-area" class="hidden flex-col items-center animate-fade-in-down">
     <div class="w-full flex justify-between items-center mb-6">
         <span class="text-lg font-semibold text-gray-700">Tiempo: <span id="quiz-timer" class="text-blue-600">00:00</span></span>
         <span class="text-lg font-semibold text-gray-700">Puntaje: <span id="quiz-score-display" class="text-green-600">0</span></span>
     </div>
 
-    <div id="quiz-card" class="bg-gray-100 p-6 rounded-lg shadow-md mb-8 w-full max-w-2xl border-2 border-transparent transition-all duration-300">
-        <p id="quiz-question" class="text-xl font-semibold text-gray-800 mb-4"></p>
-        <p id="quiz-help-text" class="text-gray-600 text-sm italic mb-4 hidden"></p>
-        
-        <!-- Contenedor para los diferentes tipos de preguntas -->
-        <div id="question-type-container" class="flex flex-col gap-3">
-            <!-- Tipo: Selección Múltiple -->
-            <div id="multiple-choice-options" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
-                <button class="answer-option-button px-5 py-3 rounded-lg font-semibold text-base bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200" data-option="0"></button>
-                <button class="answer-option-button px-5 py-3 rounded-lg font-semibold text-base bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200" data-option="1"></button>
-                <button class="answer-option-button px-5 py-3 rounded-lg font-semibold text-base bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200" data-option="2"></button>
-                <button class="answer-option-button px-5 py-3 rounded-lg font-semibold text-base bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200" data-option="3"></button>
-            </div>
+    <div id="quiz-card" class="bg-white p-6 rounded-2xl shadow-xl border-2 border-gray-200 w-full max-w-xl text-center min-h-[250px] flex flex-col justify-between items-center">
+        <p id="quiz-question" class="text-2xl font-bold text-gray-800 mb-4"></p>
+        <p id="quiz-help-text" class="text-sm text-gray-500 mb-4 hidden"></p>
 
-            <!-- Tipo: Completar Sintaxis / Orden de Ejecución -->
-            <div id="syntax-order-container" class="hidden flex-col items-center">
-                <div id="syntax-target-area" class="bg-white border-2 border-dashed border-gray-300 p-4 rounded-lg min-h-[100px] w-full mb-4 flex flex-wrap gap-2 justify-center items-center">
-                    <!-- Los fragmentos arrastrados se colocarán aquí -->
-                </div>
-                <div id="syntax-options-area" class="bg-gray-200 p-4 rounded-lg w-full flex flex-wrap gap-2 justify-center items-center">
-                    <!-- Opciones de fragmentos para arrastrar -->
-                </div>
-                <button id="check-syntax-button" class="mt-4 px-6 py-3 rounded-xl font-semibold text-base
-                            bg-blue-600 text-white hover:bg-blue-700
+        <!-- Question Type Containers -->
+        <div id="question-type-container" class="w-full flex flex-col items-center justify-center">
+
+            <!-- Multiple Choice Options -->
+            <div id="multiple-choice-options" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                <button class="answer-option-button px-6 py-3 rounded-xl font-semibold text-lg
+                            bg-blue-500 text-white hover:bg-blue-600
                             transition-all duration-300 ease-in-out
-                            shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
-                    Comprobar
-                </button>
+                            shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                        data-option="0">Opción 1</button>
+                <button class="answer-option-button px-6 py-3 rounded-xl font-semibold text-lg
+                            bg-blue-500 text-white hover:bg-blue-600
+                            transition-all duration-300 ease-in-out
+                            shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                        data-option="1">Opción 2</button>
+                <button class="answer-option-button px-6 py-3 rounded-xl font-semibold text-lg
+                            bg-blue-500 text-white hover:bg-blue-600
+                            transition-all duration-300 ease-in-out
+                            shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                        data-option="2">Opción 3</button>
+                <button class="answer-option-button px-6 py-3 rounded-xl font-semibold text-lg
+                            bg-blue-500 text-white hover:bg-blue-600
+                            transition-all duration-300 ease-in-out
+                            shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                        data-option="3">Opción 4</button>
             </div>
 
-            <!-- Tipo: Conexión Lógica (Drag & Match) -->
+            <!-- Syntax Completion / Order Execution -->
+            <div id="syntax-order-container" class="hidden flex-col items-center w-full">
+                <div id="syntax-target-area" class="w-full min-h-[80px] bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-3 mb-4 flex flex-wrap justify-center items-center gap-2">
+                    <!-- Fragments will be added here by user clicks -->
+                </div>
+                <div id="syntax-options-area" class="w-full min-h-[80px] bg-gray-50 border border-gray-200 rounded-lg p-3 flex flex-wrap justify-center items-center gap-2 mb-4">
+                    <!-- Clickable fragments will be here -->
+                </div>
+                <div class="flex space-x-4">
+                    <button id="check-syntax-button" class="px-6 py-3 rounded-xl font-semibold text-lg
+                                bg-purple-600 text-white hover:bg-purple-700
+                                transition-all duration-300 ease-in-out
+                                shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300">
+                        Comprobar
+                    </button>
+                    <button id="undo-syntax-button" class="px-6 py-3 rounded-xl font-semibold text-lg
+                                bg-gray-400 text-white hover:bg-gray-500
+                                transition-all duration-300 ease-in-out
+                                shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-gray-300">
+                        Deshacer
+                    </button>
+                </div>
+            </div>
+
+            <!-- Drag & Match -->
             <div id="drag-match-container" class="hidden flex-col items-center w-full">
-                <div class="grid grid-cols-2 gap-4 w-full max-w-lg">
-                    <div id="drag-elements" class="flex flex-col gap-3 p-4 bg-gray-200 rounded-lg">
-                        <!-- Elementos arrastrables (izquierda) -->
-                    </div>
-                    <div id="drop-targets" class="flex flex-col gap-3 p-4 bg-gray-200 rounded-lg">
-                        <!-- Zonas de soltar (derecha) -->
-                    </div>
+                <div id="drag-elements" class="w-full min-h-[80px] bg-gray-50 border border-gray-200 rounded-lg p-3 flex flex-wrap justify-center items-center gap-2 mb-4">
+                    <!-- Drag items will be here -->
                 </div>
-                <button id="check-match-button" class="mt-4 px-6 py-3 rounded-xl font-semibold text-base
-                            bg-blue-600 text-white hover:bg-blue-700
-                            transition-all duration-300 ease-in-out
-                            shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
-                    Comprobar Coincidencias
-                </button>
+                <div id="drop-targets" class="w-full min-h-[120px] bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-3 flex flex-col items-center gap-2">
+                    <!-- Drop targets will be here -->
+                </div>
+                <div class="flex space-x-4 mt-4">
+                    <button id="check-match-button" class="px-6 py-3 rounded-xl font-semibold text-lg
+                                bg-purple-600 text-white hover:bg-purple-700
+                                transition-all duration-300 ease-in-out
+                                shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300">
+                        Comprobar
+                    </button>
+                    <button id="undo-match-button" class="px-6 py-3 rounded-xl font-semibold text-lg
+                                bg-gray-400 text-white hover:bg-gray-500
+                                transition-all duration-300 ease-in-out
+                                shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-gray-300">
+                        Deshacer
+                    </button>
+                </div>
             </div>
+
         </div>
     </div>
 
-    <button id="end-quiz-button" class="px-6 py-3 rounded-xl font-semibold text-base
+    <button id="end-quiz-button" class="mt-6 px-8 py-4 rounded-xl font-bold text-xl
                 bg-orange-600 text-white hover:bg-orange-700
                 transition-all duration-300 ease-in-out
                 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-300">
-        Terminar Quiz
+        Terminar Juego
     </button>
 </div>
 
-<!-- Pantalla de Resultados del Juego -->
+<!-- Result Screen -->
 <div id="quiz-result-screen" class="hidden flex-col items-center justify-center min-h-[300px] animate-fade-in-down">
     <h2 class="text-3xl font-bold text-gray-800 mb-6">Resultados del Quiz</h2>
     <p class="text-xl text-green-600 mb-2">Aciertos: <span id="quiz-correct-answers">0</span></p>
     <p class="text-xl text-red-600 mb-4">Errores: <span id="quiz-incorrect-answers">0</span></p>
-    <p class="text-lg text-gray-700 mb-6">Puntaje Final: <span id="quiz-final-score" class="font-bold text-blue-600">0</span></p>
+    <p class="text-xl text-gray-700 mb-2">Puntaje Final: <span id="quiz-final-score" class="text-blue-600">0</span></p>
     <p class="text-lg text-gray-700 mb-6">Tiempo Total: <span id="quiz-final-time">00:00</span></p>
-    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-6 w-full max-w-sm">
-        <button id="quiz-retry-level-button" class="px-8 py-4 rounded-xl font-bold text-xl
+    
+    <!-- Adjusted button container for better fitting -->
+    <div class="flex flex-wrap justify-center gap-4 mt-6 w-full max-w-lg">
+        <button id="quiz-retry-level-button" class="px-6 py-3 rounded-xl font-bold text-lg
                     bg-blue-600 text-white hover:bg-blue-700
                     transition-all duration-300 ease-in-out
                     shadow-lg hover:shadow-xl transform hover:-translate-y-1
-                    focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    focus:outline-none focus:ring-4 focus:ring-blue-300 flex-grow">
             Reintentar Nivel
         </button>
-        <button id="quiz-next-level-button" class="px-8 py-4 rounded-xl font-bold text-xl
+        <button id="quiz-next-level-button" class="px-6 py-3 rounded-xl font-bold text-lg
                     bg-green-600 text-white hover:bg-green-700
                     transition-all duration-300 ease-in-out
                     shadow-lg hover:shadow-xl transform hover:-translate-y-1
-                    focus:outline-none focus:ring-4 focus:ring-green-300">
+                    focus:outline-none focus:ring-4 focus:ring-green-300 flex-grow">
             Siguiente Nivel
         </button>
-        <button id="quiz-change-topic-button" class="px-8 py-4 rounded-xl font-bold text-xl
+        <button id="quiz-change-topic-button" class="px-6 py-3 rounded-xl font-bold text-lg
                     bg-purple-600 text-white hover:bg-purple-700
                     transition-all duration-300 ease-in-out
                     shadow-lg hover:shadow-xl transform hover:-translate-y-1
-                    focus:outline-none focus:ring-4 focus:ring-purple-300">
-            Cambiar Tema
+                    focus:outline-none focus:ring-4 focus:ring-purple-300 flex-grow">
+            Cambiar de Tema
         </button>
-        <button id="quiz-exit-game-button" class="px-8 py-4 rounded-xl font-bold text-xl
+        <button id="quiz-exit-game-button" class="px-6 py-3 rounded-xl font-bold text-lg
                     bg-gray-600 text-white hover:bg-gray-700
                     transition-all duration-300 ease-in-out
                     shadow-lg hover:shadow-xl transform hover:-translate-y-1
-                    focus:outline-none focus:ring-4 focus:ring-gray-300">
-            Salir
+                    focus:outline-none focus:ring-4 focus:ring-gray-300 flex-grow">
+            Salir del Juego
         </button>
     </div>
 </div>
