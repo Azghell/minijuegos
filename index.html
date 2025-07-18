@@ -345,6 +345,12 @@
                                             shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
                                     Periféricos Entrada/Salida
                                 </button>
+                                <button id="select-webmaster-quiz-button" class="px-6 py-3 rounded-xl font-semibold text-lg
+                                            bg-teal-500 text-white hover:bg-teal-600
+                                            transition-all duration-300 ease-in-out
+                                            shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-teal-300">
+                                    WebMaster Quiz
+                                </button>
                                 <!-- More game buttons can be added here -->
                             </div>
                             <button id="back-to-main-activities-button" class="mt-8 px-6 py-3 rounded-xl font-semibold text-base
@@ -448,7 +454,8 @@
             {
                 category: "Actividades Practicas",
                 items: [
-                    { title: "Periféricos Entrada/Salida", action: "load-peripherals-game" } // Action to load the game dynamically
+                    { title: "Periféricos Entrada/Salida", action: "load-peripherals-game" }, // Action to load the game dynamically
+                    { title: "WebMaster Quiz", action: "load-webmaster-quiz" } // Nuevo juego
                 ]
             }
         ];
@@ -718,7 +725,16 @@
                             loadPeripheralsGameFromHeader(); // Call function to load game from header
                             closeMobileMenu(); // Close menu after selection
                         };
-                    } else {
+                    } else if (item.action === 'load-webmaster-quiz') { // Nuevo juego
+                        itemLink.href = '#';
+                        itemLink.dataset.action = 'load-webmaster-quiz';
+                        itemLink.onclick = (e) => {
+                            e.preventDefault();
+                            loadWebMasterQuizFromHeader(); // Call function to load new game from header
+                            closeMobileMenu(); // Close menu after selection
+                        };
+                    }
+                    else {
                         itemLink.href = item.file;
                         itemLink.target = '_blank';
                     }
@@ -868,7 +884,16 @@
                             loadPeripheralsGameFromHeader();
                             closeMobileMenu();
                         };
-                    } else {
+                    } else if (item.action === 'load-webmaster-quiz') { // Nuevo juego
+                        itemLink.href = '#';
+                        itemLink.dataset.action = 'load-webmaster-quiz';
+                        itemLink.onclick = (e) => {
+                            e.preventDefault();
+                            loadWebMasterQuizFromHeader();
+                            closeMobileMenu();
+                        };
+                    }
+                    else {
                         itemLink.href = item.file;
                         itemLink.target = '_blank';
                     }
@@ -998,6 +1023,7 @@
         const showActivitiesButton = document.getElementById('show-activities-button');
         const gameListMenu = document.getElementById('game-list-menu');
         const selectPeripheralsGameButton = document.getElementById('select-peripherals-game-button');
+        const selectWebMasterQuizButton = document.getElementById('select-webmaster-quiz-button'); // Nuevo botón
         const backToMainActivitiesButton = document.getElementById('back-to-main-activities-button');
         const dynamicallyLoadedGameContainer = document.getElementById('dynamically-loaded-game-container');
 
@@ -1101,10 +1127,53 @@
             }
         }
 
+        // Function to load the WebMaster Quiz HTML and JS (NEW)
+        async function loadWebMasterQuiz() {
+            // Hide the header immediately when loading the game
+            mainHeader.classList.add('header-hidden');
+
+            mainContentSections.classList.add('hidden'); // Hide both download and initial activity sections
+            mainContentSections.classList.remove('flex');
+            dynamicallyLoadedGameContainer.classList.remove('hidden'); // Show only the game container
+            mainContentTitle.textContent = 'WebMaster Quiz'; // Update main title
+
+            try {
+                const htmlResponse = await fetch('juegos/webmaster_quiz.html');
+                const gameHtml = await htmlResponse.text();
+                dynamicallyLoadedGameContainer.innerHTML = gameHtml;
+
+                // Dynamically load the game's JavaScript
+                const script = document.createElement('script');
+                script.src = 'js/webmaster_quiz_juego.js';
+                script.onload = () => {
+                    // Once the script is loaded, initialize the game elements and pass gameDataStorage
+                    if (window.initializeWebMasterQuizGame) {
+                        window.initializeWebMasterQuizGame(gameDataStorage); // Pass the storage object
+                    }
+                };
+                // Append the script to the body or the game container
+                dynamicallyLoadedGameContainer.appendChild(script);
+
+            } catch (error) {
+                console.error('Error al cargar el WebMaster Quiz:', error);
+                dynamicallyLoadedGameContainer.innerHTML = '<p class="text-red-500">Error al cargar el quiz. Por favor, inténtalo de nuevo más tarde.</p>';
+                // Optionally, provide a button to return to main content
+                const errorButton = createCustomButton('Volver al Inicio', showMainContentSections, 'mt-4');
+                dynamicallyLoadedGameContainer.appendChild(errorButton);
+            }
+        }
+
+
         // This function will be called from the header menu to load the game
         function loadPeripheralsGameFromHeader() {
             showMainContentSections(); // Ensure main content areas are visible first
             loadPeripheralsGame(); // Then load the game itself
+        }
+
+        // This function will be called from the header menu to load the new game (NEW)
+        function loadWebMasterQuizFromHeader() {
+            showMainContentSections(); // Ensure main content areas are visible first
+            loadWebMasterQuiz(); // Then load the game itself
         }
 
         // This function will be called by the game's JavaScript to return to the main content
@@ -1114,10 +1183,15 @@
 
             dynamicallyLoadedGameContainer.innerHTML = ''; // Clear game content
             // Remove any dynamically added script tags to prevent re-initialization issues
-            const oldScript = document.querySelector('script[src="js/perifericos_juego.js"]');
-            if (oldScript) {
-                oldScript.remove();
+            const oldPeripheralScript = document.querySelector('script[src="js/perifericos_juego.js"]');
+            if (oldPeripheralScript) {
+                oldPeripheralScript.remove();
             }
+            const oldWebMasterQuizScript = document.querySelector('script[src="js/webmaster_quiz_juego.js"]'); // NEW
+            if (oldWebMasterQuizScript) { // NEW
+                oldWebMasterQuizScript.remove(); // NEW
+            } // NEW
+
             showMainContentSections(); // Return to the main content layout
             renderInitialActivityButton(); // Show the initial "Ver Actividades Prácticas" button
         };
@@ -1142,6 +1216,7 @@
         // Event Listeners for Activity Section Navigation
         showActivitiesButton.addEventListener('click', renderActivityList);
         selectPeripheralsGameButton.addEventListener('click', loadPeripheralsGame); // Call load function
+        selectWebMasterQuizButton.addEventListener('click', loadWebMasterQuiz); // NEW: Call load function for WebMaster Quiz
         backToMainActivitiesButton.addEventListener('click', renderInitialActivityButton);
 
         // --- Header Hide/Show on Scroll Logic ---
