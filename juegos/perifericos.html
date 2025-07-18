@@ -1,0 +1,69 @@
+<!-- Este archivo contiene solo la estructura HTML del juego de periféricos. -->
+<!-- No incluye el encabezado, pie de página, ni estilos globales. -->
+
+<h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">
+    Periféricos
+</h3>
+<!-- Start Menu -->
+<div id="start-menu" class="flex flex-col items-center justify-center min-h-[300px] animate-fade-in-down">
+    <p class="text-xl text-gray-700 mb-6">Demuestra tus conocimientos sobre los tipos de periféricos.</p>
+    <button id="start-game-button" class="px-8 py-4 rounded-xl font-bold text-xl
+                bg-blue-600 text-white hover:bg-blue-700
+                transition-all duration-300 ease-in-out
+                shadow-lg hover:shadow-xl transform hover:-translate-y-1
+                focus:outline-none focus:ring-4 focus:ring-blue-300">
+        Comenzar Juego
+    </button>
+</div>
+
+<!-- Game Play Area -->
+<div id="game-play-area" class="hidden flex-col items-center animate-fade-in-down">
+    <div class="w-full flex justify-between items-center mb-6">
+        <span class="text-lg font-semibold text-gray-700">Tiempo: <span id="timer" class="text-blue-600">00:00</span></span>
+        <span class="text-lg font-semibold text-gray-700">Puntaje: <span id="score-display" class="text-green-600">0</span></span>
+    </div>
+
+    <div id="peripheral-card" class="bg-gray-100 p-6 rounded-lg shadow-md mb-8 w-full max-w-sm border-2 border-transparent transition-all duration-300">
+        <img id="peripheral-image" src="" alt="Peripheral Image" class="w-48 h-48 object-contain mx-auto mb-4 hidden">
+        <h3 id="peripheral-name" class="text-2xl font-bold text-gray-800 mb-4"></h3>
+        <p id="peripheral-description" class="text-gray-600 text-sm"></p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 w-full md:grid-cols-4 max-w-xl mb-6">
+        <button class="answer-button px-5 py-3 rounded-lg font-semibold text-base bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200" data-type="entrada">Entrada</button>
+        <button class="answer-button px-5 py-3 rounded-lg font-semibold text-base bg-red-500 text-white hover:bg-red-600 transition-colors duration-200" data-type="salida">Salida</button>
+        <button class="answer-button px-5 py-3 rounded-lg font-semibold text-base bg-purple-500 text-white hover:bg-purple-600 transition-colors duration-200" data-type="ambos">Ambos</button>
+        <button class="answer-button px-5 py-3 rounded-lg font-semibold text-base bg-green-500 text-white hover:bg-green-600 transition-colors duration-200" data-type="almacenamiento">Almacenamiento</button>
+    </div>
+
+    <button id="end-game-button" class="px-6 py-3 rounded-xl font-semibold text-base
+                bg-orange-600 text-white hover:bg-orange-700
+                transition-all duration-300 ease-in-out
+                shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-300">
+        Terminar Juego
+    </button>
+</div>
+
+<!-- Result Screen -->
+<div id="result-screen" class="hidden flex-col items-center justify-center min-h-[300px] animate-fade-in-down">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">Resultados del Juego</h2>
+    <p class="text-xl text-green-600 mb-2">Aciertos: <span id="correct-answers">0</span></p>
+    <p class="text-xl text-red-600 mb-4">Errores: <span id="incorrect-answers">0</span></p>
+    <p class="text-lg text-gray-700 mb-6">Tiempo Total: <span id="final-time">00:00</span></p>
+    <div class="flex space-x-4 mt-6">
+        <button id="retry-game-button" class="px-8 py-4 rounded-xl font-bold text-xl
+                    bg-blue-600 text-white hover:bg-blue-700
+                    transition-all duration-300 ease-in-out
+                    shadow-lg hover:shadow-xl transform hover:-translate-y-1
+                    focus:outline-none focus:ring-4 focus:ring-blue-300">
+            Reintentar
+        </button>
+        <button id="exit-game-button" class="px-8 py-4 rounded-xl font-bold text-xl
+                    bg-gray-600 text-white hover:bg-gray-700
+                    transition-all duration-300 ease-in-out
+                    shadow-lg hover:shadow-xl transform hover:-translate-y-1
+                    focus:outline-none focus:ring-4 focus:ring-gray-300">
+            Salir
+        </button>
+    </div>
+</div>
