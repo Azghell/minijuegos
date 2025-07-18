@@ -380,7 +380,7 @@ let quizQuestionDisplay;
 let quizHelpText;
 let questionTypeContainer;
 let multipleChoiceOptionsContainer;
-let answerOptionButtons;
+let answerOptionButtons; // NodeList, will be re-queried
 let syntaxOrderContainer;
 let syntaxTargetArea;
 let syntaxOptionsArea;
@@ -423,7 +423,8 @@ function initializeWebMasterQuizGame(gameDataStorageObj) {
         quizHelpText = document.getElementById('quiz-help-text');
         questionTypeContainer = document.getElementById('question-type-container');
         multipleChoiceOptionsContainer = document.getElementById('multiple-choice-options');
-        answerOptionButtons = document.querySelectorAll('.answer-option-button');
+        // MOVIDO: Re-consultar los botones de opción aquí para asegurar que estén en el DOM
+        answerOptionButtons = document.querySelectorAll('.answer-option-button'); 
         syntaxOrderContainer = document.getElementById('syntax-order-container');
         syntaxTargetArea = document.getElementById('syntax-target-area');
         syntaxOptionsArea = document.getElementById('syntax-options-area');
@@ -468,9 +469,12 @@ function initializeWebMasterQuizGame(gameDataStorageObj) {
             });
         });
 
-        answerOptionButtons.forEach(button => {
-            button.addEventListener('click', () => checkMultipleChoiceAnswer(parseInt(button.dataset.option)));
-        });
+        // Asegurarse de que answerOptionButtons no sea null antes de adjuntar listeners
+        if (answerOptionButtons) {
+            answerOptionButtons.forEach(button => {
+                button.addEventListener('click', () => checkMultipleChoiceAnswer(parseInt(button.dataset.option)));
+            });
+        }
 
         if (checkSyntaxButton) checkSyntaxButton.addEventListener('click', checkSyntaxOrderAnswer);
         if (checkMatchButton) checkMatchButton.addEventListener('click', checkDragMatchAnswer);
@@ -691,13 +695,14 @@ function setupSyntaxOrderQuestion(question) {
         fragmentDiv.textContent = fragment;
         fragmentDiv.className = 'draggable-fragment bg-blue-200 text-blue-800 px-3 py-2 rounded-md cursor-grab shadow-sm';
         fragmentDiv.draggable = true;
-        fragmentDiv.dataset.index = index; // Usar un índice para rastrear el fragmento original
+        fragmentDiv.dataset.originalText = fragment; // Usar el texto original para verificar
         syntaxOptionsArea.appendChild(fragmentDiv);
 
         fragmentDiv.addEventListener('dragstart', (e) => {
             draggedItem = fragmentDiv;
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text/plain', fragmentDiv.textContent);
+            console.log('Drag started for syntax fragment:', fragmentDiv.textContent); // Debugging log
             setTimeout(() => fragmentDiv.classList.add('opacity-50'), 0);
         });
 
@@ -743,7 +748,7 @@ function checkSyntaxOrderAnswer() {
     checkSyntaxButton.disabled = true; // Deshabilitar el botón de comprobar
 
     const question = shuffledQuestions[currentQuestionIndex];
-    const userOrder = Array.from(syntaxTargetArea.children).map(div => div.textContent.trim());
+    const userOrder = Array.from(syntaxTargetArea.children).map(div => div.dataset.originalText.trim()); // Usar dataset.originalText
     const correctOrder = question.correctOrder.map(f => f.trim()); // Asegurarse de que no haya espacios extra
 
     let isCorrect = true;
@@ -770,7 +775,7 @@ function checkSyntaxOrderAnswer() {
 
     // Visual feedback for syntax elements
     Array.from(syntaxTargetArea.children).forEach((div, index) => {
-        if (index < correctOrder.length && div.textContent.trim() === correctOrder[index]) {
+        if (index < correctOrder.length && div.dataset.originalText.trim() === correctOrder[index]) {
             div.classList.replace('bg-blue-200', 'bg-green-500');
             div.classList.replace('text-blue-800', 'text-white');
         } else {
@@ -811,6 +816,7 @@ function setupDragMatchQuestion(question) {
             currentDragElement = dragDiv;
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text/plain', text);
+            console.log('Drag started for match item:', text); // Debugging log
             setTimeout(() => dragDiv.classList.add('opacity-50'), 0);
         });
 
@@ -822,9 +828,16 @@ function setupDragMatchQuestion(question) {
 
     shuffledDrops.forEach((text, index) => {
         const dropDiv = document.createElement('div');
-        dropDiv.textContent = text;
+        dropDiv.textContent = ''; // Limpiar el texto para que el elemento arrastrado lo reemplace
         dropDiv.className = 'drop-target bg-gray-300 text-gray-800 px-4 py-2 rounded-md border-2 border-dashed border-gray-400 min-h-[40px] flex items-center justify-center mb-2';
         dropDiv.dataset.correctMatch = question.pairs.find(p => p.drop === text).drag; // Almacena el drag correcto
+        dropDiv.dataset.dropText = text; // Almacenar el texto original de la zona de soltar
+        
+        const dropTextSpan = document.createElement('span');
+        dropTextSpan.textContent = text;
+        dropTextSpan.className = 'text-gray-800'; // Estilo para el texto de la zona de soltar
+        dropDiv.appendChild(dropTextSpan);
+
         dropTargetsArea.appendChild(dropDiv);
 
         dropDiv.addEventListener('dragover', (e) => {
@@ -840,9 +853,11 @@ function setupDragMatchQuestion(question) {
         dropDiv.addEventListener('drop', (e) => {
             e.preventDefault();
             dropDiv.classList.remove('border-blue-500');
-            if (currentDragElement && !dropDiv.hasChildNodes()) { // Solo si la zona está vacía
+            if (currentDragElement && !dropDiv.querySelector('.drag-item')) { // Solo si la zona está vacía
                 dropDiv.appendChild(currentDragElement);
                 currentDragElement.classList.remove('opacity-50');
+                // Ocultar el texto original de la zona de soltar cuando se suelta un elemento
+                dropTextSpan.classList.add('hidden');
             }
         });
     });
@@ -858,6 +873,8 @@ function checkDragMatchAnswer() {
     let correctMatches = 0;
     Array.from(dropTargetsArea.children).forEach(dropTarget => {
         const draggedItemInTarget = dropTarget.querySelector('.drag-item');
+        const dropTextSpan = dropTarget.querySelector('span'); // Obtener el span con el texto original
+
         if (draggedItemInTarget) {
             const originalDragText = draggedItemInTarget.dataset.originalText;
             const correctMatchForTarget = dropTarget.dataset.correctMatch;
@@ -873,8 +890,10 @@ function checkDragMatchAnswer() {
             draggedItemInTarget.draggable = false; // Deshabilitar arrastre
         }
         dropTarget.classList.remove('border-dashed', 'border-gray-400'); // Quitar borde de arrastre
+        if (dropTextSpan) dropTextSpan.classList.remove('hidden'); // Mostrar el texto original de la zona de soltar
     });
 
+    const question = shuffledQuestions[currentQuestionIndex]; // Necesitamos la pregunta actual para saber cuántos pares hay
     if (correctMatches === question.pairs.length) {
         score++;
         if (quizCard) quizCard.classList.add('border-green-500');
@@ -946,7 +965,7 @@ function resetGame() {
     answerBlocked = false;
 
     // Limpiar áreas de preguntas
-    if (multipleChoiceOptionsContainer) multipleChoiceOptionsContainer.innerHTML = '';
+    // No es necesario limpiar multipleChoiceOptionsContainer.innerHTML, ya que los botones están hardcodeados
     if (syntaxTargetArea) syntaxTargetArea.innerHTML = '';
     if (syntaxOptionsArea) syntaxOptionsArea.innerHTML = '';
     if (dragElementsArea) dragElementsArea.innerHTML = '';
