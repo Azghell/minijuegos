@@ -1463,20 +1463,12 @@ div { visibility: hidden; } /* Oculto pero ocupa espacio */`
 p { clear: left; }`
             },
             {
-                question: "¿Cuál es el propósito de la propiedad `word-spacing` en CSS?",
+                question: "¿Qué propiedad CSS se utiliza para controlar el comportamiento del contenido que desborda el área de un elemento?",
                 type: "multiple-choice",
-                options: ["Controlar el espacio entre caracteres.", "Controlar el espacio entre líneas de texto.", "Controlar el espacio entre palabras.", "Controlar la sangría del texto."],
+                options: ["`text-overflow`", "`white-space`", "`overflow`", "`clip`"],
                 correctAnswer: 2,
-                help: "Esta propiedad ajusta el espacio horizontal entre las palabras de un texto.",
-                codeExample: `p { word-spacing: 5px; }`
-            },
-            {
-                question: "¿Qué propiedad CSS se utiliza para dibujar una línea alrededor de un elemento *fuera* de su borde, sin afectar el diseño?",
-                type: "multiple-choice",
-                options: ["`border`", "`outline`", "`shadow`", "`line`"],
-                correctAnswer: 1,
-                help: "Es comúnmente utilizada para indicar el foco de un elemento en la accesibilidad.",
-                codeExample: `button:focus { outline: 2px solid blue; }`
+                help: "Puede ser `visible`, `hidden`, `scroll` o `auto`.",
+                codeExample: `div { overflow: auto; }`
             }
         ],
         avanzado: [
@@ -2683,7 +2675,7 @@ let inactivityTimer;
 let inactivityCountdownInterval;
 let inactivityCountdown = INACTIVITY_WARNING_DURATION;
 
-// Declaring DOM elements as global variables, but assigning them AFTER DOMContentLoaded
+// Declaring DOM elements as global variables, but assigning them inside initQuizGame
 let quizStartMenu;
 let startQuizButton;
 let quizTopicSelectionMenu;
@@ -3408,9 +3400,10 @@ function shuffleArray(array) {
     return array;
 }
 
-// --- DOMContentLoaded Listener for Initialization ---
-document.addEventListener('DOMContentLoaded', () => {
-    // Assign DOM elements after the document is loaded
+// --- Global Initialization Function for the Quiz Game ---
+// This function will be called by index.html after the quiz HTML content is loaded.
+window.initQuizGame = function() {
+    // Assign DOM elements now that they are guaranteed to be in the document
     quizStartMenu = document.getElementById('quiz-start-menu');
     startQuizButton = document.getElementById('start-quiz-button');
     quizTopicSelectionMenu = document.getElementById('quiz-topic-selection-menu');
@@ -3499,6 +3492,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener(event, resetInactivityTimer);
     });
 
-    // Initial screen setup - moved inside DOMContentLoaded
+    // Initial screen setup - moved inside initQuizGame
     showScreen('quiz-start-menu');
-});
+}; // End of initQuizGame function
