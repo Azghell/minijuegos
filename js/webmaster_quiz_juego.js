@@ -279,11 +279,11 @@ const quizData = {
                 fragments: ["<form>", "<label for=\"name\">", "Nombre:</label>", "<input type=\"text\" id=\"name\" name=\"name\">", "<button type=\"submit\">", "Enviar</button>", "</form>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6],
                 help: "Un formulario agrupa sus campos y acciones.",
-                codeExample: `<form>
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name">
-    <button type="submit">Enviar</button>
-</form>`
+                codeExample: `<table>
+    <tr>
+        <td>Contenido de celda</td>
+    </tr>
+</table>`
             },
             {
                 question: "¿Qué es el significado de 'semántico' en HTML Semántico?",
@@ -1338,8 +1338,8 @@ div { visibility: hidden; } /* Oculto pero ocupa espacio */`
                 ],
                 correctOrder: [0, 1, 2, 3],
                 help: "`flex-grow` define la capacidad de un ítem flexible para crecer si es necesario.",
-                codeExample: `.item {
-    flex-grow: 2;
+                codeExample: `div {
+    box-shadow: 5px 10px #888888;
 }`
             },
             {
@@ -2122,7 +2122,7 @@ const arr2 = [...arr1, 3, 4]; // [1, 2, 3, 4]`
                 type: "drag-match",
                 pairs: [
                     { drag: "Transforma cada elemento en un nuevo array", drop: "`map()`" },
-                    { drag: "Crea un nuevo array con elementos que pasan una prueba", drop: "`filter()`" },
+                    { drag: "Crea un nuevo array con elementos que cumplen una condición", drop: "`filter()`" },
                     { drag: "Reduce el array a un solo valor", drop: "`reduce()`" },
                     { drag: "Verifica si al menos un elemento cumple una condición", drop: "`some()`" },
                     { drag: "Verifica si todos los elementos cumplen una condición", drop: "`every()`" }
@@ -2716,13 +2716,13 @@ function startQuestion() {
     }
 
     resetQuestionArea();
-    clearInterval(quizTimer);
+    clearInterval(quizTimer); // Clear timer before starting new question
     timeLeft = TIME_PER_QUESTION;
     updateTimerDisplay();
 
     const question = currentQuestions[currentQuestionIndex];
     quizQuestion.textContent = question.question;
-    quizHelpText.textContent = question.help || '';
+    quizHelpText.textContent = question.help || ''; // Set help text
     quizHelpText.classList.add('hidden'); // Initially hide help text
 
     switch (question.type) {
@@ -2738,6 +2738,7 @@ function startQuestion() {
             break;
     }
 
+    // Start timer after question setup
     quizTimer = setInterval(() => {
         timeLeft--;
         updateTimerDisplay();
@@ -2854,22 +2855,23 @@ function removeSyntaxFragment(originalIndex) {
 }
 
 function checkSyntaxOrder() {
+    clearInterval(quizTimer); // Stop the timer
+
     const question = currentQuestions[currentQuestionIndex];
     const correctOrderFragments = question.correctOrder.map(idx => question.fragments[idx]);
     const userAnswerFragments = currentSyntaxOrder.map(item => item.fragment);
 
-    if (userAnswerFragments.length !== correctOrderFragments.length) {
-        handleIncorrectAnswer();
-        quizHelpText.classList.remove('hidden');
-        setTimeout(nextQuestion, 1000);
-        return;
-    }
+    quizHelpText.classList.remove('hidden'); // Show help text
 
     let isCorrect = true;
-    for (let i = 0; i < correctOrderFragments.length; i++) {
-        if (userAnswerFragments[i] !== correctOrderFragments[i]) {
-            isCorrect = false;
-            break;
+    if (userAnswerFragments.length !== correctOrderFragments.length) {
+        isCorrect = false;
+    } else {
+        for (let i = 0; i < correctOrderFragments.length; i++) {
+            if (userAnswerFragments[i] !== correctOrderFragments[i]) {
+                isCorrect = false;
+                break;
+            }
         }
     }
 
@@ -2878,7 +2880,11 @@ function checkSyntaxOrder() {
     } else {
         handleIncorrectAnswer();
     }
-    quizHelpText.classList.remove('hidden');
+    
+    // Trigger animation feedback
+    quizPlayArea.classList.add(isCorrect ? 'animate-flash-green' : 'animate-flash-red');
+    setTimeout(() => quizPlayArea.classList.remove('animate-flash-green', 'animate-flash-red'), 500);
+
     checkSyntaxButton.disabled = true;
     undoSyntaxButton.disabled = true;
     setTimeout(nextQuestion, 1000);
@@ -2993,8 +2999,12 @@ function handleDrop(e) {
 
 
 function checkDragMatch() {
+    clearInterval(quizTimer); // Stop the timer
+
     let allCorrect = true;
     const dropTargets = document.querySelectorAll('.drop-target');
+
+    quizHelpText.classList.remove('hidden'); // Show help text
 
     dropTargets.forEach(target => {
         const droppedItem = target.querySelector('.drag-item-dropped');
@@ -3041,7 +3051,11 @@ function checkDragMatch() {
     } else {
         handleIncorrectAnswer();
     }
-    quizHelpText.classList.remove('hidden');
+
+    // Trigger animation feedback
+    quizPlayArea.classList.add(allCorrect ? 'animate-flash-green' : 'animate-flash-red');
+    setTimeout(() => quizPlayArea.classList.remove('animate-flash-green', 'animate-flash-red'), 500);
+
     checkMatchButton.disabled = true;
     undoMatchButton.disabled = true;
     setTimeout(nextQuestion, 2000);
@@ -3089,7 +3103,9 @@ function updateScoreDisplay() {
 }
 
 function checkAnswer(selectedIndex, correctAnswer) {
+    clearInterval(quizTimer); // Stop the timer
     quizHelpText.classList.remove('hidden'); // Show help text after answer
+
     // Disable all options after answering
     const buttons = multipleChoiceOptions.querySelectorAll('.answer-option-button');
     buttons.forEach(button => {
@@ -3103,7 +3119,16 @@ function checkAnswer(selectedIndex, correctAnswer) {
         }
     });
 
-    clearInterval(quizTimer); // Stop timer
+    if (selectedIndex === correctAnswer) {
+        handleCorrectAnswer();
+    } else {
+        handleIncorrectAnswer();
+    }
+
+    // Trigger animation feedback
+    quizPlayArea.classList.add(selectedIndex === correctAnswer ? 'animate-flash-green' : 'animate-flash-red');
+    setTimeout(() => quizPlayArea.classList.remove('animate-flash-green', 'animate-flash-red'), 500);
+
     setTimeout(nextQuestion, 1000); // Short delay before next question
 }
 
@@ -3111,18 +3136,12 @@ function handleCorrectAnswer() {
     currentScore += 10;
     answeredCorrectly++;
     updateScoreDisplay();
-    // Flash green feedback
-    quizPlayArea.classList.add('animate-flash-green');
-    setTimeout(() => quizPlayArea.classList.remove('animate-flash-green'), 500);
 }
 
 function handleIncorrectAnswer() {
     currentScore = Math.max(0, currentScore - 5); // Prevent negative score
     answeredIncorrectly++;
     updateScoreDisplay();
-    // Flash red feedback
-    quizPlayArea.classList.add('animate-flash-red');
-    setTimeout(() => quizPlayArea.classList.remove('animate-flash-red'), 500);
 }
 
 function nextQuestion() {
