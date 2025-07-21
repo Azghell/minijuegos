@@ -3097,7 +3097,8 @@ function setupDragMatchQuestion(question) {
 
         shuffledDragItems.forEach((dragText, index) => {
             const dragItem = document.createElement('div');
-            dragItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800', 'px-4', 'py-2', 'rounded-lg', 'cursor-grab', 'hover:bg-blue-300', 'transition-colors', 'duration-200');
+            // Initial styling for draggable items
+            dragItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800', 'px-4', 'py-2', 'rounded-lg', 'cursor-grab', 'hover:bg-blue-300', 'transition-colors', 'duration-200', 'shadow-md');
             dragItem.textContent = dragText;
             dragItem.setAttribute('draggable', true);
             dragItem.dataset.originalText = dragText; // Store original text to match later
@@ -3107,11 +3108,12 @@ function setupDragMatchQuestion(question) {
 
         shuffledDropItems.forEach((dropText, index) => {
             const dropTarget = document.createElement('div');
-            dropTarget.classList.add('drop-target', 'bg-gray-200', 'text-gray-800', 'border-2', 'border-dashed', 'border-gray-400', 'px-4', 'py-2', 'rounded-lg', 'flex', 'items-center', 'justify-center', 'min-h-[40px]', 'text-center');
+            // Initial styling for drop targets
+            dropTarget.classList.add('drop-target', 'bg-gray-100', 'text-gray-700', 'border-2', 'border-dashed', 'border-gray-400', 'px-4', 'py-2', 'rounded-lg', 'flex', 'items-center', 'justify-center', 'min-h-[40px]', 'text-center', 'relative', 'overflow-hidden');
             dropTarget.dataset.correctMatch = dropText; // Store the correct match for this target
 
             const dropTextSpan = document.createElement('span');
-            dropTextSpan.classList.add('drop-text-placeholder');
+            dropTextSpan.classList.add('drop-text-placeholder', 'absolute', 'inset-0', 'flex', 'items-center', 'justify-center', 'p-2');
             dropTextSpan.textContent = dropText; // Show the target text initially
             dropTarget.appendChild(dropTextSpan);
 
@@ -3130,53 +3132,71 @@ function handleDragStart(e) {
     draggedItem = e.target;
     e.dataTransfer.setData('text/plain', draggedItem.dataset.originalText);
     setTimeout(() => {
-        if (draggedItem) draggedItem.classList.add('hidden'); // Hide the original element during drag
+        if (draggedItem) draggedItem.classList.add('opacity-0'); // Make original element transparent during drag
     }, 0);
 }
 
 function handleDragOver(e) {
     e.preventDefault(); // Allow drop
-    if (e.target) e.target.classList.add('border-blue-500', 'bg-blue-100'); // Visual feedback
+    if (e.target && e.target.classList.contains('drop-target')) {
+        e.target.classList.add('border-blue-500', 'bg-blue-100'); // Visual feedback
+    }
 }
 
 function handleDragLeave(e) {
-    if (e.target) e.target.classList.remove('border-blue-500', 'bg-blue-100');
+    if (e.target && e.target.classList.contains('drop-target')) {
+        e.target.classList.remove('border-blue-500', 'bg-blue-100');
+    }
 }
 
 function handleDrop(e) {
     e.preventDefault();
-    if (e.target) e.target.classList.remove('border-blue-500', 'bg-blue-100');
+    if (e.target && e.target.classList.contains('drop-target')) {
+        e.target.classList.remove('border-blue-500', 'bg-blue-100'); // Remove drag-over feedback
 
-    if (draggedItem && e.target && e.target.classList.contains('drop-target')) {
         const dropTarget = e.target;
 
         // If the drop target already has a child (an item was dropped here before),
         // return the old item to the drag area before placing the new one.
-        if (dropTarget.querySelector('.drag-item-dropped')) {
-            const oldDroppedItem = dropTarget.querySelector('.drag-item-dropped');
-            oldDroppedItem.remove(); // Remove from target
-            if (dragElementsArea) dragElementsArea.appendChild(oldDroppedItem); // Append back to drag area
-            oldDroppedItem.classList.remove('hidden', 'drag-item-dropped'); // Make visible
-            oldDroppedItem.classList.add('drag-item'); // Restore drag-item class
+        const existingDroppedItem = dropTarget.querySelector('.drag-item-dropped');
+        if (existingDroppedItem) {
+            existingDroppedItem.remove(); // Remove from target
+            // Find the original drag item to make it visible again
+            const originalDragItemInArea = dragElementsArea.querySelector(`[data-original-text="${existingDroppedItem.dataset.originalText}"]`);
+            if (originalDragItemInArea) {
+                originalDragItemInArea.classList.remove('hidden', 'opacity-0');
+                originalDragItemInArea.classList.add('drag-item'); // Ensure it has the drag-item class
+            } else {
+                // If original not found (e.g., it was a clone), re-create it in the drag area
+                const tempDragItem = document.createElement('div');
+                tempDragItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800', 'px-4', 'py-2', 'rounded-lg', 'cursor-grab', 'hover:bg-blue-300', 'transition-colors', 'duration-200', 'shadow-md');
+                tempDragItem.textContent = existingDroppedItem.dataset.originalText;
+                tempDragItem.dataset.originalText = existingDroppedItem.dataset.originalText;
+                tempDragItem.setAttribute('draggable', true);
+                tempDragItem.addEventListener('dragstart', handleDragStart);
+                if (dragElementsArea) dragElementsArea.appendChild(tempDragItem);
+            }
         }
 
-        // Clone the dragged item (or create a new one to represent the dropped state)
-        // This ensures the original is still available for undo or if moved to another target
-        const droppedItem = document.createElement('div');
-        droppedItem.classList.add('drag-item-dropped', 'bg-green-200', 'text-green-800', 'px-4', 'py-2', 'rounded-lg', 'cursor-default', 'min-w-[100px]', 'text-center');
-        droppedItem.textContent = draggedItem.dataset.originalText;
-        droppedItem.dataset.originalText = draggedItem.dataset.originalText; // Keep original text
+        if (draggedItem) {
+            // Create a new element to represent the dropped state in the target
+            const droppedItem = document.createElement('div');
+            droppedItem.classList.add('drag-item-dropped', 'bg-indigo-300', 'text-indigo-900', 'px-4', 'py-2', 'rounded-lg', 'cursor-default', 'min-w-[100px]', 'text-center', 'shadow-inner', 'flex', 'items-center', 'justify-center', 'w-full', 'h-full');
+            droppedItem.textContent = draggedItem.dataset.originalText;
+            droppedItem.dataset.originalText = draggedItem.dataset.originalText; // Keep original text reference
 
-        // Hide the placeholder text if present
-        const dropTextPlaceholder = dropTarget.querySelector('.drop-text-placeholder');
-        if (dropTextPlaceholder) {
-            dropTextPlaceholder.classList.add('hidden');
+            // Hide the placeholder text if present
+            const dropTextPlaceholder = dropTarget.querySelector('.drop-text-placeholder');
+            if (dropTextPlaceholder) {
+                dropTextPlaceholder.classList.add('hidden');
+            }
+            
+            dropTarget.appendChild(droppedItem);
+            draggedItem.classList.add('hidden'); // Keep the original hidden after drop
+            draggedItem.classList.remove('opacity-0'); // Ensure opacity is reset for next drag if needed
+
+            draggedItem = null; // Reset dragged item
         }
-
-        dropTarget.appendChild(droppedItem);
-        if (draggedItem) draggedItem.classList.add('hidden'); // Keep the original hidden after drop
-
-        draggedItem = null; // Reset dragged item
     }
 }
 
@@ -3194,6 +3214,15 @@ function checkDragMatch() {
         const correctMatch = target.dataset.correctMatch; // This is the expected drop text
         const targetPlaceholder = target.querySelector('.drop-text-placeholder');
 
+        // Clear previous feedback styles
+        target.classList.remove('border-green-600', 'border-red-600');
+        if (droppedItem) {
+            droppedItem.classList.remove('bg-indigo-300', 'text-indigo-900', 'bg-green-400', 'text-green-900', 'bg-red-400', 'text-red-900', 'border-2', 'border-green-600', 'border-red-600');
+        }
+        if (targetPlaceholder) {
+            targetPlaceholder.classList.remove('text-green-700', 'font-bold', 'text-red-700');
+        }
+
 
         if (droppedItem) {
             // Find the original pair using droppedItem's text and target's correctMatch
@@ -3203,14 +3232,14 @@ function checkDragMatch() {
             );
 
             if (matchedPair) {
-                droppedItem.classList.remove('bg-green-200', 'text-green-800', 'bg-red-200', 'text-red-800');
-                droppedItem.classList.add('bg-green-300', 'text-green-900', 'border-2', 'border-green-600');
+                droppedItem.classList.add('bg-green-400', 'text-green-900', 'border-2', 'border-green-600');
+                target.classList.add('border-green-600');
                 // Ensure placeholder is hidden if an item is correctly placed
                 if (targetPlaceholder) targetPlaceholder.classList.add('hidden');
             } else {
                 allCorrect = false;
-                droppedItem.classList.remove('bg-green-200', 'text-green-800');
-                droppedItem.classList.add('bg-red-300', 'text-red-900', 'border-2', 'border-red-600');
+                droppedItem.classList.add('bg-red-400', 'text-red-900', 'border-2', 'border-red-600');
+                target.classList.add('border-red-600');
                 // Show the correct answer in the target placeholder for incorrect matches
                 if (targetPlaceholder) {
                     targetPlaceholder.textContent = `${correctMatch} (Correcto)`;
@@ -3221,6 +3250,7 @@ function checkDragMatch() {
         } else {
             // If nothing was dropped, it's incorrect
             allCorrect = false;
+            target.classList.add('border-red-600');
             if (targetPlaceholder) {
                 targetPlaceholder.textContent = `${correctMatch} (Faltante)`;
                 targetPlaceholder.classList.remove('hidden');
@@ -3254,10 +3284,6 @@ function undoDragMatch() {
         const droppedItem = target.querySelector('.drag-item-dropped');
         if (droppedItem) {
             droppedItem.remove(); // Remove from target
-            if (dragElementsArea) dragElementsArea.appendChild(droppedItem); // Append back to drag area
-            droppedItem.classList.remove('hidden', 'drag-item-dropped', 'bg-green-300', 'text-green-900', 'border-green-600', 'bg-red-300', 'text-red-900', 'border-red-600'); // Clean up styles
-            droppedItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800'); // Restore drag-item class and default styles
-            droppedItem.setAttribute('draggable', true); // Make draggable again
         }
 
         // Show the placeholder text again
@@ -3266,13 +3292,17 @@ function undoDragMatch() {
             dropTextPlaceholder.classList.remove('hidden', 'text-green-700', 'font-bold', 'text-red-700');
             dropTextPlaceholder.textContent = target.dataset.correctMatch; // Restore original placeholder text
         }
+        // Remove any border feedback from the target
+        target.classList.remove('border-green-600', 'border-red-600');
     });
 
-    // Ensure all original drag items are visible in the drag area
+    // Ensure all original drag items are visible in the drag area and have correct styling
     if (dragElementsArea) {
-        const originalDragItems = dragElementsArea.querySelectorAll('.drag-item.hidden');
-        originalDragItems.forEach(item => {
-            item.classList.remove('hidden');
+        const allDragItems = dragElementsArea.querySelectorAll('.drag-item, .drag-item-dropped'); // Select both potential types
+        allDragItems.forEach(item => {
+            item.classList.remove('hidden', 'opacity-0', 'drag-item-dropped', 'bg-indigo-300', 'text-indigo-900', 'bg-green-400', 'text-green-900', 'bg-red-400', 'text-red-900', 'border-2', 'border-green-600', 'border-red-600');
+            item.classList.add('drag-item', 'bg-blue-200', 'text-blue-800'); // Restore default drag item styles
+            item.setAttribute('draggable', true); // Make draggable again
         });
     }
 }
