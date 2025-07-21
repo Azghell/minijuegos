@@ -412,9 +412,9 @@ const quizData = {
                 pairs: [
                     { drag: "Contenido principal y único", drop: "<main>" },
                     { drag: "Contenido de navegación", drop: "<nav>" },
-                    { drag: "Contenido autocontenido (artículo)", drop: "<article>" },
-                    { drag: "Contenido relacionado pero aparte", drop: "<aside>" },
-                    { drag: "Pie de página de una sección o documento", drop: "<footer>" }
+                    { drag: "Pie de página", drop: "<footer>" },
+                    { drag: "Artículo independiente", drop: "<article>" },
+                    { drag: "Contenido secundario/aparte", drop: "<aside>" }
                 ],
                 help: "Estas etiquetas ayudan a estructurar el contenido de manera significativa para navegadores y herramientas de accesibilidad.",
                 codeExample: null
@@ -488,706 +488,6 @@ const quizData = {
                 correctOrder: [0, 1, 2, 3],
                 help: "La etiqueta `progress` visualiza el progreso de una tarea.",
                 codeExample: `<progress value="70" max="100">70%</progress>`
-            }
-        ],
-        avanzado: [
-            {
-                question: "Diferencia entre `localStorage` y `sessionStorage`:",
-                type: "multiple-choice",
-                options: ["`localStorage` almacena datos solo por la sesión, `sessionStorage` los persiste.", "`localStorage` solo almacena texto, `sessionStorage` objetos.", "`localStorage` persiste los datos sin fecha de expiración, `sessionStorage` los mantiene solo durante la sesión de la página.", "`localStorage` es más seguro que `sessionStorage`."],
-                correctAnswer: 2,
-                help: "Ambos son parte de la Web Storage API, pero tienen comportamientos de persistencia diferentes.",
-                codeExample: null
-            },
-            {
-                question: "Propósito de `rel=\"preload\"` en `<link>`:",
-                type: "multiple-choice",
-                options: ["Indica que el recurso debe cargarse después de que la página sea interactiva.", "Especifica que el recurso debe precargarse con alta prioridad, sin bloquear la renderización de la página.", "Define una relación de hoja de estilo alternativa.", "Carga el recurso en segundo plano solo si es necesario."],
-                correctAnswer: 1,
-                help: "Es una directiva para que el navegador cargue un recurso tan pronto como sea posible.",
-                codeExample: `<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>`
-            },
-            {
-                question: "Empareja término CSS con significado:",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Modelo de caja", drop: "Cómo los elementos HTML son renderizados como cajas con margen, borde, relleno y contenido." },
-                    { drag: "Cascada", drop: "El proceso mediante el cual los navegadores determinan qué valores de propiedades CSS aplicar a un elemento." },
-                    { drag: "Especificidad", drop: "El algoritmo que determina qué regla CSS se aplica cuando varias reglas apuntan al mismo elemento." },
-                    { drag: "Herencia", drop: "Cómo ciertas propiedades CSS se transmiten de un elemento padre a sus hijos." }
-                ],
-                help: "Estos son conceptos fundamentales para entender cómo funciona CSS.",
-                codeExample: null
-            },
-            {
-                question: "Definición de 'Shadow DOM' (Web Components):",
-                type: "multiple-choice",
-                options: ["Un DOM que solo es visible en modo de desarrollo.", "Un subárbol DOM encapsulado que se renderiza por separado del DOM principal del documento.", "Un método para ocultar elementos del DOM.", "Una técnica para manipular el DOM con JavaScript de forma más rápida."],
-                correctAnswer: 1,
-                help: "Permite encapsular el estilo y la estructura de un componente para que no interfiera con el resto de la página.",
-                codeExample: null
-            },
-            {
-                question: "Propósito del atributo `async` en `<script>`:",
-                type: "multiple-choice",
-                options: ["Asegura que el script se cargue sincrónicamente.", "Carga el script de forma asíncrona y lo ejecuta tan pronto como esté disponible, sin bloquear el parseo del HTML.", "Detiene la ejecución del script hasta un evento específico."],
-                correctAnswer: 1,
-                help: "Piensa en cómo este atributo afecta el momento de ejecución del script en relación con el parseo del HTML.",
-                codeExample: `<script src="script.js" async></script>`
-            },
-            {
-                question: "Empareja etiqueta HTML5 con rol semántico:",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Contenido principal", drop: "<main>" },
-                    { drag: "Navegación", drop: "<nav>" },
-                    { drag: "Pie de página", drop: "<footer>" },
-                    { drag: "Artículo independiente", drop: "<article>" },
-                    { drag: "Contenido secundario/aparte", drop: "<aside>" }
-                ],
-                help: "Cada una de estas etiquetas ayuda a los navegadores y lectores de pantalla a entender la estructura del contenido.",
-                codeExample: null
-            },
-            {
-                question: "API HTML5 para funcionamiento offline:",
-                type: "multiple-choice",
-                options: ["Web Storage API", "Geolocation API", "AppCache (Application Cache)", "Web Workers API"],
-                correctAnswer: 2,
-                help: "Esta API permite que los recursos de una aplicación web se almacenen localmente para que la aplicación sea accesible sin conexión.",
-                codeExample: null
-            },
-            {
-                question: "Recurso 'render-blocking' y optimización:",
-                type: "multiple-choice",
-                options: ["Un recurso que bloquea la interacción del usuario con la página. Se optimiza cargándolo al final.", "Un recurso que el navegador debe procesar antes de poder renderizar la página. Se optimiza usando atributos como `async` o `defer` para scripts y `preload` para otros recursos críticos.", "Un recurso de imagen muy grande que ralentiza la carga. Se optimiza comprimiéndolo.", "Un script que causa errores en la consola. Se optimiza corrigiendo los errores."],
-                correctAnswer: 1,
-                help: "Identificar y optimizar estos recursos es clave para mejorar el rendimiento de carga inicial de una página.",
-                codeExample: `<script src="critical.js" defer></script>`
-            },
-            {
-                question: "Uso y beneficio de la etiqueta `<picture>`:",
-                type: "multiple-choice",
-                options: ["Para incrustar múltiples imágenes en un solo elemento.", "Para definir un grupo de imágenes relacionadas para galerías.", "Para proporcionar múltiples fuentes de imagen para un elemento `<img>` para diferentes contextos (responsive images).", "Es una etiqueta obsoleta para imágenes."],
-                correctAnswer: 2,
-                help: "Permite un control más fino sobre la carga de imágenes responsivas que solo `srcset`.",
-                codeExample: `<picture>
-    <source srcset="img-large.jpg" media="(min-width: 800px)">
-    <img src="img-small.jpg" alt="Descripción">
-</picture>`
-            },
-            {
-                question: "Web Components y sus 3 tecnologías principales:",
-                type: "multiple-choice",
-                options: ["Un framework de JavaScript para construir interfaces de usuario.", "Un conjunto de APIs web que permiten crear elementos HTML reutilizables y encapsulados. Sus tecnologías principales son Custom Elements, Shadow DOM y HTML Templates.", "Un estándar para la comunicación entre navegadores y servidores.", "Una forma de optimizar la carga de imágenes en la web."],
-                correctAnswer: 1,
-                help: "Permiten desarrollar componentes encapsulados y reutilizables en la web nativamente.",
-                codeExample: null
-            },
-            {
-                question: "Definición de 'Server-Sent Events' (SSE):",
-                type: "multiple-choice",
-                options: ["Un método para enviar eventos del cliente al servidor.", "Una tecnología que permite a un servidor enviar actualizaciones automáticamente a un cliente web a través de una conexión HTTP unidireccional.", "Un protocolo para la comunicación bidireccional en tiempo real.", "Una forma de registrar errores en el servidor."],
-                correctAnswer: 1,
-                help: "Es útil para flujos de datos unidireccionales desde el servidor, como actualizaciones de stock o feeds de noticias.",
-                codeExample: null
-            },
-            {
-                question: "Diferencia entre CSR y SSR:",
-                type: "multiple-choice",
-                options: ["CSR es más rápido que SSR.", "CSR se renderiza en el navegador, SSR se renderiza en el servidor antes de enviar HTML al navegador.", "SSR usa JavaScript, CSR no.", "No hay diferencias significativas, solo diferentes nombres."],
-                correctAnswer: 1,
-                help: "La elección entre CSR y SSR afecta el rendimiento inicial, el SEO y la experiencia del usuario.",
-                codeExample: null
-            },
-            {
-                question: "Propósito del atributo `integrity` (`<script>`, `<link>`):",
-                type: "multiple-choice",
-                options: ["Asegura que el archivo se cargue lo más rápido posible.", "Garantiza que el archivo externo (script o CSS) no ha sido manipulado y es el esperado, utilizando un hash criptográfico.", "Define la prioridad de carga del recurso.", "Especifica que el recurso debe ser descargado en segundo plano."],
-                correctAnswer: 1,
-                help: "Es una medida de seguridad importante para CDN y recursos de terceros, parte de Subresource Integrity (SRI).",
-                codeExample: `<script src="library.js" xintegrity="sha384-..." crossorigin="anonymous"></script>`
-            },
-            {
-                question: "Ordena los pasos para implementar un 'Web Worker' básico.",
-                type: "order-execution",
-                fragments: [
-                    "// main.js",
-                    "const myWorker = new Worker('worker.js');",
-                    "myWorker.postMessage('Hello Worker!');",
-                    "myWorker.onmessage = function(e) {",
-                    "   console.log('Mensaje del worker:', e.data);",
-                    "};",
-                    "",
-                    "// worker.js",
-                    "onmessage = function(e) {",
-                    "   console.log('Mensaje al worker:', e.data);",
-                    "   postMessage('Hello main thread!');",
-                    "};"
-                ],
-                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-                help: "Los Web Workers permiten ejecutar código en un hilo separado para no bloquear la interfaz de usuario.",
-                codeExample: `// main.js
-const myWorker = new Worker('worker.js');
-myWorker.postMessage('Hello Worker!');
-myWorker.onmessage = function(e) {
-    console.log('Mensaje del worker:', e.data);
-};
-
-// worker.js
-onmessage = function(e) {
-    console.log('Mensaje al worker:', e.data);
-    postMessage('Hello main thread!');
-};`
-            },
-            {
-                question: "¿Qué es el 'Shadow DOM'?",
-                type: "multiple-choice",
-                options: ["Un DOM que solo es visible en modo oscuro", "Un subárbol del DOM encapsulado que se renderiza con un elemento", "Una técnica para crear efectos de sombra en elementos HTML", "Un método para acceder a elementos ocultos del DOM"],
-                correctAnswer: 1,
-                help: "Es una característica que permite crear componentes web con su propio DOM y estilos aislados.",
-                codeExample: null
-            },
-            {
-                question: "¿Qué método se utiliza para insertar un nodo como el último hijo de un nodo padre?",
-                type: "multiple-choice",
-                options: ["`appendChild()`", "`insertBefore()`", "`prepend()`", "`insertLast()`"],
-                correctAnswer: 0,
-                help: "Este método es el más común para añadir un nuevo elemento al final de los hijos de otro.",
-                codeExample: `const parent = document.getElementById('parent');
-const child = document.createElement('div');
-parent.appendChild(child);`
-            },
-            {
-                question: "Empareja el elemento con su uso en la accesibilidad web (ARIA).",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Rol de navegación", drop: "`role=\"navigation\"`" },
-                    { drag: "Estado de expandido", drop: "`aria-expanded`" },
-                    { drag: "Etiqueta para invidentes", drop: "`aria-label`" },
-                    { drag: "Descripción del elemento", drop: "`aria-describedby`" },
-                    { drag: "Elemento oculto de accesibilidad", drop: "`aria-hidden`" }
-                ],
-                help: "Los atributos ARIA ayudan a los lectores de pantalla a interpretar el contenido de la página.",
-                codeExample: null
-            },
-            {
-                question: "Ordena los pasos para crear un 'Custom Element' (Web Component).",
-                type: "order-execution",
-                fragments: [
-                    "class MyCustomElement extends HTMLElement {",
-                    "   constructor() { super(); }",
-                    "   connectedCallback() { this.innerHTML = `<h1>Hola desde MyCustomElement</h1>`; }",
-                    "}",
-                    "customElements.define('my-custom-element', MyCustomElement);"
-                ],
-                correctOrder: [0, 1, 2, 3, 4],
-                help: "Para crear tu propia etiqueta HTML, necesitas definir una clase y luego registrarla.",
-                codeExample: `class MyCustomElement extends HTMLElement {
-    constructor() {
-        super();
-    }
-    connectedCallback() {
-        this.innerHTML = \`<h1>Hola desde MyCustomElement</h1>\`;
-    }
-}
-customElements.define('my-custom-element', MyCustomElement);`
-            },
-            {
-                question: "¿Qué método de 'Fetch API' se utiliza para realizar una solicitud GET?",
-                type: "multiple-choice",
-                options: ["`fetch().get()`", "`fetch()` (por defecto)", "`fetch().request('GET')`", "`fetch.get()`"],
-                correctAnswer: 1,
-                help: "El método 'fetch' por sí solo, sin opciones adicionales, realiza este tipo de solicitud.",
-                codeExample: `fetch('https://api.ejemplo.com/data')
-    .then(response => response.json())
-    .then(data => console.log(data));`
-            },
-            {
-                question: "¿Qué es el 'template' tag en HTML5?",
-                type: "multiple-choice",
-                options: ["Una plantilla para formularios", "Un contenedor para contenido que no se renderiza inicialmente pero se puede clonar", "Una plantilla para estilos CSS", "Un componente de interfaz de usuario reutilizable"],
-                correctAnswer: 1,
-                help: "Este tag es útil para contenido que se usará más tarde, como para Web Components.",
-                codeExample: `<template id="my-template">
-    <p>Este es un contenido de plantilla.</p>
-</template>`
-            },
-            {
-                question: "¿Cuál es la función del atributo `crossorigin` en etiquetas como `<script>` o `<img>`?",
-                type: "multiple-choice",
-                options: ["Define la orientación de la imagen", "Configura las solicitudes CORS (Cross-Origin Resource Sharing) para recursos de origen cruzado", "Especifica si el recurso debe cargarse de forma perezosa", "Indica que el recurso es crítico para la renderización de la página"],
-                correctAnswer: 1,
-                help: "Es fundamental para la seguridad y el manejo de recursos cargados desde diferentes dominios.",
-                codeExample: `<img src="image.jpg" crossorigin="anonymous" alt="Imagen">`
-            },
-            {
-                question: "Ordena los pasos para crear un componente web básico usando `Shadow DOM` y un `template`.",
-                type: "order-execution",
-                fragments: [
-                    "class MyComponent extends HTMLElement {",
-                    "  constructor() {",
-                    "    super();",
-                    "    const shadowRoot = this.attachShadow({ mode: 'open' });",
-                    "    const template = document.getElementById('my-template').content.cloneNode(true);",
-                    "    shadowRoot.appendChild(template);",
-                    "  }",
-                    "}",
-                    "customElements.define('my-component', MyComponent);"
-                ],
-                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                help: "Los Web Components permiten crear elementos HTML reutilizables con su propio encapsulamiento.",
-                codeExample: `// En HTML: <template id="my-template">...</template>
-// En JS:
-class MyComponent extends HTMLElement {
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: 'open' });
-    const template = document.getElementById('my-template').content.cloneNode(true);
-    shadowRoot.appendChild(template);
-  }
-}
-customElements.define('my-component', MyComponent);`
-            },
-            {
-                question: "Empareja el API de HTML5 con su funcionalidad.",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Obtener ubicación del usuario", drop: "Geolocation API" },
-                    { drag: "Almacenamiento local de datos", drop: "Web Storage API" },
-                    { drag: "Arrastrar y soltar elementos", drop: "Drag and Drop API" },
-                    { drag: "Manipular el historial del navegador", drop: "History API" }
-                ],
-                help: "HTML5 introdujo varias APIs para extender las capacidades de las aplicaciones web.",
-                codeExample: null
-            },
-            {
-                question: "¿Qué son los 'Custom Events' en JavaScript/HTML?",
-                type: "multiple-choice",
-                options: ["Eventos predefinidos por el navegador", "Eventos que solo se disparan en dispositivos móviles", "Eventos creados y despachados por el desarrollador para comunicar entre componentes", "Eventos que solo funcionan con WebSockets"],
-                correctAnswer: 2,
-                help: "Permiten una comunicación flexible y desacoplada entre diferentes partes de tu aplicación.",
-                codeExample: `const event = new CustomEvent('my-event', { detail: { data: 'info' } });
-document.dispatchEvent(event);`
-            },
-            {
-                question: "¿Qué atributo ARIA se utiliza para indicar que un elemento está oculto o excluido de la accesibilidad (por ejemplo, para lectores de pantalla)?",
-                type: "multiple-choice",
-                options: ["`aria-visible=\"false\"`", "`aria-hidden=\"true\"`", "`aria-excluded=\"true\"`", "`aria-display=\"none\"`"],
-                correctAnswer: 1,
-                help: "Este atributo es crucial para mejorar la experiencia de usuarios con discapacidades visuales.",
-                codeExample: `<div aria-hidden="true">Contenido oculto para lectores de pantalla</div>`
-            },
-            {
-                question: "Explica brevemente el concepto de 'SSR (Server-Side Rendering)' vs 'CSR (Client-Side Rendering)' en el contexto de HTML.",
-                type: "multiple-choice",
-                options: ["SSR: HTML generado en el cliente; CSR: HTML generado en el servidor. ", "SSR: HTML generado en el servidor; CSR: HTML generado en el cliente por JavaScript.", "SSR: Solo para aplicaciones móviles; CSR: Solo para aplicaciones de escritorio.", "SSR y CSR son términos obsoletos."],
-                correctAnswer: 1,
-                help: "Estos son dos enfoques principales para renderizar páginas web, con implicaciones en rendimiento y SEO.",
-                codeExample: null
-            },
-            {
-                question: "¿Qué es el atributo `integrity` en la etiqueta `<script>` o `<link>`?",
-                type: "multiple-choice",
-                options: ["Define la prioridad de carga del recurso", "Asegura que el recurso cargado no ha sido manipulado (Subresource Integrity - SRI)", "Indica si el recurso es un script o una hoja de estilo", "Especifica el tipo de codificación del recurso"],
-                correctAnswer: 1,
-                help: "Es una característica de seguridad que ayuda a proteger tu sitio web de la inyección de código malicioso.",
-                codeExample: `<script src="library.js" xintegrity="sha384-..." crossorigin="anonymous"></script>`
-            },
-            {
-                question: "Empareja el atributo HTML5 con su propósito en la validación de formularios.",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Campo obligatorio", drop: "`required`" },
-                    { drag: "Valor mínimo", drop: "`min`" },
-                    { drag: "Valor máximo", drop: "`max`" },
-                    { drag: "Longitud mínima de texto", drop: "`minlength`" },
-                    { drag: "Longitud máxima de texto", drop: "`maxlength`" }
-                ],
-                help: "Estos atributos permiten al navegador realizar validaciones básicas antes de enviar el formulario.",
-                codeExample: null
-            },
-            {
-                question: "Ordena los pasos para utilizar la API de Geolocation para obtener la posición actual del usuario.",
-                type: "order-execution",
-                fragments: [
-                    "if (navigator.geolocation) {",
-                    "  navigator.geolocation.getCurrentPosition(function(position) {",
-                    "    console.log('Latitud:', position.coords.latitude);",
-                    "    console.log('Longitud:', position.coords.longitude);",
-                    "  });",
-                    "} else {",
-                    "  console.log('Geolocalización no soportada por este navegador.');",
-                    "}"
-                ],
-                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
-                help: "La API de Geolocation requiere permiso del usuario para acceder a su ubicación.",
-                codeExample: `if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    console.log('Latitud:', position.coords.latitude);
-    console.log('Longitud:', position.coords.longitude);
-  });
-} else {
-  console.log('Geolocalización no soportada por este navegador.');
-}`
-            },
-            {
-                question: "¿Qué es la etiqueta `<picture>` en HTML5 y para qué se utiliza?",
-                type: "multiple-choice",
-                options: ["Para incrustar múltiples imágenes en un solo elemento.", "Para definir un grupo de imágenes relacionadas para galerías.", "Para proporcionar múltiples fuentes de imagen para un elemento `<img>` para diferentes contextos (responsive images).", "Es una etiqueta obsoleta para imágenes."],
-                correctAnswer: 2,
-                help: "Permite un control más fino sobre la carga de imágenes responsivas que solo `srcset`.",
-                codeExample: `<picture>
-  <source srcset="img-large.jpg" media="(min-width: 800px)">
-  <img src="img-small.jpg" alt="Descripción">
-</picture>`
-            },
-            {
-                question: "¿Qué son los 'Web Components' y cuáles son sus tres tecnologías principales?",
-                type: "multiple-choice",
-                options: ["Un framework de JavaScript para construir interfaces de usuario.", "Un conjunto de APIs web que permiten crear elementos HTML reutilizables y encapsulados. Sus tecnologías principales son Custom Elements, Shadow DOM y HTML Templates.", "Un estándar para la comunicación entre navegadores y servidores.", "Una forma de optimizar la carga de imágenes en la web."],
-                correctAnswer: 1,
-                help: "Son un conjunto de estándares que permiten la creación de componentes reutilizables en la web.",
-                codeExample: null
-            },
-            {
-                question: "Empareja el atributo `data-*` con su propósito.",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Almacenar datos personalizados en elementos HTML", drop: "`data-*` attributes" },
-                    { drag: "Identificador único para CSS y JavaScript", drop: "`id` attribute" },
-                    { drag: "Clase para aplicar estilos a múltiples elementos", drop: "`class` attribute" }
-                ],
-                help: "Los atributos `data-*` son una forma estándar de incrustar datos personalizados en el DOM.",
-                codeExample: `<div data-id="123" data-name="producto"></div>`
-            },
-            {
-                question: "Ordena los pasos para incluir una imagen SVG directamente en HTML.",
-                type: "order-execution",
-                fragments: [
-                    "<body>",
-                    "  <svg width=\"100\" height=\"100\">",
-                    "    <circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" stroke-width=\"3\" fill=\"red\" />",
-                    "  </svg>",
-                    "</body>"
-                ],
-                correctOrder: [0, 1, 2, 3, 4],
-                help: "Los gráficos SVG pueden ser incrustados directamente en el código HTML.",
-                codeExample: `<svg width="100" height="100">
-  <circle cx="50" cy="50\" r=\"40\" stroke=\"black\" stroke-width=\"3\" fill=\"red\" />
-</svg>`
-            },
-            {
-                question: "¿Cuál es la diferencia entre `localStorage` y `sessionStorage`?",
-                type: "multiple-choice",
-                options: ["`localStorage` almacena datos solo por la sesión actual; `sessionStorage` los almacena indefinidamente.", "`localStorage` y `sessionStorage` son lo mismo, solo nombres diferentes.", "`localStorage` almacena datos sin fecha de expiración; `sessionStorage` los almacena solo por la duración de la sesión de la página.", "`localStorage` es más seguro que `sessionStorage`."],
-                correctAnswer: 2,
-                help: "Ambos son parte de la Web Storage API, pero tienen comportamientos de persistencia diferentes.",
-                codeExample: null
-            },
-            {
-                question: "¿Qué es el atributo `rel=\"preload\"` en la etiqueta `<link>`?",
-                type: "multiple-choice",
-                options: ["Indica que el recurso debe cargarse después de que la página sea interactiva.", "Especifica que el recurso debe precargarse con alta prioridad, sin bloquear la renderización de la página.", "Define una relación de hoja de estilo alternativa.", "Es un atributo obsoleto para la carga de recursos."],
-                correctAnswer: 1,
-                help: "Es una directiva de precarga que ayuda a optimizar la velocidad de carga de recursos críticos.",
-                codeExample: `<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>`
-            }
-        ]
-    },
-    css: {
-        basico: [
-            {
-                question: "¿Qué propiedad CSS se utiliza para cambiar el color del texto de un elemento?",
-                type: "multiple-choice",
-                options: ["`font-color`", "`text-color`", "`color`", "`foreground-color`"],
-                correctAnswer: 2,
-                help: "Esta propiedad es la más directa para el color de las letras.",
-                codeExample: `p {
-    color: blue;
-}`
-            },
-            {
-                question: "¿Qué selector CSS se utiliza para seleccionar todos los elementos `p`?",
-                type: "multiple-choice",
-                options: ["`.p`", "`#p`", "`p`", "`<p>`"],
-                correctAnswer: 2,
-                help: "Para seleccionar todos los elementos de un tipo específico, usas su nombre de etiqueta.",
-                codeExample: `p {
-    font-size: 16px;
-}`
-            },
-            {
-                question: "¿Qué propiedad CSS se usa para cambiar el tamaño de la fuente?",
-                type: "multiple-choice",
-                options: ["`text-size`", "`font-style`", "`font-size`", "`text-font`"],
-                correctAnswer: 2,
-                help: "Esta propiedad controla el tamaño del texto.",
-                codeExample: `h1 {
-    font-size: 2em;
-}`
-            },
-            {
-                question: "Ordena los pasos para aplicar un estilo CSS a un elemento HTML usando una clase.",
-                type: "order-execution",
-                fragments: [
-                    "HTML:",
-                    "<div class=\"mi-clase\">",
-                    "   Contenido",
-                    "</div>",
-                    "CSS:",
-                    ".mi-clase {",
-                    "   color: red;",
-                    "}"
-                ],
-                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
-                help: "Recuerda cómo se define una clase en CSS y cómo se asigna en HTML.",
-                codeExample: `HTML:
-<div class="mi-clase">
-    Contenido
-</div>
-
-CSS:
-.mi-clase {
-    color: red;
-}`
-            },
-            {
-                question: "¿Qué es CSS?",
-                type: "multiple-choice",
-                options: ["Computer Style Sheets", "Creative Style Sheets", "Cascading Style Sheets", "Colorful Style Sheets"],
-                correctAnswer: 2,
-                help: "Es el lenguaje que da 'estilo' a las páginas web.",
-                codeExample: null
-            },
-            {
-                question: "¿Qué propiedad CSS se usa para establecer el color de fondo de un elemento?",
-                type: "multiple-choice",
-                options: ["`background-color`", "`bgcolor`", "`color-background`", "`fill-color`"],
-                correctAnswer: 0,
-                help: "Esta propiedad es para el color de la parte trasera de un elemento.",
-                codeExample: `body {
-    background-color: lightblue;
-}`
-            },
-            {
-                question: "¿Qué propiedad CSS controla el espaciado entre letras?",
-                type: "multiple-choice",
-                options: ["`word-spacing`", "`line-height`", "`letter-spacing`", "`text-spacing`"],
-                correctAnswer: 2,
-                help: "Esta propiedad ajusta el espacio horizontal entre los caracteres.",
-                codeExample: `h1 {
-    letter-spacing: 3px;
-}`
-            },
-            {
-                question: "Empareja el tipo de selector CSS con su definición.",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Selecciona por ID", drop: "#id" },
-                    { drag: "Selecciona por Clase", drop: ".clase" },
-                    { drag: "Selecciona por Etiqueta", drop: "etiqueta" },
-                    { drag: "Selector Universal", drop: "*" },
-                    { drag: "Selector de Atributo", drop: "[atributo]" }
-                ],
-                help: "Cada símbolo o palabra tiene un significado específico al seleccionar elementos.",
-                codeExample: null
-            },
-            {
-                question: "Ordena los pasos para vincular una hoja de estilo CSS interna (en el head).",
-                type: "order-execution",
-                fragments: [
-                    "<head>",
-                    "   <style>",
-                    "      p { color: blue; }",
-                    "   </style>",
-                    "</head>"
-                ],
-                correctOrder: [0, 1, 2, 3, 4],
-                help: "Los estilos internos se definen directamente en la sección de metadatos del documento HTML.",
-                codeExample: `<head>
-    <style>
-        p { color: blue; }
-    </style>
-</head>`
-            },
-            {
-                question: "¿Qué propiedad CSS se utiliza para alinear texto horizontalmente?",
-                type: "multiple-choice",
-                options: ["`align-text`", "`text-align`", "`horizontal-align`", "`valign`"],
-                correctAnswer: 1,
-                help: "Esta propiedad controla cómo se distribuye el texto dentro de su contenedor.",
-                codeExample: `p {
-    text-align: center;
-}`
-            },
-            {
-                question: "¿Qué propiedad CSS controla el grosor de un borde?",
-                type: "multiple-choice",
-                options: ["`border-style`", "`border-color`", "`border-width`", "`border-size`"],
-                correctAnswer: 2,
-                help: "Esta propiedad define el grosor de la línea del borde de un elemento.",
-                codeExample: `div {
-    border-width: 2px;
-}`
-            },
-            {
-                question: "Ordena las propiedades para aplicar un borde sólido y rojo de 2px a un elemento.",
-                type: "order-execution",
-                fragments: [
-                    "div {",
-                    "   border:",
-                    "   2px",
-                    "   solid",
-                    "   red;",
-                    "}"
-                ],
-                correctOrder: [0, 1, 2, 3, 4, 5],
-                help: "La propiedad shorthand `border` permite definir estilo, grosor y color del borde en una sola línea.",
-                codeExample: `div {
-    border: 2px solid red;
-}`
-            },
-            {
-                question: "Empareja el tipo de valor CSS con un ejemplo.",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Unidad absoluta", drop: "`16px`" },
-                    { drag: "Unidad relativa al padre", drop: "`1.2em`" },
-                    { drag: "Unidad relativa a la raíz", drop: "`1rem`" },
-                    { drag: "Porcentaje", drop: "`50%`" }
-                ],
-                help: "Las unidades de medida en CSS determinan cómo se escalan los valores.",
-                codeExample: null
-            },
-            {
-                question: "¿Qué es la propiedad `margin` en el modelo de caja de CSS?",
-                type: "multiple-choice",
-                options: ["El espacio entre el contenido y el borde del elemento.", "El espacio exterior alrededor de un elemento, separándolo de otros elementos.", "El espacio que ocupa el contenido del elemento.", "La línea que rodea el elemento."],
-                correctAnswer: 1,
-                help: "El margen es el espacio transparente alrededor del borde de un elemento.",
-                codeExample: `div {
-    margin: 10px;
-}`
-            },
-            {
-                question: "¿Qué propiedad CSS se utiliza para poner en negrita el texto de un elemento?",
-                type: "multiple-choice",
-                options: ["`text-bold`", "`font-style: bold`", "`font-weight: bold`", "`text-decoration: bold`"],
-                correctAnswer: 2,
-                help: "Esta propiedad controla el grosor o la intensidad de la fuente.",
-                codeExample: `p {
-    font-weight: bold;
-}`
-            },
-            {
-                question: "¿Qué propiedad se usa para cambiar la familia de la fuente (ej. Arial, Times New Roman)?",
-                type: "multiple-choice",
-                options: ["`text-font`", "`font-family`", "`font-type`", "`typeface`"],
-                correctAnswer: 1,
-                help: "Esta propiedad define la fuente que se utilizará para el texto.",
-                codeExample: `body {
-    font-family: Arial, sans-serif;
-}`
-            },
-            {
-                question: "¿Qué propiedad CSS se utiliza para añadir un subrayado al texto?",
-                type: "multiple-choice",
-                options: ["`text-underline`", "`decoration-line`", "`text-decoration`", "`underline-text`"],
-                correctAnswer: 2,
-                help: "Esta propiedad permite aplicar líneas decorativas al texto, como subrayado, tachado o superíndice.",
-                codeExample: `a {
-    text-decoration: underline;
-}`
-            },
-            {
-                question: "Empareja la forma de incluir CSS con su descripción.",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Estilos directamente en la etiqueta HTML", drop: "Inline CSS" },
-                    { drag: "Estilos en la sección `<head>` del HTML", drop: "Internal CSS" },
-                    { drag: "Estilos en un archivo `.css` separado", drop: "External CSS" }
-                ],
-                help: "Hay varias formas de aplicar estilos a un documento HTML.",
-                codeExample: null
-            },
-            {
-                question: "Ordena las propiedades para aplicar un color de fondo con un gradiente lineal.",
-                type: "order-execution",
-                fragments: [
-                    "div {",
-                    "   background-image:",
-                    "   linear-gradient(to right, blue, green);",
-                    "}"
-                ],
-                correctOrder: [0, 1, 2, 3],
-                help: "Los gradientes permiten transiciones suaves entre dos o más colores.",
-                codeExample: `div {
-    background-image: linear-gradient(to right, blue, green);
-}`
-            },
-            {
-                question: "¿Qué propiedad CSS se utiliza para controlar si un texto largo debe desbordarse, ser ocultado o mostrar elipsis?",
-                type: "multiple-choice",
-                options: ["`text-wrap`", "`overflow-text`", "`white-space`", "`text-overflow`"],
-                correctAnswer: 3,
-                help: "Esta propiedad se usa junto con `white-space` y `overflow` para manejar el desbordamiento de texto.",
-                codeExample: `p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}`
-            },
-            {
-                question: "¿Qué propiedad CSS se utiliza para cambiar el estilo de la fuente (normal, cursiva, oblicua)?",
-                type: "multiple-choice",
-                options: ["`font-family`", "`font-weight`", "`font-style`", "`text-style`"],
-                correctAnswer: 2,
-                help: "Esta propiedad es para la inclinación del texto.",
-                codeExample: `p { font-style: italic; }`
-            },
-            {
-                question: "Empareja el valor de la propiedad `text-align` con su efecto.",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Alinea el texto a la izquierda", drop: "`left`" },
-                    { drag: "Alinea el texto a la derecha", drop: "`right`" },
-                    { drag: "Centra el texto horizontalmente", drop: "`center`" },
-                    { drag: "Justifica el texto, alineándolo a ambos márgenes", drop: "`justify`" }
-                ],
-                help: "Controla la alineación horizontal del contenido en línea de un elemento de bloque.",
-                codeExample: null
-            },
-            {
-                question: "Ordena las propiedades para aplicar un color de texto y un color de fondo a un párrafo.",
-                type: "order-execution",
-                fragments: [
-                    "p {",
-                    "   color: blue;",
-                    "   background-color: lightgray;",
-                    "}"
-                ],
-                correctOrder: [0, 1, 2, 3],
-                help: "Las propiedades `color` y `background-color` son fundamentales para el estilo visual.",
-                codeExample: `p {
-    color: blue;
-    background-color: lightgray;
-}`
-            },
-            {
-                question: "¿Cuál es el valor por defecto de la propiedad `position` en CSS?",
-                type: "multiple-choice",
-                options: ["`relative`", "`absolute`", "`fixed`", "`static`"],
-                correctAnswer: 3,
-                help: "Los elementos con esta posición se colocan en el orden normal del documento.",
-                codeExample: null
-            },
-            {
-                question: "¿Qué propiedad CSS se utiliza para controlar la transparencia (opacidad) de un elemento?",
-                type: "multiple-choice",
-                options: ["`visibility`", "`display`", "`opacity`", "`transparent`"],
-                correctAnswer: 2,
-                help: "Un valor de 0 lo hace completamente transparente, y 1 completamente opaco.",
-                codeExample: `img { opacity: 0.5; }`
             }
         ],
         intermedio: [
@@ -1678,7 +978,7 @@ div:nth-child(2) {
 }`
             },
             {
-                question: "¿Qué propiedad CSS se utiliza para controlar el comportamiento de desplazamiento suave (smooth scrolling) en la página?",
+                question: "¿Qué propiedad CSS se utiliza para controlar el comportamiento del desplazamiento suave (smooth scrolling) en la página?",
                 type: "multiple-choice",
                 options: ["`scroll-behavior`", "`smooth-scroll`", "`overflow-scrolling`", "`scroll-snap-type`"],
                 correctAnswer: 0,
@@ -2716,7 +2016,7 @@ let inactivityCountdownDisplay;
 
 
 // Drag & Drop specific elements and variables
-let draggedItem = null;
+// let draggedItemOriginalElement = null; // Renamed for clarity - REMOVED DUPLICATE DECLARATION
 let currentDragMatchPairs = [];
 let originalDragMatchState = []; // Para el botón de deshacer en Drag & Match
 
@@ -2834,7 +2134,7 @@ function selectDifficulty(difficulty) {
     // Shuffle and take only the first 10 questions for the session
     const allQuestionsForLevel = [...quizData[selectedTopic][selectedDifficulty]];
     shuffleArray(allQuestionsForLevel);
-    currentQuestions = allQuestionsForLevel.slice(0, 10); // Take only 10 questions
+    currentQuestions = allQuestionsForLevel.slice(0, 10);
     
     currentQuestionIndex = 0;
     currentScore = 0;
@@ -3115,16 +2415,25 @@ function setupDragMatchQuestion(question) {
             if (dropTargetsArea) dropTargetsArea.appendChild(dropTarget);
         });
 
+        // Add a global dragend listener to ensure the dragged item is always reset
+        document.addEventListener('dragend', handleDragEnd);
+
+
         if (checkMatchButton) checkMatchButton.onclick = checkDragMatch;
         if (undoMatchButton) undoMatchButton.onclick = undoDragMatch;
     }
 }
 
+// Global variable to hold the currently dragged item's original element from dragElementsArea
+let draggedItemOriginalElement = null;
+
 function handleDragStart(e) {
-    draggedItem = e.target;
-    e.dataTransfer.setData('text/plain', draggedItem.dataset.originalText);
+    draggedItemOriginalElement = e.target; // Store the actual element from the drag area
+    e.dataTransfer.setData('text/plain', draggedItemOriginalElement.dataset.originalText);
     setTimeout(() => {
-        if (draggedItem) draggedItem.classList.add('opacity-0'); // Make original element transparent during drag
+        if (draggedItemOriginalElement) {
+            draggedItemOriginalElement.classList.add('opacity-0'); // Make original element transparent during drag
+        }
     }, 0);
 }
 
@@ -3150,32 +2459,32 @@ function handleDrop(e) {
 
         // If the drop target already has a child (an item was dropped here before),
         // return the old item to the drag area before placing the new one.
-        const existingDroppedItem = dropTarget.querySelector('.drag-item-dropped');
-        if (existingDroppedItem) {
-            existingDroppedItem.remove(); // Remove from target
-            // Find the original drag item to make it visible again
-            const originalDragItemInArea = dragElementsArea.querySelector(`[data-original-text="${existingDroppedItem.dataset.originalText}"]`);
-            if (originalDragItemInArea) {
-                originalDragItemInArea.classList.remove('hidden', 'opacity-0');
-                originalDragItemInArea.classList.add('drag-item'); // Ensure it has the drag-item class
+        const existingDroppedItemInTarget = dropTarget.querySelector('.drag-item-dropped');
+        if (existingDroppedItemInTarget) {
+            // Find the original drag item in the dragElementsArea based on its text content
+            const originalElementToRestore = dragElementsArea.querySelector(`[data-original-text="${existingDroppedItemInTarget.dataset.originalText}"]`);
+            if (originalElementToRestore) {
+                originalElementToRestore.classList.remove('hidden', 'opacity-0'); // Make it visible again
+                originalElementToRestore.classList.add('drag-item'); // Ensure it has the drag-item class
             } else {
-                // If original not found (e.g., it was a clone), re-create it in the drag area
+                // If the original element was somehow lost, recreate it in the drag area
                 const tempDragItem = document.createElement('div');
                 tempDragItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800', 'px-4', 'py-2', 'rounded-lg', 'cursor-grab', 'hover:bg-blue-300', 'transition-colors', 'duration-200', 'shadow-md');
-                tempDragItem.textContent = existingDroppedItem.dataset.originalText;
-                tempDragItem.dataset.originalText = existingDroppedItem.dataset.originalText;
+                tempDragItem.textContent = existingDroppedItemInTarget.dataset.originalText;
+                tempDragItem.dataset.originalText = existingDroppedItemInTarget.dataset.originalText;
                 tempDragItem.setAttribute('draggable', true);
                 tempDragItem.addEventListener('dragstart', handleDragStart);
-                if (dragElementsArea) dragElementsArea.appendChild(tempDragItem);
+                dragElementsArea.appendChild(tempDragItem);
             }
+            existingDroppedItemInTarget.remove(); // Remove the old dropped item from the target
         }
 
-        if (draggedItem) {
-            // Create a new element to represent the dropped state in the target
+        // Now place the new dragged item
+        if (draggedItemOriginalElement) {
             const droppedItem = document.createElement('div');
             droppedItem.classList.add('drag-item-dropped', 'bg-indigo-300', 'text-indigo-900', 'px-4', 'py-2', 'rounded-lg', 'cursor-default', 'min-w-[100px]', 'text-center', 'shadow-inner', 'flex', 'items-center', 'justify-center', 'w-full', 'h-full');
-            droppedItem.textContent = draggedItem.dataset.originalText;
-            droppedItem.dataset.originalText = draggedItem.dataset.originalText; // Keep original text reference
+            droppedItem.textContent = draggedItemOriginalElement.dataset.originalText;
+            droppedItem.dataset.originalText = draggedItemOriginalElement.dataset.originalText; // Keep original text reference
 
             // Hide the placeholder text if present
             const dropTextPlaceholder = dropTarget.querySelector('.drop-text-placeholder');
@@ -3184,11 +2493,30 @@ function handleDrop(e) {
             }
             
             dropTarget.appendChild(droppedItem);
-            draggedItem.classList.add('hidden'); // Keep the original hidden after drop
-            draggedItem.classList.remove('opacity-0'); // Ensure opacity is reset for next drag if needed
+            draggedItemOriginalElement.classList.add('hidden'); // Hide the original element from the drag area
+            draggedItemOriginalElement.classList.remove('opacity-0'); // Reset opacity for next drag if needed
 
-            draggedItem = null; // Reset dragged item
+            draggedItemOriginalElement = null; // Reset dragged item
         }
+    } else {
+        // If dropped outside a valid target, restore the original dragged item's visibility
+        if (draggedItemOriginalElement) {
+            draggedItemOriginalElement.classList.remove('hidden', 'opacity-0');
+            draggedItemOriginalElement = null;
+        }
+    }
+}
+
+function handleDragEnd(e) {
+    // This fires after a drag operation ends, regardless of whether it was a successful drop or not.
+    // It's a good place to ensure the dragged item's visibility is reset if it wasn't dropped.
+    if (draggedItemOriginalElement) {
+        draggedItemOriginalElement.classList.remove('opacity-0'); // Ensure opacity is restored
+        // If the dropEffect is 'none', it means the item was not dropped on a valid target.
+        if (e.dataTransfer.dropEffect === 'none') {
+            draggedItemOriginalElement.classList.remove('hidden'); // Make it visible again in its original area
+        }
+        draggedItemOriginalElement = null; // Clear the reference
     }
 }
 
@@ -3292,6 +2620,7 @@ function undoDragMatch() {
     if (dragElementsArea) {
         const allDragItems = dragElementsArea.querySelectorAll('.drag-item, .drag-item-dropped'); // Select both potential types
         allDragItems.forEach(item => {
+            // Restore original drag-item classes and remove any dropped-specific or feedback classes
             item.classList.remove('hidden', 'opacity-0', 'drag-item-dropped', 'bg-indigo-300', 'text-indigo-900', 'bg-green-400', 'text-green-900', 'bg-red-400', 'text-red-900', 'border-2', 'border-green-600', 'border-red-600');
             item.classList.add('drag-item', 'bg-blue-200', 'text-blue-800'); // Restore default drag item styles
             item.setAttribute('draggable', true); // Make draggable again
@@ -3484,7 +2813,16 @@ window.initQuizGame = function() {
     }
 
     if (quizExitGameButton) {
-        quizExitGameButton.addEventListener('click', () => showScreen('quiz-start-menu')); // Or close window/redirect
+        quizExitGameButton.addEventListener('click', () => {
+            // This assumes window.returnToMainContent is defined in the parent index.html
+            if (window.returnToMainContent) {
+                window.returnToMainContent();
+            } else {
+                // Fallback if not running in the expected parent context
+                console.warn("window.returnToMainContent not found. Cannot return to main content.");
+                showScreen('quiz-start-menu'); // Just go back to quiz start menu
+            }
+        });
     }
 
     // Event listeners para detectar actividad del usuario (solo después de que los elementos existan)
