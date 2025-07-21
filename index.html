@@ -245,7 +245,7 @@
                 <a href="index.html" class="text-gray-800 hover:text-blue-600 font-semibold text-xl text-center py-2 transition-colors duration-200" onclick="closeMobileMenu()">Inicio</a>
                 <!-- Mobile Grados Menu (Cursos) -->
                 <div class="w-full">
-                    <button id="mobile-courses-toggle" class="w-full text-gray-800 hover:text-blue-600 font-semibold text-xl text-center py-2 flex justify-between items-center transition-colors duration-200">
+                    <button id="mobile-courses-toggle" class="w-full text-gray-800 hover:text-blue-600 font-semibold text-xl text-center py-2 flex justify-between items-center transition-colors duration-200 border-b border-gray-200">
                         Cursos
                         <span id="mobile-courses-arrow" class="transform transition-transform duration-300">&#9656;</span>
                     </button>
@@ -481,7 +481,7 @@
                         name: "Informática Aplicada I",
                         topics: [
                             { title: "Dispositivos de Almacenamiento", file: "II_BTP_A/Informatica_Aplicada_I/dispositivos_de_almacenamiento.pdf" },
-                            { title: "Fundamentos de Sistemas Operativos", file: "II_BTP_A/Informatica_Aplicada_I/sistemas_operativos.pdf" },
+                            { title: "Fundamentos de Sistemas Operativos", file: "II_BTP_A/Informatica_Aplicada_I/fundamentos_de_sistemas_operativos.pdf" },
                             { title: "Terminal de Comandos", file: "II_BTP_A/Informatica_Aplicada_I/terminal_comando.pdf" } // PDF for download
                         ]
                     },
@@ -1147,8 +1147,9 @@
                 script.src = 'js/webmaster_quiz_juego.js';
                 script.onload = () => {
                     // Once the script is loaded, initialize the game elements and pass gameDataStorage
-                    if (window.initializeWebMasterQuizGame) {
-                        window.initializeWebMasterQuizGame(gameDataStorage); // Pass the storage object
+                    // CORRECTED: Changed initializeWebMasterQuizGame to initQuizGame
+                    if (window.initQuizGame) {
+                        window.initQuizGame(gameDataStorage); // Pass the storage object
                     }
                 };
                 // Append the script to the body or the game container
