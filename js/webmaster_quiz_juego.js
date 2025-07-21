@@ -1,1636 +1,3159 @@
-// Datos para el juego WebMaster Quiz
-// Cada tema (HTML, CSS, JavaScript) tendrá 3 niveles de dificultad (Básico, Intermedio, Avanzado).
-// Cada nivel contendrá 20 preguntas únicas, que se cargarán aleatoriamente.
+// Este archivo contiene la lógica y los datos del juego de WebMaster Quiz.
+// Incluye las preguntas por tema y dificultad, y la configuración del juego.
 
 const quizData = {
     html: {
         basico: [
             {
+                question: "¿Cuál es el propósito de la etiqueta `<h1>`?",
                 type: "multiple-choice",
-                question: "¿Qué etiqueta se utiliza para definir el título de una página web en el navegador?",
-                options: ["<head>", "<body>", "<title>", "<meta>"],
-                correctAnswer: "<title>",
-                help: "Piensa en lo que aparece en la pestaña del navegador."
+                options: ["Crear un enlace", "Definir un párrafo", "Crear un encabezado de nivel más alto", "Insertar una imagen"],
+                correctAnswer: 2,
+                help: "Esta etiqueta se utiliza para el título principal de una sección o página.",
+                codeExample: "<h1>Este es un encabezado principal</h1>"
             },
             {
+                question: "¿Qué etiqueta se usa para insertar un salto de línea simple?",
                 type: "multiple-choice",
-                question: "¿Cuál es la etiqueta correcta para un párrafo en HTML?",
-                options: ["<para>", "<p>", "<text>", "<pt>"],
-                correctAnswer: "<p>",
-                help: "Es una de las etiquetas más comunes para texto."
+                options: ["`<p>`", "`<br>`", "`<h1>`", "`<a>`"],
+                correctAnswer: 1,
+                help: "Piensa en cómo forzar una nueva línea sin crear un nuevo párrafo.",
+                codeExample: "<p>Línea 1<br>Línea 2</p>"
             },
             {
-                type: "syntax-completion",
-                question: "Completa la etiqueta para un enlace que abra 'pagina.html' en la misma pestaña.",
-                fragments: ["<a", "href=\"pagina.html\"", ">", "Ir a página", "</a>"],
-                correctOrder: ["<a", "href=\"pagina.html\"", ">", "Ir a página", "</a>"],
-                help: "El atributo 'href' define el destino del enlace."
+                question: "¿Qué atributo se utiliza para especificar la URL de destino de un enlace?",
+                type: "multiple-choice",
+                options: ["`src`", "`alt`", "`href`", "`link`"],
+                correctAnswer: 2,
+                help: "Este atributo es clave para dónde te llevará el hipervínculo.",
+                codeExample: "<a href=\"https://www.ejemplo.com\">Visitar Ejemplo</a>"
             },
             {
-                type: "drag-match",
-                question: "Arrastra y empareja la etiqueta HTML con su propósito básico.",
-                pairs: [
-                    { drag: "<h1>", drop: "Encabezado principal" },
-                    { drag: "<img>", drop: "Insertar una imagen" },
-                    { drag: "<ul>", drop: "Lista desordenada" },
-                    { drag: "<body>", drop: "Contenido visible de la página" }
-                ],
-                help: "Piensa en la función semántica de cada etiqueta."
-            },
-            {
+                question: "Ordena los pasos para crear una tabla simple en HTML.",
                 type: "order-execution",
-                question: "Ordena la estructura básica de un documento HTML5.",
-                fragments: ["<!DOCTYPE html>", "<html>", "<head>", "<body>", "</html>", "</head>", "</body>"],
-                correctOrder: ["<!DOCTYPE html>", "<html>", "<head>", "</head>", "<body>", "</body>", "</html>"],
-                help: "Recuerda el orden de las etiquetas principales."
+                fragments: ["<table>", "<tr>", "<td>", "Contenido de celda", "</td>", "</tr>", "</table>"],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6],
+                help: "Recuerda la jerarquía: la tabla contiene filas, y las filas contienen celdas.",
+                codeExample: `<table>
+    <tr>
+        <td>Contenido de celda</td>
+    </tr>
+</table>`
             },
             {
+                question: "¿Qué significa HTML?",
                 type: "multiple-choice",
-                question: "¿Qué etiqueta se usa para crear una lista ordenada?",
-                options: ["<ul>", "<ol>", "<li>", "<dl>"],
-                correctAnswer: "<ol>",
-                help: "Las listas ordenadas tienen números o letras."
+                options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyperlink and Text Markup Language", "Home Tool Markup Language"],
+                correctAnswer: 0,
+                help: "Es el lenguaje fundamental para la estructura de las páginas web.",
+                codeExample: null
             },
             {
+                question: "¿Cuál es la etiqueta correcta para el elemento de párrafo?",
                 type: "multiple-choice",
-                question: "¿Cuál es el propósito de la etiqueta `<footer>`?",
-                options: ["Definir el encabezado de una sección", "Contener información de derechos de autor o contacto", "Agrupar contenido principal", "Crear un pie de página para un documento o sección"],
-                correctAnswer: "Crear un pie de página para un documento o sección",
-                help: "Se encuentra al final de un documento o sección."
+                options: ["`<pa>`", "`<p>`", "`<pr>`", "`<par>`"],
+                correctAnswer: 1,
+                help: "Es una de las etiquetas más básicas para bloques de texto.",
+                codeExample: "<p>Este es un párrafo de ejemplo.</p>"
             },
             {
-                type: "syntax-completion",
-                question: "Crea una etiqueta de imagen con una fuente y texto alternativo.",
-                fragments: ["<img", "src=\"foto.jpg\"", "alt=\"Mi foto\"", ">"],
-                correctOrder: ["<img", "src=\"foto.jpg\"", "alt=\"Mi foto\"", ">"],
-                help: "La etiqueta de imagen es un elemento vacío."
+                question: "¿Qué atributo se utiliza para especificar una fuente externa para una imagen?",
+                type: "multiple-choice",
+                options: ["`link`", "`url`", "`src`", "`href`"],
+                correctAnswer: 2,
+                help: "Este atributo indica la ubicación del archivo de la imagen.",
+                codeExample: "<img src=\"imagen.jpg\" alt=\"Descripción de la imagen\">"
             },
             {
+                question: "Empareja la etiqueta HTML con su propósito.",
                 type: "drag-match",
-                question: "Empareja la etiqueta con su uso principal.",
                 pairs: [
-                    { drag: "<strong>", drop: "Texto importante (negrita)" },
-                    { drag: "<em>", drop: "Texto enfatizado (cursiva)" },
-                    { drag: "<br>", drop: "Salto de línea" },
-                    { drag: "<hr>", drop: "Línea horizontal temática" }
+                    { drag: "Cuerpo del documento", drop: "<body>" },
+                    { drag: "Título de la página", drop: "<title>" },
+                    { drag: "División o sección", drop: "<div>" },
+                    { drag: "Lista no ordenada", drop: "<ul>" },
+                    { drag: "Elemento de lista", drop: "<li>" }
                 ],
-                help: "Piensa en el formato de texto y elementos de separación."
+                help: "Cada etiqueta tiene un rol específico en la estructura de la página.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué etiqueta se usa para insertar un video en HTML5?",
-                options: ["<media>", "<video>", "<movie>", "<clip>"],
-                correctAnswer: "<video>",
-                help: "Es una etiqueta semántica para contenido multimedia."
-            },
-            {
+                question: "¿Cuál es la estructura básica de un documento HTML?",
                 type: "order-execution",
-                question: "Ordena los pasos para crear un encabezado de nivel 2.",
-                fragments: ["<h2>", "Mi Encabezado", "</h2>"],
-                correctOrder: ["<h2>", "Mi Encabezado", "</h2>"],
-                help: "Los encabezados van del h1 al h6."
+                fragments: ["<!DOCTYPE html>", "<html>", "<head>", "<title>", "Título de la página</title>", "</head>", "<body>", "Contenido</body >", "</html>"],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                help: "Piensa en el orden en que se define un documento web, desde la declaración del tipo hasta el cierre del HTML.",
+                codeExample: `<!DOCTYPE html>
+<html>
+    <head>
+        <title>Título de la página</title>
+    </head>
+    <body>
+        Contenido
+    </body>
+</html>`
             },
             {
+                question: "¿Qué etiqueta se utiliza para crear un enlace?",
                 type: "multiple-choice",
-                question: "¿Qué atributo se utiliza para fusionar celdas en una fila en una tabla HTML?",
-                options: ["rowspan", "colspan", "cellspan", "merge-rows"],
-                correctAnswer: "rowspan",
-                help: "Piensa en la dirección de la fusión."
+                options: ["`<link>`", "`<a>`", "`<href>`", "`<url>`"],
+                correctAnswer: 1,
+                help: "Esta etiqueta es la abreviatura de 'anchor'.",
+                codeExample: "<a href=\"otra_pagina.html\">Ir a otra página</a>"
             },
+            // Nuevas preguntas para HTML Básico (hasta 20)
             {
-                type: "syntax-completion",
-                question: "Completa la etiqueta para un campo de entrada de texto simple.",
-                fragments: ["<input", "type=\"text\"", "name=\"nombre\"", ">"],
-                correctOrder: ["<input", "type=\"text\"", "name=\"nombre\"", ">"],
-                help: "El tipo 'text' es el más común para entradas."
-            },
-            {
+                question: "¿Qué significa la declaración `<!DOCTYPE html>`?",
                 type: "multiple-choice",
-                question: "¿Qué etiqueta se usa para definir una lista de elementos de definición?",
-                options: ["<ul>", "<ol>", "<dl>", "<dt>"],
-                correctAnswer: "<dl>",
-                help: "Es para términos y sus descripciones."
+                options: ["Define el tipo de documento como HTML4", "Es una declaración para indicar la versión de HTML que se está usando, específicamente HTML5", "Define el idioma del documento", "Indica que el documento es un archivo XML"],
+                correctAnswer: 1,
+                help: "Es la primera línea de un documento HTML5 y es crucial para el renderizado correcto del navegador.",
+                codeExample: null
             },
             {
+                question: "¿Qué etiqueta HTML se utiliza para añadir comentarios en el código que no son visibles en el navegador?",
+                type: "multiple-choice",
+                options: ["`// Comentario`", "`/* Comentario */`", "`<!-- Comentario -->`", "`<comment>Comentario</comment>`"],
+                correctAnswer: 2,
+                help: "Los comentarios HTML son útiles para documentar tu código sin que afecte la visualización de la página.",
+                codeExample: "<!-- Este es un comentario HTML -->"
+            },
+            {
+                question: "Ordena los elementos para crear una lista ordenada de ítems.",
+                type: "order-execution",
+                fragments: ["<ol>", "<li>", "Primer ítem", "</li>", "<li>", "Segundo ítem", "</li>", "</ol>"],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
+                help: "Las listas ordenadas usan `<ol>` y cada ítem se define con `<li>`.",
+                codeExample: `<ol>
+    <li>Primer ítem</li>
+    <li>Segundo ítem</li>
+</ol>`
+            },
+            {
+                question: "Empareja la etiqueta HTML con su tipo de elemento (en línea o de bloque).",
                 type: "drag-match",
-                question: "Empareja el tipo de entrada de formulario con su propósito.",
                 pairs: [
-                    { drag: "text", drop: "Campo de texto simple" },
-                    { drag: "checkbox", drop: "Selección de múltiples opciones" },
-                    { drag: "radio", drop: "Selección de una sola opción de un grupo" },
-                    { drag: "submit", drop: "Botón para enviar el formulario" }
+                    { drag: "Bloque", drop: "<div>" },
+                    { drag: "En línea", drop: "<span>" },
+                    { drag: "Bloque", drop: "<p>" },
+                    { drag: "En línea", drop: "<a>" },
+                    { drag: "Bloque", drop: "<h1>" }
                 ],
-                help: "Cada tipo de input tiene una interacción específica."
+                help: "Los elementos de bloque ocupan todo el ancho disponible, los en línea solo el espacio necesario.",
+                codeExample: null
             },
             {
+                question: "¿Cuál es la diferencia principal entre `<strong>` y `<em>`?",
                 type: "multiple-choice",
-                question: "¿Qué elemento HTML se usa para dibujar gráficos, animaciones o imágenes sobre la marcha?",
-                options: ["<svg>", "<canvas>", "<draw>", "<graphic>"],
-                correctAnswer: "<canvas>",
-                help: "Es un área de dibujo programable con JavaScript."
+                options: ["`<strong>` se usa para cursiva, `<em>` para negrita.", "`<strong>` para énfasis semántico, `<em>` para importancia semántica.", "`<strong>` para importancia semántica, `<em>` para énfasis semántico.", "No hay diferencia, ambos solo aplican negrita."],
+                correctAnswer: 2,
+                help: "Ambas etiquetas tienen un significado semántico que va más allá de su estilo visual predeterminado.",
+                codeExample: "<strong>Texto importante</strong>, <em>texto enfatizado</em>"
             },
             {
+                question: "¿Qué etiqueta se utiliza para crear un encabezado de nivel 2?",
+                type: "multiple-choice",
+                options: ["`<h2>`", "`<h1.2>`", "`<head2>`", "`<heading2>`"],
+                correctAnswer: 0,
+                help: "Los encabezados van del h1 al h6, siendo h1 el más importante.",
+                codeExample: "<h2>Subtítulo</h2>"
+            },
+            {
+                question: "¿Qué atributo se utiliza para proporcionar una descripción alternativa para una imagen, útil para la accesibilidad?",
+                type: "multiple-choice",
+                options: ["`description`", "`title`", "`alt`", "`text`"],
+                correctAnswer: 2,
+                help: "Este texto se muestra si la imagen no se carga o es leído por lectores de pantalla.",
+                codeExample: "<img src=\"logo.png\" alt=\"Logo de la empresa\">"
+            },
+            {
+                question: "Ordena los elementos para crear una lista no ordenada (viñetas).",
                 type: "order-execution",
-                question: "Ordena los pasos para vincular una hoja de estilos CSS externa.",
-                fragments: ["<link>", "rel=\"stylesheet\"", "href=\"estilos.css\"", "en la sección <head>"],
-                correctOrder: ["<link>", "rel=\"stylesheet\"", "href=\"estilos.css\"", "en la sección <head>"],
-                help: "La etiqueta link se usa para recursos externos."
+                fragments: ["<ul>", "<li>", "Café", "</li>", "<li>", "Té", "</li>", "</ul>"],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
+                help: "Las listas no ordenadas usan `<ul>` y cada ítem se define con `<li>`.",
+                codeExample: `<ul>
+    <li>Café</li>
+    <li>Té</li>
+</ul>`
             },
             {
+                question: "¿Qué etiqueta se usa para definir el pie de página de un documento o una sección?",
                 type: "multiple-choice",
-                question: "¿Qué atributo hace que un campo de formulario sea obligatorio?",
-                options: ["required", "mandatory", "must", "compulsory"],
-                correctAnswer: "required",
-                help: "Es un atributo booleano simple."
+                options: ["`<bottom>`", "`<end>`", "`<footer>`", "`<page-end>`"],
+                correctAnswer: 2,
+                help: "Se encuentra al final de un documento o sección y suele contener información de derechos de autor o contacto.",
+                codeExample: "<footer>Derechos de autor 2023</footer>"
             },
             {
-                type: "syntax-completion",
-                question: "Crea una etiqueta de lista desordenada con un elemento.",
-                fragments: ["<ul>", "<li>", "Elemento", "</li>", "</ul>"],
-                correctOrder: ["<ul>", "<li>", "Elemento", "</li>", "</ul>"],
-                help: "Las listas desordenadas usan viñetas."
-            },
-            {
+                question: "¿Cuál es la etiqueta correcta para una celda de encabezado en una tabla HTML?",
                 type: "multiple-choice",
-                question: "¿Cuál es la etiqueta correcta para un salto de línea en HTML?",
-                options: ["<lb>", "<break>", "<br>", "<newline>"],
-                correctAnswer: "<br>",
-                help: "Es una etiqueta de elemento vacío."
+                options: ["`<td>`", "`<th>`", "`<headcell>`", "`<tr>`"],
+                correctAnswer: 1,
+                help: "Esta etiqueta se utiliza para los títulos de las columnas o filas en una tabla.",
+                codeExample: `<th>Nombre</th>`
+            },
+            // Nuevas preguntas adicionales para HTML Básico (total 25)
+            {
+                question: "¿Qué etiqueta se utiliza para crear un botón en un formulario HTML?",
+                type: "multiple-choice",
+                options: ["`<input type=\"button\">`", "`<button>`", "`<btn>`", "`<click>`"],
+                correctAnswer: 1,
+                help: "Aunque `<input type=\"button\">` también existe, `<button>` es más versátil y permite contenido HTML.",
+                codeExample: `<button type="submit">Enviar</button>`
+            },
+            {
+                question: "Empareja la etiqueta con el tipo de contenido que representa.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Imagen", drop: "`<img>`" },
+                    { drag: "Enlace", drop: "`<a>`" },
+                    { drag: "Párrafo", drop: "`<p>`" },
+                    { drag: "Lista no ordenada", drop: "`<ul>`" }
+                ],
+                help: "Cada etiqueta HTML tiene un propósito semántico específico.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los elementos para definir una imagen con su fuente y texto alternativo.",
+                type: "order-execution",
+                fragments: ["`<img`", `src="imagen.jpg"`, `alt="Descripción de la imagen"`, `>`],
+                correctOrder: [0, 1, 2, 3],
+                help: "Los atributos `src` y `alt` son esenciales para las imágenes.",
+                codeExample: `<img src="imagen.jpg" alt="Descripción de la imagen">`
+            },
+            {
+                question: "¿Qué atributo se utiliza para establecer el identificador único de un elemento HTML?",
+                type: "multiple-choice",
+                options: ["`class`", "`name`", "`id`", "`data-id`"],
+                correctAnswer: 2,
+                help: "Este atributo debe ser único para cada elemento en el documento.",
+                codeExample: `<div id="miElementoUnico"></div>`
+            },
+            {
+                question: "¿Qué etiqueta HTML se utiliza para el contenido principal del documento, visible en el navegador?",
+                type: "multiple-choice",
+                options: ["`<head>`", "`<html>`", "`<body>`", "`<main>`"],
+                correctAnswer: 2,
+                help: "Todo lo que el usuario ve en la página va dentro de esta etiqueta.",
+                codeExample: `<body>Contenido visible</body>`
             }
         ],
         intermedio: [
             {
+                question: "¿Qué atributo se utiliza para fusionar celdas en una fila en una tabla HTML?",
                 type: "multiple-choice",
-                question: "¿Qué atributo se usa para especificar una URL base para todas las URL relativas en un documento?",
-                options: ["<link>", "<base>", "<href>", "<src>"],
-                correctAnswer: "<base>",
-                help: "Es una etiqueta que va dentro del <head>."
+                options: ["`rowspan`", "`colspan`", "`cellspan`", "`merge-rows`"],
+                correctAnswer: 1,
+                help: "Este atributo se usa para expandir una celda a través de múltiples columnas.",
+                codeExample: `<table>
+    <tr>
+        <td colspan="2">Celdas fusionadas</td>
+    </tr>
+</table>`
             },
             {
-                type: "syntax-completion",
-                question: "Ordena los fragmentos para crear un formulario con un campo de texto y un botón de envío.",
-                fragments: ["<form>", "<input type=\"text\">", "<button type=\"submit\">", "</form>", "Enviar", "</button>"],
-                correctOrder: ["<form>", "<input type=\"text\">", "<button type=\"submit\">", "Enviar", "</button>", "</form>"],
-                help: "Los formularios agrupan elementos de entrada."
-            },
-            {
+                question: "Empareja el tipo de entrada de formulario con su uso.",
                 type: "drag-match",
-                question: "Arrastra y empareja el elemento HTML con su tipo de visualización por defecto.",
                 pairs: [
-                    { drag: "<div>", drop: "Block" },
-                    { drag: "<span>", drop: "Inline" },
-                    { drag: "<li>", drop: "Block" },
-                    { drag: "<img>", drop: "Inline-block" }
+                    { drag: "Campo de texto", drop: `<input type="text">` },
+                    { drag: "Contraseña", drop: `<input type="password">` },
+                    { drag: "Botón de envío", drop: `<input type="submit">` },
+                    { drag: "Casilla de verificación", drop: `<input type="checkbox">` },
+                    { drag: "Botón de radio", drop: `<input type="radio">` }
                 ],
-                help: "Algunos elementos ocupan todo el ancho disponible, otros solo el necesario."
+                help: "Cada tipo de input está diseñado para un tipo específico de interacción del usuario.",
+                codeExample: null
             },
             {
-                type: "order-execution",
-                question: "Ordena los pasos para incrustar un video de YouTube usando un iframe.",
-                fragments: ["Cerrar la etiqueta <iframe>", "Abrir la etiqueta <iframe>", "Establecer el atributo src a la URL del video", "Establecer atributos de ancho y alto"],
-                correctOrder: ["Abrir la etiqueta <iframe>", "Establecer el atributo src a la URL del video", "Establecer atributos de ancho y alto", "Cerrar la etiqueta <iframe>"],
-                help: "El 'src' es fundamental para el contenido."
-            },
-            {
+                question: "¿Qué etiqueta HTML se utiliza para incrustar contenido multimedia externo (ej. YouTube, Vimeo)?",
                 type: "multiple-choice",
-                question: "¿Qué elemento HTML5 se utiliza para representar un conjunto de enlaces de navegación?",
-                options: ["<header>", "<section>", "<nav>", "<footer>"],
-                correctAnswer: "<nav>",
-                help: "Es específico para la navegación."
+                options: ["`<video>`", "`<iframe>`", "`<embed>`", "`<object>`"],
+                correctAnswer: 1,
+                help: "Piensa en cómo se inserta una 'ventana' a otro documento dentro del tuyo.",
+                codeExample: `<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" width="560" height="315" frameborder="0" allowfullscreen></iframe>`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una etiqueta `<audio>` con un archivo de audio y controles.",
-                fragments: ["<audio", "src=\"audio.mp3\"", "controls", ">", "</audio>"],
-                correctOrder: ["<audio", "src=\"audio.mp3\"", "controls", ">", "</audio>"],
-                help: "Similar a la etiqueta de video, pero para audio."
+                question: "Ordena los elementos para definir un formulario HTML básico.",
+                type: "order-execution",
+                fragments: ["<form>", "<label for=\"name\">", "Nombre:</label>", "<input type=\"text\" id=\"name\" name=\"name\">", "<button type=\"submit\">", "Enviar</button>", "</form>"],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6],
+                help: "Un formulario agrupa sus campos y acciones.",
+                codeExample: `<form>
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name">
+    <button type="submit">Enviar</button>
+</form>`
             },
             {
+                question: "¿Qué es el significado de 'semántico' en HTML Semántico?",
+                type: "multiple-choice",
+                options: ["Estilo de la página", "Significado o propósito del contenido", "Formato visual del texto", "Interactividad del usuario"],
+                correctAnswer: 1,
+                help: "Se refiere a dar un significado claro a las etiquetas, más allá de cómo se ven.",
+                codeExample: "<header>, <nav>, <article>, <section>, <aside>, <footer>"
+            },
+            {
+                question: "¿Cuál es el propósito principal de la etiqueta `<meta>`?",
+                type: "multiple-choice",
+                options: ["Definir el título de la página", "Proporcionar metadatos sobre el documento HTML", "Vincular hojas de estilo externas", "Insertar scripts de JavaScript"],
+                correctAnswer: 1,
+                help: "Esta etiqueta proporciona información sobre la página, pero no es visible para el usuario.",
+                codeExample: `<meta charset="UTF-8">
+<meta name="description" content="Descripción de la página">`
+            },
+            {
+                question: "Empareja los atributos de imagen con su función.",
                 type: "drag-match",
+                pairs: [
+                    { drag: "Ruta de la imagen", drop: "`src`" },
+                    { drag: "Texto alternativo", drop: "`alt`" },
+                    { drag: "Ancho de la imagen", drop: "`width`" },
+                    { drag: "Alto de la imagen", drop: "`height`" },
+                    { drag: "Mapa de imagen", drop: "`usemap`" }
+                ],
+                help: "Estos atributos son esenciales para que las imágenes se muestren correctamente y sean accesibles.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los pasos para vincular una hoja de estilo CSS externa.",
+                type: "order-execution",
+                fragments: ["<head>", "<link", "rel=\"stylesheet\"", "href=\"styles.css\"", ">", "</head>"],
+                correctOrder: [0, 1, 2, 3, 4, 5],
+                help: "Las hojas de estilo externas se enlazan en la sección de metadatos del documento.",
+                codeExample: `<head>
+    <link rel="stylesheet" href="styles.css">
+</head>`
+            },
+            {
+                question: "¿Qué etiqueta se usa para agrupar contenido relacionado en HTML5, típicamente con un título?",
+                type: "multiple-choice",
+                options: ["`<group>`", "`<section>`", "`<article>`", "`<aside>`"],
+                correctAnswer: 1,
+                help: "Esta etiqueta define una sección genérica de contenido.",
+                codeExample: `<section>
+    <h2>Acerca de nosotros</h2>
+    <p>Información sobre la empresa.</p>
+</section>`
+            },
+            {
+                question: "¿Qué atributo se utiliza para hacer un elemento editable por el usuario directamente en el navegador?",
+                type: "multiple-choice",
+                options: ["`editable`", "`contenteditable`", "`canedit`", "`user-editable`"],
+                correctAnswer: 1,
+                help: "Este atributo permite que el contenido del elemento pueda ser modificado por el usuario.",
+                codeExample: `<div contenteditable="true">Este texto se puede editar.</div>`
+            },
+            // Nuevas preguntas para HTML Intermedio (hasta 20)
+            {
+                question: "¿Qué atributo se utiliza para especificar un valor predeterminado en un campo de entrada de texto (`<input type=\"text\">`)?",
+                type: "multiple-choice",
+                options: ["`default`", "`placeholder`", "`value`", "`initial`"],
+                correctAnswer: 2,
+                help: "Este atributo define el valor inicial de un campo de entrada.",
+                codeExample: `<input type="text" value="Texto predeterminado">`
+            },
+            {
                 question: "Empareja el atributo de formulario con su función.",
-                pairs: [
-                    { drag: "action", drop: "URL a donde se envían los datos del formulario" },
-                    { drag: "method", drop: "Método HTTP (GET/POST) para enviar el formulario" },
-                    { drag: "name", drop: "Nombre del campo de entrada" },
-                    { drag: "value", drop: "Valor inicial del campo de entrada" }
-                ],
-                help: "Son atributos clave para la funcionalidad de los formularios."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué atributo HTML5 se usa para especificar que un elemento es arrastrable?",
-                options: ["draggable", "can-drag", "drag", "is-draggable"],
-                correctAnswer: "draggable",
-                help: "Es un atributo booleano."
-            },
-            {
-                type: "order-execution",
-                question: "Ordena los pasos para crear un `datalist` para un campo de entrada.",
-                fragments: ["<input list=\"browsers\">", "<datalist id=\"browsers\">", "<option value=\"Chrome\">", "<option value=\"Firefox\">", "</datalist>"],
-                correctOrder: ["<input list=\"browsers\">", "<datalist id=\"browsers\">", "<option value=\"Chrome\">", "<option value=\"Firefox\">", "</datalist>"],
-                help: "El `datalist` proporciona sugerencias para el input."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Cuál es el propósito del elemento `<figure>` en HTML5?",
-                options: ["Para agrupar contenido principal", "Para representar contenido auto-contenido, como ilustraciones, diagramas, fotos, código, etc.", "Para definir una sección de un documento", "Para crear un pie de página"],
-                correctAnswer: "Para representar contenido auto-contenido, como ilustraciones, diagramas, fotos, código, etc.",
-                help: "Se usa a menudo con `figcaption`."
-            },
-            {
-                type: "syntax-completion",
-                question: "Crea un `textarea` con un nombre y un número de filas.",
-                fragments: ["<textarea", "name=\"mensaje\"", "rows=\"5\"", ">", "</textarea>"],
-                correctOrder: ["<textarea", "name=\"mensaje\"", "rows=\"5\"", ">", "</textarea>"],
-                help: "Es para entradas de texto multilínea."
-            },
-            {
                 type: "drag-match",
-                question: "Empareja el atributo con su uso en la etiqueta `<img>`.",
                 pairs: [
-                    { drag: "src", drop: "Ruta de la imagen" },
-                    { drag: "alt", drop: "Texto alternativo para la imagen" },
-                    { drag: "width", drop: "Ancho de la imagen" },
-                    { drag: "height", drop: "Alto de la imagen" }
+                    { drag: "URL a la que se envían los datos", drop: "`action`" },
+                    { drag: "Método HTTP (GET/POST)", drop: "`method`" },
+                    { drag: "Tipo de codificación de datos", drop: "`enctype`" },
+                    { drag: "Habilitar/deshabilitar autocompletado", drop: "`autocomplete`" },
+                    { drag: "Deshabilitar validación del navegador", drop: "`novalidate`" }
                 ],
-                help: "Son esenciales para la accesibilidad y el diseño de imágenes."
+                help: "Estos atributos controlan el comportamiento de un formulario HTML.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué elemento HTML5 se utiliza para agrupar contenido relacionado semánticamente, a menudo con un encabezado?",
-                options: ["<article>", "<section>", "<aside>", "<details>"],
-                correctAnswer: "<section>",
-                help: "Es una agrupación temática genérica."
-            },
-            {
+                question: "Ordena los elementos para crear una lista descriptiva (`<dl>`).",
                 type: "order-execution",
-                question: "Ordena los pasos para crear un enlace de correo electrónico.",
-                fragments: ["<a", "href=\"mailto:ejemplo@dominio.com\"", ">", "Enviar Correo", "</a>"],
-                correctOrder: ["<a", "href=\"mailto:ejemplo@dominio.com\"", ">", "Enviar Correo", "</a>"],
-                help: "El protocolo 'mailto:' se usa para correos."
+                fragments: ["<dl>", "<dt>", "Término", "</dt>", "<dd>", "Descripción", "</dd>", "</dl>"],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
+                help: "Las listas descriptivas se usan para definir términos y sus descripciones.",
+                codeExample: `<dl>
+    <dt>Término</dt>
+    <dd>Descripción</dd>
+</dl>`
             },
             {
+                question: "¿Qué nuevas etiquetas semánticas de HTML5 se utilizan para estructurar el contenido principal de una página y su sección de navegación, respectivamente?",
                 type: "multiple-choice",
-                question: "¿Qué atributo se utiliza para especificar el tipo de contenido de un script externo?",
-                options: ["type", "script-type", "mime", "language"],
-                correctAnswer: "type",
-                help: "Comúnmente 'text/javascript'."
+                options: ["`<content>` y `<menu>`", "`<main>` y `<nav>`", "`<article>` y `<aside>`", "`<section>` y `<header>`"],
+                correctAnswer: 1,
+                help: "HTML5 introdujo etiquetas para mejorar la semántica del documento.",
+                codeExample: `<main>...</main> <nav>...</nav>`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una etiqueta `<header>` con un `<h1>` dentro.",
-                fragments: ["<header>", "<h1>", "Título de la Página", "</h1>", "</header>"],
-                correctOrder: ["<header>", "<h1>", "Título de la Página", "</h1>", "</header>"],
-                help: "El header es para contenido introductorio."
+                question: "¿Cuál es el propósito del atributo `srcset` en la etiqueta `<img>`?",
+                type: "multiple-choice",
+                options: ["Definir el tamaño máximo de la imagen", "Proporcionar imágenes diferentes para distintas resoluciones o densidades de píxeles", "Especificar la calidad de compresión de la imagen", "Cargar la imagen de forma asíncrona"],
+                correctAnswer: 1,
+                help: "Permite que el navegador elija la imagen más adecuada para el dispositivo del usuario.",
+                codeExample: `<img srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 1500w" src="medium.jpg" alt="Imagen responsive">`
             },
             {
+                question: "¿Qué etiqueta HTML se utiliza para incrustar un archivo de audio directamente en una página web?",
+                type: "multiple-choice",
+                options: ["`<sound>`", "`<audio>`", "`<mp3>`", "`<play>`"],
+                correctAnswer: 1,
+                help: "Esta etiqueta permite reproducir archivos de audio con controles nativos del navegador.",
+                codeExample: `<audio controls src="audio.mp3"></audio>`
+            },
+            {
+                question: "¿Qué atributo se usa para especificar que un campo de formulario debe ser rellenado antes de enviar el formulario?",
+                type: "multiple-choice",
+                options: ["`mandatory`", "`required`", "`must-fill`", "`validate`"],
+                correctAnswer: 1,
+                help: "Es un atributo booleano que activa la validación HTML5 del navegador.",
+                codeExample: `<input type="text" required>`
+            },
+            {
+                question: "Empareja la etiqueta HTML con su uso semántico en HTML5.",
                 type: "drag-match",
-                question: "Empareja el elemento de tabla con su propósito.",
                 pairs: [
-                    { drag: "<thead>", drop: "Contenido del encabezado de la tabla" },
-                    { drag: "<tbody>", drop: "Contenido del cuerpo de la tabla" },
-                    { drag: "<tfoot>", drop: "Contenido del pie de la tabla" },
-                    { drag: "<th>", drop: "Celda de encabezado de tabla" }
+                    { drag: "Contenido principal y único", drop: "<main>" },
+                    { drag: "Contenido de navegación", drop: "<nav>" },
+                    { drag: "Contenido autocontenido (artículo)", drop: "<article>" },
+                    { drag: "Contenido relacionado pero aparte", drop: "<aside>" },
+                    { drag: "Pie de página de una sección o documento", drop: "<footer>" }
                 ],
-                help: "Ayudan a estructurar tablas complejas."
+                help: "Estas etiquetas ayudan a estructurar el contenido de manera significativa para navegadores y herramientas de accesibilidad.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué elemento HTML5 se utiliza para representar el contenido principal de un documento?",
-                options: ["<main>", "<content>", "<body-content>", "<primary>"],
-                correctAnswer: "<main>",
-                help: "Solo debe haber uno por documento."
-            },
-            {
+                question: "Ordena los elementos para crear una imagen con un mapa de imagen (`<map>`).",
                 type: "order-execution",
-                question: "Ordena los pasos para crear un comentario en HTML.",
-                fragments: ["<!--", "Este es un comentario", "-->"],
-                correctOrder: ["<!--", "Este es un comentario", "-->"],
-                help: "Los comentarios no son visibles en el navegador."
+                fragments: [
+                    "<img src=\"planets.gif\" alt=\"Planetas\" usemap=\"#planetmap\">",
+                    "<map name=\"planetmap\">",
+                    "  <area shape=\"rect\" coords=\"0,0,82,126\" href=\"sun.htm\" alt=\"Sol\">",
+                    "  <area shape=\"circle\" coords=\"90,58,3\" href=\"mercury.htm\" alt=\"Mercurio\">",
+                    "</map>"
+                ],
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Un mapa de imagen define áreas clicables en una imagen.",
+                codeExample: `<img src="planets.gif" alt="Planetas" usemap="#planetmap">
+<map name="planetmap">
+  <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sol">
+  <area shape="circle" coords="90,58,3" href="mercury.htm" alt="Mercurio">
+</map>`
             },
             {
+                question: "¿Qué atributo se utiliza para especificar un patrón de expresión regular para la validación de un campo de entrada?",
                 type: "multiple-choice",
-                question: "¿Cuál es la etiqueta correcta para una celda de datos en una tabla HTML?",
-                options: ["<tc>", "<cd>", "<td>", "<data>"],
-                correctAnswer: "<td>",
-                help: "Es la abreviatura de 'table data'."
+                options: ["`regex`", "`pattern`", "`format`", "`validate-regex`"],
+                correctAnswer: 1,
+                help: "Este atributo permite definir un formato específico que el usuario debe seguir al introducir datos.",
+                codeExample: `<input type="text" pattern="[0-9]{5}" title="Solo 5 dígitos numéricos">`
+            },
+            // Nuevas preguntas adicionales para HTML Intermedio (total 25)
+            {
+                question: "¿Qué atributo se utiliza para agrupar elementos de formulario relacionados, como casillas de verificación o botones de radio, y a menudo dibujar un borde alrededor de ellos?",
+                type: "multiple-choice",
+                options: ["`<group>`", "`<section>`", "`<fieldset>`", "`<formgroup>`"],
+                correctAnswer: 2,
+                help: "La etiqueta `<legend>` se usa a menudo con esta para proporcionar un título al grupo.",
+                codeExample: `<fieldset><legend>Contacto</legend>...</fieldset>`
+            },
+            {
+                question: "Empareja el atributo HTML con su función en la accesibilidad o usabilidad.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Orden de navegación con teclado", drop: "`tabindex`" },
+                    { drag: "Texto de ejemplo en campo de entrada", drop: "`placeholder`" },
+                    { drag: "Deshabilita un control de formulario", drop: "`disabled`" },
+                    { drag: "Hace un campo de entrada solo lectura", drop: "`readonly`" }
+                ],
+                help: "Estos atributos mejoran la interacción del usuario y la accesibilidad.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los elementos para crear un formulario de selección (`<select>`) con opciones.",
+                type: "order-execution",
+                fragments: ["`<select>`", `<option value="opcion1">`, "Opción 1", `</option>`, `<option value="opcion2">`, "Opción 2", `</option>`, `</select>`],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
+                help: "La etiqueta `<select>` contiene las opciones, y cada opción se define con `<option>`.",
+                codeExample: `<select>
+    <option value="opcion1">Opción 1</option>
+    <option value="opcion2">Opción 2</option>
+</select>`
+            },
+            {
+                question: "¿Cuál es el propósito de la etiqueta `<canvas>` en HTML5?",
+                type: "multiple-choice",
+                options: ["Para incrustar videos de YouTube.", "Para dibujar gráficos, animaciones o juegos con JavaScript.", "Para crear formularios dinámicos.", "Para definir un área de texto desplazable."],
+                correctAnswer: 1,
+                help: "Es un elemento que proporciona un área de dibujo programable para renderizar gráficos.",
+                codeExample: `<canvas id="myCanvas" width="200" height="100"></canvas>`
+            },
+            {
+                question: "¿Qué atributo HTML se utiliza para especificar que un enlace debe abrirse en una nueva pestaña o ventana del navegador?",
+                type: "multiple-choice",
+                options: ["`target=\"_self\"`", "`target=\"_parent\"`", "`target=\"_blank\"`", "`target=\"_top\"`"],
+                correctAnswer: 2,
+                help: "Este atributo es muy común para enlaces externos.",
+                codeExample: `<a href="https://ejemplo.com" target="_blank">Visitar</a>`
             }
         ],
         avanzado: [
             {
+                question: "¿Cuál es el propósito del atributo `defer` en la etiqueta `<script>`?",
                 type: "multiple-choice",
-                question: "¿Cuál es el propósito del atributo 'data-*' en HTML5?",
-                options: ["Almacenar datos privados para el navegador", "Almacenar datos personalizados para el script de la página", "Definir un tipo de dato para formularios", "Indicar que un elemento está deshabilitado"],
-                correctAnswer: "Almacenar datos personalizados para el script de la página",
-                help: "Permite añadir información extra a los elementos HTML."
+                options: ["Ejecutar el script antes que el HTML", "Descargar el script pero ejecutarlo después de que el HTML sea parseado", "Hacer que el script se cargue de forma asíncrona", "Detener la ejecución del script hasta un evento específico"],
+                correctAnswer: 1,
+                help: "Piensa en cómo este atributo afecta el momento de ejecución del script en relación con el parseo del HTML.",
+                codeExample: `<script src="script.js" defer></script>`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una etiqueta `<picture>` para responsive images con `<source>` y `<img>`.",
-                fragments: ["<picture>", "<source srcset=\"small.jpg\" media=\"(max-width: 600px)\">", "<img src=\"large.jpg\" alt=\"Imagen\">", "</picture>"],
-                correctOrder: ["<picture>", "<source srcset=\"small.jpg\" media=\"(max-width: 600px)\">", "<img src=\"large.jpg\" alt=\"Imagen\">", "</picture>"],
-                help: "La etiqueta `<picture>` permite definir múltiples fuentes de imagen."
-            },
-            {
+                question: "Empareja la etiqueta con su rol en la semántica de HTML5.",
                 type: "drag-match",
-                question: "Arrastra y empareja el elemento semántico HTML5 con su descripción.",
                 pairs: [
-                    { drag: "<article>", drop: "Contenido independiente y redistribuible" },
-                    { drag: "<aside>", drop: "Contenido relacionado pero separado del principal" },
-                    { drag: "<section>", drop: "Agrupación temática de contenido" },
-                    { drag: "<nav>", drop: "Sección de enlaces de navegación" }
+                    { drag: "Contenido principal", drop: "<main>" },
+                    { drag: "Navegación", drop: "<nav>" },
+                    { drag: "Pie de página", drop: "<footer>" },
+                    { drag: "Artículo independiente", drop: "<article>" },
+                    { drag: "Contenido secundario/aparte", drop: "<aside>" }
                 ],
-                help: "Piensa en la estructura y el significado del contenido."
+                help: "Cada una de estas etiquetas ayuda a los navegadores y lectores de pantalla a entender la estructura del contenido.",
+                codeExample: null
             },
             {
-                type: "order-execution",
-                question: "Ordena los pasos para implementar Web Workers.",
-                fragments: ["Crear una instancia de Worker", "Enviar mensajes al Worker con postMessage()", "Escuchar mensajes del Worker con onmessage", "Definir la lógica del Worker en un archivo JS separado"],
-                correctOrder: ["Definir la lógica del Worker en un archivo JS separado", "Crear una instancia de Worker", "Enviar mensajes al Worker con postMessage()", "Escuchar mensajes del Worker con onmessage"],
-                help: "Los Web Workers se ejecutan en un hilo separado."
-            },
-            {
+                question: "¿Qué API de HTML5 permite a las aplicaciones web funcionar sin conexión?",
                 type: "multiple-choice",
-                question: "¿Qué API de HTML5 permite a las aplicaciones web almacenar datos de forma persistente en el navegador?",
-                options: ["Geolocation API", "Web Storage API", "Canvas API", "Drag and Drop API"],
-                correctAnswer: "Web Storage API",
-                help: "Incluye localStorage y sessionStorage."
+                options: ["Web Storage API", "Geolocation API", "AppCache (Application Cache)", "Web Workers API"],
+                correctAnswer: 2,
+                help: "Esta API permite que los recursos de una aplicación web se almacenen para uso offline, aunque ha sido reemplazada por Service Workers.",
+                codeExample: null
             },
             {
-                type: "syntax-completion",
-                question: "Crea un elemento `<template>` con un párrafo dentro.",
-                fragments: ["<template>", "<p>", "Contenido del template", "</p>", "</template>"],
-                correctOrder: ["<template>", "<p>", "Contenido del template", "</p>", "</template>"],
-                help: "El contenido de un template no se renderiza inicialmente."
+                question: "Ordena los pasos para implementar un 'Web Worker' básico.",
+                type: "order-execution",
+                fragments: [
+                    "// main.js",
+                    "const myWorker = new Worker('worker.js');",
+                    "myWorker.postMessage('Hello Worker!');",
+                    "myWorker.onmessage = function(e) {",
+                    "   console.log('Mensaje del worker:', e.data);",
+                    "};",
+                    "",
+                    "// worker.js",
+                    "onmessage = function(e) {",
+                    "   console.log('Mensaje al worker:', e.data);",
+                    "   postMessage('Hello main thread!');",
+                    "};"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                help: "Los Web Workers permiten ejecutar código en un hilo separado para no bloquear la interfaz de usuario.",
+                codeExample: `// main.js
+const myWorker = new Worker('worker.js');
+myWorker.postMessage('Hello Worker!');
+myWorker.onmessage = function(e) {
+    console.log('Mensaje del worker:', e.data);
+};
+
+// worker.js
+onmessage = function(e) {
+    console.log('Mensaje al worker:', e.data);
+    postMessage('Hello main thread!');
+};`
             },
             {
+                question: "¿Qué es el 'Shadow DOM'?",
+                type: "multiple-choice",
+                options: ["Un DOM que solo es visible en modo oscuro", "Un subárbol del DOM encapsulado que se renderiza con un elemento", "Una técnica para crear efectos de sombra en elementos HTML", "Un método para acceder a elementos ocultos del DOM"],
+                correctAnswer: 1,
+                help: "Es una característica que permite crear componentes web con su propio DOM y estilos aislados.",
+                codeExample: null
+            },
+            {
+                question: "¿Qué método se utiliza para insertar un nodo como el último hijo de un nodo padre?",
+                type: "multiple-choice",
+                options: ["`appendChild()`", "`insertBefore()`", "`prepend()`", "`insertLast()`"],
+                correctAnswer: 0,
+                help: "Este método es el más común para añadir un nuevo elemento al final de los hijos de otro.",
+                codeExample: `const parent = document.getElementById('parent');
+const child = document.createElement('div');
+parent.appendChild(child);`
+            },
+            {
+                question: "Empareja el elemento con su uso en la accesibilidad web (ARIA).",
                 type: "drag-match",
-                question: "Empareja la etiqueta HTML con su uso en formularios avanzados.",
                 pairs: [
-                    { drag: "<fieldset>", drop: "Agrupa elementos relacionados en un formulario" },
-                    { drag: "<legend>", drop: "Define un título para un `<fieldset>`" },
-                    { drag: "<output>", drop: "Muestra el resultado de un cálculo de formulario" },
-                    { drag: "<progress>", drop: "Muestra el progreso de una tarea" }
+                    { drag: "Rol de navegación", drop: "`role=\"navigation\"`" },
+                    { drag: "Estado de expandido", drop: "`aria-expanded`" },
+                    { drag: "Etiqueta para invidentes", drop: "`aria-label`" },
+                    { drag: "Descripción del elemento", drop: "`aria-describedby`" },
+                    { drag: "Elemento oculto de accesibilidad", drop: "`aria-hidden`" }
                 ],
-                help: "Mejoran la semántica y la usabilidad de los formularios."
+                help: "Los atributos ARIA ayudan a los lectores de pantalla a interpretar el contenido de la página.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué atributo se utiliza para especificar una función JavaScript que se ejecutará cuando un elemento es arrastrado?",
-                options: ["ondrag", "ondragstart", "onmove", "ondragging"],
-                correctAnswer: "ondragstart",
-                help: "Es un evento específico para el inicio del arrastre."
-            },
-            {
+                question: "Ordena los pasos para crear un 'Custom Element' (Web Component).",
                 type: "order-execution",
-                question: "Ordena los pasos para usar la Geolocation API para obtener la posición actual.",
-                fragments: ["navigator.geolocation.getCurrentPosition(", "function(position) { ... }", ");"],
-                correctOrder: ["navigator.geolocation.getCurrentPosition(", "function(position) { ... }", ");"],
-                help: "Requiere permiso del usuario."
+                fragments: [
+                    "class MyCustomElement extends HTMLElement {",
+                    "   constructor() { super(); }",
+                    "   connectedCallback() { this.innerHTML = `<h1>Hola desde MyCustomElement</h1>`; }",
+                    "}",
+                    "customElements.define('my-custom-element', MyCustomElement);"
+                ],
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Para crear tu propia etiqueta HTML, necesitas definir una clase y luego registrarla.",
+                codeExample: `class MyCustomElement extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+        this.innerHTML = \`<h1>Hola desde MyCustomElement</h1>\`;
+    }
+}
+customElements.define('my-custom-element', MyCustomElement);`
             },
             {
+                question: "¿Qué método de 'Fetch API' se utiliza para realizar una solicitud GET?",
                 type: "multiple-choice",
-                question: "¿Cuál es el propósito del atributo `async` en una etiqueta `<script>`?",
-                options: ["Cargar el script de forma síncrona", "Cargar el script de forma asíncrona y ejecutarlo tan pronto como esté disponible sin bloquear el HTML", "Retrasar la ejecución del script hasta que el HTML esté completamente parseado", "Indicar que el script es opcional"],
-                correctAnswer: "Cargar el script de forma asíncrona y ejecutarlo tan pronto como esté disponible sin bloquear el HTML",
-                help: "No garantiza el orden de ejecución."
+                options: ["`fetch().get()`", "`fetch()` (por defecto)", "`fetch().request('GET')`", "`fetch.get()`"],
+                correctAnswer: 1,
+                help: "El método 'fetch' por sí solo, sin opciones adicionales, realiza este tipo de solicitud.",
+                codeExample: `fetch('https://api.ejemplo.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data));`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una etiqueta `<details>` con un `<summary>`.",
-                fragments: ["<details>", "<summary>", "Haz clic para ver más", "</summary>", "<p>", "Contenido oculto", "</p>", "</details>"],
-                correctOrder: ["<details>", "<summary>", "Haz clic para ver más", "</summary>", "<p>", "Contenido oculto", "</p>", "</details>"],
-                help: "Crea un widget de divulgación interactivo."
+                question: "¿Qué es el 'template' tag en HTML5?",
+                type: "multiple-choice",
+                options: ["Una plantilla para formularios", "Un contenedor para contenido que no se renderiza inicialmente pero se puede clonar", "Una plantilla para estilos CSS", "Un componente de interfaz de usuario reutilizable"],
+                correctAnswer: 1,
+                help: "Este tag es útil para contenido que se usará más tarde, como para Web Components.",
+                codeExample: `<template id="my-template">
+    <p>Este es un contenido de plantilla.</p>
+</template>`
+            },
+            // Nuevas preguntas para HTML Avanzado (hasta 20)
+            {
+                question: "¿Cuál es la función del atributo `crossorigin` en etiquetas como `<script>` o `<img>`?",
+                type: "multiple-choice",
+                options: ["Define la orientación de la imagen", "Configura las solicitudes CORS (Cross-Origin Resource Sharing) para recursos de origen cruzado", "Especifica si el recurso debe cargarse de forma perezosa", "Indica que el recurso es crítico para la renderización de la página"],
+                correctAnswer: 1,
+                help: "Es fundamental para la seguridad y el manejo de recursos cargados desde diferentes dominios.",
+                codeExample: `<img src="image.jpg" crossorigin="anonymous" alt="Imagen">`
             },
             {
+                question: "Ordena los pasos para crear un componente web básico usando `Shadow DOM` y un `template`.",
+                type: "order-execution",
+                fragments: [
+                    "class MyComponent extends HTMLElement {",
+                    "  constructor() {",
+                    "    super();",
+                    "    const shadowRoot = this.attachShadow({ mode: 'open' });",
+                    "    const template = document.getElementById('my-template').content.cloneNode(true);",
+                    "    shadowRoot.appendChild(template);",
+                    "  }",
+                    "}",
+                    "customElements.define('my-component', MyComponent);"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                help: "Los Web Components permiten crear elementos HTML reutilizables con su propio encapsulamiento.",
+                codeExample: `// En HTML: <template id="my-template">...</template>
+// En JS:
+class MyComponent extends HTMLElement {
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    const template = document.getElementById('my-template').content.cloneNode(true);
+    shadowRoot.appendChild(template);
+  }
+}
+customElements.define('my-component', MyComponent);`
+            },
+            {
+                question: "Empareja el API de HTML5 con su funcionalidad.",
                 type: "drag-match",
-                question: "Empareja el evento de arrastre y soltar con su descripción.",
                 pairs: [
-                    { drag: "dragstart", drop: "Se dispara cuando el usuario comienza a arrastrar un elemento" },
-                    { drag: "dragover", drop: "Se dispara cuando un elemento arrastrado se mueve sobre un objetivo válido" },
-                    { drag: "drop", drop: "Se dispara cuando un elemento arrastrado se suelta sobre un objetivo válido" },
-                    { drag: "dragleave", drop: "Se dispara cuando un elemento arrastrado sale de un objetivo válido" }
+                    { drag: "Obtener ubicación del usuario", drop: "Geolocation API" },
+                    { drag: "Almacenamiento local de datos", drop: "Web Storage API" },
+                    { drag: "Arrastrar y soltar elementos", drop: "Drag and Drop API" },
+                    { drag: "Manipular el historial del navegador", drop: "History API" }
                 ],
-                help: "Son eventos clave para la interacción de arrastrar y soltar."
+                help: "HTML5 introdujo varias APIs para extender las capacidades de las aplicaciones web.",
+                codeExample: null
             },
             {
+                question: "¿Qué son los 'Custom Events' en JavaScript/HTML?",
                 type: "multiple-choice",
-                question: "¿Qué elemento HTML5 se utiliza para representar un rango de valores numéricos?",
-                options: ["<range>", "<meter>", "<output>", "<input type=\"range\">"],
-                correctAnswer: "<meter>",
-                help: "Indica un valor dentro de un rango conocido."
+                options: ["Eventos predefinidos por el navegador", "Eventos que solo se disparan en dispositivos móviles", "Eventos creados y despachados por el desarrollador para comunicar entre componentes", "Eventos que solo funcionan con WebSockets"],
+                correctAnswer: 2,
+                help: "Permiten una comunicación flexible y desacoplada entre diferentes partes de tu aplicación.",
+                codeExample: `const event = new CustomEvent('my-event', { detail: { data: 'info' } });
+document.dispatchEvent(event);`
             },
             {
-                type: "order-execution",
-                question: "Ordena los pasos para usar Web Components (Custom Elements).",
-                fragments: ["Definir la clase del Custom Element", "Conectar el Custom Element al DOM", "Registrar el Custom Element con `customElements.define()`"],
-                correctOrder: ["Definir la clase del Custom Element", "Registrar el Custom Element con `customElements.define()`", "Conectar el Custom Element al DOM"],
-                help: "Permiten crear etiquetas HTML personalizadas."
-            },
-            {
+                question: "¿Qué atributo ARIA se utiliza para indicar que un elemento está oculto o excluido de la accesibilidad (por ejemplo, para lectores de pantalla)?",
                 type: "multiple-choice",
-                question: "¿Cuál es la función principal de la etiqueta `<canvas>` en HTML5?",
-                options: ["Reproducir videos", "Crear animaciones 3D complejas", "Dibujar gráficos 2D y animaciones dinámicas con JavaScript", "Insertar contenido de otras páginas web"],
-                correctAnswer: "Dibujar gráficos 2D y animaciones dinámicas con JavaScript",
-                help: "Es un lienzo para dibujar."
+                options: ["`aria-visible=\"false\"`", "`aria-hidden=\"true\"`", "`aria-excluded=\"true\"`", "`aria-display=\"none\"`"],
+                correctAnswer: 1,
+                help: "Este atributo es crucial para mejorar la experiencia de usuarios con discapacidades visuales.",
+                codeExample: `<div aria-hidden="true">Contenido oculto para lectores de pantalla</div>`
             },
             {
-                type: "syntax-completion",
-                question: "Crea un `input` para subir archivos que acepte solo imágenes JPG y PNG.",
-                fragments: ["<input", "type=\"file\"", "accept=\".jpg,.png\"", ">"],
-                correctOrder: ["<input", "type=\"file\"", "accept=\".jpg,.png\"", ">"],
-                help: "El atributo `accept` filtra tipos de archivo."
+                question: "Explica brevemente el concepto de 'SSR (Server-Side Rendering)' vs 'CSR (Client-Side Rendering)' en el contexto de HTML.",
+                type: "multiple-choice",
+                options: ["SSR: HTML generado en el cliente; CSR: HTML generado en el servidor. ", "SSR: HTML generado en el servidor; CSR: HTML generado en el cliente por JavaScript.", "SSR: Solo para aplicaciones móviles; CSR: Solo para aplicaciones de escritorio.", "SSR y CSR son términos obsoletos."],
+                correctAnswer: 1,
+                help: "Estos son dos enfoques principales para renderizar páginas web, con implicaciones en rendimiento y SEO.",
+                codeExample: null
             },
             {
+                question: "¿Qué es el atributo `integrity` en la etiqueta `<script>` o `<link>`?",
+                type: "multiple-choice",
+                options: ["Define la prioridad de carga del recurso", "Asegura que el recurso cargado no ha sido manipulado (Subresource Integrity - SRI)", "Indica si el recurso es un script o una hoja de estilo", "Especifica el tipo de codificación del recurso"],
+                correctAnswer: 1,
+                help: "Es una característica de seguridad que ayuda a proteger tu sitio web de la inyección de código malicioso.",
+                codeExample: `<script src="library.js" xintegrity="sha384-..." crossorigin="anonymous"></script>`
+            },
+            {
+                question: "Empareja el atributo HTML5 con su propósito en la validación de formularios.",
                 type: "drag-match",
-                question: "Empareja el tipo de entrada de formulario HTML5 con su propósito.",
                 pairs: [
-                    { drag: "email", drop: "Campo para direcciones de correo electrónico" },
-                    { drag: "url", drop: "Campo para URLs" },
-                    { drag: "date", drop: "Selector de fecha" },
-                    { drag: "color", drop: "Selector de color" }
+                    { drag: "Campo obligatorio", drop: "`required`" },
+                    { drag: "Valor mínimo", drop: "`min`" },
+                    { drag: "Valor máximo", drop: "`max`" },
+                    { drag: "Longitud mínima de texto", drop: "`minlength`" },
+                    { drag: "Longitud máxima de texto", drop: "`maxlength`" }
                 ],
-                help: "Simplifican la entrada de datos específicos."
+                help: "Estos atributos permiten al navegador realizar validaciones básicas antes de enviar el formulario.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué atributo se usa para especificar que un elemento `<script>` debe ser ejecutado después de que el documento ha sido parseado?",
-                options: ["defer", "async", "load", "execute"],
-                correctAnswer: "defer",
-                help: "Garantiza el orden de ejecución y no bloquea el parseo."
-            },
-            {
+                question: "Ordena los pasos para utilizar la API de Geolocation para obtener la posición actual del usuario.",
                 type: "order-execution",
-                question: "Ordena los pasos para crear un `iframe` con contenido de otra página.",
-                fragments: ["<iframe", "src=\"otra_pagina.html\"", "width=\"500\"", "height=\"300\"", ">", "</iframe>"],
-                correctOrder: ["<iframe", "src=\"otra_pagina.html\"", "width=\"500\"", "height=\"300\"", ">", "</iframe>"],
-                help: "Permite incrustar contenido externo."
+                fragments: [
+                    "if (navigator.geolocation) {",
+                    "  navigator.geolocation.getCurrentPosition(function(position) {",
+                    "    console.log('Latitud:', position.coords.latitude);",
+                    "    console.log('Longitud:', position.coords.longitude);",
+                    "  });",
+                    "} else {",
+                    "  console.log('Geolocalización no soportada por este navegador.');",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
+                help: "La API de Geolocation requiere permiso del usuario para acceder a su ubicación.",
+                codeExample: `if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    console.log('Latitud:', position.coords.latitude);
+    console.log('Longitud:', position.coords.longitude);
+  });
+} else {
+  console.log('Geolocalización no soportada por este navegador.');
+}`
             },
             {
+                question: "¿Qué es la etiqueta `<picture>` en HTML5 y para qué se utiliza?",
                 type: "multiple-choice",
-                question: "¿Cuál es el propósito del atributo `srcset` en la etiqueta `<img>`?",
-                options: ["Especificar el tamaño de la imagen", "Definir múltiples fuentes de imagen para diferentes resoluciones o densidades de píxeles", "Añadir texto alternativo a la imagen", "Cargar la imagen de forma perezosa"],
-                correctAnswer: "Definir múltiples fuentes de imagen para diferentes resoluciones o densidades de píxeles",
-                help: "Es clave para imágenes responsivas."
+                options: ["Para incrustar múltiples imágenes en un solo elemento.", "Para definir un grupo de imágenes relacionadas para galerías.", "Para proporcionar múltiples fuentes de imagen para un elemento `<img>` para diferentes contextos (responsive images).", "Es una etiqueta obsoleta para imágenes."],
+                correctAnswer: 2,
+                help: "Permite un control más fino sobre la carga de imágenes responsivas que solo `srcset`.",
+                codeExample: `<picture>
+  <source srcset="img-large.jpg" media="(min-width: 800px)">
+  <img src="img-small.jpg" alt="Descripción">
+</picture>`
+            },
+            // Nuevas preguntas adicionales para HTML Avanzado (total 25)
+            {
+                question: "¿Qué son los 'Web Components' y cuáles son sus tres tecnologías principales?",
+                type: "multiple-choice",
+                options: ["Un framework de JavaScript para construir interfaces de usuario.", "Un conjunto de APIs web que permiten crear elementos HTML reutilizables y encapsulados. Sus tecnologías principales son Custom Elements, Shadow DOM y HTML Templates.", "Un estándar para la comunicación entre navegadores y servidores.", "Una forma de optimizar la carga de imágenes en la web."],
+                correctAnswer: 1,
+                help: "Son un conjunto de estándares que permiten la creación de componentes reutilizables en la web.",
+                codeExample: null
+            },
+            {
+                question: "Empareja el atributo `data-*` con su propósito.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Almacenar datos personalizados en elementos HTML", drop: "`data-*` attributes" },
+                    { drag: "Identificador único para CSS y JavaScript", drop: "`id` attribute" },
+                    { drag: "Clase para aplicar estilos a múltiples elementos", drop: "`class` attribute" }
+                ],
+                help: "Los atributos `data-*` son una forma estándar de incrustar datos personalizados en el DOM.",
+                codeExample: `<div data-id="123" data-name="producto"></div>`
+            },
+            {
+                question: "Ordena los pasos para incluir una imagen SVG directamente en HTML.",
+                type: "order-execution",
+                fragments: [
+                    "<body>",
+                    "  <svg width=\"100\" height=\"100\">",
+                    "    <circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" stroke-width=\"3\" fill=\"red\" />",
+                    "  </svg>",
+                    "</body>"
+                ],
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Los gráficos SVG pueden ser incrustados directamente en el código HTML.",
+                codeExample: `<svg width="100" height="100">
+  <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+</svg>`
+            },
+            {
+                question: "¿Cuál es la diferencia entre `localStorage` y `sessionStorage`?",
+                type: "multiple-choice",
+                options: ["`localStorage` almacena datos solo por la sesión actual; `sessionStorage` los almacena indefinidamente.", "`localStorage` y `sessionStorage` son lo mismo, solo nombres diferentes.", "`localStorage` almacena datos sin fecha de expiración; `sessionStorage` los almacena solo por la duración de la sesión de la página.", "`localStorage` es más seguro que `sessionStorage`."],
+                correctAnswer: 2,
+                help: "Ambos son parte de la Web Storage API, pero tienen comportamientos de persistencia diferentes.",
+                codeExample: null
+            },
+            {
+                question: "¿Qué es el atributo `rel=\"preload\"` en la etiqueta `<link>`?",
+                type: "multiple-choice",
+                options: ["Indica que el recurso debe cargarse después de que la página sea interactiva.", "Especifica que el recurso debe precargarse con alta prioridad, sin bloquear la renderización de la página.", "Define una relación de hoja de estilo alternativa.", "Es un atributo obsoleto para la carga de recursos."],
+                correctAnswer: 1,
+                help: "Es una directiva de precarga que ayuda a optimizar la velocidad de carga de recursos críticos.",
+                codeExample: `<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>`
             }
         ]
     },
     css: {
         basico: [
             {
+                question: "¿Qué propiedad CSS se utiliza para cambiar el color del texto de un elemento?",
                 type: "multiple-choice",
-                question: "¿Qué propiedad CSS se usa para cambiar el color del texto de un elemento?",
-                options: ["background-color", "text-color", "color", "font-color"],
-                correctAnswer: "color",
-                help: "Es una propiedad muy directa para el texto."
+                options: ["`font-color`", "`text-color`", "`color`", "`foreground-color`"],
+                correctAnswer: 2,
+                help: "Esta propiedad es la más directa para el color de las letras.",
+                codeExample: `p {
+    color: blue;
+}`
             },
             {
+                question: "¿Qué selector CSS se utiliza para seleccionar todos los elementos `p`?",
                 type: "multiple-choice",
-                question: "¿Qué selector CSS selecciona todos los elementos <p>?",
-                options: [".p", "#p", "p", "*p"],
-                correctAnswer: "p",
-                help: "Es el nombre de la etiqueta directamente."
+                options: ["`.p`", "`#p`", "`p`", "`<p>`"],
+                correctAnswer: 2,
+                help: "Para seleccionar todos los elementos de un tipo específico, usas su nombre de etiqueta.",
+                codeExample: `p {
+    font-size: 16px;
+}`
             },
             {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para un selector de clase en CSS.",
-                fragments: [".mi-clase", "{", "color: blue;", "}"],
-                correctOrder: [".mi-clase", "{", "color: blue;", "}"],
-                help: "Las clases se seleccionan con un punto."
+                question: "¿Qué propiedad CSS se usa para cambiar el tamaño de la fuente?",
+                type: "multiple-choice",
+                options: ["`text-size`", "`font-style`", "`font-size`", "`text-font`"],
+                correctAnswer: 2,
+                help: "Esta propiedad controla el tamaño del texto.",
+                codeExample: `h1 {
+    font-size: 2em;
+}`
             },
             {
-                type: "drag-match",
-                question: "Arrastra y empareja la propiedad CSS con su efecto.",
-                pairs: [
-                    { drag: "font-size", drop: "Tamaño del texto" },
-                    { drag: "margin", drop: "Espacio exterior" },
-                    { drag: "padding", drop: "Espacio interior" },
-                    { drag: "border", drop: "Línea alrededor del elemento" }
-                ],
-                help: "Margin y padding son conceptos clave del modelo de caja."
-            },
-            {
+                question: "Ordena los pasos para aplicar un estilo CSS a un elemento HTML usando una clase.",
                 type: "order-execution",
-                question: "Ordena la forma correcta de enlazar una hoja de estilos externa.",
-                fragments: ["<link", "rel=\"stylesheet\"", "href=\"style.css\"", ">"],
-                correctOrder: ["<link", "rel=\"stylesheet\"", "href=\"style.css\"", ">"],
-                help: "Esta etiqueta va en el <head>."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué propiedad CSS se usa para cambiar el color de fondo de un elemento?",
-                options: ["color", "background-color", "bgcolor", "background"],
-                correctAnswer: "background-color",
-                help: "Es una propiedad muy común para el fondo."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué selector CSS selecciona un elemento por su ID?",
-                options: [".myid", "#myid", "myid", "*myid"],
-                correctAnswer: "#myid",
-                help: "Los IDs se seleccionan con un hash."
-            },
-            {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para un selector de ID en CSS.",
-                fragments: ["#mi-id", "{", "font-size: 16px;", "}"],
-                correctOrder: ["#mi-id", "{", "font-size: 16px;", "}"],
-                help: "Los IDs son únicos en una página."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja la unidad CSS con su descripción.",
-                pairs: [
-                    { drag: "px", drop: "Píxeles (unidad absoluta)" },
-                    { drag: "%", drop: "Porcentaje (relativo al padre)" },
-                    { drag: "em", drop: "Relativo al tamaño de fuente del elemento padre" },
-                    { drag: "rem", drop: "Relativo al tamaño de fuente del elemento raíz (html)" }
+                fragments: [
+                    "HTML:",
+                    "<div class=\"mi-clase\">",
+                    "   Contenido",
+                    "</div>",
+                    "CSS:",
+                    ".mi-clase {",
+                    "   color: red;",
+                    "}"
                 ],
-                help: "Las unidades definen el tamaño y el espaciado."
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
+                help: "Recuerda cómo se define una clase en CSS y cómo se asigna en HTML.",
+                codeExample: `HTML:
+<div class="mi-clase">
+    Contenido
+</div>
+
+CSS:
+.mi-clase {
+    color: red;
+}`
             },
             {
+                question: "¿Qué es CSS?",
                 type: "multiple-choice",
-                question: "¿Qué propiedad CSS controla el espacio entre las letras de un texto?",
-                options: ["word-spacing", "line-height", "letter-spacing", "text-indent"],
-                correctAnswer: "letter-spacing",
-                help: "Es para el espaciado horizontal de caracteres."
+                options: ["Computer Style Sheets", "Creative Style Sheets", "Cascading Style Sheets", "Colorful Style Sheets"],
+                correctAnswer: 2,
+                help: "Es el lenguaje que da 'estilo' a las páginas web.",
+                codeExample: null
             },
             {
+                question: "¿Qué propiedad CSS se usa para establecer el color de fondo de un elemento?",
+                type: "multiple-choice",
+                options: ["`background-color`", "`bgcolor`", "`color-background`", "`fill-color`"],
+                correctAnswer: 0,
+                help: "Esta propiedad es para el color de la parte trasera de un elemento.",
+                codeExample: `body {
+    background-color: lightblue;
+}`
+            },
+            {
+                question: "¿Qué propiedad CSS controla el espaciado entre letras?",
+                type: "multiple-choice",
+                options: ["`word-spacing`", "`line-height`", "`letter-spacing`", "`text-spacing`"],
+                correctAnswer: 2,
+                help: "Esta propiedad ajusta el espacio horizontal entre los caracteres.",
+                codeExample: `h1 {
+    letter-spacing: 3px;
+}`
+            },
+            {
+                question: "Empareja el tipo de selector CSS con su definición.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Selecciona por ID", drop: "#id" },
+                    { drag: "Selecciona por Clase", drop: ".clase" },
+                    { drag: "Selecciona por Etiqueta", drop: "etiqueta" },
+                    { drag: "Selector Universal", drop: "*" },
+                    { drag: "Selector de Atributo", drop: "[atributo]" }
+                ],
+                help: "Cada símbolo o palabra tiene un significado específico al seleccionar elementos.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los pasos para vincular una hoja de estilo CSS interna (en el head).",
                 type: "order-execution",
-                question: "Ordena las propiedades para centrar texto dentro de un div.",
-                fragments: ["text-align: center;"],
-                correctOrder: ["text-align: center;"],
-                help: "Es una propiedad de texto muy común."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué valor de `display` hace que un elemento se comporte como un bloque pero permita otros elementos en la misma línea?",
-                options: ["block", "inline", "inline-block", "flex"],
-                correctAnswer: "inline-block",
-                help: "Combina características de inline y block."
-            },
-            {
-                type: "syntax-completion",
-                question: "Crea una regla CSS para cambiar el color de todos los enlaces visitados a morado.",
-                fragments: ["a:visited", "{", "color: purple;", "}"],
-                correctOrder: ["a:visited", "{", "color: purple;", "}"],
-                help: "Las pseudo-clases son para estados especiales."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja la propiedad de borde con su función.",
-                pairs: [
-                    { drag: "border-width", drop: "Grosor del borde" },
-                    { drag: "border-style", drop: "Estilo del borde (solid, dotted, etc.)" },
-                    { drag: "border-color", drop: "Color del borde" },
-                    { drag: "border-radius", drop: "Redondez de las esquinas del borde" }
+                fragments: [
+                    "<head>",
+                    "   <style>",
+                    "      p { color: blue; }",
+                    "   </style>",
+                    "</head>"
                 ],
-                help: "Permiten personalizar la apariencia de los bordes."
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Los estilos internos se definen directamente en la sección de metadatos del documento HTML.",
+                codeExample: `<head>
+    <style>
+        p { color: blue; }
+    </style>
+</head>`
             },
             {
+                question: "¿Qué propiedad CSS se utiliza para alinear texto horizontalmente?",
                 type: "multiple-choice",
-                question: "¿Qué propiedad CSS se usa para ocultar un elemento visualmente pero mantenerlo en el flujo del documento?",
-                options: ["display: none;", "visibility: hidden;", "opacity: 0;", "hidden: true;"],
-                correctAnswer: "visibility: hidden;",
-                help: "Ocupa espacio, pero no es visible."
+                options: ["`align-text`", "`text-align`", "`horizontal-align`", "`valign`"],
+                correctAnswer: 1,
+                help: "Esta propiedad controla cómo se distribuye el texto dentro de su contenedor.",
+                codeExample: `p {
+    text-align: center;
+}`
+            },
+            // Nuevas preguntas para CSS Básico (hasta 20)
+            {
+                question: "¿Qué propiedad CSS controla el grosor de un borde?",
+                type: "multiple-choice",
+                options: ["`border-style`", "`border-color`", "`border-width`", "`border-size`"],
+                correctAnswer: 2,
+                help: "Esta propiedad define el grosor de la línea del borde de un elemento.",
+                codeExample: `div {
+    border-width: 2px;
+}`
             },
             {
+                question: "Ordena las propiedades para aplicar un borde sólido y rojo de 2px a un elemento.",
                 type: "order-execution",
-                question: "Ordena las propiedades para aplicar un estilo en línea (inline style) a un párrafo.",
-                fragments: ["<p", "style=\"color: red;\"", ">", "Texto rojo", "</p>"],
-                correctOrder: ["<p", "style=\"color: red;\"", ">", "Texto rojo", "</p>"],
-                help: "Los estilos en línea se aplican directamente en la etiqueta HTML."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué propiedad se usa para cambiar el tipo de fuente?",
-                options: ["text-font", "font-type", "font-family", "font-style"],
-                correctAnswer: "font-family",
-                help: "Define la familia de fuentes a usar."
-            },
-            {
-                type: "syntax-completion",
-                question: "Crea una regla CSS para que los elementos `div` tengan un ancho del 50% y estén centrados.",
-                fragments: ["div", "{", "width: 50%;", "margin: 0 auto;", "}"],
-                correctOrder: ["div", "{", "width: 50%;", "margin: 0 auto;", "}"],
-                help: "Margin auto centra elementos de bloque."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja la propiedad de texto con su efecto.",
-                pairs: [
-                    { drag: "text-decoration", drop: "Añade líneas (subrayado, tachado) al texto" },
-                    { drag: "text-transform", drop: "Cambia el uso de mayúsculas y minúsculas del texto" },
-                    { drag: "line-height", drop: "Espacio entre líneas de texto" },
-                    { drag: "word-spacing", drop: "Espacio entre palabras" }
+                fragments: [
+                    "div {",
+                    "   border:",
+                    "   2px",
+                    "   solid",
+                    "   red;",
+                    "}"
                 ],
-                help: "Son propiedades para estilizar el texto."
+                correctOrder: [0, 1, 2, 3, 4, 5],
+                help: "La propiedad shorthand `border` permite definir estilo, grosor y color del borde en una sola línea.",
+                codeExample: `div {
+    border: 2px solid red;
+}`
             },
             {
+                question: "Empareja el tipo de valor CSS con un ejemplo.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Unidad absoluta", drop: "`16px`" },
+                    { drag: "Unidad relativa al padre", drop: "`1.2em`" },
+                    { drag: "Unidad relativa a la raíz", drop: "`1rem`" },
+                    { drag: "Porcentaje", drop: "`50%`" }
+                ],
+                help: "Las unidades de medida en CSS determinan cómo se escalan los valores.",
+                codeExample: null
+            },
+            {
+                question: "¿Qué es la propiedad `margin` en el modelo de caja de CSS?",
                 type: "multiple-choice",
-                question: "¿Qué propiedad CSS se utiliza para controlar el orden de los elementos en un contenedor flexbox?",
-                options: ["align-items", "justify-content", "order", "flex-direction"],
-                correctAnswer: "order",
-                help: "Permite reordenar elementos individuales."
+                options: ["El espacio entre el contenido y el borde del elemento.", "El espacio exterior alrededor de un elemento, separándolo de otros elementos.", "El espacio que ocupa el contenido del elemento.", "La línea que rodea el elemento."],
+                correctAnswer: 1,
+                help: "El margen es el espacio transparente alrededor del borde de un elemento.",
+                codeExample: `div {
+    margin: 10px;
+}`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para poner en negrita el texto de un elemento?",
+                type: "multiple-choice",
+                options: ["`text-bold`", "`font-style: bold`", "`font-weight: bold`", "`text-decoration: bold`"],
+                correctAnswer: 2,
+                help: "Esta propiedad controla el grosor o la intensidad de la fuente.",
+                codeExample: `p {
+    font-weight: bold;
+}`
+            },
+            {
+                question: "¿Qué propiedad se usa para cambiar la familia de la fuente (ej. Arial, Times New Roman)?",
+                type: "multiple-choice",
+                options: ["`text-font`", "`font-family`", "`font-type`", "`typeface`"],
+                correctAnswer: 1,
+                help: "Esta propiedad define la fuente que se utilizará para el texto.",
+                codeExample: `body {
+    font-family: Arial, sans-serif;
+}`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para añadir un subrayado al texto?",
+                type: "multiple-choice",
+                options: ["`text-underline`", "`decoration-line`", "`text-decoration`", "`underline-text`"],
+                correctAnswer: 2,
+                help: "Esta propiedad permite aplicar líneas decorativas al texto, como subrayado, tachado o superíndice.",
+                codeExample: `a {
+    text-decoration: underline;
+}`
+            },
+            {
+                question: "Empareja la forma de incluir CSS con su descripción.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Estilos directamente en la etiqueta HTML", drop: "Inline CSS" },
+                    { drag: "Estilos en la sección `<head>` del HTML", drop: "Internal CSS" },
+                    { drag: "Estilos en un archivo `.css` separado", drop: "External CSS" }
+                ],
+                help: "Hay varias formas de aplicar estilos a un documento HTML.",
+                codeExample: null
+            },
+            {
+                question: "Ordena las propiedades para aplicar un color de fondo con un gradiente lineal.",
+                type: "order-execution",
+                fragments: [
+                    "div {",
+                    "   background-image:",
+                    "   linear-gradient(to right, blue, green);",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3],
+                help: "Los gradientes permiten transiciones suaves entre dos o más colores.",
+                codeExample: `div {
+    background-image: linear-gradient(to right, blue, green);
+}`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para controlar si un texto largo debe desbordarse, ser ocultado o mostrar elipsis?",
+                type: "multiple-choice",
+                options: ["`text-wrap`", "`overflow-text`", "`white-space`", "`text-overflow`"],
+                correctAnswer: 3,
+                help: "Esta propiedad se usa junto con `white-space` y `overflow` para manejar el desbordamiento de texto.",
+                codeExample: `p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}`
+            },
+            // Nuevas preguntas adicionales para CSS Básico (total 25)
+            {
+                question: "¿Qué propiedad CSS se utiliza para cambiar el estilo de la fuente (normal, cursiva, oblicua)?",
+                type: "multiple-choice",
+                options: ["`font-family`", "`font-weight`", "`font-style`", "`text-style`"],
+                correctAnswer: 2,
+                help: "Esta propiedad es para la inclinación del texto.",
+                codeExample: `p { font-style: italic; }`
+            },
+            {
+                question: "Empareja el valor de la propiedad `text-align` con su efecto.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Alinea el texto a la izquierda", drop: "`left`" },
+                    { drag: "Alinea el texto a la derecha", drop: "`right`" },
+                    { drag: "Centra el texto horizontalmente", drop: "`center`" },
+                    { drag: "Justifica el texto, alineándolo a ambos márgenes", drop: "`justify`" }
+                ],
+                help: "Controla la alineación horizontal del contenido en línea de un elemento de bloque.",
+                codeExample: null
+            },
+            {
+                question: "Ordena las propiedades para aplicar un color de texto y un color de fondo a un párrafo.",
+                type: "order-execution",
+                fragments: [
+                    "p {",
+                    "   color: blue;",
+                    "   background-color: lightgray;",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3],
+                help: "Las propiedades `color` y `background-color` son fundamentales para el estilo visual.",
+                codeExample: `p {
+    color: blue;
+    background-color: lightgray;
+}`
+            },
+            {
+                question: "¿Cuál es el valor por defecto de la propiedad `position` en CSS?",
+                type: "multiple-choice",
+                options: ["`relative`", "`absolute`", "`fixed`", "`static`"],
+                correctAnswer: 3,
+                help: "Los elementos con esta posición se colocan en el orden normal del documento.",
+                codeExample: null
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para controlar la transparencia (opacidad) de un elemento?",
+                type: "multiple-choice",
+                options: ["`visibility`", "`display`", "`opacity`", "`transparent`"],
+                correctAnswer: 2,
+                help: "Un valor de 0 lo hace completamente transparente, y 1 completamente opaco.",
+                codeExample: `img { opacity: 0.5; }`
             }
         ],
         intermedio: [
             {
+                question: "¿Qué pseudo-clase CSS se utiliza para seleccionar un elemento cuando el cursor del ratón está sobre él?",
                 type: "multiple-choice",
-                question: "¿Qué valor de 'position' saca un elemento del flujo normal del documento?",
-                options: ["relative", "fixed", "static", "absolute"],
-                correctAnswer: "absolute",
-                help: "Permite posicionar un elemento con respecto a su ancestro posicionado más cercano."
+                options: ["`:active`", "`::before`", "`::hover`", "`a:hover`"],
+                correctAnswer: 3, // Assuming this is asking for specific link hover, not generic pseudo-class
+                help: "Piensa en el estado de un elemento cuando el puntero del mouse está encima.",
+                codeExample: `a:hover {
+    color: red;
+}`
             },
             {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para una regla @media para pantallas con un ancho máximo de 768px.",
-                fragments: ["@media", "(max-width: 768px)", "{", "body { background-color: lightblue; }", "}"],
-                correctOrder: ["@media", "(max-width: 768px)", "{", "body { background-color: lightblue; }", "}"],
-                help: "Las media queries son para diseño responsivo."
-            },
-            {
+                question: "Empareja la propiedad 'display' con su efecto principal.",
                 type: "drag-match",
-                question: "Arrastra y empareja la pseudo-clase CSS con su descripción.",
                 pairs: [
-                    { drag: ":hover", drop: "Cuando el ratón está sobre el elemento" },
-                    { drag: ":active", drop: "Cuando el elemento es clicado" },
-                    { drag: ":focus", drop: "Cuando el elemento tiene el foco" },
-                    { drag: ":first-child", drop: "El primer hijo de su padre" }
+                    { drag: "Elemento en bloque", drop: "`display: block;`" },
+                    { drag: "Elemento en línea", drop: "`display: inline;`" },
+                    { drag: "Elemento en línea pero con propiedades de bloque", drop: "`display: inline-block;`" },
+                    { drag: "Oculta el elemento sin quitar espacio", drop: "`display: none;`" },
+                    { drag: "Contenedor flexible", drop: "`display: flex;`" }
                 ],
-                help: "Las pseudo-clases describen estados especiales de un elemento."
+                help: "Esta propiedad define cómo se muestra y se comporta un elemento en el diseño.",
+                codeExample: null
             },
             {
-                type: "order-execution",
-                question: "Ordena las propiedades para centrar un div horizontalmente usando flexbox.",
-                fragments: ["display: flex;", "justify-content: center;"],
-                correctOrder: ["display: flex;", "justify-content: center;"],
-                help: "Flexbox es una herramienta poderosa para la alineación."
-            },
-            {
+                question: "¿Qué propiedad CSS se utiliza para controlar el espacio entre el borde de un elemento y su contenido?",
                 type: "multiple-choice",
-                question: "¿Qué propiedad CSS se usa para añadir una sombra a un texto?",
-                options: ["box-shadow", "element-shadow", "text-shadow", "font-shadow"],
-                correctAnswer: "text-shadow",
-                help: "Es específica para texto."
+                options: ["`margin`", "`border-spacing`", "`padding`", "`spacing`"],
+                correctAnswer: 2,
+                help: "Este espacio está 'dentro' del elemento, antes de su borde.",
+                codeExample: `div {
+    padding: 20px;
+}`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una regla CSS para un elemento con la clase `container` que use Flexbox para centrar sus ítems vertical y horizontalmente.",
-                fragments: [".container", "{", "display: flex;", "justify-content: center;", "align-items: center;", "}"],
-                correctOrder: [".container", "{", "display: flex;", "justify-content: center;", "align-items: center;", "}"],
-                help: "Flexbox es muy útil para centrar."
+                question: "Ordena las propiedades para centrar un elemento de bloque horizontalmente usando `margin`.",
+                type: "order-execution",
+                fragments: [
+                    "div {",
+                    "   width: 50%;",
+                    "   margin-left: auto;",
+                    "   margin-right: auto;",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Para centrar un bloque, necesitas darle un ancho y usar un valor específico para los márgenes laterales.",
+                codeExample: `div {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}`
             },
             {
+                question: "¿Qué unidad de medida CSS es relativa al tamaño de fuente del elemento raíz (`<html>`)?",
+                type: "multiple-choice",
+                options: ["`em`", "`rem`", "`px`", "`%`"],
+                correctAnswer: 1,
+                help: "Esta unidad es útil para un escalado de fuente consistente en todo el documento.",
+                codeExample: `p {
+    font-size: 1.2rem;
+}`
+            },
+            {
+                question: "¿Cuál es la forma correcta de importar una hoja de estilo CSS en otra hoja de estilo CSS?",
+                type: "multiple-choice",
+                options: ["`@include url('style.css');`", "`@import 'style.css';`", "`<link src='style.css'>`", "`import url('style.css');`"],
+                correctAnswer: 1,
+                help: "Esta regla permite anidar hojas de estilo.",
+                codeExample: `@import 'theme.css';`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para crear esquinas redondeadas en un elemento?",
+                type: "multiple-choice",
+                options: ["`corner-radius`", "`border-radius`", "`round-corners`", "`border-curve`"],
+                correctAnswer: 1,
+                help: "Esta propiedad afecta la curvatura de los bordes de un elemento.",
+                codeExample: `div {
+    border-radius: 10px;
+}`
+            },
+            {
+                question: "Empareja la propiedad de posicionamiento CSS con su comportamiento.",
                 type: "drag-match",
-                question: "Empareja la propiedad de fondo con su función.",
                 pairs: [
-                    { drag: "background-image", drop: "Imagen de fondo" },
-                    { drag: "background-repeat", drop: "Cómo se repite la imagen de fondo" },
-                    { drag: "background-position", drop: "Posición inicial de la imagen de fondo" },
-                    { drag: "background-size", drop: "Tamaño de la imagen de fondo" }
+                    { drag: "Posición normal en el flujo", drop: "`position: static;`" },
+                    { drag: "Posicionado relativo a su posición normal", drop: "`position: relative;`" },
+                    { drag: "Posicionado relativo al viewport", drop: "`position: fixed;`" },
+                    { drag: "Posicionado relativo al ancestro posicionado más cercano", drop: "`position: absolute;`" },
+                    { drag: "Se comporta como 'relative' hasta un punto de scroll, luego como 'fixed'", drop: "`position: sticky;`" }
                 ],
-                help: "Permiten controlar completamente el fondo."
+                help: "Cada valor de `position` altera cómo un elemento se sitúa en la página.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué propiedad CSS se utiliza para controlar el espaciado entre las celdas de una tabla?",
-                options: ["cell-spacing", "table-spacing", "border-spacing", "cell-padding"],
-                correctAnswer: "border-spacing",
-                help: "Es para el espacio entre los bordes de las celdas."
-            },
-            {
+                question: "Ordena las propiedades para crear un efecto de sombra de caja (box-shadow).",
                 type: "order-execution",
-                question: "Ordena las propiedades para crear un gradiente lineal de arriba a abajo, de rojo a azul.",
-                fragments: ["background-image:", "linear-gradient(to bottom, red, blue);"],
-                correctOrder: ["background-image:", "linear-gradient(to bottom, red, blue);"],
-                help: "Los gradientes son imágenes CSS."
+                fragments: [
+                    "div {",
+                    "   box-shadow: 5px",
+                    "   10px",
+                    "   #888888;",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Esta propiedad permite añadir sombras a los elementos, con valores para el desplazamiento y color.",
+                codeExample: `div {
+    box-shadow: 5px 10px #888888;
+}`
             },
             {
+                question: "¿Qué propiedad CSS se utiliza para definir la altura de la línea del texto?",
                 type: "multiple-choice",
-                question: "¿Qué valor de `overflow` recorta el contenido y añade barras de desplazamiento si es necesario?",
-                options: ["hidden", "scroll", "auto", "visible"],
-                correctAnswer: "auto",
-                help: "Es el más flexible para el desbordamiento."
+                options: ["`line-spacing`", "`text-height`", "`line-height`", "`text-spacing-y`"],
+                correctAnswer: 2,
+                help: "Esta propiedad controla el espacio vertical entre las líneas de texto.",
+                codeExample: `p {
+    line-height: 1.5;
+}`
+            },
+            // Nuevas preguntas para CSS Intermedio (hasta 20)
+            {
+                question: "¿Qué es la especificidad en CSS?",
+                type: "multiple-choice",
+                options: ["El orden en que se escriben las reglas CSS.", "Un conjunto de reglas que determina qué reglas de estilo se aplican a un elemento cuando hay conflictos.", "La capacidad de un selector para ser reutilizado.", "La velocidad de carga de una hoja de estilo."],
+                correctAnswer: 1,
+                help: "La especificidad es un algoritmo que calcula el 'peso' de un selector CSS.",
+                codeExample: null
             },
             {
-                type: "syntax-completion",
-                question: "Crea una regla CSS para que un elemento con ID `logo` tenga un ancho de 100px y un alto de 50px.",
-                fragments: ["#logo", "{", "width: 100px;", "height: 50px;", "}"],
-                correctOrder: ["#logo", "{", "width: 100px;", "height: 50px;", "}"],
-                help: "Los IDs son selectores de alta especificidad."
-            },
-            {
+                question: "Empareja el pseudo-clase/elemento CSS con su uso.",
                 type: "drag-match",
-                question: "Empareja la propiedad de posicionamiento con su descripción.",
                 pairs: [
-                    { drag: "static", drop: "Posición por defecto, no se puede mover con top/left/etc." },
-                    { drag: "relative", drop: "Posicionado relativo a su posición normal" },
-                    { drag: "fixed", drop: "Posicionado relativo a la ventana del navegador" },
-                    { drag: "sticky", drop: "Posicionado relativo al scroll del usuario" }
+                    { drag: "Selecciona un hijo específico por su posición", drop: ":nth-child()" },
+                    { drag: "Estilo de la primera línea de un bloque de texto", drop: "::first-line" },
+                    { drag: "Elemento que tiene el foco de entrada", drop: ":focus" },
+                    { drag: "Estilo del primer carácter de un bloque de texto", drop: "::first-letter" }
                 ],
-                help: "La propiedad 'position' controla el flujo de los elementos."
+                help: "Los pseudo-clases y pseudo-elementos permiten aplicar estilos a estados o partes específicas de un elemento.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué propiedad CSS se utiliza para aplicar una transformación 2D o 3D a un elemento?",
-                options: ["transition", "animation", "transform", "translate"],
-                correctAnswer: "transform",
-                help: "Incluye rotar, escalar, trasladar, etc."
-            },
-            {
+                question: "Ordena los pasos para utilizar la función `calc()` en CSS para definir un ancho.",
                 type: "order-execution",
-                question: "Ordena las propiedades para aplicar una sombra de caja (box-shadow) a un elemento.",
-                fragments: ["box-shadow:", "5px 5px 10px rgba(0,0,0,0.3);"],
-                correctOrder: ["box-shadow:", "5px 5px 10px rgba(0,0,0,0.3);"],
-                help: "Los valores son offset-x, offset-y, blur, spread y color."
+                fragments: [
+                    "div {",
+                    "   width:",
+                    "   calc(",
+                    "   100%",
+                    "   - 20px",
+                    "   );",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6],
+                help: "`calc()` permite realizar cálculos matemáticos en propiedades CSS.",
+                codeExample: `div {
+    width: calc(100% - 20px);
+}`
             },
             {
+                question: "¿Cuál es el propósito de la propiedad `object-fit` para imágenes o videos?",
                 type: "multiple-choice",
-                question: "¿Qué propiedad CSS se utiliza para controlar el espacio entre las palabras de un texto?",
-                options: ["letter-spacing", "line-height", "word-spacing", "text-indent"],
-                correctAnswer: "word-spacing",
-                help: "Es para el espaciado horizontal entre palabras."
+                options: ["Controlar la alineación del objeto dentro de su contenedor.", "Especificar cómo un contenido (ej. imagen, video) debe ajustarse dentro del contenedor de su elemento.", "Definir el tamaño de la caja del objeto.", "Aplicar un filtro al objeto."],
+                correctAnswer: 1,
+                help: "Es similar a `background-size` pero para elementos reemplazados como `<img>` o `<video>`.",
+                codeExample: `img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una regla CSS para un enlace cuando el ratón está sobre él (hover state).",
-                fragments: ["a:hover", "{", "color: red;", "}"],
-                correctOrder: ["a:hover", "{", "color: red;", "}"],
-                help: "La pseudo-clase `:hover` es muy común."
+                question: "¿Qué propiedad CSS se utiliza para aplicar un fondo de imagen a un elemento?",
+                type: "multiple-choice",
+                options: ["`image-background`", "`bg-image`", "`background-image`", "`source-image`"],
+                correctAnswer: 2,
+                help: "Esta propiedad permite establecer una o más imágenes como fondo de un elemento.",
+                codeExample: `div {
+    background-image: url('fondo.png');
+}`
             },
             {
+                question: "¿Cuál es la diferencia entre `visibility: hidden;` y `display: none;`?",
+                type: "multiple-choice",
+                options: ["`hidden` oculta el elemento pero mantiene su espacio; `none` lo oculta completamente y no ocupa espacio.", "`hidden` no funciona en todos los navegadores; `none` sí.", "`hidden` solo oculta texto; `none` oculta todo el elemento.", "No hay diferencia funcional, solo sintáctica."],
+                correctAnswer: 0,
+                help: "Ambas ocultan elementos, pero su impacto en el diseño es diferente.",
+                codeExample: `div { display: none; } /* No ocupa espacio */
+div { visibility: hidden; } /* Oculto pero ocupa espacio */`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para controlar el apilamiento de elementos posicionados (su orden en el eje Z)?",
+                type: "multiple-choice",
+                options: ["`layer-index`", "`z-index`", "`order`", "`stack-level`"],
+                correctAnswer: 1,
+                help: "Funciona solo en elementos con una posición diferente a `static`.",
+                codeExample: `div {
+    position: relative;
+    z-index: 10;
+}`
+            },
+            {
+                question: "Empareja la propiedad de `background` con su función.",
                 type: "drag-match",
-                question: "Empareja la propiedad CSS con su valor de `display`.",
                 pairs: [
-                    { drag: "flex-direction", drop: "row | column" },
-                    { drag: "justify-content", drop: "center | space-between" },
-                    { drag: "align-items", drop: "center | flex-start" },
-                    { drag: "flex-wrap", drop: "wrap | nowrap" }
+                    { drag: "Imagen de fondo", drop: "`background-image`" },
+                    { drag: "Color de fondo", drop: "`background-color`" },
+                    { drag: "Repetición de la imagen de fondo", drop: "`background-repeat`" },
+                    { drag: "Posición de la imagen de fondo", drop: "`background-position`" },
+                    { drag: "Tamaño de la imagen de fondo", drop: "`background-size`" }
                 ],
-                help: "Son propiedades clave para Flexbox."
+                help: "Estas propiedades controlan cómo se muestra el fondo de un elemento.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué propiedad CSS se utiliza para definir el estilo de la lista (viñetas, números, etc.)?",
-                options: ["list-type", "list-style-type", "marker-type", "bullet-style"],
-                correctAnswer: "list-style-type",
-                help: "Controla la apariencia de los marcadores de lista."
-            },
-            {
+                question: "Ordena las propiedades para crear una columna flexible que ocupe el doble de espacio que otras en un contenedor Flexbox.",
                 type: "order-execution",
-                question: "Ordena las propiedades para hacer que un elemento sea transparente al 50%.",
-                fragments: ["opacity: 0.5;"],
-                correctOrder: ["opacity: 0.5;"],
-                help: "La opacidad va de 0 (transparente) a 1 (opaco)."
+                fragments: [
+                    ".item {",
+                    "   flex-grow:",
+                    "   2;",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3],
+                help: "`flex-grow` define la capacidad de un ítem flexible para crecer si es necesario.",
+                codeExample: `.item {
+    flex-grow: 2;
+}`
             },
             {
+                question: "¿Qué propiedad CSS se utiliza para aplicar un desplazamiento de texto (ej. sangría de primera línea)?",
                 type: "multiple-choice",
-                question: "¿Qué pseudo-elemento CSS se utiliza para seleccionar la primera línea de un párrafo?",
-                options: ["::first-line", ":first-line", ":line-one", "::first-text-line"],
-                correctAnswer: "::first-line",
-                help: "Se usa con dos puntos dobles."
+                options: ["`text-align`", "`text-indent`", "`padding-left`", "`margin-left`"],
+                correctAnswer: 1,
+                help: "Esta propiedad añade un espacio horizontal antes de la primera línea de un bloque de texto.",
+                codeExample: `p {
+    text-indent: 50px;
+}`
+            },
+            // Nuevas preguntas adicionales para CSS Intermedio (total 25)
+            {
+                question: "¿Qué propiedad CSS se utiliza para controlar el comportamiento del contenido que desborda el área de un elemento?",
+                type: "multiple-choice",
+                options: ["`text-overflow`", "`white-space`", "`overflow`", "`clip`"],
+                correctAnswer: 2,
+                help: "Puede ser `visible`, `hidden`, `scroll` o `auto`.",
+                codeExample: `div { overflow: auto; }`
+            },
+            {
+                question: "Empareja la propiedad `box-sizing` con su efecto.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "El `width` y `height` incluyen el contenido y el padding.", drop: "`box-sizing: content-box;`" },
+                    { drag: "El `width` y `height` incluyen el contenido, padding y borde.", drop: "`box-sizing: border-box;`" }
+                ],
+                help: "Esta propiedad es fundamental para el control del modelo de caja.",
+                codeExample: null
+            },
+            {
+                question: "Ordena las propiedades para aplicar un estilo de texto flotante alrededor de una imagen.",
+                type: "order-execution",
+                fragments: [
+                    "img {",
+                    "   float: left;",
+                    "   margin-right: 15px;",
+                    "}",
+                    "p {",
+                    "   clear: left;",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6],
+                help: "La propiedad `float` saca un elemento del flujo normal, y `clear` se usa para evitar que otros elementos floten a su lado.",
+                codeExample: `img { float: left; margin-right: 15px; }
+p { clear: left; }`
+            },
+            {
+                question: "¿Cuál es el propósito de la propiedad `word-spacing` en CSS?",
+                type: "multiple-choice",
+                options: ["Controlar el espacio entre caracteres.", "Controlar el espacio entre líneas de texto.", "Controlar el espacio entre palabras.", "Controlar la sangría del texto."],
+                correctAnswer: 2,
+                help: "Esta propiedad ajusta el espacio horizontal entre las palabras de un texto.",
+                codeExample: `p { word-spacing: 5px; }`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para dibujar una línea alrededor de un elemento *fuera* de su borde, sin afectar el diseño?",
+                type: "multiple-choice",
+                options: ["`border`", "`outline`", "`shadow`", "`line`"],
+                correctAnswer: 1,
+                help: "Es comúnmente utilizada para indicar el foco de un elemento en la accesibilidad.",
+                codeExample: `button:focus { outline: 2px solid blue; }`
             }
         ],
         avanzado: [
             {
+                question: "¿Qué propiedad CSS se utiliza para aplicar transformaciones 2D o 3D a un elemento?",
                 type: "multiple-choice",
-                question: "¿Qué propiedad CSS se utiliza para crear animaciones fluidas entre estados de un elemento?",
-                options: ["animation", "transition", "transform", "keyframes"],
-                correctAnswer: "transition",
-                help: "Permite suavizar los cambios de propiedades CSS."
+                options: ["`transition`", "`animation`", "`transform`", "`translate`"],
+                correctAnswer: 2,
+                help: "Esta propiedad permite mover, rotar, escalar o inclinar elementos.",
+                codeExample: `div {
+    transform: rotate(45deg) scale(1.2);
+}`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una animación CSS llamada 'fade-in' que cambie la opacidad de 0 a 1.",
-                fragments: ["@keyframes fade-in {", "from { opacity: 0; }", "to { opacity: 1; }", "}"],
-                correctOrder: ["@keyframes fade-in {", "from { opacity: 0; }", "to { opacity: 1; }", "}"],
-                help: "Las animaciones se definen con @keyframes."
-            },
-            {
+                question: "Empareja la propiedad de Flexbox con su función.",
                 type: "drag-match",
-                question: "Arrastra y empareja el valor de 'display' con su comportamiento.",
                 pairs: [
-                    { drag: "grid", drop: "Layout bidimensional basado en filas y columnas" },
-                    { drag: "flex", drop: "Layout unidimensional para distribuir elementos" },
-                    { drag: "inline-block", drop: "Elemento en línea que acepta ancho y alto" },
-                    { drag: "none", drop: "El elemento no se muestra y no ocupa espacio" }
+                    { drag: "Define la dirección de los ítems", drop: "`flex-direction`" },
+                    { drag: "Alinea ítems a lo largo del eje principal", drop: "`justify-content`" },
+                    { drag: "Alinea ítems a lo largo del eje transversal", drop: "`align-items`" },
+                    { drag: "Permite a los ítems ajustarse a la siguiente línea", drop: "`flex-wrap`" },
+                    { drag: "Controla el crecimiento de un ítem", drop: "`flex-grow`" }
                 ],
-                help: "La propiedad 'display' es fundamental para el layout."
+                help: "Flexbox es una herramienta poderosa para la distribución y alineación de elementos en una dimensión.",
+                codeExample: null
             },
             {
-                type: "order-execution",
-                question: "Ordena las propiedades para crear un gradiente lineal de arriba a abajo, de rojo a azul.",
-                fragments: ["background-image:", "linear-gradient(to bottom, red, blue);"],
-                correctOrder: ["background-image:", "linear-gradient(to bottom, red, blue);"],
-                help: "Los gradientes son imágenes CSS."
-            },
-            {
+                question: "¿Qué pseudo-elemento CSS se utiliza para insertar contenido antes del contenido de un elemento?",
                 type: "multiple-choice",
-                question: "¿Qué propiedad CSS se usa para crear un efecto de paralaje con imágenes de fondo?",
-                options: ["background-attachment: fixed;", "background-scroll: fixed;", "background-position: fixed;", "background-origin: fixed;"],
-                correctAnswer: "background-attachment: fixed;",
-                help: "Mantiene la imagen fija mientras el contenido se desplaza."
+                options: ["`:first-child`", "`::before`", "`::after`", "`::first-line`"],
+                correctAnswer: 1,
+                help: "Este pseudo-elemento se utiliza para añadir contenido decorativo o funcional antes del contenido real del elemento.",
+                codeExample: `p::before {
+    content: "Nota: ";
+    font-weight: bold;
+}`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una regla CSS para un elemento `div` que use `grid` para tener 3 columnas de igual ancho y 2 filas con alto automático.",
-                fragments: ["div", "{", "display: grid;", "grid-template-columns: repeat(3, 1fr);", "grid-template-rows: auto auto;", "}"],
-                correctOrder: ["div", "{", "display: grid;", "grid-template-columns: repeat(3, 1fr);", "grid-template-rows: auto auto;", "}"],
-                help: "Grid es muy potente para layouts complejos."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja la propiedad de animación CSS con su función.",
-                pairs: [
-                    { drag: "animation-name", drop: "Nombre de la regla @keyframes" },
-                    { drag: "animation-duration", drop: "Duración de la animación" },
-                    { drag: "animation-iteration-count", drop: "Número de veces que se repite la animación" },
-                    { drag: "animation-delay", drop: "Retraso antes de que comience la animación" }
+                question: "Ordena las propiedades para crear una animación CSS básica.",
+                type: "order-execution",
+                fragments: [
+                    "div {",
+                    "   animation-name: slidein;",
+                    "   animation-duration: 3s;",
+                    "}",
+                    "@keyframes slidein {",
+                    "   from { transform: translateX(0%); }",
+                    "   to { transform: translateX(100%); }",
+                    "}"
                 ],
-                help: "Son propiedades fundamentales para controlar animaciones."
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
+                help: "Las animaciones CSS se definen en dos partes: la definición de los fotogramas clave y la aplicación al elemento.",
+                codeExample: `div {
+    animation-name: slidein;
+    animation-duration: 3s;
+}
+
+@keyframes slidein {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}`
             },
             {
+                question: "¿Qué es 'CSS Grid Layout'?",
                 type: "multiple-choice",
-                question: "¿Qué pseudo-clase CSS se utiliza para seleccionar elementos basados en su posición en un grupo de hermanos (ej. cada tercer elemento)?",
-                options: [":nth-child()", ":nth-of-type()", ":first-child", ":last-child"],
-                correctAnswer: ":nth-child()",
-                help: "Permite selecciones más complejas en listas."
+                options: ["Un sistema de rejilla para imágenes", "Un sistema de diseño bidimensional para organizar elementos en columnas y filas", "Una forma de alinear texto en una cuadrícula", "Una técnica para crear gráficos vectoriales"],
+                correctAnswer: 1,
+                help: "Este sistema de diseño permite un control preciso sobre la disposición de elementos en dos dimensiones.",
+                codeExample: null
             },
             {
-                type: "order-execution",
-                question: "Ordena las propiedades para crear un filtro de desenfoque (blur) de 5px.",
-                fragments: ["filter:", "blur(5px);"],
-                correctOrder: ["filter:", "blur(5px);"],
-                help: "Los filtros CSS aplican efectos gráficos."
-            },
-            {
+                question: "¿Qué propiedad CSS se utiliza para controlar el orden de los ítems dentro de un contenedor Flexbox?",
                 type: "multiple-choice",
-                question: "¿Qué valor de `background-size` escala la imagen para cubrir completamente el área del contenedor, recortando si es necesario?",
-                options: ["contain", "cover", "auto", "100%"],
-                correctAnswer: "cover",
-                help: "Asegura que no queden espacios vacíos."
+                options: ["`flex-order`", "`order`", "`sort-items`", "`item-order`"],
+                correctAnswer: 1,
+                help: "Esta propiedad permite cambiar la secuencia visual de los elementos flexibles.",
+                codeExample: `div:nth-child(1) {
+    order: 2;
+}
+div:nth-child(2) {
+    order: 1;
+}`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una regla CSS para un elemento `p` que use la propiedad `clip-path` para crear una forma de círculo.",
-                fragments: ["p", "{", "clip-path: circle(50%);", "}"],
-                correctOrder: ["p", "{", "clip-path: circle(50%);", "}"],
-                help: "Permite crear formas complejas para recortar elementos."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja la propiedad de Grid Layout con su función.",
-                pairs: [
-                    { drag: "grid-gap", drop: "Espacio entre las filas y columnas de la cuadrícula" },
-                    { drag: "grid-template-columns", drop: "Define el número y tamaño de las columnas" },
-                    { drag: "grid-template-rows", drop: "Define el número y tamaño de las filas" },
-                    { drag: "grid-area", drop: "Define el nombre de un área de la cuadrícula" }
-                ],
-                help: "Son propiedades fundamentales para Grid."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué propiedad CSS se utiliza para controlar la visibilidad de los elementos de una manera que no afecta el diseño (layout)?",
-                options: ["display", "visibility", "opacity", "pointer-events"],
-                correctAnswer: "opacity",
-                help: "Solo afecta la transparencia, no el espacio."
-            },
-            {
-                type: "order-execution",
-                question: "Ordena las propiedades para crear una transformación de rotación de 45 grados en el eje Z.",
-                fragments: ["transform:", "rotateZ(45deg);"],
-                correctOrder: ["transform:", "rotateZ(45deg);"],
-                help: "Las transformaciones son muy versátiles."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué unidad de medida CSS es relativa al ancho de la ventana gráfica?",
-                options: ["vh", "vw", "vmin", "vmax"],
-                correctAnswer: "vw",
-                help: "1vw es el 1% del ancho del viewport."
-            },
-            {
-                type: "syntax-completion",
-                question: "Crea una regla CSS para un elemento `::before` que añada contenido de texto.",
-                fragments: ["p::before", "{", "content: \"Prefijo \";", "}"],
-                correctOrder: ["p::before", "{", "content: \"Prefijo \";", "}"],
-                help: "Los pseudo-elementos añaden contenido antes o después."
-            },
-            {
-                type: "drag-match",
                 question: "Empareja la propiedad de transición CSS con su función.",
+                type: "drag-match",
                 pairs: [
-                    { drag: "transition-property", drop: "Propiedad a la que se aplica la transición" },
-                    { drag: "transition-duration", drop: "Duración de la transición" },
-                    { drag: "transition-timing-function", drop: "Curva de velocidad de la transición" },
-                    { drag: "transition-delay", drop: "Retraso antes de que comience la transición" }
+                    { drag: "Propiedad a transicionar", drop: "`transition-property`" },
+                    { drag: "Duración de la transición", drop: "`transition-duration`" },
+                    { drag: "Función de temporización", drop: "`transition-timing-function`" },
+                    { drag: "Retraso de la transición", drop: "`transition-delay`" },
+                    { drag: "Atajo para todas", drop: "`transition`" }
                 ],
-                help: "Permiten controlar el comportamiento de las transiciones."
+                help: "Las transiciones permiten suavizar los cambios de propiedades CSS a lo largo del tiempo.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué propiedad CSS se utiliza para controlar cómo se ajusta el contenido de una imagen dentro de su contenedor, preservando su relación de aspecto?",
-                options: ["object-fit", "image-fit", "content-fit", "aspect-ratio"],
-                correctAnswer: "object-fit",
-                help: "Similar a `background-size` pero para elementos `<img>` o `<video>`."
-            },
-            {
+                question: "Ordena las propiedades para hacer un elemento 'sticky' en CSS.",
                 type: "order-execution",
-                question: "Ordena las propiedades para crear un `flex-container` que envuelva sus elementos y los alinee al final.",
-                fragments: ["display: flex;", "flex-wrap: wrap;", "justify-content: flex-end;"],
-                correctOrder: ["display: flex;", "flex-wrap: wrap;", "justify-content: flex-end;"],
-                help: "Flexbox es muy versátil para layouts."
+                fragments: [
+                    "div {",
+                    "   position: sticky;",
+                    "   top: 0;",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3],
+                help: "Este tipo de posicionamiento es útil para elementos que se 'pegan' a la pantalla al desplazarse.",
+                codeExample: `div {
+    position: sticky;
+    top: 0;
+}`
             },
             {
+                question: "¿Qué función CSS se utiliza para aplicar un filtro de desenfoque a un elemento?",
                 type: "multiple-choice",
-                question: "¿Qué propiedad CSS se utiliza para definir el origen de la transformación de un elemento?",
-                options: ["transform-origin", "transform-point", "origin", "pivot"],
-                correctAnswer: "transform-origin",
-                help: "Cambia el punto alrededor del cual rota o escala un elemento."
+                options: ["`blur()`", "`filter: blur()`", "`backdrop-filter: blur()`", "`transform: blur()`"],
+                correctAnswer: 1,
+                help: "Esta propiedad permite aplicar efectos gráficos como el desenfoque.",
+                codeExample: `img {
+    filter: blur(5px);
+}`
+            },
+            {
+                question: "¿Qué es una 'media query' en CSS?",
+                type: "multiple-choice",
+                options: ["Una forma de cargar archivos multimedia", "Una técnica para consultar la base de datos", "Una regla CSS que permite aplicar estilos condicionalmente basados en las características del dispositivo", "Una función para reproducir medios"],
+                correctAnswer: 2,
+                help: "Son fundamentales para el diseño web adaptable a diferentes tamaños de pantalla.",
+                codeExample: `@media (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+}`
+            },
+            // Nuevas preguntas para CSS Avanzado (hasta 20)
+            {
+                question: "¿Qué es una 'CSS Custom Property' (variable CSS)?",
+                type: "multiple-choice",
+                options: ["Una propiedad que solo funciona en navegadores específicos.", "Una entidad definida por el autor que contiene un valor reusable a lo largo de una hoja de estilo.", "Una propiedad que se ajusta automáticamente al tamaño de la pantalla.", "Una propiedad para definir animaciones complejas."],
+                correctAnswer: 1,
+                help: "Permiten definir valores que pueden ser utilizados en múltiples lugares, facilitando el mantenimiento.",
+                codeExample: `:root { --main-color: blue; } p { color: var(--main-color); }`
+            },
+            {
+                question: "Ordena las propiedades para crear un diseño simple con CSS Grid usando `grid-template-columns` y `grid-template-rows`.",
+                type: "order-execution",
+                fragments: [
+                    ".container {",
+                    "   display: grid;",
+                    "   grid-template-columns: 1fr 1fr 1fr;",
+                    "   grid-template-rows: auto 100px;",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "`grid-template-columns` y `grid-template-rows` definen la estructura explícita de la rejilla.",
+                codeExample: `.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 100px;
+}`
+            },
+            {
+                question: "Empareja la propiedad de Flexbox o Grid con su uso específico.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Espacio entre filas y columnas en Grid/Flexbox", drop: "`gap`" },
+                    { drag: "Alineación individual de un ítem en el eje transversal", drop: "`align-self`" },
+                    { drag: "Define áreas nombradas en el Grid", drop: "`grid-template-areas`" },
+                    { drag: "Controla el encogimiento de un ítem flexible", drop: "`flex-shrink`" }
+                ],
+                help: "Estas propiedades ofrecen control granular sobre la disposición de los elementos.",
+                codeExample: null
+            },
+            {
+                question: "¿Qué es la regla `@supports` en CSS?",
+                type: "multiple-choice",
+                options: ["Una forma de importar fuentes externas.", "Una regla CSS que permite aplicar estilos condicionalmente basados en la compatibilidad del navegador con ciertas propiedades o valores.", "Una forma de definir variables CSS.", "Una regla para incluir archivos JavaScript."],
+                correctAnswer: 1,
+                help: "Es útil para aplicar estilos progresivamente, asegurando la compatibilidad con navegadores antiguos.",
+                codeExample: `@supports (display: grid) {
+    .container { display: grid; }
+}`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para aplicar un efecto de máscara a un elemento, permitiendo que partes del elemento sean transparentes o semitransparentes?",
+                type: "multiple-choice",
+                options: ["`opacity`", "`clip-path`", "`mask-image`", "`filter: alpha()`"],
+                correctAnswer: 2,
+                help: "La propiedad `mask-image` utiliza una imagen como máscara para revelar u ocultar partes de un elemento.",
+                codeExample: `div {
+    mask-image: url(mask.png);
+    mask-mode: alpha;
+}`
+            },
+            {
+                question: "¿Cómo se utiliza la propiedad `mix-blend-mode`?",
+                type: "multiple-choice",
+                options: ["Para mezclar colores de texto y fondo.", "Para definir cómo el contenido de un elemento debe mezclarse con el de su fondo (o con los elementos debajo de él).", "Para aplicar un modo de fusión a las imágenes de fondo.", "Para controlar la opacidad de un elemento."],
+                correctAnswer: 1,
+                help: "Es similar a los modos de fusión en software de edición de imágenes como Photoshop.",
+                codeExample: `div {
+    background-color: blue;
+    mix-blend-mode: multiply;
+}`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para controlar el comportamiento de desplazamiento suave (smooth scrolling) en la página?",
+                type: "multiple-choice",
+                options: ["`scroll-behavior`", "`smooth-scroll`", "`overflow-scrolling`", "`scroll-snap-type`"],
+                correctAnswer: 0,
+                help: "Permite que los saltos de ancla o los cambios de scroll se animen suavemente en lugar de ser instantáneos.",
+                codeExample: `html {
+    scroll-behavior: smooth;
+}`
+            },
+            {
+                question: "Empareja la función de transformación CSS con su efecto.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Mueve un elemento", drop: "`translate()`" },
+                    { drag: "Rota un elemento", drop: "`rotate()`" },
+                    { drag: "Escala un elemento", drop: "`scale()`" },
+                    { drag: "Inclina un elemento", drop: "`skew()`" }
+                ],
+                help: "Las funciones de `transform` permiten manipular la posición, rotación, escala e inclinación de los elementos.",
+                codeExample: null
+            },
+            {
+                question: "Ordena las propiedades para crear un diseño de Grid con áreas nombradas.",
+                type: "order-execution",
+                fragments: [
+                    ".container {",
+                    "   display: grid;",
+                    "   grid-template-areas:",
+                    "   \"header header\"",
+                    "   \"nav    main\"",
+                    "   \"footer footer\";",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6],
+                help: "`grid-template-areas` permite un diseño visual intuitivo de la rejilla.",
+                codeExample: `.container {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "nav    main"
+        "footer footer";
+}`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para aplicar un efecto de desenfoque a un elemento y a su contenido *detrás* de él (como un fondo borroso de tipo 'vidrio esmerilado')?",
+                type: "multiple-choice",
+                options: ["`filter: blur()`", "`backdrop-filter: blur()`", "`background-filter`", "`blur-content`"],
+                correctAnswer: 1,
+                help: "Esta propiedad aplica efectos gráficos a la región detrás de un elemento.",
+                codeExample: `div {
+    backdrop-filter: blur(5px);
+}`
+            },
+            // Nuevas preguntas adicionales para CSS Avanzado (total 25)
+            {
+                question: "¿Qué propiedad CSS se utiliza para definir una forma geométrica que recorta un elemento, haciendo invisibles las partes fuera de la forma?",
+                type: "multiple-choice",
+                options: ["`mask-image`", "`shape-outside`", "`clip-path`", "`object-fit`"],
+                correctAnswer: 2,
+                help: "Permite crear recortes complejos en elementos, como círculos, elipses o polígonos.",
+                codeExample: `div { clip-path: circle(50% at 50% 50%); }`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para indicar al navegador que un elemento va a ser animado o transformado, permitiéndole optimizar el rendimiento?",
+                type: "multiple-choice",
+                options: ["`optimize-animation`", "`performance-hint`", "`will-change`", "`animate-prepare`"],
+                correctAnswer: 2,
+                help: "Es una propiedad de optimización que sugiere al navegador qué propiedades cambiarán.",
+                codeExample: `div { will-change: transform, opacity; }`
+            },
+            {
+                question: "Ordena las propiedades para crear un gradiente cónico.",
+                type: "order-execution",
+                fragments: [
+                    "div {",
+                    "   background:",
+                    "   conic-gradient(red, yellow, green, blue, red);",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3],
+                help: "Los gradientes cónicos se dibujan alrededor de un punto central.",
+                codeExample: `div {
+    background: conic-gradient(red, yellow, green, blue, red);
+}`
+            },
+            {
+                question: "¿Qué propiedad CSS se utiliza para cambiar la dirección del texto, como de izquierda a derecha (LTR) o de derecha a izquierda (RTL), o incluso verticalmente?",
+                type: "multiple-choice",
+                options: ["`text-direction`", "`writing-mode`", "`direction`", "`text-orientation`"],
+                correctAnswer: 1,
+                help: "Es útil para idiomas que se escriben verticalmente o de derecha a izquierda.",
+                codeExample: `div { writing-mode: vertical-lr; }`
+            },
+            {
+                question: "Empareja el concepto de 'CSS Modules' con su beneficio principal.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Asegura nombres de clase únicos para evitar conflictos globales", drop: "Encapsulamiento de estilos" },
+                    { drag: "Permite importar archivos CSS como módulos JavaScript", drop: "Modularidad" },
+                    { drag: "Facilita la reutilización de estilos en diferentes componentes", drop: "Reutilización" }
+                ],
+                help: "Los CSS Modules son una solución para la modularización y el encapsulamiento de estilos en proyectos grandes.",
+                codeExample: null
             }
         ]
     },
     javascript: {
         basico: [
             {
+                question: "¿Qué palabra clave se usa para declarar una variable que no puede ser reasignada?",
                 type: "multiple-choice",
-                question: "¿Qué palabra clave se usa para declarar una variable en JavaScript que puede ser reasignada?",
-                options: ["const", "let", "var", "int"],
-                correctAnswer: "let",
-                help: "Fue introducida en ES6."
+                options: ["`var`", "`let`", "`const`", "`static`"],
+                correctAnswer: 2,
+                help: "Esta palabra clave se utiliza para valores que permanecen fijos.",
+                codeExample: "const PI = 3.14159;"
             },
             {
+                question: "¿Qué método de String devuelve la longitud de una cadena?",
                 type: "multiple-choice",
+                options: ["`size()`", "`length()`", "`count()`", "`length` (propiedad)"],
+                correctAnswer: 3,
+                help: "Es una propiedad que indica cuántos caracteres tiene una cadena.",
+                codeExample: "let texto = 'Hola';\nlet longitud = texto.length; // 4"
+            },
+            {
+                question: "¿Qué operador se utiliza para la igualdad estricta (valor y tipo)?",
+                type: "multiple-choice",
+                options: ["`==`", "`===`", "`!=`", "`!==`"],
+                correctAnswer: 1,
+                help: "Este operador no realiza conversiones de tipo antes de comparar.",
+                codeExample: "5 === '5' // false (diferente tipo)"
+            },
+            {
+                question: "Ordena los pasos para crear una función simple en JavaScript.",
+                type: "order-execution",
+                fragments: [
+                    "function miFuncion() {",
+                    "   console.log('Hola Mundo');",
+                    "}",
+                    "miFuncion();"
+                ],
+                correctOrder: [0, 1, 2, 3],
+                help: "Primero se define la función, luego se llama para que se ejecute.",
+                codeExample: `function miFuncion() {
+    console.log('Hola Mundo');
+}
+miFuncion();`
+            },
+            {
+                question: "¿Qué es JavaScript?",
+                type: "multiple-choice",
+                options: ["Un lenguaje de marcado", "Un lenguaje de estilos", "Un lenguaje de programación interpretado para la web", "Una base de datos"],
+                correctAnswer: 2,
+                help: "Es el lenguaje que añade interactividad a las páginas web.",
+                codeExample: null
+            },
+            {
                 question: "¿Qué función se utiliza para imprimir mensajes en la consola del navegador?",
-                options: ["console.log()", "print()", "alert()", "display()"],
-                correctAnswer: "console.log()",
-                help: "Es muy útil para depuración."
+                type: "multiple-choice",
+                options: ["`print()`", "`log()`", "`console.log()`", "`display()`"],
+                correctAnswer: 2,
+                help: "Es muy útil para ver valores y depurar tu código.",
+                codeExample: "console.log('Este es un mensaje');"
             },
             {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para una función anónima que salude.",
-                fragments: ["function()", "{", "console.log('Hola!');", "}"],
-                correctOrder: ["function()", "{", "console.log('Hola!');", "}"],
-                help: "Las funciones anónimas no tienen nombre."
+                question: "¿Qué método Array agrega un elemento al final de un array?",
+                type: "multiple-choice",
+                options: ["`add()`", "`insert()`", "`push()`", "`append()`"],
+                correctAnswer: 2,
+                help: "Este método 'empuja' un elemento al final de la lista.",
+                codeExample: "let arr = [1, 2];\narr.push(3); // arr es ahora [1, 2, 3]"
             },
             {
+                question: "Empareja el evento de DOM con su descripción.",
                 type: "drag-match",
-                question: "Arrastra y empareja el operador JavaScript con su significado.",
                 pairs: [
-                    { drag: "===", drop: "Igualdad estricta" },
-                    { drag: "&&", drop: "Operador lógico AND" },
-                    { drag: "+", drop: "Suma o concatenación" },
-                    { drag: "!", drop: "Negación lógica" }
+                    { drag: "Cuando se hace clic", drop: "`click`" },
+                    { drag: "Cuando el mouse entra en un elemento", drop: "`mouseover`" },
+                    { drag: "Cuando el mouse sale de un elemento", drop: "`mouseout`" },
+                    { drag: "Cuando se carga el documento", drop: "`DOMContentLoaded`" },
+                    { drag: "Cuando una tecla es presionada", drop: "`keydown`" }
                 ],
-                help: "Los operadores son la base de la lógica."
+                help: "Los eventos permiten que el código reaccione a las interacciones del usuario o a los cambios en la página.",
+                codeExample: null
             },
             {
+                question: "Ordena los pasos para acceder a un elemento HTML por su ID y cambiar su texto.",
                 type: "order-execution",
-                question: "Ordena los pasos para seleccionar un elemento por su ID y cambiar su texto.",
-                fragments: ["document.getElementById('miId')", ".textContent = 'Nuevo Texto';", "let elemento ="],
-                correctOrder: ["let elemento =", "document.getElementById('miId')", ".textContent = 'Nuevo Texto';"],
-                help: "Primero se selecciona el elemento, luego se modifica."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué tipo de dato representa un valor verdadero o falso en JavaScript?",
-                options: ["string", "number", "boolean", "undefined"],
-                correctAnswer: "boolean",
-                help: "Solo tiene dos valores posibles."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué método de string se utiliza para convertir una cadena a mayúsculas?",
-                options: ["toUpperCase()", "toUpper()", "upperCase()", "makeUpperCase()"],
-                correctAnswer: "toUpperCase()",
-                help: "Es un método de instancia de string."
-            },
-            {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para una declaración `if` simple.",
-                fragments: ["if (condicion)", "{", "console.log('Verdadero');", "}"],
-                correctOrder: ["if (condicion)", "{", "console.log('Verdadero');", "}"],
-                help: "La condición va entre paréntesis."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja el tipo de bucle con su uso común.",
-                pairs: [
-                    { drag: "for", drop: "Iterar un número conocido de veces" },
-                    { drag: "while", drop: "Iterar mientras una condición sea verdadera" },
-                    { drag: "do...while", drop: "Iterar al menos una vez, luego mientras una condición sea verdadera" },
-                    { drag: "forEach", drop: "Iterar sobre elementos de un array" }
+                fragments: [
+                    "HTML:",
+                    "<p id=\"saludo\"></p>",
+                    "JavaScript:",
+                    "const elemento = document.getElementById('saludo');",
+                    "elemento.textContent = 'Hola desde JS';"
                 ],
-                help: "Cada bucle tiene su escenario de uso ideal."
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Primero necesitas encontrar el elemento en el documento HTML, luego puedes modificar su contenido.",
+                codeExample: `HTML:
+<p id="saludo"></p>
+
+JavaScript:
+const elemento = document.getElementById('saludo');
+elemento.textContent = 'Hola desde JS';`
             },
             {
+                question: "¿Qué tipo de datos devuelve la función `typeof` para un array?",
                 type: "multiple-choice",
-                question: "¿Qué operador se usa para la exponenciación en JavaScript (ES6)?",
-                options: ["^", "**", "pow()", "exp()"],
-                correctAnswer: "**",
-                help: "Es el operador de doble asterisco."
+                options: ["`array`", "`object`", "`list`", "`null`"],
+                correctAnswer: 1,
+                help: "En JavaScript, los arrays son una forma especial de este tipo de dato.",
+                codeExample: "typeof [] // 'object'"
+            },
+            // Nuevas preguntas para JavaScript Básico (hasta 20)
+            {
+                question: "¿Qué operador se utiliza para sumar dos números?",
+                type: "multiple-choice",
+                options: ["`-`", "`*`", "`+`", `/`],
+                correctAnswer: 2,
+                help: "Es el operador más común para la adición matemática.",
+                codeExample: "let suma = 5 + 3; // 8"
             },
             {
+                question: "Ordena los elementos para crear una sentencia `if/else` básica.",
                 type: "order-execution",
-                question: "Ordena los pasos para declarar una función y llamarla.",
-                fragments: ["function saludar() {", "console.log('Hola');", "}", "saludar();"],
-                correctOrder: ["function saludar() {", "console.log('Hola');", "}", "saludar();"],
-                help: "Primero se define la función, luego se ejecuta."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué método de array se utiliza para añadir uno o más elementos al final de un array?",
-                options: ["unshift()", "pop()", "push()", "shift()"],
-                correctAnswer: "push()",
-                help: "Aumenta la longitud del array."
-            },
-            {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para un comentario de una sola línea en JavaScript.",
-                fragments: ["//", "Este es un comentario"],
-                correctOrder: ["//", "Este es un comentario"],
-                help: "Los comentarios de una línea empiezan con dos barras."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja el método de número con su función.",
-                pairs: [
-                    { drag: "toFixed()", drop: "Formatea un número con un número específico de decimales" },
-                    { drag: "parseInt()", drop: "Convierte una cadena a un entero" },
-                    { drag: "parseFloat()", drop: "Convierte una cadena a un número de punto flotante" },
-                    { drag: "isNaN()", drop: "Comprueba si un valor es Not-a-Number" }
+                fragments: [
+                    "if (",
+                    "condición",
+                    ") {",
+                    "// código si es verdadero",
+                    "} else {",
+                    "// código si es falso",
+                    "}"
                 ],
-                help: "Son útiles para trabajar con números y cadenas."
+                correctOrder: [0, 1, 2, 3, 4, 5, 6],
+                help: "Las sentencias condicionales permiten ejecutar código basado en una condición.",
+                codeExample: `if (edad >= 18) {
+    console.log('Es mayor de edad');
+} else {
+    console.log('Es menor de edad');
+}`
             },
             {
+                question: "Empareja el operador lógico con su significado.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "AND (y)", drop: "`&&`" },
+                    { drag: "OR (o)", drop: "`||`" },
+                    { drag: "NOT (no)", drop: "`!`" }
+                ],
+                help: "Los operadores lógicos se utilizan para combinar expresiones booleanas.",
+                codeExample: null
+            },
+            {
+                question: "¿Qué tipo de bucle se utiliza para iterar un número específico de veces?",
                 type: "multiple-choice",
-                question: "¿Qué operador lógico devuelve `true` si al menos uno de sus operandos es `true`?",
-                options: ["&&", "||", "!", "=="],
-                correctAnswer: "||",
-                help: "Es el operador OR lógico."
+                options: ["`while`", "`do...while`", "`for`", "`for...in`"],
+                correctAnswer: 2,
+                help: "Este bucle es ideal cuando se conoce la cantidad exacta de repeticiones.",
+                codeExample: `for (let i = 0; i < 5; i++) {
+    console.log(i);
+}`
             },
             {
+                question: "¿Cómo se accede al contenido de texto de un elemento HTML usando JavaScript?",
+                type: "multiple-choice",
+                options: ["`element.value`", "`element.htmlContent`", "`element.textContent`", "`element.text`"],
+                correctAnswer: 2,
+                help: "Esta propiedad permite obtener o establecer el contenido de texto de un nodo y sus descendientes.",
+                codeExample: `const div = document.getElementById('myDiv');
+console.log(div.textContent);`
+            },
+            {
+                question: "¿Qué método se utiliza para crear un nuevo elemento HTML (`<div>`, `<p>`, etc.) en JavaScript?",
+                type: "multiple-choice",
+                options: ["`document.newElement()`", "`document.createNode()`", "`document.buildElement()`", "`document.createElement()`"],
+                correctAnswer: 3,
+                help: "Es el método estándar para generar nuevos elementos en el DOM.",
+                codeExample: `const newDiv = document.createElement('div');`
+            },
+            {
+                question: "¿Qué método de Array elimina el último elemento de un array y lo devuelve?",
+                type: "multiple-choice",
+                options: ["`shift()`", "`splice()`", "`pop()`", "`removeLast()`"],
+                correctAnswer: 2,
+                help: "Este método modifica el array original.",
+                codeExample: "let arr = [1, 2, 3];\nlet ultimo = arr.pop(); // ultimo es 3, arr es [1, 2]"
+            },
+            {
+                question: "Empareja el tipo de dato primitivo con un ejemplo.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Número", drop: "`123`" },
+                    { drag: "Cadena de texto", drop: "`\"Hola\"`" },
+                    { drag: "Booleano", drop: "`true`" },
+                    { drag: "Indefinido", drop: "`undefined`" },
+                    { drag: "Nulo", drop: "`null`" }
+                ],
+                help: "JavaScript tiene varios tipos de datos fundamentales.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los pasos para declarar una variable con `let` y asignarle un valor.",
                 type: "order-execution",
-                question: "Ordena los pasos para crear un array y acceder a su segundo elemento.",
-                fragments: ["let miArray = [10, 20, 30];", "miArray[1];"],
-                correctOrder: ["let miArray = [10, 20, 30];", "miArray[1];"],
-                help: "Los arrays tienen índice base cero."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué método de objeto se utiliza para obtener las claves (nombres de propiedades) de un objeto como un array?",
-                options: ["Object.values()", "Object.entries()", "Object.keys()", "Object.getProperties()"],
-                correctAnswer: "Object.keys()",
-                help: "Devuelve un array de strings."
-            },
-            {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para un objeto literal con dos propiedades.",
-                fragments: ["let persona = {", "nombre: 'Ana',", "edad: 30", "};"],
-                correctOrder: ["let persona = {", "nombre: 'Ana',", "edad: 30", "};"],
-                help: "Los objetos almacenan pares clave-valor."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja el método de array con su función.",
-                pairs: [
-                    { drag: "pop()", drop: "Remueve el último elemento de un array" },
-                    { drag: "shift()", drop: "Remueve el primer elemento de un array" },
-                    { drag: "indexOf()", drop: "Devuelve el primer índice en el que se puede encontrar un elemento dado en el array" },
-                    { drag: "join()", drop: "Une todos los elementos de un array en una cadena" }
+                fragments: [
+                    "let",
+                    "nombreVariable",
+                    "=",
+                    "\"valor\";"
                 ],
-                help: "Son métodos comunes para manipular arrays."
+                correctOrder: [0, 1, 2, 3],
+                help: "`let` es la forma moderna de declarar variables reasignables.",
+                codeExample: `let mensaje = "Hola";`
             },
             {
+                question: "¿Qué método de String se utiliza para convertir una cadena a mayúsculas?",
                 type: "multiple-choice",
-                question: "¿Qué palabra clave se usa para salir de un bucle o una declaración `switch`?",
-                options: ["continue", "exit", "break", "return"],
-                correctAnswer: "break",
-                help: "Detiene la ejecución del bucle/switch."
+                options: ["`toUpperCase()`", "`toCapitalCase()`", "`upperCase()`", "`makeUpperCase()`"],
+                correctAnswer: 0,
+                help: "Este método devuelve una nueva cadena con todos los caracteres en mayúsculas.",
+                codeExample: "let texto = 'hola';\nlet mayusculas = texto.toUpperCase(); // 'HOLA'"
+            },
+            // Nuevas preguntas adicionales para JavaScript Básico (total 25)
+            {
+                question: "¿Qué función de JavaScript se utiliza para mostrar un cuadro de diálogo con un mensaje y un campo de entrada para que el usuario ingrese datos?",
+                type: "multiple-choice",
+                options: ["`alert()`", "`confirm()`", "`prompt()`", "`console.log()`"],
+                correctAnswer: 2,
+                help: "Esta función es útil para obtener información simple del usuario.",
+                codeExample: `let nombre = prompt("Ingresa tu nombre:");`
+            },
+            {
+                question: "Empareja el tipo de comentario en JavaScript con su sintaxis.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Comentario de una sola línea", drop: "`// comentario`" },
+                    { drag: "Comentario de múltiples líneas", drop: "`/* comentario */`" }
+                ],
+                help: "Los comentarios son útiles para documentar el código.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los pasos para obtener el número de elementos en un array.",
+                type: "order-execution",
+                fragments: [
+                    "let miArray = [1, 2, 3];",
+                    "let longitud = miArray.length;",
+                    "console.log(longitud);"
+                ],
+                correctOrder: [0, 1, 2],
+                help: "La propiedad `length` devuelve la cantidad de elementos en un array.",
+                codeExample: `let miArray = [1, 2, 3];
+let longitud = miArray.length; // 3`
+            },
+            {
+                question: "¿Qué función se utiliza para determinar si un valor es 'Not-a-Number' (NaN)?",
+                type: "multiple-choice",
+                options: ["`isNumber()`", "`isNaN()`", "`checkNum()`", "`isNotNum()`"],
+                correctAnswer: 1,
+                help: "Es importante para validar entradas numéricas.",
+                codeExample: `isNaN("hola") // true`
+            },
+            {
+                question: "¿Cuál es la diferencia entre `null` y `0` en JavaScript?",
+                type: "multiple-choice",
+                options: ["`null` es un número, `0` es un valor nulo.", "`null` es un valor asignado que representa la ausencia intencional de cualquier valor; `0` es un valor numérico.", "No hay diferencia, son intercambiables.", "`null` es un objeto, `0` es un primitivo."],
+                correctAnswer: 1,
+                help: "Aunque ambos pueden ser 'falsy', tienen significados distintos.",
+                codeExample: null
             }
         ],
         intermedio: [
             {
+                question: "¿Qué método Array se utiliza para iterar sobre los elementos de un array y ejecutar una función para cada elemento?",
                 type: "multiple-choice",
-                question: "¿Qué método de array se utiliza para ejecutar una función en cada elemento del array y devolver un nuevo array con los resultados?",
-                options: ["forEach()", "map()", "filter()", "reduce()"],
-                correctAnswer: "map()",
-                help: "Es ideal para transformar arrays."
+                options: ["`map()`", "`filter()`", "`forEach()`", "`reduce()`"],
+                correctAnswer: 2,
+                help: "Este método es para recorrer un array y realizar una acción en cada elemento, sin crear un nuevo array.",
+                codeExample: "let numeros = [1, 2, 3];\nnumeros.forEach(num => console.log(num));"
             },
             {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para una función flecha que sume dos números.",
-                fragments: ["(a, b)", "=>", "a + b;"],
-                correctOrder: ["(a, b)", "=>", "a + b;"],
-                help: "Las funciones flecha son una forma concisa de escribir funciones."
-            },
-            {
+                question: "Empareja el método de Array con su función.",
                 type: "drag-match",
-                question: "Arrastra y empareja el método de string con su función.",
                 pairs: [
-                    { drag: ".length", drop: "Devuelve la longitud de la cadena" },
-                    { drag: ".toUpperCase()", drop: "Convierte la cadena a mayúsculas" },
-                    { drag: ".indexOf()", drop: "Devuelve la primera posición de una subcadena" },
-                    { drag: ".slice()", drop: "Extrae una parte de la cadena" }
+                    { drag: "Crea un nuevo array con los resultados de una función aplicada", drop: "`map()`" },
+                    { drag: "Crea un nuevo array con todos los elementos que cumplen una condición", drop: "`filter()`" },
+                    { drag: "Ejecuta una función reductora sobre cada elemento, acumulando un solo resultado", drop: "`reduce()`" },
+                    { drag: "Elimina el último elemento y lo devuelve", drop: "`pop()`" },
+                    { drag: "Agrega un elemento al inicio y devuelve la nueva longitud", drop: "`unshift()`" }
                 ],
-                help: "Los métodos de string son útiles para manipular texto."
+                help: "Cada método tiene un propósito específico para transformar o modificar arrays.",
+                codeExample: null
             },
             {
-                type: "order-execution",
+                question: "¿Qué es un 'callback' en JavaScript?",
+                type: "multiple-choice",
+                options: ["Una función que se llama automáticamente al iniciar el script", "Una función que se pasa como argumento a otra función y se ejecuta después", "Una función que devuelve otra función", "Una función para depurar código"],
+                correctAnswer: 1,
+                help: "Es una función que se 'llama de vuelta' en un momento posterior, a menudo después de que otra función ha terminado.",
+                codeExample: `function doSomething(callback) {
+    console.log('Haciendo algo...');
+    callback();
+}
+doSomething(() => console.log('Callback ejecutado!'));`
+            },
+            {
                 question: "Ordena los pasos para manejar un evento de clic en un botón.",
-                fragments: ["addEventListener('click', ...)", "document.getElementById('miBoton')", "function() { ... }"],
-                correctOrder: ["document.getElementById('miBoton')", "addEventListener('click', ...)", "function() { ... }"],
-                help: "Primero se obtiene el elemento, luego se le añade el 'listener'."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué método de array se utiliza para crear un nuevo array con todos los elementos que pasan una prueba implementada por la función proporcionada?",
-                options: ["map()", "filter()", "reduce()", "find()"],
-                correctAnswer: "filter()",
-                help: "Es para filtrar elementos de un array."
-            },
-            {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para un `try...catch` block.",
-                fragments: ["try {", "  // Código que puede generar un error", "}", "catch (error) {", "  console.error(error);", "}"],
-                correctOrder: ["try {", "  // Código que puede generar un error", "}", "catch (error) {", "  console.error(error);", "}"],
-                help: "Se usa para manejar errores de forma controlada."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja el método del objeto `Date` con su función.",
-                pairs: [
-                    { drag: "getFullYear()", drop: "Obtiene el año completo (ej. 2023)" },
-                    { drag: "getMonth()", drop: "Obtiene el mes (0-11)" },
-                    { drag: "getDate()", drop: "Obtiene el día del mes (1-31)" },
-                    { drag: "getHours()", drop: "Obtiene la hora (0-23)" }
-                ],
-                help: "Son métodos para extraer partes de una fecha."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué método de `localStorage` se utiliza para almacenar un par clave-valor?",
-                options: ["getItem()", "removeItem()", "setItem()", "clear()"],
-                correctAnswer: "setItem()",
-                help: "Es para guardar datos."
-            },
-            {
                 type: "order-execution",
-                question: "Ordena los pasos para usar un `setTimeout`.",
-                fragments: ["setTimeout(", "function() { console.log('Hola'); }", ", 1000);"],
-                correctOrder: ["setTimeout(", "function() { console.log('Hola'); }", ", 1000);"],
-                help: "Ejecuta una función una vez después de un retraso."
-            },
-            {
-                type: "multiple-choice",
-                question: "¿Qué significa 'DOM' en el contexto de JavaScript web?",
-                options: ["Document Object Model", "Data Order Management", "Direct Object Manipulation", "Dynamic Output Method"],
-                correctAnswer: "Document Object Model",
-                help: "Representa la estructura de un documento HTML."
-            },
-            {
-                type: "syntax-completion",
-                question: "Completa la sintaxis para un evento de teclado `keydown` en un input.",
-                fragments: ["inputElement.addEventListener('keydown',", "function(event) {", "  console.log(event.key);", "});"],
-                correctOrder: ["inputElement.addEventListener('keydown',", "function(event) {", "  console.log(event.key);", "});"],
-                help: "Los eventos de teclado son útiles para interacciones de usuario."
-            },
-            {
-                type: "drag-match",
-                question: "Empareja el método de `console` con su propósito.",
-                pairs: [
-                    { drag: "log()", drop: "Imprime un mensaje general en la consola" },
-                    { drag: "warn()", drop: "Imprime un mensaje de advertencia" },
-                    { drag: "error()", drop: "Imprime un mensaje de error" },
-                    { drag: "info()", drop: "Imprime un mensaje informativo" }
+                fragments: [
+                    "HTML:",
+                    "<button id=\"miBoton\">",
+                    "   Haz clic",
+                    "</button>",
+                    "JavaScript:",
+                    "const boton = document.getElementById('miBoton');",
+                    "boton.addEventListener('click', () => {",
+                    "   alert('¡Botón clicado!');",
+                    "});"
                 ],
-                help: "Son útiles para depuración y seguimiento."
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                help: "Necesitas seleccionar el elemento y luego 'escuchar' cuando ocurre la interacción.",
+                codeExample: `HTML:
+<button id="miBoton">Haz clic</button>
+
+JavaScript:
+const boton = document.getElementById('miBoton');
+boton.addEventListener('click', () => {
+    alert('¡Botón clicado!');
+});`
             },
             {
+                question: "¿Cuál es el propósito del objeto `event` en los manejadores de eventos?",
                 type: "multiple-choice",
-                question: "¿Qué método de array se utiliza para reducir el array a un único valor?",
-                options: ["map()", "filter()", "reduce()", "forEach()"],
-                correctAnswer: "reduce()",
-                help: "Aplica una función acumuladora."
+                options: ["Almacenar datos de la aplicación", "Proporcionar información sobre el evento que ocurrió", "Definir nuevas funciones", "Controlar el flujo de la aplicación"],
+                correctAnswer: 1,
+                help: "Este objeto te da detalles sobre la interacción que acaba de suceder.",
+                codeExample: `document.addEventListener('click', (e) => {
+    console.log('Elemento clicado:', e.target);
+});`
             },
             {
-                type: "order-execution",
-                question: "Ordena los pasos para obtener el valor de un campo de texto.",
-                fragments: ["document.getElementById('miInput')", ".value;"],
-                correctOrder: ["document.getElementById('miInput')", ".value;"],
-                help: "La propiedad `value` contiene el contenido del input."
-            },
-            {
+                question: "¿Qué método se utiliza para detener la propagación de un evento por el DOM?",
                 type: "multiple-choice",
-                question: "¿Qué significa 'AJAX'?",
-                options: ["Asynchronous JavaScript and XML", "Advanced JavaScript and XHTML", "Asynchronous JSON and XML", "Automated JavaScript and XHR"],
-                correctAnswer: "Asynchronous JavaScript and XML",
-                help: "Permite cargar datos sin recargar la página."
+                options: ["`stopPropagation()`", "`cancelPropagation()`", "`stopEvent()`", "`preventBubble()`"],
+                correctAnswer: 0,
+                help: "Este método impide que un evento 'suba' por la jerarquía del DOM.",
+                codeExample: `div.addEventListener('click', (e) => {
+    e.stopPropagation(); // El clic no llegará a elementos padres
+});`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una función que tome un argumento y lo devuelva.",
-                fragments: ["function identidad(x)", "{", "return x;", "}"],
-                correctOrder: ["function identidad(x)", "{", "return x;", "}"],
-                help: "La palabra clave `return` devuelve un valor."
+                question: "¿Qué método se usa para parsear una cadena JSON y construir un valor u objeto JavaScript?",
+                type: "multiple-choice",
+                options: ["`JSON.stringify()`", "`JSON.parse()`", "`JSON.toObject()`", "`JSON.decode()`"],
+                correctAnswer: 1,
+                help: "Este método convierte una cadena de texto a un objeto JavaScript.",
+                codeExample: `let jsonString = '{"nombre": "Ana", "edad": 30}';
+let obj = JSON.parse(jsonString); // obj es {nombre: "Ana", edad: 30}`
             },
             {
+                question: "Empareja el concepto de 'scope' con su definición.",
                 type: "drag-match",
-                question: "Empareja el tipo de evento DOM con su descripción.",
                 pairs: [
-                    { drag: "click", drop: "Cuando un elemento es clicado" },
-                    { drag: "mouseover", drop: "Cuando el puntero del ratón se mueve sobre un elemento" },
-                    { drag: "submit", drop: "Cuando un formulario es enviado" },
-                    { drag: "load", drop: "Cuando un recurso (como una imagen) ha terminado de cargarse" }
+                    { drag: "Variables accesibles globalmente", drop: "Scope Global" },
+                    { drag: "Variables accesibles dentro de una función", drop: "Scope de Función" },
+                    { drag: "Variables accesibles dentro de un bloque (`{}`) usando `let` o `const`", drop: "Scope de Bloque" },
+                    { drag: "Acceso a variables del scope padre", drop: "Clausura (Closure)" }
                 ],
-                help: "Los eventos son la forma en que JavaScript reacciona a las interacciones."
+                help: "El 'scope' define dónde puedes acceder a tus variables.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué método de array se utiliza para eliminar elementos de un array y/o añadir nuevos elementos en su lugar?",
-                options: ["slice()", "splice()", "concat()", "join()"],
-                correctAnswer: "splice()",
-                help: "Es un método muy versátil para modificar arrays."
-            },
-            {
+                question: "Ordena los pasos para usar 'localStorage' para guardar un dato.",
                 type: "order-execution",
-                question: "Ordena los pasos para añadir una clase CSS a un elemento.",
-                fragments: ["elemento.classList.add('mi-clase');"],
-                correctOrder: ["elemento.classList.add('mi-clase');"],
-                help: "La propiedad `classList` permite manipular clases."
+                fragments: [
+                    "localStorage.setItem('username', 'usuario123');",
+                    "// Para recuperar:",
+                    "let user = localStorage.getItem('username');",
+                    "console.log(user);"
+                ],
+                correctOrder: [0, 1, 2, 3],
+                help: "Recuerda los métodos para guardar y recuperar datos en el almacenamiento local del navegador.",
+                codeExample: `localStorage.setItem('username', 'usuario123');
+let user = localStorage.getItem('username');
+console.log(user); // 'usuario123'`
             },
             {
+                question: "¿Qué es el 'hoisting' en JavaScript?",
                 type: "multiple-choice",
-                question: "¿Qué función se utiliza para detener la ejecución de un `setInterval`?",
-                options: ["clearInterval()", "stopInterval()", "clearTimeout()", "removeInterval()"],
-                correctAnswer: "clearInterval()",
-                help: "Necesita el ID del intervalo para detenerlo."
+                options: ["Un método para elevar elementos del DOM", "El proceso por el cual las declaraciones de variables y funciones son movidas al inicio de su scope", "Un tipo de error de sintaxis", "Un patrón de diseño para eventos"],
+                correctAnswer: 1,
+                help: "Este concepto explica por qué puedes usar una variable o función antes de declararla en tu código.",
+                codeExample: `console.log(a); // undefined
+var a = 5;`
+            },
+            // Nuevas preguntas para JavaScript Intermedio (hasta 20)
+            {
+                question: "¿Cuál es el propósito del operador de propagación (spread operator) `...`?",
+                type: "multiple-choice",
+                options: ["Para concatenar cadenas de texto.", "Para expandir un iterable (como un array o cadena) en elementos individuales.", "Para copiar objetos con sus prototipos.", "Para realizar operaciones matemáticas complejas."],
+                correctAnswer: 1,
+                help: "Es muy útil para copiar arrays, fusionar objetos o pasar argumentos a funciones.",
+                codeExample: `const arr1 = [1, 2];
+const arr2 = [...arr1, 3, 4]; // [1, 2, 3, 4]`
+            },
+            {
+                question: "Empareja el método de array de alto orden con su función.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Transforma cada elemento en un nuevo array", drop: "`map()`" },
+                    { drag: "Crea un nuevo array con elementos que pasan una prueba", drop: "`filter()`" },
+                    { drag: "Reduce el array a un solo valor", drop: "`reduce()`" },
+                    { drag: "Verifica si al menos un elemento cumple una condición", drop: "`some()`" },
+                    { drag: "Verifica si todos los elementos cumplen una condición", drop: "`every()`" }
+                ],
+                help: "Estos métodos facilitan la manipulación y consulta de arrays de forma funcional.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los elementos para definir una función de flecha (arrow function) simple.",
+                type: "order-execution",
+                fragments: [
+                    "const miFuncion = (",
+                    "param",
+                    ") => {",
+                    "return param * 2;",
+                    "};"
+                ],
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Las funciones de flecha son una sintaxis más concisa para escribir funciones en JavaScript.",
+                codeExample: `const doble = (num) => num * 2;`
+            },
+            {
+                question: "¿Cómo se maneja el contexto de `this` en una función de flecha comparado con una función regular?",
+                type: "multiple-choice",
+                options: ["Las funciones de flecha siempre tienen `this` global.", "Las funciones de flecha no tienen su propio `this`; heredan el `this` de su contexto léxico (el scope donde fueron definidas).", "Las funciones de flecha tienen un `this` dinámico que cambia según cómo se llaman.", "Las funciones de flecha siempre enlazan `this` al elemento DOM."],
+                correctAnswer: 1,
+                help: "Esta es una diferencia clave que simplifica el manejo de `this` en muchos escenarios.",
+                codeExample: null
+            },
+            {
+                question: "¿Qué es una 'clausura' (closure) en JavaScript?",
+                type: "multiple-choice",
+                options: ["Un error de sintaxis que cierra el programa.", "Una función que recuerda su entorno léxico (variables de su scope exterior) incluso cuando se ejecuta fuera de ese scope.", "Un tipo de bucle que se cierra automáticamente.", "Una forma de proteger variables de ser modificadas."],
+                correctAnswer: 1,
+                help: "Las clausuras son un concepto fundamental para entender patrones avanzados en JavaScript.",
+                codeExample: `function crearContador() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+const contador = crearContador();
+console.log(contador()); // 1`
+            },
+            {
+                question: "¿Qué es la 'delegación de eventos' en el DOM?",
+                type: "multiple-choice",
+                options: ["Un método para detener todos los eventos en una página.", "Un patrón para manejar eventos en elementos hijos adjuntando un solo controlador de eventos a su elemento padre.", "Un tipo de evento que se dispara cuando un elemento es arrastrado.", "Una forma de priorizar la ejecución de eventos."],
+                correctAnswer: 1,
+                help: "Mejora el rendimiento y simplifica el código al manejar muchos elementos interactivos.",
+                codeExample: `document.getElementById('parent').addEventListener('click', function(e) {
+    if (e.target.matches('.child-button')) {
+        console.log('Botón hijo clicado');
+    }
+});`
+            },
+            {
+                question: "¿Qué método de `Date` se utiliza para obtener el año completo (ej. 2023) de un objeto Date?",
+                type: "multiple-choice",
+                options: ["`getYear()`", "`getFullYear()`", "`getYearFull()`", "`getActualYear()`"],
+                correctAnswer: 1,
+                help: "`getYear()` es un método obsoleto que devuelve el año menos 1900.",
+                codeExample: `const fecha = new Date();
+console.log(fecha.getFullYear());`
+            },
+            {
+                question: "Empareja el método de `String` con su función.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Extrae una parte de la cadena", drop: "`substring()`" },
+                    { drag: "Reemplaza una parte de la cadena", drop: "`replace()`" },
+                    { drag: "Divide la cadena en un array de subcadenas", drop: "`split()`" },
+                    { drag: "Elimina espacios en blanco de ambos extremos", drop: "`trim()`" }
+                ],
+                help: "Estos métodos son fundamentales para manipular cadenas de texto.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los pasos para realizar una llamada `setTimeout` con un retraso de 2 segundos.",
+                type: "order-execution",
+                fragments: [
+                    "setTimeout(",
+                    "() => {",
+                    "   console.log('Han pasado 2 segundos');",
+                    "},",
+                    "2000",
+                    ");"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5],
+                help: "`setTimeout` ejecuta una función una vez después de un retraso especificado.",
+                codeExample: `setTimeout(() => {
+    console.log('Han pasado 2 segundos');
+}, 2000);`
+            },
+            {
+                question: "¿Qué método de `Array` se utiliza para combinar dos o más arrays?",
+                type: "multiple-choice",
+                options: ["`join()`", "`merge()`", "`concat()`", "`combine()`"],
+                correctAnswer: 2,
+                help: "Este método no modifica los arrays existentes, sino que devuelve un nuevo array.",
+                codeExample: `const arr1 = [1, 2];
+const arr2 = [3, 4];
+const nuevoArr = arr1.concat(arr2); // [1, 2, 3, 4]`
+            },
+            // Nuevas preguntas adicionales para JavaScript Intermedio (total 25)
+            {
+                question: "¿Qué estructura de control se utiliza para manejar errores en bloques de código que pueden fallar?",
+                type: "multiple-choice",
+                options: ["`if...else`", "`switch`", "`try...catch`", "`for...of`"],
+                correctAnswer: 2,
+                help: "Permite ejecutar código potencialmente problemático y capturar cualquier error que ocurra.",
+                codeExample: `try {
+    // Código que puede generar un error
+} catch (error) {
+    console.error("Ocurrió un error:", error);
+}`
+            },
+            {
+                question: "Empareja el concepto de `this` con su contexto.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "En un método de objeto", drop: "El objeto que posee el método" },
+                    { drag: "En una función regular (no estricta)", drop: "El objeto global (window/global)" },
+                    { drag: "En una función de flecha", drop: "El `this` del contexto léxico circundante" }
+                ],
+                help: "El valor de `this` depende de cómo se llama la función.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los pasos para eliminar un escuchador de eventos (`event listener`) de un elemento.",
+                type: "order-execution",
+                fragments: [
+                    "const miFuncion = () => console.log('Clic');",
+                    "elemento.addEventListener('click', miFuncion);",
+                    "elemento.removeEventListener('click', miFuncion);"
+                ],
+                correctOrder: [0, 1, 2],
+                help: "Para eliminar un escuchador, se necesita la misma función de callback que se usó para añadirlo.",
+                codeExample: `const miFuncion = () => console.log('Clic');
+elemento.addEventListener('click', miFuncion);
+elemento.removeEventListener('click', miFuncion);`
+            },
+            {
+                question: "¿Qué método de `Array` se utiliza para verificar si *todos* los elementos de un array cumplen una condición?",
+                type: "multiple-choice",
+                options: ["`filter()`", "`some()`", "`every()`", "`find()`"],
+                correctAnswer: 2,
+                help: "Devuelve `true` si la función de callback devuelve `true` para todos los elementos, de lo contrario `false`.",
+                codeExample: `const numeros = [2, 4, 6];
+numeros.every(num => num % 2 === 0); // true`
+            },
+            {
+                question: "¿Qué propiedad del objeto `Element` en el DOM permite manipular las clases CSS de un elemento (añadir, remover, alternar)?",
+                type: "multiple-choice",
+                options: ["`className`", "`class`", "`style.class`", "`classList`"],
+                correctAnswer: 3,
+                help: "Ofrece métodos convenientes para gestionar las clases de un elemento.",
+                codeExample: `elemento.classList.add('nueva-clase');`
             }
         ],
         avanzado: [
             {
+                question: "¿Qué palabra clave se usa para importar módulos en ES6 (ECMAScript 2015)?",
                 type: "multiple-choice",
-                question: "¿Qué es 'hoisting' en JavaScript?",
-                options: ["Un método para optimizar el rendimiento del código.", "El proceso de mover declaraciones al principio de su ámbito antes de la ejecución.", "Un tipo de error de sintaxis.", "Una forma de herencia de prototipos."],
-                correctAnswer: "El proceso de mover declaraciones al principio de su ámbito antes de la ejecución.",
-                help: "Afecta a cómo se interpretan las variables y funciones."
+                options: ["`require`", "`include`", "`import`", "`load`"],
+                correctAnswer: 2,
+                help: "Esta palabra clave es fundamental para la modularización en JavaScript moderno.",
+                codeExample: "`import { miFuncion } from './miModulo.js';`"
             },
             {
-                type: "syntax-completion",
-                question: "Crea una promesa que se resuelva después de 1 segundo con un mensaje 'Éxito'.",
-                fragments: ["new Promise((resolve) => {", "setTimeout(() => {", "resolve('Éxito');", "}, 1000);", "});"],
-                correctOrder: ["new Promise((resolve) => {", "setTimeout(() => {", "resolve('Éxito');", "}, 1000);", "});"],
-                help: "Las promesas son para operaciones asíncronas."
-            },
-            {
+                question: "Empareja el concepto de Asincronía con su implementación en JavaScript moderno.",
                 type: "drag-match",
-                question: "Arrastra y empareja el concepto de JavaScript con su descripción.",
                 pairs: [
-                    { drag: "Closure", drop: "Una función que recuerda su entorno léxico" },
-                    { drag: "Callback", drop: "Una función pasada como argumento a otra función" },
-                    { drag: "Async/Await", drop: "Sintaxis para manejar promesas de forma más legible" },
-                    { drag: "Event Loop", drop: "Mecanismo que permite a JS manejar operaciones no bloqueantes" }
+                    { drag: "Objeto que representa la eventual finalización (o falla) de una operación asíncrona", drop: "Promise" },
+                    { drag: "Sintaxis para escribir código asíncrono que parece síncrono", drop: "`async/await`" },
+                    { drag: "Función que se pasa a otra y se ejecuta al completar una operación", drop: "Callback" },
+                    { drag: "Función que genera una secuencia de valores", drop: "Generador" }
                 ],
-                help: "Son conceptos fundamentales para entender el comportamiento de JavaScript."
+                help: "Estos conceptos son clave para manejar operaciones que no ocurren instantáneamente.",
+                codeExample: null
             },
             {
-                type: "order-execution",
-                question: "Ordena los pasos para realizar una petición fetch a una API y procesar la respuesta JSON.",
-                fragments: ["fetch('https://api.example.com/data')", ".then(response => response.json())", ".then(data => console.log(data))", ".catch(error => console.error(error))"],
-                correctOrder: ["fetch('https://api.example.com/data')", ".then(response => response.json())", ".then(data => console.log(data))", ".catch(error => console.error(error))"],
-                help: "Fetch devuelve una promesa."
-            },
-            {
+                question: "¿Cuál es el propósito de la 'desestructuración de objetos' en JavaScript?",
                 type: "multiple-choice",
-                question: "¿Qué método de array se utiliza para comprobar si al menos un elemento en el array pasa la prueba implementada por la función proporcionada?",
-                options: ["every()", "some()", "includes()", "find()"],
-                correctAnswer: "some()",
-                help: "Devuelve `true` si encuentra al menos uno."
+                options: ["Convertir objetos a cadenas", "Extraer valores de objetos en variables separadas de forma conveniente", "Fusionar varios objetos en uno", "Crear copias profundas de objetos"],
+                correctAnswer: 1,
+                help: "Es una forma concisa de obtener propiedades de un objeto y asignarlas a variables.",
+                codeExample: `const persona = { nombre: 'Juan', edad: 30 };
+const { nombre, edad } = persona; // nombre='Juan', edad=30`
             },
             {
-                type: "syntax-completion",
-                question: "Crea una clase JavaScript con un constructor y un método simple.",
-                fragments: ["class Persona {", "  constructor(nombre) {", "    this.nombre = nombre;", "  }", "  saludar() {", "    console.log(`Hola, soy ${this.nombre}`);", "  }", "}"],
-                correctOrder: ["class Persona {", "  constructor(nombre) {", "    this.nombre = nombre;", "  }", "  saludar() {", "    console.log(`Hola, soy ${this.nombre}`);", "  }", "}"],
-                help: "Las clases son azúcar sintáctico sobre prototipos."
+                question: "Ordena los pasos para realizar una solicitud 'fetch' con 'async/await'.",
+                type: "order-execution",
+                fragments: [
+                    "async function getData() {",
+                    "   try {",
+                    "      const response = await fetch('https://api.example.com/data');",
+                    "      const data = await response.json();",
+                    "      console.log(data);",
+                    "   } catch (error) {",
+                    "      console.error('Error:', error);",
+                    "   }",
+                    "}"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                help: "Piensa en cómo se manejan las operaciones que tardan tiempo en completarse, esperando el resultado.",
+                codeExample: `async function getData() {
+    try {
+        const response = await fetch('https://api.example.com/data');
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}`
             },
             {
+                question: "¿Qué es el 'Event Loop' en JavaScript?",
+                type: "multiple-choice",
+                options: ["Un bucle para iterar sobre arrays", "El mecanismo que permite a JavaScript realizar operaciones no bloqueantes, procesando eventos de la cola", "Un tipo de bucle `for` avanzado", "Una herramienta de depuración para eventos"],
+                correctAnswer: 1,
+                help: "Este mecanismo es crucial para entender cómo JavaScript maneja tareas asíncronas sin 'congelar' la interfaz.",
+                codeExample: null
+            },
+            {
+                question: "¿Qué método de 'Map' se utiliza para obtener el número de elementos en un Map?",
+                type: "multiple-choice",
+                options: ["`size()`", "`length`", "`count()`", "`Map.length`"],
+                correctAnswer: 0,
+                help: "Es una propiedad que indica la cantidad de pares clave-valor en un Map.",
+                codeExample: "let miMap = new Map();\nmiMap.set('a', 1);\nmiMap.set('b', 2);\nmiMap.size; // 2"
+            },
+            {
+                question: "Empareja el método de Set con su función.",
                 type: "drag-match",
-                question: "Empareja el concepto de programación asíncrona con su descripción.",
                 pairs: [
-                    { drag: "Promise.all()", drop: "Espera a que todas las promesas en un iterable se resuelvan" },
-                    { drag: "Promise.race()", drop: "Devuelve una promesa que se resuelve o rechaza tan pronto como una de las promesas en el iterable lo hace" },
-                    { drag: "async function", drop: "Declara una función asíncrona" },
-                    { drag: "await", drop: "Pausa la ejecución de una función asíncrona hasta que una promesa se resuelva" }
+                    { drag: "Añade un valor al Set", drop: "`add()`" },
+                    { drag: "Elimina un valor del Set", drop: "`delete()`" },
+                    { drag: "Verifica si un valor existe en el Set", drop: "`has()`" },
+                    { drag: "Elimina todos los elementos del Set", drop: "`clear()`" },
+                    { drag: "Devuelve un iterador de los valores del Set", drop: "`values()`" }
                 ],
-                help: "Son herramientas para manejar operaciones que tardan tiempo."
+                help: "Los Sets son colecciones de valores únicos, y estos métodos te permiten manipularlos.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué es el 'event bubbling' en JavaScript?",
-                options: ["Cuando un evento se propaga desde el elemento más interno hacia el elemento más externo del DOM.", "Cuando un evento se propaga desde el elemento más externo hacia el elemento más interno del DOM.", "Un error en el manejo de eventos.", "Una forma de detener la propagación de eventos."],
-                correctAnswer: "Cuando un evento se propaga desde el elemento más interno hacia el elemento más externo del DOM.",
-                help: "Es el comportamiento por defecto de la propagación de eventos."
-            },
-            {
+                question: "Ordena los pasos para crear e invocar una función autoejecutable (IIFE).",
                 type: "order-execution",
-                question: "Ordena los pasos para usar `localStorage` para guardar y luego recuperar un dato.",
-                fragments: ["localStorage.setItem('clave', 'valor');", "let dato = localStorage.getItem('clave');", "console.log(dato);"],
-                correctOrder: ["localStorage.setItem('clave', 'valor');", "let dato = localStorage.getItem('clave');", "console.log(dato);"],
-                help: "LocalStorage almacena datos de forma persistente."
+                fragments: [
+                    "(function() {",
+                    "   console.log('¡Me ejecuto inmediatamente!');",
+                    "})();"
+                ],
+                correctOrder: [0, 1, 2],
+                help: "Este patrón de función se ejecuta tan pronto como se define.",
+                codeExample: `(function() {
+    console.log('¡Me ejecuto inmediatamente!');
+})();`
             },
             {
+                question: "¿Qué es 'WebAssembly'?",
                 type: "multiple-choice",
-                question: "¿Qué método de `Array.prototype` se utiliza para crear un nuevo array aplanando sub-arrays recursivamente hasta la profundidad especificada?",
-                options: ["flat()", "flatten()", "depth()", "merge()"],
-                correctAnswer: "flat()",
-                help: "Útil para trabajar con arrays anidados."
+                options: ["Un nuevo lenguaje de programación web", "Un formato de código binario de bajo nivel diseñado para la web", "Una API de JavaScript para gráficos 3D", "Un compilador de JavaScript a C++"],
+                correctAnswer: 1,
+                help: "Permite ejecutar código de alto rendimiento, compilado desde otros lenguajes, en el navegador.",
+                codeExample: null
             },
             {
-                type: "syntax-completion",
-                question: "Crea una función generadora simple.",
-                fragments: ["function* generador() {", "  yield 1;", "  yield 2;", "}"],
-                correctOrder: ["function* generador() {", "  yield 1;", "  yield 2;", "}"],
-                help: "Las funciones generadoras pueden pausar y reanudar su ejecución."
+                question: "¿Qué método se utiliza para crear un objeto a partir de un prototipo existente?",
+                type: "multiple-choice",
+                options: ["`Object.create()`", "`Object.assign()`", "`Object.from()`", "`Object.new()`"],
+                correctAnswer: 0,
+                help: "Este método es fundamental para la herencia prototípica en JavaScript.",
+                codeExample: `const personaProto = {
+    saludar() {
+        console.log('Hola');
+    }
+};
+const juan = Object.create(personaProto);
+juan.saludar(); // 'Hola'`
+            },
+            // Nuevas preguntas para JavaScript Avanzado (hasta 20)
+            {
+                question: "¿Cuál es la diferencia entre herencia prototípica y herencia basada en clases en JavaScript?",
+                type: "multiple-choice",
+                options: ["La herencia prototípica es más moderna que la basada en clases.", "JavaScript es intrínsecamente prototípico; las clases son azúcar sintáctico sobre el modelo de prototipos.", "La herencia basada en clases permite herencia múltiple, a diferencia de la prototípica.", "No hay diferencia, son dos nombres para lo mismo."],
+                correctAnswer: 1,
+                help: "Comprender el modelo prototípico es clave para dominar JavaScript, incluso con la sintaxis de clases.",
+                codeExample: null
             },
             {
+                question: "Ordena los pasos para crear e usar una clase básica en JavaScript.",
+                type: "order-execution",
+                fragments: [
+                    "class Animal {",
+                    "   constructor(nombre) { this.nombre = nombre; }",
+                    "   saludar() { console.log('Hola, soy ' + this.nombre); }",
+                    "}",
+                    "const perro = new Animal('Fido');",
+                    "perro.saludar();"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5],
+                help: "Las clases en JavaScript proporcionan una sintaxis más limpia para crear objetos y manejar la herencia.",
+                codeExample: `class Animal {
+    constructor(nombre) {
+        this.nombre = nombre;
+    }
+    saludar() {
+        console.log('Hola, soy ' + this.nombre);
+    }
+}
+const perro = new Animal('Fido');
+perro.saludar();`
+            },
+            {
+                question: "Empareja el concepto avanzado de JavaScript con su descripción.",
                 type: "drag-match",
-                question: "Empareja el concepto de módulos ES6 con su descripción.",
                 pairs: [
-                    { drag: "export default", drop: "Exporta un solo valor como la exportación principal de un módulo" },
-                    { drag: "export const", drop: "Exporta una constante con nombre" },
-                    { drag: "import", drop: "Importa bindings exportados por otro módulo" },
-                    { drag: "as", drop: "Renombra un import o export" }
+                    { drag: "Objeto que permite interceptar operaciones en otros objetos", drop: "Proxy" },
+                    { drag: "Objeto que proporciona métodos de bajo nivel para interactuar con objetos", drop: "Reflect" },
+                    { drag: "Script que el navegador ejecuta en segundo plano para funciones offline y notificaciones", drop: "Service Worker" },
+                    { drag: "Protocolo para comunicación bidireccional en tiempo real entre cliente y servidor", drop: "WebSockets" }
                 ],
-                help: "Los módulos ayudan a organizar el código."
+                help: "Estos conceptos amplían las capacidades de JavaScript para aplicaciones web modernas.",
+                codeExample: null
             },
             {
+                question: "¿Cuál es el propósito de los 'Generators' y 'Async Iterators' en JavaScript?",
                 type: "multiple-choice",
-                question: "¿Qué es un 'Service Worker' en el desarrollo web?",
-                options: ["Un tipo de Web Worker para realizar cálculos complejos en segundo plano.", "Un script que el navegador ejecuta en segundo plano, separado de una página web, para habilitar características offline, notificaciones push, etc.", "Una herramienta para optimizar el rendimiento de CSS.", "Un framework de JavaScript para construir interfaces de usuario."],
-                correctAnswer: "Un script que el navegador ejecuta en segundo plano, separado de una página web, para habilitar características offline, notificaciones push, etc.",
-                help: "Son clave para las Progressive Web Apps (PWAs)."
+                options: ["Para crear bucles infinitos.", "Para manejar la creación de objetos de forma asíncrona.", "Para controlar la iteración de secuencias de valores y manejar secuencias asíncronas de datos.", "Para optimizar el rendimiento de las funciones síncronas."],
+                correctAnswer: 2,
+                help: "Permiten escribir código asíncrono de una manera más secuencial y legible.",
+                codeExample: `function* idGenerator() {
+    let id = 0;
+    while (true) yield id++;
+}
+const gen = idGenerator();
+console.log(gen.next().value); // 0`
             },
             {
-                type: "order-execution",
-                question: "Ordena los pasos para usar el operador spread (...) en un array.",
-                fragments: ["let arr1 = [1, 2];", "let arr2 = [...arr1, 3, 4];", "console.log(arr2);"],
-                correctOrder: ["let arr1 = [1, 2];", "let arr2 = [...arr1, 3, 4];", "console.log(arr2);"],
-                help: "El operador spread expande iterables."
-            },
-            {
+                question: "¿Qué es un 'Service Worker' y para qué se utiliza?",
                 type: "multiple-choice",
-                question: "¿Qué método de `Array.prototype` se utiliza para crear un nuevo array con los resultados de la llamada a una función para cada elemento del array?",
-                options: ["forEach()", "filter()", "map()", "reduce()"],
-                correctAnswer: "map()",
-                help: "Transforma cada elemento y devuelve un nuevo array."
+                options: ["Una herramienta para depurar errores de JavaScript.", "Un script que el navegador ejecuta en segundo plano, actuando como un proxy de red programable, habilitando funciones offline, notificaciones push, etc.", "Un tipo de Web Worker que se ejecuta en el servidor.", "Una biblioteca para animaciones CSS."],
+                correctAnswer: 1,
+                help: "Son la base de las Progressive Web Apps (PWAs) y mejoran la fiabilidad y el rendimiento.",
+                codeExample: null
             },
             {
-                type: "syntax-completion",
-                question: "Crea una función asíncrona que espere 2 segundos y luego imprima un mensaje.",
-                fragments: ["async function esperarYSaludar() {", "  await new Promise(resolve => setTimeout(resolve, 2000));", "  console.log('¡Hola después de esperar!');", "}"],
-                correctOrder: ["async function esperarYSaludar() {", "  await new Promise(resolve => setTimeout(resolve, 2000));", "  console.log('¡Hola después de esperar!');", "}"],
-                help: "Async/await simplifica el código asíncrono."
+                question: "¿Qué método de `Array` se puede usar para aplanar un array de arrays a una profundidad específica?",
+                type: "multiple-choice",
+                options: ["`flatten()`", "`deepFlatten()`", "`flat()`", "`unfold()`"],
+                correctAnswer: 2,
+                help: "Este método es útil para trabajar con arrays anidados.",
+                codeExample: `const arr = [1, [2, 3], [4, [5]]];
+console.log(arr.flat(2)); // [1, 2, 3, 4, 5]`
             },
             {
+                question: "¿Qué es la 'currificación' (currying) en JavaScript?",
+                type: "multiple-choice",
+                options: ["Un método para ocultar funciones.", "Una técnica para transformar una función que toma múltiples argumentos en una secuencia de funciones que toman un solo argumento.", "Un patrón para optimizar recursiones.", "Una forma de aplicar estilos a funciones."],
+                correctAnswer: 1,
+                help: "Es un concepto de programación funcional que mejora la reutilización y composición de funciones.",
+                codeExample: `const add = (a) => (b) => a + b;
+const addFive = add(5);
+console.log(addFive(3)); // 8`
+            },
+            {
+                question: "Empareja el concepto de manejo de errores asíncronos con su implementación.",
                 type: "drag-match",
-                question: "Empareja el método de `Promise` con su función.",
                 pairs: [
-                    { drag: ".then()", drop: "Maneja el resultado de una promesa resuelta" },
-                    { drag: ".catch()", drop: "Maneja los errores de una promesa rechazada" },
-                    { drag: ".finally()", drop: "Ejecuta un callback cuando la promesa se asienta (resuelta o rechazada)" },
-                    { drag: "Promise.resolve()", drop: "Devuelve una promesa que se resuelve con el valor dado" }
+                    { drag: "Captura errores en Promises", drop: "`.catch()`" },
+                    { drag: "Maneja errores en `async/await`", drop: "`try...catch`" },
+                    { drag: "Evento global para errores no capturados", drop: "`window.onerror`" },
+                    { drag: "Evento global para rechazos de Promises no manejados", drop: "`unhandledrejection`" }
                 ],
-                help: "Son métodos fundamentales para el manejo de promesas."
+                help: "Es crucial manejar los errores en operaciones asíncronas para una aplicación robusta.",
+                codeExample: null
             },
             {
-                type: "multiple-choice",
-                question: "¿Qué es la 'delegación de eventos' en JavaScript?",
-                options: ["Asignar múltiples manejadores de eventos a un solo elemento.", "Asignar un manejador de eventos a un elemento padre para gestionar eventos de sus hijos.", "Detener la propagación de un evento.", "Ejecutar un evento de forma asíncrona."],
-                correctAnswer: "Asignar un manejador de eventos a un elemento padre para gestionar eventos de sus hijos.",
-                help: "Es eficiente para muchos elementos interactivos."
-            },
-            {
+                question: "Ordena los pasos para implementar un 'Intersection Observer' básico.",
                 type: "order-execution",
-                question: "Ordena los pasos para desestructurar un objeto y obtener dos propiedades.",
-                fragments: ["let persona = { nombre: 'Juan', edad: 25, ciudad: 'Madrid' };", "const { nombre, edad } = persona;", "console.log(nombre, edad);"],
-                correctOrder: ["let persona = { nombre: 'Juan', edad: 25, ciudad: 'Madrid' };", "const { nombre, edad } = persona;", "console.log(nombre, edad);"],
-                help: "La desestructuración simplifica el acceso a propiedades."
+                fragments: [
+                    "const observer = new IntersectionObserver((entries) => {",
+                    "  entries.forEach(entry => {",
+                    "    if (entry.isIntersecting) {",
+                    "      console.log('Elemento visible');",
+                    "    }",
+                    "  });",
+                    "});",
+                    "const target = document.querySelector('.my-element');",
+                    "observer.observe(target);"
+                ],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                help: "Permite detectar cuándo un elemento entra o sale del viewport (o de otro elemento).",
+                codeExample: `const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      console.log('Elemento visible');
+    }
+  });
+});
+const target = document.querySelector('.my-element');
+observer.observe(target);`
             },
             {
+                question: "¿Qué es el 'WeakMap' en JavaScript y cuándo se usa?",
                 type: "multiple-choice",
-                question: "¿Qué objeto global en JavaScript proporciona funciones matemáticas?",
-                options: ["Math", "Numbers", "Calculations", "Algebra"],
-                correctAnswer: "Math",
-                help: "Contiene métodos como `random()`, `floor()`, `ceil()`."
+                options: ["Un tipo de `Map` que solo almacena cadenas.", "Un `Map` cuyas claves son débilmente referenciadas, lo que permite que las claves sean recolectadas por el garbage collector si no hay otras referencias a ellas.", "Un `Map` que solo puede contener un número limitado de elementos.", "Una versión más lenta de `Map` para compatibilidad."],
+                correctAnswer: 1,
+                help: "Es útil para asociar datos a objetos sin evitar que esos objetos sean eliminados de la memoria.",
+                codeExample: `const wm = new WeakMap();
+const obj = {};
+wm.set(obj, 'valor'); // obj puede ser recolectado si no hay otras referencias`
+            },
+            // Nuevas preguntas adicionales para JavaScript Avanzado (total 25)
+            {
+                question: "¿Qué es un 'WeakSet' en JavaScript y cuándo es útil?",
+                type: "multiple-choice",
+                options: ["Un `Set` que solo puede contener un número limitado de elementos.", "Un `Set` cuyas referencias a sus elementos son débiles, permitiendo que los objetos sean recolectados por el garbage collector si no hay otras referencias a ellos.", "Un `Set` que solo almacena valores numéricos.", "Una versión más lenta de `Set` para compatibilidad."],
+                correctAnswer: 1,
+                help: "Similar a `WeakMap`, es útil para almacenar objetos sin impedir su recolección de basura.",
+                codeExample: `const ws = new WeakSet();
+const obj = {};
+ws.add(obj); // obj puede ser recolectado si no hay otras referencias`
+            },
+            {
+                question: "Empareja el operador de JavaScript con su función.",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Encadenamiento opcional (acceso seguro a propiedades anidadas)", drop: "`?.`" },
+                    { drag: "Coalescencia nula (valor por defecto si es `null` o `undefined`)", drop: "`??`" },
+                    { drag: "Operador de asignación lógica AND", drop: "`&&=`" },
+                    { drag: "Operador de asignación lógica OR", drop: "`||=`" }
+                ],
+                help: "Estos operadores son adiciones modernas a JavaScript que mejoran la concisión y seguridad del código.",
+                codeExample: null
+            },
+            {
+                question: "Ordena los pasos para utilizar la API `requestAnimationFrame` para animaciones optimizadas.",
+                type: "order-execution",
+                fragments: [
+                    "function animate() {",
+                    "  // Lógica de la animación aquí",
+                    "  requestAnimationFrame(animate);",
+                    "}",
+                    "requestAnimationFrame(animate);"
+                ],
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Permite al navegador optimizar las animaciones para que se ejecuten de forma más fluida y eficiente.",
+                codeExample: `function animate() {
+  // Lógica de la animación aquí
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);`
+            },
+            {
+                question: "¿Qué es el tipo de dato `Symbol` en JavaScript?",
+                type: "multiple-choice",
+                options: ["Un tipo de número para cálculos grandes.", "Un tipo de dato primitivo cuyas instancias son únicas e inmutables, utilizadas a menudo como claves de propiedades de objeto.", "Un objeto para representar iconos SVG.", "Una forma de crear comentarios especiales."],
+                correctAnswer: 1,
+                help: "Los Symbols son útiles para evitar colisiones de nombres de propiedades en objetos.",
+                codeExample: `const id = Symbol('id');
+const obj = { [id]: 1 };`
+            },
+            {
+                question: "¿Qué es el tipo de dato `BigInt` en JavaScript?",
+                type: "multiple-choice",
+                options: ["Un tipo de dato para representar números enteros de precisión arbitraria, más allá del límite de `Number`.", "Un tipo de dato para números flotantes de doble precisión.", "Un tipo de dato para almacenar números muy pequeños.", "Un objeto para realizar operaciones matemáticas complejas."],
+                correctAnswer: 0,
+                help: "Permite trabajar con números enteros que son demasiado grandes para ser representados por el tipo `Number` estándar.",
+                codeExample: `const bigNum = 123456789012345678901234567890123456789n;`
             }
         ]
     }
 };
 
-// Variables de estado del juego
-let currentTopic = ''; // 'html', 'css', 'javascript'
-let currentDifficulty = ''; // 'basico', 'intermedio', 'avanzado'
-let currentQuestions = [];
-let shuffledQuestions = [];
 let currentQuestionIndex = 0;
-let score = 0;
-let errors = 0;
-let timerInterval;
-let startTime;
-let gameStarted = false;
-let answerBlocked = false; // Para prevenir múltiples clics en botones de respuesta
-let localGameStorage; // Objeto para manejar el almacenamiento local
+let currentScore = 0;
+let quizTimer;
+let timeLeft = 0;
+let selectedTopic = '';
+let selectedDifficulty = '';
+let currentQuestions = [];
+let answeredCorrectly = 0;
+let answeredIncorrectly = 0;
 
-// Historial para la función de deshacer
-let syntaxOrderHistory = []; // Para preguntas de Ordena la estructura (click-to-add)
-let dragMatchHistory = []; // Para preguntas de Drag & Match
+const TIME_PER_QUESTION = 30; // seconds
 
-// Variables DOM (se asignarán en initializeWebMasterQuizGame)
-let quizStartMenu;
-let startQuizButton;
-let quizTopicSelectionMenu;
-let topicButtons;
-let backToStartMenuButton;
-let quizDifficultySelectionMenu;
-let selectedTopicDisplay;
-let difficultyButtons;
-let backToTopicMenuButton;
-let quizPlayArea;
-let quizTimerDisplay;
-let quizScoreDisplay;
-let quizCard;
-let quizQuestionDisplay;
-let quizHelpText;
-let questionTypeContainer;
-let multipleChoiceOptionsContainer;
-let answerOptionButtons; // NodeList, will be re-queried
-let syntaxOrderContainer;
-let syntaxTargetArea;
-let syntaxOptionsArea;
-let checkSyntaxButton;
-let undoSyntaxButton; // Nuevo botón de deshacer
-let dragMatchContainer;
-let dragElementsArea;
-let dropTargetsArea;
-let checkMatchButton;
-let undoMatchButton; // Nuevo botón de deshacer
-let endQuizButton;
-let quizResultScreen;
-let quizCorrectAnswersDisplay;
-let quizIncorrectAnswersDisplay;
-let quizFinalScoreDisplay;
-let quizFinalTimeDisplay;
-let quizRetryLevelButton;
-let quizNextLevelButton;
-let quizChangeTopicButton;
-let quizExitGameButton;
+const quizStartMenu = document.getElementById('quiz-start-menu');
+const startQuizButton = document.getElementById('start-quiz-button');
+const quizTopicSelectionMenu = document.getElementById('quiz-topic-selection-menu');
+const topicButtons = document.querySelectorAll('.topic-button');
+const backToStartMenuButton = document.getElementById('back-to-start-menu-button');
+const quizDifficultySelectionMenu = document.getElementById('quiz-difficulty-selection-menu');
+const selectedTopicDisplay = document.getElementById('selected-topic-display');
+const difficultyButtons = document.querySelectorAll('.difficulty-button');
+const backToTopicMenuButton = document.getElementById('back-to-topic-menu-button');
+const quizPlayArea = document.getElementById('quiz-play-area');
+const quizTimerDisplay = document.getElementById('quiz-timer');
+const quizScoreDisplay = document.getElementById('quiz-score-display');
+const quizQuestion = document.getElementById('quiz-question');
+const quizHelpText = document.getElementById('quiz-help-text');
+const multipleChoiceOptions = document.getElementById('multiple-choice-options');
+const syntaxOrderContainer = document.getElementById('syntax-order-container');
+const syntaxTargetArea = document.getElementById('syntax-target-area');
+const syntaxOptionsArea = document.getElementById('syntax-options-area');
+const checkSyntaxButton = document.getElementById('check-syntax-button');
+const undoSyntaxButton = document.getElementById('undo-syntax-button');
+const dragMatchContainer = document.getElementById('drag-match-container');
+const dragElementsArea = document.getElementById('drag-elements');
+const dropTargetsArea = document.getElementById('drop-targets');
+const checkMatchButton = document.getElementById('check-match-button');
+const undoMatchButton = document.getElementById('undo-match-button');
+const endQuizButton = document.getElementById('end-quiz-button');
+const quizResultScreen = document.getElementById('quiz-result-screen');
+const quizCorrectAnswers = document.getElementById('quiz-correct-answers');
+const quizIncorrectAnswers = document.getElementById('quiz-incorrect-answers');
+const quizFinalScore = document.getElementById('quiz-final-score');
+const quizFinalTime = document.getElementById('quiz-final-time');
+const quizRetryLevelButton = document.getElementById('quiz-retry-level-button');
+const quizNextLevelButton = document.getElementById('quiz-next-level-button');
+const quizChangeTopicButton = document.getElementById('quiz-change-topic-button');
+const quizExitGameButton = document.getElementById('quiz-exit-game-button');
 
-// Función de inicialización principal del juego
-function initializeWebMasterQuizGame(gameDataStorageObj) {
-    localGameStorage = gameDataStorageObj; // Almacena el objeto de almacenamiento
+// Drag & Drop specific elements and variables
+let draggedItem = null;
+let currentDragMatchPairs = [];
+let originalDragMatchState = [];
 
-    // Aumentar el tiempo de espera para asegurar que el DOM esté completamente cargado
+// Syntax / Order specific variables
+let currentSyntaxFragments = [];
+let currentSyntaxOrder = [];
+
+// --- Game Flow Functions ---
+
+function showScreen(screenId) {
+    const screens = [
+        quizStartMenu,
+        quizTopicSelectionMenu,
+        quizDifficultySelectionMenu,
+        quizPlayArea,
+        quizResultScreen
+    ];
+    screens.forEach(screen => {
+        if (screen) {
+            screen.classList.add('hidden');
+            screen.classList.remove('flex');
+            screen.classList.remove('flex-col'); // Ensure flex-col is removed if not needed
+        }
+    });
+
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.classList.remove('hidden');
+        targetScreen.classList.add('flex', 'flex-col');
+        // Add animation class
+        targetScreen.classList.add('animate-fade-in-down');
+    }
+}
+
+function startQuiz() {
+    showScreen('quiz-topic-selection-menu');
+}
+
+function selectTopic(topic) {
+    selectedTopic = topic;
+    selectedTopicDisplay.textContent = topic.toUpperCase();
+    showScreen('quiz-difficulty-selection-menu');
+}
+
+function selectDifficulty(difficulty) {
+    selectedDifficulty = difficulty;
+    // Shuffle and take only the first 10 questions for the session
+    const allQuestionsForLevel = [...quizData[selectedTopic][selectedDifficulty]];
+    shuffleArray(allQuestionsForLevel);
+    currentQuestions = allQuestionsForLevel.slice(0, 10); // Take only 10 questions
+    
+    currentQuestionIndex = 0;
+    currentScore = 0;
+    answeredCorrectly = 0;
+    answeredIncorrectly = 0;
+    startQuestion();
+    showScreen('quiz-play-area');
+}
+
+function startQuestion() {
+    if (currentQuestionIndex >= currentQuestions.length) {
+        endQuiz();
+        return;
+    }
+
+    resetQuestionArea();
+    clearInterval(quizTimer);
+    timeLeft = TIME_PER_QUESTION;
+    updateTimerDisplay();
+
+    const question = currentQuestions[currentQuestionIndex];
+    quizQuestion.textContent = question.question;
+    quizHelpText.textContent = question.help || '';
+    quizHelpText.classList.add('hidden'); // Initially hide help text
+
+    switch (question.type) {
+        case "multiple-choice":
+            setupMultipleChoiceQuestion(question);
+            break;
+        case "syntax-completion":
+        case "order-execution":
+            setupSyntaxOrderQuestion(question);
+            break;
+        case "drag-match":
+            setupDragMatchQuestion(question);
+            break;
+    }
+
+    quizTimer = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+            clearInterval(quizTimer);
+            handleIncorrectAnswer();
+            setTimeout(nextQuestion, 1000); // Short delay before next question
+        }
+    }, 1000);
+}
+
+function resetQuestionArea() {
+    multipleChoiceOptions.innerHTML = '';
+    multipleChoiceOptions.classList.add('hidden');
+    syntaxOrderContainer.classList.add('hidden');
+    syntaxTargetArea.innerHTML = '';
+    syntaxOptionsArea.innerHTML = '';
+    dragMatchContainer.classList.add('hidden');
+    dragElementsArea.innerHTML = '';
+    dropTargetsArea.innerHTML = '';
+
+    // Reset button states
+    if (checkSyntaxButton) checkSyntaxButton.disabled = false;
+    if (undoSyntaxButton) undoSyntaxButton.disabled = false;
+    if (checkMatchButton) checkMatchButton.disabled = false;
+    if (undoMatchButton) undoMatchButton.disabled = false;
+}
+
+function setupMultipleChoiceQuestion(question) {
+    multipleChoiceOptions.classList.remove('hidden');
+    multipleChoiceOptions.classList.add('grid'); // Ensure grid display for multiple choice
+
+    question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.classList.add('answer-option-button', 'px-6', 'py-3', 'rounded-xl', 'font-semibold', 'text-lg',
+            'bg-blue-500', 'text-white', 'hover:bg-blue-600',
+            'transition-all', 'duration-300', 'ease-in-out',
+            'shadow-md', 'hover:shadow-lg', 'focus:outline-none', 'focus:ring-4', 'focus:ring-blue-300');
+        button.dataset.option = index;
+        button.textContent = option;
+        button.onclick = () => checkAnswer(index, question.correctAnswer);
+        multipleChoiceOptions.appendChild(button);
+    });
+}
+
+function setupSyntaxOrderQuestion(question) {
+    syntaxOrderContainer.classList.remove('hidden');
+
+    currentSyntaxFragments = shuffleArray([...question.fragments]);
+    currentSyntaxOrder = [];
+
+    renderSyntaxOptions();
+    renderSyntaxTarget();
+
+    checkSyntaxButton.onclick = checkSyntaxOrder;
+    undoSyntaxButton.onclick = undoSyntaxOrder;
+}
+
+function renderSyntaxOptions() {
+    syntaxOptionsArea.innerHTML = '';
+    currentSyntaxFragments.forEach((fragment, index) => {
+        const fragmentSpan = document.createElement('span');
+        fragmentSpan.classList.add('syntax-fragment', 'bg-gray-200', 'text-gray-800', 'px-3', 'py-1', 'rounded', 'cursor-pointer', 'hover:bg-gray-300', 'transition-colors', 'duration-200');
+        fragmentSpan.textContent = fragment;
+        fragmentSpan.dataset.index = index;
+        fragmentSpan.onclick = () => addSyntaxFragment(fragment, index);
+        syntaxOptionsArea.appendChild(fragmentSpan);
+    });
+}
+
+function renderSyntaxTarget() {
+    syntaxTargetArea.innerHTML = '';
+    currentSyntaxOrder.forEach((item) => {
+        const fragmentSpan = document.createElement('span');
+        fragmentSpan.classList.add('syntax-fragment-target', 'bg-purple-200', 'text-purple-800', 'px-3', 'py-1', 'rounded', 'relative', 'cursor-pointer', 'hover:bg-purple-300', 'transition-colors', 'duration-200');
+        fragmentSpan.textContent = item.fragment;
+        fragmentSpan.dataset.originalIndex = item.originalIndex; // Store original index
+        fragmentSpan.onclick = () => removeSyntaxFragment(item.originalIndex);
+
+        // Add a small 'x' button for removal
+        const removeButton = document.createElement('span');
+        removeButton.classList.add('absolute', '-top-1', '-right-1', 'bg-red-500', 'text-white', 'rounded-full', 'w-4', 'h-4', 'flex', 'items-center', 'justify-center', 'text-xs', 'cursor-pointer');
+        removeButton.textContent = 'x';
+        removeButton.onclick = (e) => {
+            e.stopPropagation(); // Prevent parent click
+            removeSyntaxFragment(item.originalIndex);
+        };
+        fragmentSpan.appendChild(removeButton);
+        syntaxTargetArea.appendChild(fragmentSpan);
+    });
+}
+
+function addSyntaxFragment(fragment, originalIndex) {
+    // Only add if it's not already in the target area (based on original index)
+    if (!currentSyntaxOrder.some(item => item.originalIndex === originalIndex)) {
+        currentSyntaxOrder.push({ fragment, originalIndex });
+        renderSyntaxTarget();
+        // Temporarily hide the added fragment from options area
+        const fragmentElement = syntaxOptionsArea.querySelector(`[data-index="${originalIndex}"]`);
+        if (fragmentElement) {
+            fragmentElement.style.visibility = 'hidden';
+        }
+    }
+}
+
+function removeSyntaxFragment(originalIndex) {
+    currentSyntaxOrder = currentSyntaxOrder.filter(item => item.originalIndex !== originalIndex);
+    renderSyntaxTarget();
+    // Make the fragment visible again in options area
+    const fragmentElement = syntaxOptionsArea.querySelector(`[data-index="${originalIndex}"]`);
+    if (fragmentElement) {
+        fragmentElement.style.visibility = 'visible';
+    }
+}
+
+function checkSyntaxOrder() {
+    const question = currentQuestions[currentQuestionIndex];
+    const correctOrderFragments = question.correctOrder.map(idx => question.fragments[idx]);
+    const userAnswerFragments = currentSyntaxOrder.map(item => item.fragment);
+
+    if (userAnswerFragments.length !== correctOrderFragments.length) {
+        handleIncorrectAnswer();
+        quizHelpText.classList.remove('hidden');
+        setTimeout(nextQuestion, 1000);
+        return;
+    }
+
+    let isCorrect = true;
+    for (let i = 0; i < correctOrderFragments.length; i++) {
+        if (userAnswerFragments[i] !== correctOrderFragments[i]) {
+            isCorrect = false;
+            break;
+        }
+    }
+
+    if (isCorrect) {
+        handleCorrectAnswer();
+    } else {
+        handleIncorrectAnswer();
+    }
+    quizHelpText.classList.remove('hidden');
+    checkSyntaxButton.disabled = true;
+    undoSyntaxButton.disabled = true;
+    setTimeout(nextQuestion, 1000);
+}
+
+function undoSyntaxOrder() {
+    if (currentSyntaxOrder.length > 0) {
+        const lastItem = currentSyntaxOrder.pop();
+        renderSyntaxTarget();
+        const fragmentElement = syntaxOptionsArea.querySelector(`[data-index="${lastItem.originalIndex}"]`);
+        if (fragmentElement) {
+            fragmentElement.style.visibility = 'visible';
+        }
+    }
+}
+
+
+function setupDragMatchQuestion(question) {
+    dragMatchContainer.classList.remove('hidden');
+    dragElementsArea.innerHTML = '';
+    dropTargetsArea.innerHTML = '';
+
+    currentDragMatchPairs = shuffleArray([...question.pairs]);
+    originalDragMatchState = currentDragMatchPairs.map(pair => ({ drag: pair.drag, drop: pair.drop, dropped: false }));
+
+    const shuffledDragItems = shuffleArray(currentDragMatchPairs.map(p => p.drag));
+    const shuffledDropItems = shuffleArray(currentDragMatchPairs.map(p => p.drop)); // Use drop values as targets
+
+    shuffledDragItems.forEach((dragText, index) => {
+        const dragItem = document.createElement('div');
+        dragItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800', 'px-4', 'py-2', 'rounded-lg', 'cursor-grab', 'hover:bg-blue-300', 'transition-colors', 'duration-200');
+        dragItem.textContent = dragText;
+        dragItem.setAttribute('draggable', true);
+        dragItem.dataset.originalText = dragText; // Store original text to match later
+        dragItem.addEventListener('dragstart', handleDragStart);
+        dragElementsArea.appendChild(dragItem);
+    });
+
+    shuffledDropItems.forEach((dropText, index) => {
+        const dropTarget = document.createElement('div');
+        dropTarget.classList.add('drop-target', 'bg-gray-200', 'text-gray-800', 'border-2', 'border-dashed', 'border-gray-400', 'px-4', 'py-2', 'rounded-lg', 'flex', 'items-center', 'justify-center', 'min-h-[40px]', 'text-center');
+        dropTarget.dataset.correctMatch = dropText; // Store the correct match for this target
+
+        const dropTextSpan = document.createElement('span');
+        dropTextSpan.classList.add('drop-text-placeholder');
+        dropTextSpan.textContent = dropText; // Show the target text initially
+        dropTarget.appendChild(dropTextSpan);
+
+        dropTarget.addEventListener('dragover', handleDragOver);
+        dropTarget.addEventListener('drop', handleDrop);
+        dropTarget.addEventListener('dragleave', handleDragLeave);
+        dropTargetsArea.appendChild(dropTarget);
+    });
+
+    checkMatchButton.onclick = checkDragMatch;
+    undoMatchButton.onclick = undoDragMatch;
+}
+
+function handleDragStart(e) {
+    draggedItem = e.target;
+    e.dataTransfer.setData('text/plain', draggedItem.dataset.originalText);
     setTimeout(() => {
-        // Asignación de elementos DOM
-        quizStartMenu = document.getElementById('quiz-start-menu');
-        startQuizButton = document.getElementById('start-quiz-button');
-        quizTopicSelectionMenu = document.getElementById('quiz-topic-selection-menu');
-        topicButtons = document.querySelectorAll('.topic-button');
-        backToStartMenuButton = document.getElementById('back-to-start-menu-button');
-        quizDifficultySelectionMenu = document.getElementById('quiz-difficulty-selection-menu');
-        selectedTopicDisplay = document.getElementById('selected-topic-display');
-        difficultyButtons = document.querySelectorAll('.difficulty-button');
-        backToTopicMenuButton = document.getElementById('back-to-topic-menu-button');
-        quizPlayArea = document.getElementById('quiz-play-area');
-        quizTimerDisplay = document.getElementById('quiz-timer');
-        quizScoreDisplay = document.getElementById('quiz-score-display');
-        quizCard = document.getElementById('quiz-card');
-        quizQuestionDisplay = document.getElementById('quiz-question');
-        quizHelpText = document.getElementById('quiz-help-text');
-        questionTypeContainer = document.getElementById('question-type-container');
-        multipleChoiceOptionsContainer = document.getElementById('multiple-choice-options');
-        // Re-consultar los botones de opción aquí para asegurar que estén en el DOM
-        answerOptionButtons = document.querySelectorAll('.answer-option-button'); 
-        syntaxOrderContainer = document.getElementById('syntax-order-container');
-        syntaxTargetArea = document.getElementById('syntax-target-area');
-        syntaxOptionsArea = document.getElementById('syntax-options-area');
-        checkSyntaxButton = document.getElementById('check-syntax-button');
-        undoSyntaxButton = document.getElementById('undo-syntax-button'); // Asignar nuevo botón
-        dragMatchContainer = document.getElementById('drag-match-container');
-        dragElementsArea = document.getElementById('drag-elements');
-        dropTargetsArea = document.getElementById('drop-targets');
-        checkMatchButton = document.getElementById('check-match-button');
-        undoMatchButton = document.getElementById('undo-match-button'); // Asignar nuevo botón
-        endQuizButton = document.getElementById('end-quiz-button');
-        quizResultScreen = document.getElementById('quiz-result-screen');
-        quizCorrectAnswersDisplay = document.getElementById('quiz-correct-answers');
-        quizIncorrectAnswersDisplay = document.getElementById('quiz-incorrect-answers');
-        quizFinalScoreDisplay = document.getElementById('quiz-final-score');
-        quizFinalTimeDisplay = document.getElementById('quiz-final-time');
-        quizRetryLevelButton = document.getElementById('quiz-retry-level-button');
-        quizNextLevelButton = document.getElementById('quiz-next-level-button');
-        quizChangeTopicButton = document.getElementById('quiz-change-topic-button');
-        quizExitGameButton = document.getElementById('quiz-exit-game-button');
+        draggedItem.classList.add('hidden'); // Hide the original element during drag
+    }, 0);
+}
 
-        // Adjuntar Event Listeners
-        if (startQuizButton) startQuizButton.addEventListener('click', showTopicSelection);
-        if (backToStartMenuButton) backToStartMenuButton.addEventListener('click', showStartMenu);
-        if (backToTopicMenuButton) backToTopicMenuButton.addEventListener('click', showTopicSelection);
-        if (endQuizButton) endQuizButton.addEventListener('click', endGame);
-        if (quizRetryLevelButton) quizRetryLevelButton.addEventListener('click', retryLevel);
-        if (quizNextLevelButton) quizNextLevelButton.addEventListener('click', nextLevel);
-        if (quizChangeTopicButton) quizChangeTopicButton.addEventListener('click', showTopicSelection);
-        if (quizExitGameButton) quizExitGameButton.addEventListener('click', exitGame);
+function handleDragOver(e) {
+    e.preventDefault(); // Allow drop
+    e.target.classList.add('border-blue-500', 'bg-blue-100'); // Visual feedback
+}
 
-        topicButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                currentTopic = button.dataset.topic;
-                if (selectedTopicDisplay) selectedTopicDisplay.textContent = button.textContent;
-                showDifficultySelection();
-            });
-        });
+function handleDragLeave(e) {
+    e.target.classList.remove('border-blue-500', 'bg-blue-100');
+}
 
-        difficultyButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                currentDifficulty = button.dataset.difficulty;
-                startGame();
-            });
-        });
+function handleDrop(e) {
+    e.preventDefault();
+    e.target.classList.remove('border-blue-500', 'bg-blue-100');
 
-        // Asegurarse de que answerOptionButtons no sea null antes de adjuntar listeners
-        if (answerOptionButtons) {
-            answerOptionButtons.forEach(button => {
-                button.addEventListener('click', () => checkMultipleChoiceAnswer(parseInt(button.dataset.option)));
-            });
+    if (draggedItem && e.target.classList.contains('drop-target')) {
+        const dropTarget = e.target;
+
+        // If the drop target already has a child (an item was dropped here before),
+        // return the old item to the drag area before placing the new one.
+        if (dropTarget.querySelector('.drag-item-dropped')) {
+            const oldDroppedItem = dropTarget.querySelector('.drag-item-dropped');
+            oldDroppedItem.remove(); // Remove from target
+            dragElementsArea.appendChild(oldDroppedItem); // Append back to drag area
+            oldDroppedItem.classList.remove('hidden', 'drag-item-dropped'); // Make visible
+            oldDroppedItem.classList.add('drag-item'); // Restore drag-item class
         }
 
-        if (checkSyntaxButton) checkSyntaxButton.addEventListener('click', checkSyntaxOrderAnswer);
-        if (undoSyntaxButton) undoSyntaxButton.addEventListener('click', undoSyntaxOrder); // Listener para deshacer
-        if (checkMatchButton) checkMatchButton.addEventListener('click', checkDragMatchAnswer);
-        if (undoMatchButton) undoMatchButton.addEventListener('click', undoDragMatch); // Listener para deshacer
+        // Clone the dragged item (or create a new one to represent the dropped state)
+        // This ensures the original is still available for undo or if moved to another target
+        const droppedItem = document.createElement('div');
+        droppedItem.classList.add('drag-item-dropped', 'bg-green-200', 'text-green-800', 'px-4', 'py-2', 'rounded-lg', 'cursor-default', 'min-w-[100px]', 'text-center');
+        droppedItem.textContent = draggedItem.dataset.originalText;
+        droppedItem.dataset.originalText = draggedItem.dataset.originalText; // Keep original text
 
-        // Estado inicial del juego
-        showStartMenu();
+        // Hide the placeholder text if present
+        const dropTextPlaceholder = dropTarget.querySelector('.drop-text-placeholder');
+        if (dropTextPlaceholder) {
+            dropTextPlaceholder.classList.add('hidden');
+        }
 
-    }, 500); // Aumentado a 500ms
-}
+        dropTarget.appendChild(droppedItem);
+        draggedItem.classList.add('hidden'); // Keep the original hidden after drop
 
-// --- Funciones de Navegación entre Menús ---
-function showElement(element) {
-    if (element) {
-        element.classList.remove('hidden');
-        element.classList.add('flex');
+        draggedItem = null; // Reset dragged item
     }
 }
 
-function hideElement(element) {
-    if (element) {
-        element.classList.add('hidden');
-        element.classList.remove('flex');
+
+function checkDragMatch() {
+    let allCorrect = true;
+    const dropTargets = document.querySelectorAll('.drop-target');
+
+    dropTargets.forEach(target => {
+        const droppedItem = target.querySelector('.drag-item-dropped');
+        const correctMatch = target.dataset.correctMatch; // This is the expected drop text
+        const targetPlaceholder = target.querySelector('.drop-text-placeholder');
+
+
+        if (droppedItem) {
+            // Find the original pair using droppedItem's text and target's correctMatch
+            // The logic here needs to map `dragText` to `dropText` from `question.pairs`
+            const matchedPair = currentDragMatchPairs.find(pair =>
+                pair.drag === droppedItem.dataset.originalText && pair.drop === correctMatch
+            );
+
+            if (matchedPair) {
+                droppedItem.classList.remove('bg-green-200', 'text-green-800', 'bg-red-200', 'text-red-800');
+                droppedItem.classList.add('bg-green-300', 'text-green-900', 'border-2', 'border-green-600');
+                // Ensure placeholder is hidden if an item is correctly placed
+                if (targetPlaceholder) targetPlaceholder.classList.add('hidden');
+            } else {
+                allCorrect = false;
+                droppedItem.classList.remove('bg-green-200', 'text-green-800');
+                droppedItem.classList.add('bg-red-300', 'text-red-900', 'border-2', 'border-red-600');
+                // Show the correct answer in the target placeholder for incorrect matches
+                if (targetPlaceholder) {
+                    targetPlaceholder.textContent = `${correctMatch} (Correcto)`;
+                    targetPlaceholder.classList.remove('hidden');
+                    targetPlaceholder.classList.add('text-green-700', 'font-bold');
+                }
+            }
+        } else {
+            // If nothing was dropped, it's incorrect
+            allCorrect = false;
+            if (targetPlaceholder) {
+                targetPlaceholder.textContent = `${correctMatch} (Faltante)`;
+                targetPlaceholder.classList.remove('hidden');
+                targetPlaceholder.classList.add('text-red-700', 'font-bold');
+            }
+        }
+    });
+
+    if (allCorrect) {
+        handleCorrectAnswer();
+    } else {
+        handleIncorrectAnswer();
     }
+    quizHelpText.classList.remove('hidden');
+    checkMatchButton.disabled = true;
+    undoMatchButton.disabled = true;
+    setTimeout(nextQuestion, 2000);
 }
 
-function hideAllMenus() {
-    hideElement(quizStartMenu);
-    hideElement(quizTopicSelectionMenu);
-    hideElement(quizDifficultySelectionMenu);
-    hideElement(quizPlayArea);
-    hideElement(quizResultScreen);
+
+function undoDragMatch() {
+    const dropTargets = document.querySelectorAll('.drop-target');
+    dropTargets.forEach(target => {
+        const droppedItem = target.querySelector('.drag-item-dropped');
+        if (droppedItem) {
+            droppedItem.remove(); // Remove from target
+            dragElementsArea.appendChild(droppedItem); // Append back to drag area
+            droppedItem.classList.remove('hidden', 'drag-item-dropped', 'bg-green-300', 'text-green-900', 'border-green-600', 'bg-red-300', 'text-red-900', 'border-red-600'); // Clean up styles
+            droppedItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800'); // Restore drag-item class and default styles
+            droppedItem.setAttribute('draggable', true); // Make draggable again
+        }
+
+        // Show the placeholder text again
+        const dropTextPlaceholder = target.querySelector('.drop-text-placeholder');
+        if (dropTextPlaceholder) {
+            dropTextPlaceholder.classList.remove('hidden', 'text-green-700', 'font-bold', 'text-red-700');
+            dropTextPlaceholder.textContent = target.dataset.correctMatch; // Restore original placeholder text
+        }
+    });
+
+    // Ensure all original drag items are visible in the drag area
+    const originalDragItems = dragElementsArea.querySelectorAll('.drag-item.hidden');
+    originalDragItems.forEach(item => {
+        item.classList.remove('hidden');
+    });
 }
 
-function showStartMenu() {
-    hideAllMenus();
-    showElement(quizStartMenu);
-    resetGame(); // Reinicia el estado del juego al volver al menú principal
+
+// --- Helper Functions ---
+
+function updateTimerDisplay() {
+    const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+    const seconds = String(timeLeft % 60).padStart(2, '0');
+    quizTimerDisplay.textContent = `${minutes}:${seconds}`;
 }
 
-function showTopicSelection() {
-    hideAllMenus();
-    showElement(quizTopicSelectionMenu);
-    resetGame(); // Reinicia el estado del juego al seleccionar tema
+function updateScoreDisplay() {
+    quizScoreDisplay.textContent = currentScore;
 }
 
-function showDifficultySelection() {
-    hideAllMenus();
-    showElement(quizDifficultySelectionMenu);
-    // No resetGame aquí para mantener el tema seleccionado
+function checkAnswer(selectedIndex, correctAnswer) {
+    quizHelpText.classList.remove('hidden'); // Show help text after answer
+    // Disable all options after answering
+    const buttons = multipleChoiceOptions.querySelectorAll('.answer-option-button');
+    buttons.forEach(button => {
+        button.disabled = true;
+        if (parseInt(button.dataset.option) === correctAnswer) {
+            button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+            button.classList.add('bg-green-500'); // Correct answer green
+        } else if (parseInt(button.dataset.option) === selectedIndex) {
+            button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+            button.classList.add('bg-red-500'); // Incorrect selected red
+        }
+    });
+
+    clearInterval(quizTimer); // Stop timer
+    setTimeout(nextQuestion, 1000); // Short delay before next question
 }
 
-function showPlayArea() {
-    hideAllMenus();
-    showElement(quizPlayArea);
+function handleCorrectAnswer() {
+    currentScore += 10;
+    answeredCorrectly++;
+    updateScoreDisplay();
+    // Flash green feedback
+    quizPlayArea.classList.add('animate-flash-green');
+    setTimeout(() => quizPlayArea.classList.remove('animate-flash-green'), 500);
 }
 
-function showResultScreen() {
-    hideAllMenus();
-    showElement(quizResultScreen);
+function handleIncorrectAnswer() {
+    currentScore = Math.max(0, currentScore - 5); // Prevent negative score
+    answeredIncorrectly++;
+    updateScoreDisplay();
+    // Flash red feedback
+    quizPlayArea.classList.add('animate-flash-red');
+    setTimeout(() => quizPlayArea.classList.remove('animate-flash-red'), 500);
 }
 
-// --- Lógica del Juego ---
+function nextQuestion() {
+    currentQuestionIndex++;
+    startQuestion();
+}
 
-// Utilidad para mezclar un array
+function endQuiz() {
+    clearInterval(quizTimer);
+    quizCorrectAnswers.textContent = answeredCorrectly;
+    quizIncorrectAnswers.textContent = answeredIncorrectly;
+    quizFinalScore.textContent = currentScore;
+    quizFinalTime.textContent = quizTimerDisplay.textContent; // Display the time left on the last question
+
+    // Check if there's a next level
+    const difficultyOrder = ['basico', 'intermedio', 'avanzado'];
+    const currentDifficultyIndex = difficultyOrder.indexOf(selectedDifficulty);
+    const nextDifficulty = difficultyOrder[currentDifficultyIndex + 1];
+
+    if (nextDifficulty && quizData[selectedTopic][nextDifficulty]) {
+        quizNextLevelButton.classList.remove('hidden');
+        quizNextLevelButton.onclick = () => {
+            selectDifficulty(nextDifficulty); // Start next level
+        };
+    } else {
+        quizNextLevelButton.classList.add('hidden');
+    }
+
+    showScreen('quiz-result-screen');
+}
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -1639,526 +3162,48 @@ function shuffleArray(array) {
     return array;
 }
 
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+// --- Event Listeners ---
+if (startQuizButton) {
+    startQuizButton.addEventListener('click', startQuiz);
 }
 
-function updateTimer() {
-    if (quizTimerDisplay) {
-        const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-        quizTimerDisplay.textContent = formatTime(elapsedTime);
+topicButtons.forEach(button => {
+    if (button) {
+        button.addEventListener('click', () => selectTopic(button.dataset.topic));
     }
+});
+
+if (backToStartMenuButton) {
+    backToStartMenuButton.addEventListener('click', () => showScreen('quiz-start-menu'));
 }
 
-function startGame() {
-    if (!currentTopic || !currentDifficulty) {
-        console.error("Tema o dificultad no seleccionados.");
-        showTopicSelection(); // Volver a la selección si no hay tema/dificultad
-        return;
+difficultyButtons.forEach(button => {
+    if (button) {
+        button.addEventListener('click', () => selectDifficulty(button.dataset.difficulty));
     }
+});
 
-    currentQuestions = quizData[currentTopic][currentDifficulty];
-    if (!currentQuestions || currentQuestions.length === 0) {
-        console.error(`No hay preguntas para el tema ${currentTopic} y dificultad ${currentDifficulty}.`);
-        showDifficultySelection(); // Volver a la selección de dificultad
-        return;
-    }
-
-    // Asegurarse de tener al menos 10 preguntas (o todas las disponibles si son menos)
-    shuffledQuestions = shuffleArray([...currentQuestions]);
-    const numberOfQuestionsToAsk = Math.min(10, shuffledQuestions.length); // Mínimo 10 o todas las que haya
-    shuffledQuestions = shuffledQuestions.slice(0, numberOfQuestionsToAsk);
-
-
-    currentQuestionIndex = 0;
-    score = 0;
-    errors = 0;
-    if (quizScoreDisplay) quizScoreDisplay.textContent = score;
-    if (quizTimerDisplay) quizTimerDisplay.textContent = '00:00';
-    startTime = Date.now();
-    timerInterval = setInterval(updateTimer, 1000);
-    gameStarted = true;
-    showPlayArea();
-    displayQuestion();
+if (backToTopicMenuButton) {
+    backToTopicMenuButton.addEventListener('click', () => showScreen('quiz-topic-selection-menu'));
 }
 
-function displayQuestion() {
-    if (currentQuestionIndex >= shuffledQuestions.length) {
-        endGame();
-        return;
-    }
-
-    const question = shuffledQuestions[currentQuestionIndex];
-    if (quizQuestionDisplay) quizQuestionDisplay.innerHTML = question.question;
-
-    // Reiniciar y ocultar todos los contenedores de tipo de pregunta
-    hideElement(multipleChoiceOptionsContainer);
-    hideElement(syntaxOrderContainer);
-    hideElement(dragMatchContainer);
-    if (quizHelpText) quizHelpText.classList.add('hidden'); // Ocultar ayuda por defecto
-
-    // Limpiar áreas de drag & drop (ahora también para click-to-add)
-    if (syntaxTargetArea) syntaxTargetArea.innerHTML = '';
-    if (syntaxOptionsArea) syntaxOptionsArea.innerHTML = '';
-    if (dragElementsArea) dragElementsArea.innerHTML = '';
-    if (dropTargetsArea) dropTargetsArea.innerHTML = '';
-
-    // Resetear borde de la tarjeta de quiz
-    if (quizCard) quizCard.classList.remove('border-green-500', 'border-red-500');
-
-    answerBlocked = false; // Permitir responder a la nueva pregunta
-
-    // Limpiar historial de deshacer para la nueva pregunta
-    syntaxOrderHistory = [];
-    dragMatchHistory = [];
-
-    // Mostrar el tipo de pregunta correcto
-    switch (question.type) {
-        case "multiple-choice":
-            showElement(multipleChoiceOptionsContainer);
-            if (answerOptionButtons) {
-                answerOptionButtons.forEach((button, index) => {
-                    button.textContent = question.options[index];
-                    button.disabled = false;
-                    button.classList.remove('bg-green-700', 'bg-red-700', 'bg-blue-700'); // Limpiar colores de retroalimentación
-                    button.classList.add('bg-blue-500', 'hover:bg-blue-600'); // Restaurar color original
-                });
-            }
-            break;
-        case "syntax-completion":
-        case "order-execution":
-            showElement(syntaxOrderContainer);
-            setupSyntaxOrderQuestion(question); // Esta función será modificada para clics
-            break;
-        case "drag-match":
-            showElement(dragMatchContainer);
-            setupDragMatchQuestion(question);
-            break;
-    }
-
-    if (question.help && quizHelpText) {
-        quizHelpText.textContent = question.help;
-        quizHelpText.classList.remove('hidden');
-    }
+if (endQuizButton) {
+    endQuizButton.addEventListener('click', endQuiz);
 }
 
-// --- Lógica para Tipos de Pregunta ---
-
-// Selección Múltiple
-function checkMultipleChoiceAnswer(selectedIndex) {
-    if (answerBlocked) return;
-    answerBlocked = true;
-
-    const question = shuffledQuestions[currentQuestionIndex];
-    const correctIndex = question.options.indexOf(question.correctAnswer);
-    const selectedButton = answerOptionButtons[selectedIndex];
-
-    answerOptionButtons.forEach(button => button.disabled = true); // Deshabilitar todos los botones
-
-    if (selectedIndex === correctIndex) {
-        score++;
-        if (quizCard) quizCard.classList.add('border-green-500');
-        if (selectedButton) selectedButton.classList.replace('bg-blue-500', 'bg-green-700');
-    } else {
-        errors++;
-        score--; // Deduce un punto por respuesta incorrecta
-        if (quizCard) quizCard.classList.add('border-red-500');
-        if (selectedButton) selectedButton.classList.replace('bg-blue-500', 'bg-red-700');
-        // Resaltar la respuesta correcta
-        if (answerOptionButtons[correctIndex]) {
-            answerOptionButtons[correctIndex].classList.replace('bg-blue-500', 'bg-green-700');
-        }
-    }
-    if (quizScoreDisplay) quizScoreDisplay.textContent = score;
-
-    setTimeout(() => {
-        currentQuestionIndex++;
-        displayQuestion();
-    }, 1200); // Pequeño retraso para ver la retroalimentación
-}
-
-// Completar Sintaxis / Orden de Ejecución (MODIFICADO para click-to-add)
-function setupSyntaxOrderQuestion(question) {
-    if (!syntaxTargetArea || !syntaxOptionsArea || !checkSyntaxButton || !undoSyntaxButton) return;
-
-    syntaxTargetArea.innerHTML = '';
-    syntaxOptionsArea.innerHTML = '';
-    checkSyntaxButton.disabled = false;
-    undoSyntaxButton.disabled = true; // Deshabilitar deshacer al inicio
-    syntaxOrderHistory = []; // Resetear historial
-
-    const shuffledFragments = shuffleArray([...question.fragments]);
-
-    shuffledFragments.forEach((fragment, index) => {
-        const fragmentDiv = document.createElement('div');
-        fragmentDiv.textContent = fragment;
-        fragmentDiv.className = 'clickable-fragment bg-blue-200 text-blue-800 px-3 py-2 rounded-md cursor-pointer shadow-sm m-1'; // Añadido margen
-        fragmentDiv.dataset.originalText = fragment; // Usar el texto original para verificar
-        fragmentDiv.dataset.isMoved = 'false'; // Para rastrear si está en targetArea
-
-        syntaxOptionsArea.appendChild(fragmentDiv);
-
-        // Añadir listener para mover al área de respuesta
-        fragmentDiv.addEventListener('click', function() {
-            if (answerBlocked) return; // No permitir clics si la respuesta está bloqueada
-            if (this.dataset.isMoved === 'false') { // Si no está en el área de respuesta
-                syntaxTargetArea.appendChild(this);
-                this.classList.replace('bg-blue-200', 'bg-blue-400'); // Cambiar color al mover
-                this.dataset.isMoved = 'true';
-                syntaxOrderHistory.push(this); // Añadir al historial
-                undoSyntaxButton.disabled = false; // Habilitar deshacer
-            } else { // Si ya está en el área de respuesta, mover de vuelta a opciones
-                syntaxOptionsArea.appendChild(this);
-                this.classList.replace('bg-blue-400', 'bg-blue-200'); // Restaurar color
-                this.dataset.isMoved = 'false';
-                // Eliminar del historial (buscar y remover la última instancia)
-                const indexInHistory = syntaxOrderHistory.lastIndexOf(this);
-                if (indexInHistory > -1) {
-                    syntaxOrderHistory.splice(indexInHistory, 1);
-                }
-                if (syntaxOrderHistory.length === 0) {
-                    undoSyntaxButton.disabled = true;
-                }
-            }
-        });
+if (quizRetryLevelButton) {
+    quizRetryLevelButton.addEventListener('click', () => {
+        selectDifficulty(selectedDifficulty); // Re-select current difficulty to restart
     });
 }
 
-function undoSyntaxOrder() {
-    if (answerBlocked || syntaxOrderHistory.length === 0) return;
-
-    const lastMovedFragment = syntaxOrderHistory.pop();
-    if (lastMovedFragment) {
-        syntaxOptionsArea.appendChild(lastMovedFragment);
-        lastMovedFragment.classList.replace('bg-blue-400', 'bg-blue-200');
-        lastMovedFragment.dataset.isMoved = 'false';
-    }
-
-    if (syntaxOrderHistory.length === 0) {
-        undoSyntaxButton.disabled = true;
-    }
+if (quizChangeTopicButton) {
+    quizChangeTopicButton.addEventListener('click', () => showScreen('quiz-topic-selection-menu'));
 }
 
-function checkSyntaxOrderAnswer() {
-    if (answerBlocked) return;
-    answerBlocked = true;
-    if (!syntaxTargetArea || !checkSyntaxButton || !undoSyntaxButton) return;
-
-    checkSyntaxButton.disabled = true; // Deshabilitar el botón de comprobar
-    undoSyntaxButton.disabled = true; // Deshabilitar deshacer
-
-    // Deshabilitar clics en todos los fragmentos
-    Array.from(syntaxOptionsArea.children).forEach(div => div.style.pointerEvents = 'none');
-    Array.from(syntaxTargetArea.children).forEach(div => div.style.pointerEvents = 'none');
-
-
-    const question = shuffledQuestions[currentQuestionIndex];
-    const userOrder = Array.from(syntaxTargetArea.children).map(div => div.dataset.originalText.trim()); // Usar dataset.originalText
-    const correctOrder = question.correctOrder.map(f => f.trim()); // Asegurarse de que no haya espacios extra
-
-    let isCorrect = true;
-    if (userOrder.length !== correctOrder.length) {
-        isCorrect = false;
-    } else {
-        for (let i = 0; i < userOrder.length; i++) {
-            if (userOrder[i] !== correctOrder[i]) {
-                isCorrect = false;
-                break;
-            }
-        }
-    }
-
-    if (isCorrect) {
-        score++;
-        if (quizCard) quizCard.classList.add('border-green-500');
-    } else {
-        errors++;
-        score--;
-        if (quizCard) quizCard.classList.add('border-red-500');
-    }
-    if (quizScoreDisplay) quizScoreDisplay.textContent = score;
-
-    // Visual feedback for syntax elements
-    Array.from(syntaxTargetArea.children).forEach((div, index) => {
-        if (index < correctOrder.length && div.dataset.originalText.trim() === correctOrder[index]) {
-            div.classList.replace('bg-blue-400', 'bg-green-500');
-            div.classList.replace('text-blue-800', 'text-white');
-        } else {
-            div.classList.replace('bg-blue-400', 'bg-red-500');
-            div.classList.replace('text-blue-800', 'text-white');
-        }
-    });
-
-    setTimeout(() => {
-        currentQuestionIndex++;
-        displayQuestion();
-    }, 1500);
+if (quizExitGameButton) {
+    quizExitGameButton.addEventListener('click', () => showScreen('quiz-start-menu')); // Or close window/redirect
 }
 
-// Conexión Lógica (Drag & Match) - Se mantiene como drag and drop
-let currentDragElement = null;
-
-function setupDragMatchQuestion(question) {
-    if (!dragElementsArea || !dropTargetsArea || !checkMatchButton || !undoMatchButton) return;
-
-    dragElementsArea.innerHTML = '';
-    dropTargetsArea.innerHTML = '';
-    checkMatchButton.disabled = false;
-    undoMatchButton.disabled = true; // Deshabilitar deshacer al inicio
-    dragMatchHistory = []; // Resetear historial
-
-    const shuffledDrags = shuffleArray(question.pairs.map(p => p.drag));
-    const shuffledDrops = shuffleArray(question.pairs.map(p => p.drop));
-
-    shuffledDrags.forEach((text, index) => {
-        const dragDiv = document.createElement('div');
-        dragDiv.textContent = text;
-        dragDiv.className = 'drag-item bg-blue-200 text-blue-800 px-4 py-2 rounded-md cursor-grab shadow-sm mb-2 touch-action-none';
-        dragDiv.draggable = true;
-        dragDiv.dataset.originalText = text; // Para referencia al verificar
-        dragElementsArea.appendChild(dragDiv);
-
-        dragDiv.addEventListener('dragstart', (e) => {
-            currentDragElement = dragDiv;
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/plain', text);
-            setTimeout(() => dragDiv.classList.add('opacity-50'), 0);
-        });
-
-        dragDiv.addEventListener('dragend', () => {
-            dragDiv.classList.remove('opacity-50');
-            currentDragElement = null;
-        });
-    });
-
-    shuffledDrops.forEach((text, index) => {
-        const dropDiv = document.createElement('div');
-        dropDiv.textContent = ''; // Limpiar el texto para que el elemento arrastrado lo reemplace
-        dropDiv.className = 'drop-target bg-gray-300 text-gray-800 px-4 py-2 rounded-md border-2 border-dashed border-gray-400 min-h-[40px] flex items-center justify-center mb-2';
-        dropDiv.dataset.correctMatch = question.pairs.find(p => p.drop === text).drag; // Almacena el drag correcto
-        dropDiv.dataset.dropText = text; // Almacenar el texto original de la zona de soltar
-        
-        const dropTextSpan = document.createElement('span');
-        dropTextSpan.textContent = text;
-        dropTextSpan.className = 'text-gray-800'; // Estilo para el texto de la zona de soltar
-        dropDiv.appendChild(dropTextSpan);
-
-        dropTargetsArea.appendChild(dropDiv);
-
-        dropDiv.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            dropDiv.classList.add('border-blue-500'); // Resaltar zona de soltar
-        });
-
-        dropDiv.addEventListener('dragleave', () => {
-            dropDiv.classList.remove('border-blue-500');
-        });
-
-        dropDiv.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropDiv.classList.remove('border-blue-500');
-            if (currentDragElement && !dropDiv.querySelector('.drag-item')) { // Solo si la zona está vacía
-                dropDiv.appendChild(currentDragElement);
-                currentDragElement.classList.remove('opacity-50');
-                // Ocultar el texto original de la zona de soltar cuando se suelta un elemento
-                dropTextSpan.classList.add('hidden');
-                dragMatchHistory.push({ draggedElement: currentDragElement, droppedInto: dropDiv, originalDropTextSpan: dropTextSpan }); // Añadir al historial
-                undoMatchButton.disabled = false; // Habilitar deshacer
-            }
-        });
-    });
-}
-
-function undoDragMatch() {
-    if (answerBlocked || dragMatchHistory.length === 0) return;
-
-    const lastMove = dragMatchHistory.pop();
-    if (lastMove) {
-        const { draggedElement, droppedInto, originalDropTextSpan } = lastMove;
-        dragElementsArea.appendChild(draggedElement); // Mover de vuelta al área de arrastre
-        draggedElement.classList.remove('opacity-50'); // Asegurarse de que sea visible
-        draggedElement.draggable = true; // Re-habilitar arrastre
-        
-        // Restaurar el texto original en la zona de soltar
-        if (originalDropTextSpan) {
-            originalDropTextSpan.classList.remove('hidden');
-        }
-        // Limpiar la zona de soltar si el elemento arrastrado era el único hijo
-        if (droppedInto.children.length > 1 && droppedInto.contains(draggedElement)) {
-             droppedInto.removeChild(draggedElement);
-        }
-    }
-
-    if (dragMatchHistory.length === 0) {
-        undoMatchButton.disabled = true;
-    }
-}
-
-function checkDragMatchAnswer() {
-    if (answerBlocked) return;
-    answerBlocked = true;
-    if (!dropTargetsArea || !checkMatchButton || !undoMatchButton) return;
-
-    checkMatchButton.disabled = true;
-    undoMatchButton.disabled = true; // Deshabilitar deshacer
-
-    // Deshabilitar arrastre en todos los elementos
-    Array.from(dragElementsArea.children).forEach(div => div.draggable = false);
-    Array.from(dropTargetsArea.children).forEach(dropTarget => {
-        const draggedItemInTarget = dropTarget.querySelector('.drag-item');
-        if (draggedItemInTarget) {
-            draggedItemInTarget.draggable = false;
-        }
-    });
-
-    let correctMatches = 0;
-    Array.from(dropTargetsArea.children).forEach(dropTarget => {
-        const draggedItemInTarget = dropTarget.querySelector('.drag-item');
-        const dropTextSpan = dropTarget.querySelector('span'); // Obtener el span con el texto original
-
-        if (draggedItemInTarget) {
-            const originalDragText = draggedItemInTarget.dataset.originalText;
-            const correctMatchForTarget = dropTarget.dataset.correctMatch;
-
-            if (originalDragText === correctMatchForTarget) {
-                correctMatches++;
-                draggedItemInTarget.classList.replace('bg-blue-200', 'bg-green-500');
-                draggedItemInTarget.classList.replace('text-blue-800', 'text-white');
-            } else {
-                draggedItemInTarget.classList.replace('bg-blue-200', 'bg-red-500');
-                draggedItemInTarget.classList.replace('text-blue-800', 'text-white');
-            }
-        }
-        dropTarget.classList.remove('border-dashed', 'border-gray-400'); // Quitar borde de arrastre
-        if (dropTextSpan) dropTextSpan.classList.remove('hidden'); // Mostrar el texto original de la zona de soltar
-    });
-
-    const question = shuffledQuestions[currentQuestionIndex]; // Necesitamos la pregunta actual para saber cuántos pares hay
-    if (correctMatches === question.pairs.length) {
-        score++;
-        if (quizCard) quizCard.classList.add('border-green-500');
-    } else {
-        errors++;
-        score--;
-        if (quizCard) quizCard.classList.add('border-red-500');
-    }
-    if (quizScoreDisplay) quizScoreDisplay.textContent = score;
-
-    setTimeout(() => {
-        currentQuestionIndex++;
-        displayQuestion();
-    }, 1500);
-}
-
-
-function endGame() {
-    clearInterval(timerInterval);
-    gameStarted = false;
-
-    showResultScreen();
-
-    const finalTimeSeconds = Math.floor((Date.now() - startTime) / 1000);
-    const sessionData = {
-        topic: currentTopic,
-        difficulty: currentDifficulty,
-        score: score,
-        errors: errors,
-        time: formatTime(finalTimeSeconds),
-        timestamp: new Date().toISOString()
-    };
-
-    // Guardar la sesión actual
-    if (localGameStorage) {
-        localGameStorage.saveGameSession('webMasterQuizGame', sessionData);
-    }
-
-    if (quizCorrectAnswersDisplay) quizCorrectAnswersDisplay.textContent = score;
-    if (quizIncorrectAnswersDisplay) quizIncorrectAnswersDisplay.textContent = errors;
-    if (quizFinalScoreDisplay) quizFinalScoreDisplay.textContent = score; // Mostrar el puntaje final
-    if (quizFinalTimeDisplay) quizFinalTimeDisplay.textContent = formatTime(finalTimeSeconds);
-
-    // Lógica para habilitar/deshabilitar botón "Siguiente Nivel"
-    const difficulties = ['basico', 'intermedio', 'avanzado'];
-    const currentDifficultyIndex = difficulties.indexOf(currentDifficulty);
-    if (quizNextLevelButton) {
-        if (currentDifficultyIndex < difficulties.length - 1) {
-            quizNextLevelButton.disabled = false;
-            quizNextLevelButton.classList.remove('opacity-50', 'cursor-not-allowed');
-            quizNextLevelButton.classList.add('bg-green-600', 'hover:bg-green-700');
-        } else {
-            quizNextLevelButton.disabled = true;
-            quizNextLevelButton.classList.add('opacity-50', 'cursor-not-allowed');
-            quizNextLevelButton.classList.remove('bg-green-600', 'hover:bg-green-700');
-        }
-    }
-}
-
-function resetGame() {
-    clearInterval(timerInterval);
-    gameStarted = false;
-    currentQuestionIndex = 0;
-    score = 0;
-    errors = 0;
-    if (quizScoreDisplay) quizScoreDisplay.textContent = '0';
-    if (quizTimerDisplay) quizTimerDisplay.textContent = '00:00';
-    if (quizCard) quizCard.classList.remove('border-green-500', 'border-red-500');
-    answerBlocked = false;
-
-    // Limpiar historial de deshacer
-    syntaxOrderHistory = [];
-    dragMatchHistory = [];
-
-    // Limpiar áreas de preguntas
-    // No es necesario limpiar multipleChoiceOptionsContainer.innerHTML, ya que los botones están hardcodeados
-    if (syntaxTargetArea) syntaxTargetArea.innerHTML = '';
-    if (syntaxOptionsArea) syntaxOptionsArea.innerHTML = '';
-    if (dragElementsArea) dragElementsArea.innerHTML = '';
-    if (dropTargetsArea) dropTargetsArea.innerHTML = '';
-
-    // Asegurarse de que los botones de resultado estén habilitados para el próximo juego
-    if (quizRetryLevelButton) {
-        quizRetryLevelButton.disabled = false;
-        quizRetryLevelButton.classList.remove('opacity-50', 'cursor-not-allowed');
-        quizRetryLevelButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
-    }
-    if (quizChangeTopicButton) {
-        quizChangeTopicButton.disabled = false;
-        quizChangeTopicButton.classList.remove('opacity-50', 'cursor-not-allowed');
-        quizChangeTopicButton.classList.add('bg-purple-600', 'hover:bg-purple-700');
-    }
-    if (quizExitGameButton) {
-        quizExitGameButton.disabled = false;
-        quizExitGameButton.classList.remove('opacity-50', 'cursor-not-allowed');
-        quizExitGameButton.classList.add('bg-gray-600', 'hover:bg-gray-700');
-    }
-}
-
-function retryLevel() {
-    startGame(); // Simplemente reinicia el juego con el mismo tema y dificultad
-}
-
-function nextLevel() {
-    const difficulties = ['basico', 'intermedio', 'avanzado'];
-    const currentDifficultyIndex = difficulties.indexOf(currentDifficulty);
-
-    if (currentDifficultyIndex < difficulties.length - 1) {
-        currentDifficulty = difficulties[currentDifficultyIndex + 1];
-        startGame(); // Inicia el juego con el mismo tema pero la siguiente dificultad
-    } else {
-        // Ya en el nivel más avanzado, quizás volver a la selección de tema
-        showTopicSelection();
-    }
-}
-
-function exitGame() {
-    resetGame();
-    if (window.returnToMainContent) {
-        window.returnToMainContent(); // Llama a la función global para volver al index.html
-    }
-}
-
-// Expone la función de inicialización al ámbito global
-window.initializeWebMasterQuizGame = initializeWebMasterQuizGame;
+// Initial screen setup
+showScreen('quiz-start-menu');
