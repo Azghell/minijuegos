@@ -873,7 +873,7 @@ document.dispatchEvent(event);`
                 correctOrder: [0, 1, 2, 3, 4],
                 help: "Los gráficos SVG pueden ser incrustados directamente en el código HTML.",
                 codeExample: `<svg width="100" height="100">
-  <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+  <circle cx="50" cy="50\" r=\"40\" stroke=\"black\" stroke-width=\"3\" fill=\"red\" />
 </svg>`
             },
             {
@@ -2669,14 +2669,13 @@ const obj = { [id]: 1 };`
 let currentQuestionIndex = 0;
 let currentScore = 0;
 let quizTimer;
-let timeLeft = 0;
+let timeElapsed = 0; // Cambiado de timeLeft a timeElapsed
 let selectedTopic = '';
 let selectedDifficulty = '';
 let currentQuestions = [];
 let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
 
-const TIME_PER_QUESTION = 30; // seconds
 const INACTIVITY_TIMEOUT = 60; // seconds of inactivity before warning
 const INACTIVITY_WARNING_DURATION = 10; // seconds for warning countdown
 
@@ -2862,7 +2861,7 @@ function startQuestion() {
 
     resetQuestionArea();
     clearInterval(quizTimer); // Clear timer before starting new question
-    timeLeft = TIME_PER_QUESTION;
+    timeElapsed = 0; // Reiniciar el contador ascendente
     updateTimerDisplay();
 
     const question = currentQuestions[currentQuestionIndex];
@@ -2888,13 +2887,9 @@ function startQuestion() {
 
     // Start timer after question setup
     quizTimer = setInterval(() => {
-        timeLeft--;
+        timeElapsed++; // Incrementar el tiempo transcurrido
         updateTimerDisplay();
-        if (timeLeft <= 0) {
-            clearInterval(quizTimer);
-            handleIncorrectAnswer();
-            setTimeout(nextQuestion, 1000); // Short delay before next question
-        }
+        // La pregunta ya no avanza automáticamente al llegar a un límite
     }, 1000);
     resetInactivityTimer(); // Reset inactivity timer on new question
 }
@@ -3042,6 +3037,16 @@ function checkSyntaxOrder() {
             if (userAnswerFragments[i] !== correctOrderFragments[i]) {
                 isCorrect = false;
                 break;
+            }
+            // Add visual feedback for each fragment
+            const targetFragments = syntaxTargetArea.querySelectorAll('.syntax-fragment-target');
+            if (targetFragments[i]) {
+                targetFragments[i].classList.remove('bg-purple-200', 'text-purple-800');
+                if (userAnswerFragments[i] === correctOrderFragments[i]) {
+                    targetFragments[i].classList.add('bg-green-300', 'text-green-900', 'border-2', 'border-green-600');
+                } else {
+                    targetFragments[i].classList.add('bg-red-300', 'text-red-900', 'border-2', 'border-red-600');
+                }
             }
         }
     }
@@ -3276,8 +3281,8 @@ function undoDragMatch() {
 // --- Helper Functions ---
 
 function updateTimerDisplay() {
-    const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-    const seconds = String(timeLeft % 60).padStart(2, '0');
+    const minutes = String(Math.floor(timeElapsed / 60)).padStart(2, '0'); // Usar timeElapsed
+    const seconds = String(timeElapsed % 60).padStart(2, '0'); // Usar timeElapsed
     if (quizTimerDisplay) quizTimerDisplay.textContent = `${minutes}:${seconds}`;
 }
 
