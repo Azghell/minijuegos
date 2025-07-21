@@ -5,7 +5,7 @@ const quizData = {
     html: {
         basico: [
             {
-                question: "¿Cuál es el propósito de la etiqueta `<h1>`?",
+                question: "Propósito de la etiqueta `<h1>`:",
                 type: "multiple-choice",
                 options: ["Crear un enlace", "Definir un párrafo", "Crear un encabezado de nivel más alto", "Insertar una imagen"],
                 correctAnswer: 2,
@@ -13,7 +13,7 @@ const quizData = {
                 codeExample: "<h1>Este es un encabezado principal</h1>"
             },
             {
-                question: "¿Qué etiqueta se usa para insertar un salto de línea simple?",
+                question: "Etiqueta para salto de línea simple:",
                 type: "multiple-choice",
                 options: ["`<p>`", "`<br>`", "`<h1>`", "`<a>`"],
                 correctAnswer: 1,
@@ -21,7 +21,7 @@ const quizData = {
                 codeExample: "<p>Línea 1<br>Línea 2</p>"
             },
             {
-                question: "¿Qué atributo se utiliza para especificar la URL de destino de un enlace?",
+                question: "Atributo para URL de enlace:",
                 type: "multiple-choice",
                 options: ["`src`", "`alt`", "`href`", "`link`"],
                 correctAnswer: 2,
@@ -29,7 +29,7 @@ const quizData = {
                 codeExample: "<a href=\"https://www.ejemplo.com\">Visitar Ejemplo</a>"
             },
             {
-                question: "Ordena los pasos para crear una tabla simple en HTML.",
+                question: "Ordena para crear una tabla HTML:",
                 type: "order-execution",
                 fragments: ["<table>", "<tr>", "<td>", "Contenido de celda", "</td>", "</tr>", "</table>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6],
@@ -41,7 +41,7 @@ const quizData = {
 </table>`
             },
             {
-                question: "¿Qué significa HTML?",
+                question: "Significado de HTML:",
                 type: "multiple-choice",
                 options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyperlink and Text Markup Language", "Home Tool Markup Language"],
                 correctAnswer: 0,
@@ -49,7 +49,7 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "¿Cuál es la etiqueta correcta para el elemento de párrafo?",
+                question: "Etiqueta correcta para párrafo:",
                 type: "multiple-choice",
                 options: ["`<pa>`", "`<p>`", "`<pr>`", "`<par>`"],
                 correctAnswer: 1,
@@ -57,7 +57,7 @@ const quizData = {
                 codeExample: "<p>Este es un párrafo de ejemplo.</p>"
             },
             {
-                question: "¿Qué atributo se utiliza para especificar una fuente externa para una imagen?",
+                question: "Atributo para fuente de imagen:",
                 type: "multiple-choice",
                 options: ["`link`", "`url`", "`src`", "`href`"],
                 correctAnswer: 2,
@@ -65,7 +65,7 @@ const quizData = {
                 codeExample: "<img src=\"imagen.jpg\" alt=\"Descripción de la imagen\">"
             },
             {
-                question: "Empareja la etiqueta HTML con su propósito.",
+                question: "Empareja etiqueta HTML y propósito:",
                 type: "drag-match",
                 pairs: [
                     { drag: "Cuerpo del documento", drop: "<body>" },
@@ -78,7 +78,7 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "¿Cuál es la estructura básica de un documento HTML?",
+                question: "Estructura básica de HTML:",
                 type: "order-execution",
                 fragments: ["<!DOCTYPE html>", "<html>", "<head>", "<title>", "Título de la página</title>", "</head>", "<body>", "Contenido</body >", "</html>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -94,16 +94,15 @@ const quizData = {
 </html>`
             },
             {
-                question: "¿Qué etiqueta se utiliza para crear un enlace?",
+                question: "Etiqueta para crear un enlace:",
                 type: "multiple-choice",
                 options: ["`<link>`", "`<a>`", "`<href>`", "`<url>`"],
                 correctAnswer: 1,
                 help: "Esta etiqueta es la abreviatura de 'anchor'.",
                 codeExample: "<a href=\"otra_pagina.html\">Ir a otra página</a>"
             },
-            // Nuevas preguntas para HTML Básico (hasta 20)
             {
-                question: "¿Qué significa la declaración `<!DOCTYPE html>`?",
+                question: "Significado de `<!DOCTYPE html>`:",
                 type: "multiple-choice",
                 options: ["Define el tipo de documento como HTML4", "Es una declaración para indicar la versión de HTML que se está usando, específicamente HTML5", "Define el idioma del documento", "Indica que el documento es un archivo XML"],
                 correctAnswer: 1,
@@ -111,7 +110,7 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "¿Qué etiqueta HTML se utiliza para añadir comentarios en el código que no son visibles en el navegador?",
+                question: "Etiqueta HTML para comentarios invisibles:",
                 type: "multiple-choice",
                 options: ["`// Comentario`", "`/* Comentario */`", "`<!-- Comentario -->`", "`<comment>Comentario</comment>`"],
                 correctAnswer: 2,
@@ -119,7 +118,7 @@ const quizData = {
                 codeExample: "<!-- Este es un comentario HTML -->"
             },
             {
-                question: "Ordena los elementos para crear una lista ordenada de ítems.",
+                question: "Ordena para crear lista ordenada:",
                 type: "order-execution",
                 fragments: ["<ol>", "<li>", "Primer ítem", "</li>", "<li>", "Segundo ítem", "</li>", "</ol>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
@@ -130,7 +129,7 @@ const quizData = {
 </ol>`
             },
             {
-                question: "Empareja la etiqueta HTML con su tipo de elemento (en línea o de bloque).",
+                question: "Empareja etiqueta HTML y tipo (línea/bloque):",
                 type: "drag-match",
                 pairs: [
                     { drag: "Bloque", drop: "<div>" },
@@ -143,7 +142,7 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "¿Cuál es la diferencia principal entre `<strong>` y `<em>`?",
+                question: "Diferencia entre `<strong>` y `<em>`:",
                 type: "multiple-choice",
                 options: ["`<strong>` se usa para cursiva, `<em>` para negrita.", "`<strong>` para énfasis semántico, `<em>` para importancia semántica.", "`<strong>` para importancia semántica, `<em>` para énfasis semántico.", "No hay diferencia, ambos solo aplican negrita."],
                 correctAnswer: 2,
@@ -151,7 +150,7 @@ const quizData = {
                 codeExample: "<strong>Texto importante</strong>, <em>texto enfatizado</em>"
             },
             {
-                question: "¿Qué etiqueta se utiliza para crear un encabezado de nivel 2?",
+                question: "Etiqueta para encabezado nivel 2:",
                 type: "multiple-choice",
                 options: ["`<h2>`", "`<h1.2>`", "`<head2>`", "`<heading2>`"],
                 correctAnswer: 0,
@@ -159,7 +158,7 @@ const quizData = {
                 codeExample: "<h2>Subtítulo</h2>"
             },
             {
-                question: "¿Qué atributo se utiliza para proporcionar una descripción alternativa para una imagen, útil para la accesibilidad?",
+                question: "Atributo `alt` para imagen:",
                 type: "multiple-choice",
                 options: ["`description`", "`title`", "`alt`", "`text`"],
                 correctAnswer: 2,
@@ -167,7 +166,7 @@ const quizData = {
                 codeExample: "<img src=\"logo.png\" alt=\"Logo de la empresa\">"
             },
             {
-                question: "Ordena los elementos para crear una lista no ordenada (viñetas).",
+                question: "Ordena para crear lista no ordenada:",
                 type: "order-execution",
                 fragments: ["<ul>", "<li>", "Café", "</li>", "<li>", "Té", "</li>", "</ul>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
@@ -178,7 +177,7 @@ const quizData = {
 </ul>`
             },
             {
-                question: "¿Qué etiqueta se usa para definir el pie de página de un documento o una sección?",
+                question: "Etiqueta para pie de página:",
                 type: "multiple-choice",
                 options: ["`<bottom>`", "`<end>`", "`<footer>`", "`<page-end>`"],
                 correctAnswer: 2,
@@ -186,16 +185,15 @@ const quizData = {
                 codeExample: "<footer>Derechos de autor 2023</footer>"
             },
             {
-                question: "¿Cuál es la etiqueta correcta para una celda de encabezado en una tabla HTML?",
+                question: "Etiqueta para celda de encabezado de tabla:",
                 type: "multiple-choice",
                 options: ["`<td>`", "`<th>`", "`<headcell>`", "`<tr>`"],
                 correctAnswer: 1,
                 help: "Esta etiqueta se utiliza para los títulos de las columnas o filas en una tabla.",
                 codeExample: `<th>Nombre</th>`
             },
-            // Nuevas preguntas adicionales para HTML Básico (total 25)
             {
-                question: "¿Qué etiqueta se utiliza para crear un botón en un formulario HTML?",
+                question: "Etiqueta para crear un botón en formulario:",
                 type: "multiple-choice",
                 options: ["`<input type=\"button\">`", "`<button>`", "`<btn>`", "`<click>`"],
                 correctAnswer: 1,
@@ -203,7 +201,7 @@ const quizData = {
                 codeExample: `<button type="submit">Enviar</button>`
             },
             {
-                question: "Empareja la etiqueta con el tipo de contenido que representa.",
+                question: "Empareja etiqueta con tipo de contenido:",
                 type: "drag-match",
                 pairs: [
                     { drag: "Imagen", drop: "`<img>`" },
@@ -215,7 +213,7 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "Ordena los elementos para definir una imagen con su fuente y texto alternativo.",
+                question: "Ordena para definir imagen con `src` y `alt`:",
                 type: "order-execution",
                 fragments: ["`<img`", `src="imagen.jpg"`, `alt="Descripción de la imagen"`, `>`],
                 correctOrder: [0, 1, 2, 3],
@@ -223,7 +221,7 @@ const quizData = {
                 codeExample: `<img src="imagen.jpg" alt="Descripción de la imagen">`
             },
             {
-                question: "¿Qué atributo se utiliza para establecer el identificador único de un elemento HTML?",
+                question: "Atributo para identificador único HTML:",
                 type: "multiple-choice",
                 options: ["`class`", "`name`", "`id`", "`data-id`"],
                 correctAnswer: 2,
@@ -231,7 +229,7 @@ const quizData = {
                 codeExample: `<div id="miElementoUnico"></div>`
             },
             {
-                question: "¿Qué etiqueta HTML se utiliza para el contenido principal del documento, visible en el navegador?",
+                question: "Etiqueta para contenido principal visible:",
                 type: "multiple-choice",
                 options: ["`<head>`", "`<html>`", "`<body>`", "`<main>`"],
                 correctAnswer: 2,
@@ -241,7 +239,7 @@ const quizData = {
         ],
         intermedio: [
             {
-                question: "¿Qué atributo se utiliza para fusionar celdas en una fila en una tabla HTML?",
+                question: "Atributo para fusionar celdas en fila de tabla:",
                 type: "multiple-choice",
                 options: ["`rowspan`", "`colspan`", "`cellspan`", "`merge-rows`"],
                 correctAnswer: 1,
@@ -253,7 +251,7 @@ const quizData = {
 </table>`
             },
             {
-                question: "Empareja el tipo de entrada de formulario con su uso.",
+                question: "Empareja tipo de input de formulario con uso:",
                 type: "drag-match",
                 pairs: [
                     { drag: "Campo de texto", drop: `<input type="text">` },
@@ -266,7 +264,7 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "¿Qué etiqueta HTML se utiliza para incrustar contenido multimedia externo (ej. YouTube, Vimeo)?",
+                question: "Etiqueta para incrustar multimedia externa:",
                 type: "multiple-choice",
                 options: ["`<video>`", "`<iframe>`", "`<embed>`", "`<object>`"],
                 correctAnswer: 1,
@@ -274,19 +272,19 @@ const quizData = {
                 codeExample: `<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" width="560" height="315" frameborder="0" allowfullscreen></iframe>`
             },
             {
-                question: "Ordena los elementos para definir un formulario HTML básico.",
+                question: "Ordena para definir formulario HTML básico:",
                 type: "order-execution",
                 fragments: ["<form>", "<label for=\"name\">", "Nombre:</label>", "<input type=\"text\" id=\"name\" name=\"name\">", "<button type=\"submit\">", "Enviar</button>", "</form>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6],
                 help: "Un formulario agrupa sus campos y acciones.",
-                codeExample: `<table>
-    <tr>
-        <td>Contenido de celda</td>
-    </tr>
-</table>`
+                codeExample: `<form>
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name">
+    <button type="submit">Enviar</button>
+</form>`
             },
             {
-                question: "¿Qué es el significado de 'semántico' en HTML Semántico?",
+                question: "Significado de 'semántico' en HTML:",
                 type: "multiple-choice",
                 options: ["Estilo de la página", "Significado o propósito del contenido", "Formato visual del texto", "Interactividad del usuario"],
                 correctAnswer: 1,
@@ -294,7 +292,7 @@ const quizData = {
                 codeExample: "<header>, <nav>, <article>, <section>, <aside>, <footer>"
             },
             {
-                question: "¿Cuál es el propósito principal de la etiqueta `<meta>`?",
+                question: "Propósito principal de etiqueta `<meta>`:",
                 type: "multiple-choice",
                 options: ["Definir el título de la página", "Proporcionar metadatos sobre el documento HTML", "Vincular hojas de estilo externas", "Insertar scripts de JavaScript"],
                 correctAnswer: 1,
@@ -303,7 +301,7 @@ const quizData = {
 <meta name="description" content="Descripción de la página">`
             },
             {
-                question: "Empareja los atributos de imagen con su función.",
+                question: "Empareja atributos de imagen con función:",
                 type: "drag-match",
                 pairs: [
                     { drag: "Ruta de la imagen", drop: "`src`" },
@@ -316,7 +314,7 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "Ordena los pasos para vincular una hoja de estilo CSS externa.",
+                question: "Ordena para vincular CSS externo:",
                 type: "order-execution",
                 fragments: ["<head>", "<link", "rel=\"stylesheet\"", "href=\"styles.css\"", ">", "</head>"],
                 correctOrder: [0, 1, 2, 3, 4, 5],
@@ -326,7 +324,7 @@ const quizData = {
 </head>`
             },
             {
-                question: "¿Qué etiqueta se usa para agrupar contenido relacionado en HTML5, típicamente con un título?",
+                question: "Etiqueta HTML5 para agrupar contenido relacionado (con título):",
                 type: "multiple-choice",
                 options: ["`<group>`", "`<section>`", "`<article>`", "`<aside>`"],
                 correctAnswer: 1,
@@ -337,16 +335,15 @@ const quizData = {
 </section>`
             },
             {
-                question: "¿Qué atributo se utiliza para hacer un elemento editable por el usuario directamente en el navegador?",
+                question: "Atributo para hacer elemento editable en navegador:",
                 type: "multiple-choice",
                 options: ["`editable`", "`contenteditable`", "`canedit`", "`user-editable`"],
                 correctAnswer: 1,
                 help: "Este atributo permite que el contenido del elemento pueda ser modificado por el usuario.",
                 codeExample: `<div contenteditable="true">Este texto se puede editar.</div>`
             },
-            // Nuevas preguntas para HTML Intermedio (hasta 20)
             {
-                question: "¿Qué atributo se utiliza para especificar un valor predeterminado en un campo de entrada de texto (`<input type=\"text\">`)?",
+                question: "Atributo para valor predeterminado en `<input type=\"text\">`:",
                 type: "multiple-choice",
                 options: ["`default`", "`placeholder`", "`value`", "`initial`"],
                 correctAnswer: 2,
@@ -354,7 +351,7 @@ const quizData = {
                 codeExample: `<input type="text" value="Texto predeterminado">`
             },
             {
-                question: "Empareja el atributo de formulario con su función.",
+                question: "Empareja atributo de formulario con función:",
                 type: "drag-match",
                 pairs: [
                     { drag: "URL a la que se envían los datos", drop: "`action`" },
@@ -367,7 +364,7 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "Ordena los elementos para crear una lista descriptiva (`<dl>`).",
+                question: "Ordena para crear lista descriptiva (`<dl>`):",
                 type: "order-execution",
                 fragments: ["<dl>", "<dt>", "Término", "</dt>", "<dd>", "Descripción", "</dd>", "</dl>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
@@ -378,7 +375,7 @@ const quizData = {
 </dl>`
             },
             {
-                question: "¿Qué nuevas etiquetas semánticas de HTML5 se utilizan para estructurar el contenido principal de una página y su sección de navegación, respectivamente?",
+                question: "Etiquetas HTML5 para contenido principal y navegación:",
                 type: "multiple-choice",
                 options: ["`<content>` y `<menu>`", "`<main>` y `<nav>`", "`<article>` y `<aside>`", "`<section>` y `<header>`"],
                 correctAnswer: 1,
@@ -386,7 +383,7 @@ const quizData = {
                 codeExample: `<main>...</main> <nav>...</nav>`
             },
             {
-                question: "¿Cuál es el propósito del atributo `srcset` en la etiqueta `<img>`?",
+                question: "Propósito del atributo `srcset` en `<img>`:",
                 type: "multiple-choice",
                 options: ["Definir el tamaño máximo de la imagen", "Proporcionar imágenes diferentes para distintas resoluciones o densidades de píxeles", "Especificar la calidad de compresión de la imagen", "Cargar la imagen de forma asíncrona"],
                 correctAnswer: 1,
@@ -394,7 +391,7 @@ const quizData = {
                 codeExample: `<img srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 1500w" src="medium.jpg" alt="Imagen responsive">`
             },
             {
-                question: "¿Qué etiqueta HTML se utiliza para incrustar un archivo de audio directamente en una página web?",
+                question: "Etiqueta para incrustar audio en página web:",
                 type: "multiple-choice",
                 options: ["`<sound>`", "`<audio>`", "`<mp3>`", "`<play>`"],
                 correctAnswer: 1,
@@ -402,7 +399,7 @@ const quizData = {
                 codeExample: `<audio controls src="audio.mp3"></audio>`
             },
             {
-                question: "¿Qué atributo se usa para especificar que un campo de formulario debe ser rellenado antes de enviar el formulario?",
+                question: "Atributo para campo de formulario requerido:",
                 type: "multiple-choice",
                 options: ["`mandatory`", "`required`", "`must-fill`", "`validate`"],
                 correctAnswer: 1,
@@ -410,7 +407,7 @@ const quizData = {
                 codeExample: `<input type="text" required>`
             },
             {
-                question: "Empareja la etiqueta HTML con su uso semántico en HTML5.",
+                question: "Empareja etiqueta HTML con uso semántico (HTML5):",
                 type: "drag-match",
                 pairs: [
                     { drag: "Contenido principal y único", drop: "<main>" },
@@ -423,7 +420,7 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "Ordena los elementos para crear una imagen con un mapa de imagen (`<map>`).",
+                question: "Ordena para crear imagen con mapa (`<map>`):",
                 type: "order-execution",
                 fragments: [
                     "<img src=\"planets.gif\" alt=\"Planetas\" usemap=\"#planetmap\">",
@@ -441,16 +438,15 @@ const quizData = {
 </map>`
             },
             {
-                question: "¿Qué atributo se utiliza para especificar un patrón de expresión regular para la validación de un campo de entrada?",
+                question: "¿Qué tipo de `input` se usa para un control deslizante de rango?",
                 type: "multiple-choice",
-                options: ["`regex`", "`pattern`", "`format`", "`validate-regex`"],
+                options: ["`type=\"slider\"`", "`type=\"range\"`", "`type=\"scale\"`", "`type=\"level\"`"],
                 correctAnswer: 1,
-                help: "Este atributo permite definir un formato específico que el usuario debe seguir al introducir datos.",
-                codeExample: `<input type="text" pattern="[0-9]{5}" title="Solo 5 dígitos numéricos">`
+                help: "Este input permite al usuario seleccionar un valor de un rango predefinido.",
+                codeExample: `<input type="range" min="0" max="100" value="50">`
             },
-            // Nuevas preguntas adicionales para HTML Intermedio (total 25)
             {
-                question: "¿Qué atributo se utiliza para agrupar elementos de formulario relacionados, como casillas de verificación o botones de radio, y a menudo dibujar un borde alrededor de ellos?",
+                question: "Atributo para agrupar elementos de formulario (con borde):",
                 type: "multiple-choice",
                 options: ["`<group>`", "`<section>`", "`<fieldset>`", "`<formgroup>`"],
                 correctAnswer: 2,
@@ -458,7 +454,7 @@ const quizData = {
                 codeExample: `<fieldset><legend>Contacto</legend>...</fieldset>`
             },
             {
-                question: "Empareja el atributo HTML con su función en la accesibilidad o usabilidad.",
+                question: "Empareja atributo HTML con accesibilidad/usabilidad:",
                 type: "drag-match",
                 pairs: [
                     { drag: "Orden de navegación con teclado", drop: "`tabindex`" },
@@ -470,44 +466,330 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "Ordena los elementos para crear un formulario de selección (`<select>`) con opciones.",
-                type: "order-execution",
-                fragments: ["`<select>`", `<option value="opcion1">`, "Opción 1", `</option>`, `<option value="opcion2">`, "Opción 2", `</option>`, `</select>`],
-                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
-                help: "La etiqueta `<select>` contiene las opciones, y cada opción se define con `<option>`.",
-                codeExample: `<select>
-    <option value="opcion1">Opción 1</option>
-    <option value="opcion2">Opción 2</option>
-</select>`
-            },
-            {
-                question: "¿Cuál es el propósito de la etiqueta `<canvas>` en HTML5?",
+                question: "Etiqueta HTML para encabezado de tabla:",
                 type: "multiple-choice",
-                options: ["Para incrustar videos de YouTube.", "Para dibujar gráficos, animaciones o juegos con JavaScript.", "Para crear formularios dinámicos.", "Para definir un área de texto desplazable."],
-                correctAnswer: 1,
-                help: "Es un elemento que proporciona un área de dibujo programable para renderizar gráficos.",
-                codeExample: `<canvas id="myCanvas" width="200" height="100"></canvas>`
-            },
-            {
-                question: "¿Qué atributo HTML se utiliza para especificar que un enlace debe abrirse en una nueva pestaña o ventana del navegador?",
-                type: "multiple-choice",
-                options: ["`target=\"_self\"`", "`target=\"_parent\"`", "`target=\"_blank\"`", "`target=\"_top\"`"],
+                options: ["`<th>`", "`<header>`", "`<thead>`", "`<caption>`"],
                 correctAnswer: 2,
-                help: "Este atributo es muy común para enlaces externos.",
-                codeExample: `<a href="https://ejemplo.com" target="_blank">Visitar</a>`
+                help: "Esta etiqueta agrupa las filas de encabezado de una tabla.",
+                codeExample: `<thead><tr><th>Encabezado</th></tr></thead>`
+            },
+            {
+                question: "Atributo para especificar charset HTML:",
+                type: "multiple-choice",
+                options: ["`lang`", "`charset`", "`encoding`", "`type`"],
+                correctAnswer: 1,
+                help: "Es fundamental para la correcta visualización de caracteres especiales y acentos.",
+                codeExample: `<meta charset="UTF-8">`
+            },
+            {
+                question: "Ordena para crear barra de progreso HTML5:",
+                type: "order-execution",
+                fragments: ["`<progress`", `value="70"`, `max="100">`, `70%</progress>`],
+                correctOrder: [0, 1, 2, 3],
+                help: "La etiqueta `progress` visualiza el progreso de una tarea.",
+                codeExample: `<progress value="70" max="100">70%</progress>`
+            }
+        ],
+        intermedio: [
+            {
+                question: "Atributo para fusionar celdas en fila de tabla:",
+                type: "multiple-choice",
+                options: ["`rowspan`", "`colspan`", "`cellspan`", "`merge-rows`"],
+                correctAnswer: 1,
+                help: "Este atributo se usa para expandir una celda a través de múltiples columnas.",
+                codeExample: `<table>
+    <tr>
+        <td colspan="2">Celdas fusionadas</td>
+    </tr>
+</table>`
+            },
+            {
+                question: "Empareja tipo de input de formulario con uso:",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Campo de texto", drop: `<input type="text">` },
+                    { drag: "Contraseña", drop: `<input type="password">` },
+                    { drag: "Botón de envío", drop: `<input type="submit">` },
+                    { drag: "Casilla de verificación", drop: `<input type="checkbox">` },
+                    { drag: "Botón de radio", drop: `<input type="radio">` }
+                ],
+                help: "Cada tipo de input está diseñado para un tipo específico de interacción del usuario.",
+                codeExample: null
+            },
+            {
+                question: "Etiqueta para incrustar multimedia externa:",
+                type: "multiple-choice",
+                options: ["`<video>`", "`<iframe>`", "`<embed>`", "`<object>`"],
+                correctAnswer: 1,
+                help: "Piensa en cómo se inserta una 'ventana' a otro documento dentro del tuyo.",
+                codeExample: `<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" width="560" height="315" frameborder="0" allowfullscreen></iframe>`
+            },
+            {
+                question: "Ordena para definir formulario HTML básico:",
+                type: "order-execution",
+                fragments: ["<form>", "<label for=\"name\">", "Nombre:</label>", "<input type=\"text\" id=\"name\" name=\"name\">", "<button type=\"submit\">", "Enviar</button>", "</form>"],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6],
+                help: "Un formulario agrupa sus campos y acciones.",
+                codeExample: `<form>
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name">
+    <button type="submit">Enviar</button>
+</form>`
+            },
+            {
+                question: "Significado de 'semántico' en HTML:",
+                type: "multiple-choice",
+                options: ["Estilo de la página", "Significado o propósito del contenido", "Formato visual del texto", "Interactividad del usuario"],
+                correctAnswer: 1,
+                help: "Se refiere a dar un significado claro a las etiquetas, más allá de cómo se ven.",
+                codeExample: "<header>, <nav>, <article>, <section>, <aside>, <footer>"
+            },
+            {
+                question: "Propósito principal de etiqueta `<meta>`:",
+                type: "multiple-choice",
+                options: ["Definir el título de la página", "Proporcionar metadatos sobre el documento HTML", "Vincular hojas de estilo externas", "Insertar scripts de JavaScript"],
+                correctAnswer: 1,
+                help: "Esta etiqueta proporciona información sobre la página, pero no es visible para el usuario.",
+                codeExample: `<meta charset="UTF-8">
+<meta name="description" content="Descripción de la página">`
+            },
+            {
+                question: "Empareja atributos de imagen con función:",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Ruta de la imagen", drop: "`src`" },
+                    { drag: "Texto alternativo", drop: "`alt`" },
+                    { drag: "Ancho de la imagen", drop: "`width`" },
+                    { drag: "Alto de la imagen", drop: "`height`" },
+                    { drag: "Mapa de imagen", drop: "`usemap`" }
+                ],
+                help: "Estos atributos son esenciales para que las imágenes se muestren correctamente y sean accesibles.",
+                codeExample: null
+            },
+            {
+                question: "Ordena para vincular CSS externo:",
+                type: "order-execution",
+                fragments: ["<head>", "<link", "rel=\"stylesheet\"", "href=\"styles.css\"", ">", "</head>"],
+                correctOrder: [0, 1, 2, 3, 4, 5],
+                help: "Las hojas de estilo externas se enlazan en la sección de metadatos del documento.",
+                codeExample: `<head>
+    <link rel="stylesheet" href="styles.css">
+</head>`
+            },
+            {
+                question: "Etiqueta HTML5 para agrupar contenido relacionado (con título):",
+                type: "multiple-choice",
+                options: ["`<group>`", "`<section>`", "`<article>`", "`<aside>`"],
+                correctAnswer: 1,
+                help: "Esta etiqueta define una sección genérica de contenido.",
+                codeExample: `<section>
+    <h2>Acerca de nosotros</h2>
+    <p>Información sobre la empresa.</p>
+</section>`
+            },
+            {
+                question: "Atributo para hacer elemento editable en navegador:",
+                type: "multiple-choice",
+                options: ["`editable`", "`contenteditable`", "`canedit`", "`user-editable`"],
+                correctAnswer: 1,
+                help: "Este atributo permite que el contenido del elemento pueda ser modificado por el usuario.",
+                codeExample: `<div contenteditable="true">Este texto se puede editar.</div>`
+            },
+            {
+                question: "Atributo para valor predeterminado en `<input type=\"text\">`:",
+                type: "multiple-choice",
+                options: ["`default`", "`placeholder`", "`value`", "`initial`"],
+                correctAnswer: 2,
+                help: "Este atributo define el valor inicial de un campo de entrada.",
+                codeExample: `<input type="text" value="Texto predeterminado">`
+            },
+            {
+                question: "Empareja atributo de formulario con función:",
+                type: "drag-match",
+                pairs: [
+                    { drag: "URL a la que se envían los datos", drop: "`action`" },
+                    { drag: "Método HTTP (GET/POST)", drop: "`method`" },
+                    { drag: "Tipo de codificación de datos", drop: "`enctype`" },
+                    { drag: "Habilitar/deshabilitar autocompletado", drop: "`autocomplete`" },
+                    { drag: "Deshabilitar validación del navegador", drop: "`novalidate`" }
+                ],
+                help: "Estos atributos controlan el comportamiento de un formulario HTML.",
+                codeExample: null
+            },
+            {
+                question: "Ordena para crear lista descriptiva (`<dl>`):",
+                type: "order-execution",
+                fragments: ["<dl>", "<dt>", "Término", "</dt>", "<dd>", "Descripción", "</dd>", "</dl>"],
+                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
+                help: "Las listas descriptivas se usan para definir términos y sus descripciones.",
+                codeExample: `<dl>
+    <dt>Término</dt>
+    <dd>Descripción</dd>
+</dl>`
+            },
+            {
+                question: "Etiquetas HTML5 para contenido principal y navegación:",
+                type: "multiple-choice",
+                options: ["`<content>` y `<menu>`", "`<main>` y `<nav>`", "`<article>` y `<aside>`", "`<section>` y `<header>`"],
+                correctAnswer: 1,
+                help: "HTML5 introdujo etiquetas para mejorar la semántica del documento.",
+                codeExample: `<main>...</main> <nav>...</nav>`
+            },
+            {
+                question: "Propósito del atributo `srcset` en `<img>`:",
+                type: "multiple-choice",
+                options: ["Definir el tamaño máximo de la imagen", "Proporcionar imágenes diferentes para distintas resoluciones o densidades de píxeles", "Especificar la calidad de compresión de la imagen", "Cargar la imagen de forma asíncrona"],
+                correctAnswer: 1,
+                help: "Permite que el navegador elija la imagen más adecuada para el dispositivo del usuario.",
+                codeExample: `<img srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 1500w" src="medium.jpg" alt="Imagen responsive">`
+            },
+            {
+                question: "Etiqueta para incrustar audio en página web:",
+                type: "multiple-choice",
+                options: ["`<sound>`", "`<audio>`", "`<mp3>`", "`<play>`"],
+                correctAnswer: 1,
+                help: "Esta etiqueta permite reproducir archivos de audio con controles nativos del navegador.",
+                codeExample: `<audio controls src="audio.mp3"></audio>`
+            },
+            {
+                question: "Atributo para campo de formulario requerido:",
+                type: "multiple-choice",
+                options: ["`mandatory`", "`required`", "`must-fill`", "`validate`"],
+                correctAnswer: 1,
+                help: "Es un atributo booleano que activa la validación HTML5 del navegador.",
+                codeExample: `<input type="text" required>`
+            },
+            {
+                question: "Empareja etiqueta HTML con uso semántico (HTML5):",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Contenido principal y único", drop: "<main>" },
+                    { drag: "Contenido de navegación", drop: "<nav>" },
+                    { drag: "Contenido autocontenido (artículo)", drop: "<article>" },
+                    { drag: "Contenido relacionado pero aparte", drop: "<aside>" },
+                    { drag: "Pie de página de una sección o documento", drop: "<footer>" }
+                ],
+                help: "Estas etiquetas ayudan a estructurar el contenido de manera significativa para navegadores y herramientas de accesibilidad.",
+                codeExample: null
+            },
+            {
+                question: "Ordena para crear imagen con mapa (`<map>`):",
+                type: "order-execution",
+                fragments: [
+                    "<img src=\"planets.gif\" alt=\"Planetas\" usemap=\"#planetmap\">",
+                    "<map name=\"planetmap\">",
+                    "  <area shape=\"rect\" coords=\"0,0,82,126\" href=\"sun.htm\" alt=\"Sol\">",
+                    "  <area shape=\"circle\" coords=\"90,58,3\" href=\"mercury.htm\" alt=\"Mercurio\">",
+                    "</map>"
+                ],
+                correctOrder: [0, 1, 2, 3, 4],
+                help: "Un mapa de imagen define áreas clicables en una imagen.",
+                codeExample: `<img src="planets.gif" alt="Planetas" usemap="#planetmap">
+<map name="planetmap">
+  <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sol">
+  <area shape="circle" coords="90,58,3" href="mercury.htm" alt="Mercurio">
+</map>`
+            },
+            {
+                question: "¿Qué tipo de `input` se usa para un control deslizante de rango?",
+                type: "multiple-choice",
+                options: ["`type=\"slider\"`", "`type=\"range\"`", "`type=\"scale\"`", "`type=\"level\"`"],
+                correctAnswer: 1,
+                help: "Este input permite al usuario seleccionar un valor de un rango predefinido.",
+                codeExample: `<input type="range" min="0" max="100" value="50">`
+            },
+            {
+                question: "Atributo para agrupar elementos de formulario (con borde):",
+                type: "multiple-choice",
+                options: ["`<group>`", "`<section>`", "`<fieldset>`", "`<formgroup>`"],
+                correctAnswer: 2,
+                help: "La etiqueta `<legend>` se usa a menudo con esta para proporcionar un título al grupo.",
+                codeExample: `<fieldset><legend>Contacto</legend>...</fieldset>`
+            },
+            {
+                question: "Empareja atributo HTML con accesibilidad/usabilidad:",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Orden de navegación con teclado", drop: "`tabindex`" },
+                    { drag: "Texto de ejemplo en campo de entrada", drop: "`placeholder`" },
+                    { drag: "Deshabilita un control de formulario", drop: "`disabled`" },
+                    { drag: "Hace un campo de entrada solo lectura", drop: "`readonly`" }
+                ],
+                help: "Estos atributos mejoran la interacción del usuario y la accesibilidad.",
+                codeExample: null
+            },
+            {
+                question: "Etiqueta HTML para encabezado de tabla:",
+                type: "multiple-choice",
+                options: ["`<th>`", "`<header>`", "`<thead>`", "`<caption>`"],
+                correctAnswer: 2,
+                help: "Esta etiqueta agrupa las filas de encabezado de una tabla.",
+                codeExample: `<thead><tr><th>Encabezado</th></tr></thead>`
+            },
+            {
+                question: "Atributo para especificar charset HTML:",
+                type: "multiple-choice",
+                options: ["`lang`", "`charset`", "`encoding`", "`type`"],
+                correctAnswer: 1,
+                help: "Es fundamental para la correcta visualización de caracteres especiales y acentos.",
+                codeExample: `<meta charset="UTF-8">`
+            },
+            {
+                question: "Ordena para crear barra de progreso HTML5:",
+                type: "order-execution",
+                fragments: ["`<progress`", `value="70"`, `max="100">`, `70%</progress>`],
+                correctOrder: [0, 1, 2, 3],
+                help: "La etiqueta `progress` visualiza el progreso de una tarea.",
+                codeExample: `<progress value="70" max="100">70%</progress>`
             }
         ],
         avanzado: [
             {
-                question: "¿Cuál es el propósito del atributo `defer` en la etiqueta `<script>`?",
+                question: "Diferencia entre `localStorage` y `sessionStorage`:",
                 type: "multiple-choice",
-                options: ["Ejecutar el script antes que el HTML", "Descargar el script pero ejecutarlo después de que el HTML sea parseado", "Hacer que el script se cargue de forma asíncrona", "Detener la ejecución del script hasta un evento específico"],
-                correctAnswer: 1,
-                help: "Piensa en cómo este atributo afecta el momento de ejecución del script en relación con el parseo del HTML.",
-                codeExample: `<script src="script.js" defer></script>`
+                options: ["`localStorage` almacena datos solo por la sesión, `sessionStorage` los persiste.", "`localStorage` solo almacena texto, `sessionStorage` objetos.", "`localStorage` persiste los datos sin fecha de expiración, `sessionStorage` los mantiene solo durante la sesión de la página.", "`localStorage` es más seguro que `sessionStorage`."],
+                correctAnswer: 2,
+                help: "Ambos son parte de la Web Storage API, pero tienen comportamientos de persistencia diferentes.",
+                codeExample: null
             },
             {
-                question: "Empareja la etiqueta con su rol en la semántica de HTML5.",
+                question: "Propósito de `rel=\"preload\"` en `<link>`:",
+                type: "multiple-choice",
+                options: ["Indica que el recurso debe cargarse después de que la página sea interactiva.", "Especifica que el recurso debe precargarse con alta prioridad, sin bloquear la renderización de la página.", "Define una relación de hoja de estilo alternativa.", "Carga el recurso en segundo plano solo si es necesario."],
+                correctAnswer: 1,
+                help: "Es una directiva para que el navegador cargue un recurso tan pronto como sea posible.",
+                codeExample: `<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>`
+            },
+            {
+                question: "Empareja término CSS con significado:",
+                type: "drag-match",
+                pairs: [
+                    { drag: "Modelo de caja", drop: "Cómo los elementos HTML son renderizados como cajas con margen, borde, relleno y contenido." },
+                    { drag: "Cascada", drop: "El proceso mediante el cual los navegadores determinan qué valores de propiedades CSS aplicar a un elemento." },
+                    { drag: "Especificidad", drop: "El algoritmo que determina qué regla CSS se aplica cuando varias reglas apuntan al mismo elemento." },
+                    { drag: "Herencia", drop: "Cómo ciertas propiedades CSS se transmiten de un elemento padre a sus hijos." }
+                ],
+                help: "Estos son conceptos fundamentales para entender cómo funciona CSS.",
+                codeExample: null
+            },
+            {
+                question: "Definición de 'Shadow DOM' (Web Components):",
+                type: "multiple-choice",
+                options: ["Un DOM que solo es visible en modo de desarrollo.", "Un subárbol DOM encapsulado que se renderiza por separado del DOM principal del documento.", "Un método para ocultar elementos del DOM.", "Una técnica para manipular el DOM con JavaScript de forma más rápida."],
+                correctAnswer: 1,
+                help: "Permite encapsular el estilo y la estructura de un componente para que no interfiera con el resto de la página.",
+                codeExample: null
+            },
+            {
+                question: "Propósito del atributo `async` en `<script>`:",
+                type: "multiple-choice",
+                options: ["Asegura que el script se cargue sincrónicamente.", "Carga el script de forma asíncrona y lo ejecuta tan pronto como esté disponible, sin bloquear el parseo del HTML.", "Detiene la ejecución del script hasta un evento específico."],
+                correctAnswer: 1,
+                help: "Piensa en cómo este atributo afecta el momento de ejecución del script en relación con el parseo del HTML.",
+                codeExample: `<script src="script.js" async></script>`
+            },
+            {
+                question: "Empareja etiqueta HTML5 con rol semántico:",
                 type: "drag-match",
                 pairs: [
                     { drag: "Contenido principal", drop: "<main>" },
@@ -520,12 +802,63 @@ const quizData = {
                 codeExample: null
             },
             {
-                question: "¿Qué API de HTML5 permite a las aplicaciones web funcionar sin conexión?",
+                question: "API HTML5 para funcionamiento offline:",
                 type: "multiple-choice",
                 options: ["Web Storage API", "Geolocation API", "AppCache (Application Cache)", "Web Workers API"],
                 correctAnswer: 2,
-                help: "Esta API permite que los recursos de una aplicación web se almacenen para uso offline, aunque ha sido reemplazada por Service Workers.",
+                help: "Esta API permite que los recursos de una aplicación web se almacenen localmente para que la aplicación sea accesible sin conexión.",
                 codeExample: null
+            },
+            {
+                question: "Recurso 'render-blocking' y optimización:",
+                type: "multiple-choice",
+                options: ["Un recurso que bloquea la interacción del usuario con la página. Se optimiza cargándolo al final.", "Un recurso que el navegador debe procesar antes de poder renderizar la página. Se optimiza usando atributos como `async` o `defer` para scripts y `preload` para otros recursos críticos.", "Un recurso de imagen muy grande que ralentiza la carga. Se optimiza comprimiéndolo.", "Un script que causa errores en la consola. Se optimiza corrigiendo los errores."],
+                correctAnswer: 1,
+                help: "Identificar y optimizar estos recursos es clave para mejorar el rendimiento de carga inicial de una página.",
+                codeExample: `<script src="critical.js" defer></script>`
+            },
+            {
+                question: "Uso y beneficio de la etiqueta `<picture>`:",
+                type: "multiple-choice",
+                options: ["Para incrustar múltiples imágenes en un solo elemento.", "Para definir un grupo de imágenes relacionadas para galerías.", "Para proporcionar múltiples fuentes de imagen para un elemento `<img>` para diferentes contextos (responsive images).", "Es una etiqueta obsoleta para imágenes."],
+                correctAnswer: 2,
+                help: "Permite un control más fino sobre la carga de imágenes responsivas que solo `srcset`.",
+                codeExample: `<picture>
+    <source srcset="img-large.jpg" media="(min-width: 800px)">
+    <img src="img-small.jpg" alt="Descripción">
+</picture>`
+            },
+            {
+                question: "Web Components y sus 3 tecnologías principales:",
+                type: "multiple-choice",
+                options: ["Un framework de JavaScript para construir interfaces de usuario.", "Un conjunto de APIs web que permiten crear elementos HTML reutilizables y encapsulados. Sus tecnologías principales son Custom Elements, Shadow DOM y HTML Templates.", "Un estándar para la comunicación entre navegadores y servidores.", "Una forma de optimizar la carga de imágenes en la web."],
+                correctAnswer: 1,
+                help: "Permiten desarrollar componentes encapsulados y reutilizables en la web nativamente.",
+                codeExample: null
+            },
+            {
+                question: "Definición de 'Server-Sent Events' (SSE):",
+                type: "multiple-choice",
+                options: ["Un método para enviar eventos del cliente al servidor.", "Una tecnología que permite a un servidor enviar actualizaciones automáticamente a un cliente web a través de una conexión HTTP unidireccional.", "Un protocolo para la comunicación bidireccional en tiempo real.", "Una forma de registrar errores en el servidor."],
+                correctAnswer: 1,
+                help: "Es útil para flujos de datos unidireccionales desde el servidor, como actualizaciones de stock o feeds de noticias.",
+                codeExample: null
+            },
+            {
+                question: "Diferencia entre CSR y SSR:",
+                type: "multiple-choice",
+                options: ["CSR es más rápido que SSR.", "CSR se renderiza en el navegador, SSR se renderiza en el servidor antes de enviar HTML al navegador.", "SSR usa JavaScript, CSR no.", "No hay diferencias significativas, solo diferentes nombres."],
+                correctAnswer: 1,
+                help: "La elección entre CSR y SSR afecta el rendimiento inicial, el SEO y la experiencia del usuario.",
+                codeExample: null
+            },
+            {
+                question: "Propósito del atributo `integrity` (`<script>`, `<link>`):",
+                type: "multiple-choice",
+                options: ["Asegura que el archivo se cargue lo más rápido posible.", "Garantiza que el archivo externo (script o CSS) no ha sido manipulado y es el esperado, utilizando un hash criptográfico.", "Define la prioridad de carga del recurso.", "Especifica que el recurso debe ser descargado en segundo plano."],
+                correctAnswer: 1,
+                help: "Es una medida de seguridad importante para CDN y recursos de terceros, parte de Subresource Integrity (SRI).",
+                codeExample: `<script src="library.js" xintegrity="sha384-..." crossorigin="anonymous"></script>`
             },
             {
                 question: "Ordena los pasos para implementar un 'Web Worker' básico.",
@@ -632,7 +965,6 @@ customElements.define('my-custom-element', MyCustomElement);`
     <p>Este es un contenido de plantilla.</p>
 </template>`
             },
-            // Nuevas preguntas para HTML Avanzado (hasta 20)
             {
                 question: "¿Cuál es la función del atributo `crossorigin` en etiquetas como `<script>` o `<img>`?",
                 type: "multiple-choice",
@@ -762,7 +1094,6 @@ document.dispatchEvent(event);`
   <img src="img-small.jpg" alt="Descripción">
 </picture>`
             },
-            // Nuevas preguntas adicionales para HTML Avanzado (total 25)
             {
                 question: "¿Qué son los 'Web Components' y cuáles son sus tres tecnologías principales?",
                 type: "multiple-choice",
@@ -942,7 +1273,6 @@ CSS:
     text-align: center;
 }`
             },
-            // Nuevas preguntas para CSS Básico (hasta 20)
             {
                 question: "¿Qué propiedad CSS controla el grosor de un borde?",
                 type: "multiple-choice",
@@ -1060,7 +1390,6 @@ CSS:
     text-overflow: ellipsis;
 }`
             },
-            // Nuevas preguntas adicionales para CSS Básico (total 25)
             {
                 question: "¿Qué propiedad CSS se utiliza para cambiar el estilo de la fuente (normal, cursiva, oblicua)?",
                 type: "multiple-choice",
@@ -1233,7 +1562,6 @@ CSS:
     line-height: 1.5;
 }`
             },
-            // Nuevas preguntas para CSS Intermedio (hasta 20)
             {
                 question: "¿Qué es la especificidad en CSS?",
                 type: "multiple-choice",
@@ -1352,7 +1680,6 @@ div { visibility: hidden; } /* Oculto pero ocupa espacio */`
     text-indent: 50px;
 }`
             },
-            // Nuevas preguntas adicionales para CSS Intermedio (total 25)
             {
                 question: "¿Qué propiedad CSS se utiliza para controlar el comportamiento del contenido que desborda el área de un elemento?",
                 type: "multiple-choice",
@@ -1541,7 +1868,6 @@ div:nth-child(2) {
     }
 }`
             },
-            // Nuevas preguntas para CSS Avanzado (hasta 20)
             {
                 question: "¿Qué es una 'CSS Custom Property' (variable CSS)?",
                 type: "multiple-choice",
@@ -1666,7 +1992,6 @@ div:nth-child(2) {
     backdrop-filter: blur(5px);
 }`
             },
-            // Nuevas preguntas adicionales para CSS Avanzado (total 25)
             {
                 question: "¿Qué propiedad CSS se utiliza para definir una forma geométrica que recorta un elemento, haciendo invisibles las partes fuera de la forma?",
                 type: "multiple-choice",
@@ -1825,7 +2150,6 @@ elemento.textContent = 'Hola desde JS';`
                 help: "En JavaScript, los arrays son una forma especial de este tipo de dato.",
                 codeExample: "typeof [] // 'object'"
             },
-            // Nuevas preguntas para JavaScript Básico (hasta 20)
             {
                 question: "¿Qué operador se utiliza para sumar dos números?",
                 type: "multiple-choice",
@@ -1934,7 +2258,6 @@ console.log(div.textContent);`
                 help: "Este método devuelve una nueva cadena con todos los caracteres en mayúsculas.",
                 codeExample: "let texto = 'hola';\nlet mayusculas = texto.toUpperCase(); // 'HOLA'"
             },
-            // Nuevas preguntas adicionales para JavaScript Básico (total 25)
             {
                 question: "¿Qué función de JavaScript se utiliza para mostrar un cuadro de diálogo con un mensaje y un campo de entrada para que el usuario ingrese datos?",
                 type: "multiple-choice",
@@ -2107,7 +2430,6 @@ console.log(user); // 'usuario123'`
                 codeExample: `console.log(a); // undefined
 var a = 5;`
             },
-            // Nuevas preguntas para JavaScript Intermedio (hasta 20)
             {
                 question: "¿Cuál es el propósito del operador de propagación (spread operator) `...`?",
                 type: "multiple-choice",
@@ -2228,7 +2550,6 @@ console.log(fecha.getFullYear());`
 const arr2 = [3, 4];
 const nuevoArr = arr1.concat(arr2); // [1, 2, 3, 4]`
             },
-            // Nuevas preguntas adicionales para JavaScript Intermedio (total 25)
             {
                 question: "¿Qué estructura de control se utiliza para manejar errores en bloques de código que pueden fallar?",
                 type: "multiple-choice",
@@ -2405,7 +2726,6 @@ const { nombre, edad } = persona; // nombre='Juan', edad=30`
 const juan = Object.create(personaProto);
 juan.saludar(); // 'Hola'`
             },
-            // Nuevas preguntas para JavaScript Avanzado (hasta 20)
             {
                 question: "¿Cuál es la diferencia entre herencia prototípica y herencia basada en clases en JavaScript?",
                 type: "multiple-choice",
@@ -2538,7 +2858,6 @@ observer.observe(target);`
 const obj = {};
 wm.set(obj, 'valor'); // obj puede ser recolectado si no hay otras referencias`
             },
-            // Nuevas preguntas adicionales para JavaScript Avanzado (total 25)
             {
                 question: "¿Qué es un 'WeakSet' en JavaScript y cuándo es útil?",
                 type: "multiple-choice",
@@ -2611,6 +2930,12 @@ let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
 
 const TIME_PER_QUESTION = 30; // seconds
+const INACTIVITY_TIMEOUT = 60; // seconds of inactivity before warning
+const INACTIVITY_WARNING_DURATION = 10; // seconds for warning countdown
+
+let inactivityTimer;
+let inactivityCountdownInterval;
+let inactivityCountdown = INACTIVITY_WARNING_DURATION;
 
 const quizStartMenu = document.getElementById('quiz-start-menu');
 const startQuizButton = document.getElementById('start-quiz-button');
@@ -2625,7 +2950,7 @@ const quizPlayArea = document.getElementById('quiz-play-area');
 const quizTimerDisplay = document.getElementById('quiz-timer');
 const quizScoreDisplay = document.getElementById('quiz-score-display');
 const quizQuestion = document.getElementById('quiz-question');
-const quizHelpText = document.getElementById('quiz-help-text');
+const quizHelpText = document.getElementById('quiz-help-text'); // Ahora siempre visible
 const multipleChoiceOptions = document.getElementById('multiple-choice-options');
 const syntaxOrderContainer = document.getElementById('syntax-order-container');
 const syntaxTargetArea = document.getElementById('syntax-target-area');
@@ -2648,14 +2973,64 @@ const quizNextLevelButton = document.getElementById('quiz-next-level-button');
 const quizChangeTopicButton = document.getElementById('quiz-change-topic-button');
 const quizExitGameButton = document.getElementById('quiz-exit-game-button');
 
+// Elementos del modal de inactividad
+const inactivityWarningModal = document.getElementById('inactivity-warning-modal');
+const inactivityCountdownDisplay = document.getElementById('inactivity-countdown-display');
+
 // Drag & Drop specific elements and variables
 let draggedItem = null;
 let currentDragMatchPairs = [];
-let originalDragMatchState = [];
+let originalDragMatchState = []; // Para el botón de deshacer en Drag & Match
 
 // Syntax / Order specific variables
-let currentSyntaxFragments = [];
-let currentSyntaxOrder = [];
+let currentSyntaxFragments = []; // Fragmentos disponibles para arrastrar/seleccionar
+let currentSyntaxOrder = [];    // Orden actual de los fragmentos en el área de destino
+
+// --- Funciones de control de inactividad ---
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    clearInterval(inactivityCountdownInterval);
+    hideInactivityWarning();
+    inactivityTimer = setTimeout(showInactivityWarning, INACTIVITY_TIMEOUT * 1000);
+}
+
+function showInactivityWarning() {
+    inactivityCountdown = INACTIVITY_WARNING_DURATION;
+    inactivityWarningModal.classList.remove('hidden');
+    inactivityCountdownDisplay.textContent = inactivityCountdown;
+
+    inactivityCountdownInterval = setInterval(() => {
+        inactivityCountdown--;
+        inactivityCountdownDisplay.textContent = inactivityCountdown;
+        if (inactivityCountdown <= 0) {
+            clearInterval(inactivityCountdownInterval);
+            resetGameDueToInactivity();
+        }
+    }, 1000);
+}
+
+function hideInactivityWarning() {
+    inactivityWarningModal.classList.add('hidden');
+}
+
+function resetGameDueToInactivity() {
+    clearInterval(quizTimer); // Detener el temporizador del quiz
+    clearInterval(inactivityCountdownInterval); // Detener el contador de inactividad
+    showScreen('quiz-start-menu'); // Volver al menú de inicio
+    currentScore = 0; // Resetear puntuación
+    answeredCorrectly = 0;
+    answeredIncorrectly = 0;
+    updateScoreDisplay(); // Actualizar display de puntuación
+    quizTimerDisplay.textContent = '00:00'; // Resetear display del tiempo
+    alert('El juego se ha reiniciado debido a la inactividad.'); // Usar un mensaje simple
+}
+
+// Event listeners para detectar actividad del usuario
+['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(event => {
+    document.addEventListener(event, resetInactivityTimer);
+});
+
 
 // --- Game Flow Functions ---
 
@@ -2682,6 +3057,7 @@ function showScreen(screenId) {
         // Add animation class
         targetScreen.classList.add('animate-fade-in-down');
     }
+    resetInactivityTimer(); // Reset timer on screen change
 }
 
 function startQuiz() {
@@ -2705,6 +3081,7 @@ function selectDifficulty(difficulty) {
     currentScore = 0;
     answeredCorrectly = 0;
     answeredIncorrectly = 0;
+    updateScoreDisplay(); // Asegurarse de que el score se reinicie visualmente
     startQuestion();
     showScreen('quiz-play-area');
 }
@@ -2722,8 +3099,8 @@ function startQuestion() {
 
     const question = currentQuestions[currentQuestionIndex];
     quizQuestion.textContent = question.question;
-    quizHelpText.textContent = question.help || ''; // Set help text
-    quizHelpText.classList.add('hidden'); // Initially hide help text
+    quizHelpText.textContent = question.help || ''; // Set help text, now always visible
+    quizHelpText.classList.remove('hidden'); // Ensure help text is visible
 
     switch (question.type) {
         case "multiple-choice":
@@ -2748,14 +3125,18 @@ function startQuestion() {
             setTimeout(nextQuestion, 1000); // Short delay before next question
         }
     }, 1000);
+    resetInactivityTimer(); // Reset inactivity timer on new question
 }
 
 function resetQuestionArea() {
     multipleChoiceOptions.innerHTML = '';
     multipleChoiceOptions.classList.add('hidden');
+    multipleChoiceOptions.classList.remove('grid'); // Remove grid display for other types
+
     syntaxOrderContainer.classList.add('hidden');
     syntaxTargetArea.innerHTML = '';
     syntaxOptionsArea.innerHTML = '';
+
     dragMatchContainer.classList.add('hidden');
     dragElementsArea.innerHTML = '';
     dropTargetsArea.innerHTML = '';
@@ -2816,7 +3197,6 @@ function renderSyntaxTarget() {
         fragmentSpan.classList.add('syntax-fragment-target', 'bg-purple-200', 'text-purple-800', 'px-3', 'py-1', 'rounded', 'relative', 'cursor-pointer', 'hover:bg-purple-300', 'transition-colors', 'duration-200');
         fragmentSpan.textContent = item.fragment;
         fragmentSpan.dataset.originalIndex = item.originalIndex; // Store original index
-        fragmentSpan.onclick = () => removeSyntaxFragment(item.originalIndex);
 
         // Add a small 'x' button for removal
         const removeButton = document.createElement('span');
@@ -2853,6 +3233,7 @@ function removeSyntaxFragment(originalIndex) {
         fragmentElement.style.visibility = 'visible';
     }
 }
+
 
 function checkSyntaxOrder() {
     clearInterval(quizTimer); // Stop the timer
@@ -3133,15 +3514,15 @@ function checkAnswer(selectedIndex, correctAnswer) {
 }
 
 function handleCorrectAnswer() {
-    currentScore += 10;
+    currentScore += 1; // 1 punto por respuesta correcta
     answeredCorrectly++;
     updateScoreDisplay();
 }
 
 function handleIncorrectAnswer() {
-    currentScore = Math.max(0, currentScore - 5); // Prevent negative score
+    // No se resta puntuación por errores, solo se cuenta el error
     answeredIncorrectly++;
-    updateScoreDisplay();
+    updateScoreDisplay(); // Asegurarse de que el score se actualice visualmente
 }
 
 function nextQuestion() {
@@ -3171,6 +3552,7 @@ function endQuiz() {
     }
 
     showScreen('quiz-result-screen');
+    resetInactivityTimer(); // Reset inactivity timer on quiz end
 }
 
 function shuffleArray(array) {
@@ -3214,6 +3596,10 @@ if (quizRetryLevelButton) {
     quizRetryLevelButton.addEventListener('click', () => {
         selectDifficulty(selectedDifficulty); // Re-select current difficulty to restart
     });
+}
+
+if (quizNextLevelButton) {
+    // This will be set dynamically in endQuiz based on availability
 }
 
 if (quizChangeTopicButton) {
