@@ -1,7 +1,6 @@
 // Datos para el juego WebMaster Quiz
 // Cada tema (HTML, CSS, JavaScript) tendrá 3 niveles de dificultad (Básico, Intermedio, Avanzado).
 // Cada nivel contendrá 20 preguntas únicas, que se cargarán aleatoriamente.
-// Aquí se incluyen ejemplos representativos de cada tipo de pregunta; se necesitarían más para llegar a 20 por nivel/tema.
 
 const quizData = {
     html: {
@@ -22,19 +21,19 @@ const quizData = {
             },
             {
                 type: "syntax-completion",
-                question: "Ordena los fragmentos para crear una etiqueta de imagen con una fuente y texto alternativo.",
-                fragments: ["<img", "src=\"imagen.jpg\"", "alt=\"Descripción\"", ">"],
-                correctOrder: ["<img", "src=\"imagen.jpg\"", "alt=\"Descripción\"", ">"],
-                help: "La etiqueta de imagen es un elemento vacío."
+                question: "Completa la etiqueta para un enlace que abra 'pagina.html' en la misma pestaña.",
+                fragments: ["<a", "href=\"pagina.html\"", ">", "Ir a página", "</a>"],
+                correctOrder: ["<a", "href=\"pagina.html\"", ">", "Ir a página", "</a>"],
+                help: "El atributo 'href' define el destino del enlace."
             },
             {
                 type: "drag-match",
-                question: "Arrastra y empareja la etiqueta HTML con su propósito.",
+                question: "Arrastra y empareja la etiqueta HTML con su propósito básico.",
                 pairs: [
                     { drag: "<h1>", drop: "Encabezado principal" },
-                    { drag: "<a>", drop: "Enlace de hipertexto" },
+                    { drag: "<img>", drop: "Insertar una imagen" },
                     { drag: "<ul>", drop: "Lista desordenada" },
-                    { drag: "<button>", drop: "Botón clicable" }
+                    { drag: "<body>", drop: "Contenido visible de la página" }
                 ],
                 help: "Piensa en la función semántica de cada etiqueta."
             },
@@ -45,7 +44,6 @@ const quizData = {
                 correctOrder: ["<!DOCTYPE html>", "<html>", "<head>", "</head>", "<body>", "</body>", "</html>"],
                 help: "Recuerda el orden de las etiquetas principales."
             },
-            // Preguntas adicionales para HTML Básico (15 más)
             {
                 type: "multiple-choice",
                 question: "¿Qué etiqueta se usa para crear una lista ordenada?",
@@ -56,23 +54,23 @@ const quizData = {
             {
                 type: "multiple-choice",
                 question: "¿Cuál es el propósito de la etiqueta `<footer>`?",
-                options: ["Definir el encabezado de una sección", "Contener información de derechos de autor o contacto", "Agrupar contenido principal", "Crear un pie de página para un un documento o sección"],
+                options: ["Definir el encabezado de una sección", "Contener información de derechos de autor o contacto", "Agrupar contenido principal", "Crear un pie de página para un documento o sección"],
                 correctAnswer: "Crear un pie de página para un documento o sección",
                 help: "Se encuentra al final de un documento o sección."
             },
             {
                 type: "syntax-completion",
-                question: "Completa la etiqueta para un enlace que abra 'pagina.html' en una nueva pestaña.",
-                fragments: ["<a", "href=\"pagina.html\"", "target=\"_blank\"", ">", "Ir a página", "</a>"],
-                correctOrder: ["<a", "href=\"pagina.html\"", "target=\"_blank\"", ">", "Ir a página", "</a>"],
-                help: "El atributo 'target' controla dónde se abre el enlace."
+                question: "Crea una etiqueta de imagen con una fuente y texto alternativo.",
+                fragments: ["<img", "src=\"foto.jpg\"", "alt=\"Mi foto\"", ">"],
+                correctOrder: ["<img", "src=\"foto.jpg\"", "alt=\"Mi foto\"", ">"],
+                help: "La etiqueta de imagen es un elemento vacío."
             },
             {
                 type: "drag-match",
                 question: "Empareja la etiqueta con su uso principal.",
                 pairs: [
-                    { drag: "<strong>", drop: "Texto importante" },
-                    { drag: "<em>", drop: "Texto enfatizado" },
+                    { drag: "<strong>", drop: "Texto importante (negrita)" },
+                    { drag: "<em>", drop: "Texto enfatizado (cursiva)" },
                     { drag: "<br>", drop: "Salto de línea" },
                     { drag: "<hr>", drop: "Línea horizontal temática" }
                 ],
@@ -87,24 +85,24 @@ const quizData = {
             },
             {
                 type: "order-execution",
-                question: "Ordena los pasos para crear una tabla simple en HTML.",
-                fragments: ["Cerrar <table>", "Abrir <table>", "Cerrar <tr>", "Abrir <tr>", "Abrir <td>", "Cerrar <td>", "Contenido de celda"],
-                correctOrder: ["Abrir <table>", "Abrir <tr>", "Abrir <td>", "Contenido de celda", "Cerrar <td>", "Cerrar <tr>", "Cerrar <table>"],
-                help: "La estructura es tabla > fila > celda."
+                question: "Ordena los pasos para crear un encabezado de nivel 2.",
+                fragments: ["<h2>", "Mi Encabezado", "</h2>"],
+                correctOrder: ["<h2>", "Mi Encabezado", "</h2>"],
+                help: "Los encabezados van del h1 al h6."
             },
             {
                 type: "multiple-choice",
-                question: "¿Qué atributo se utiliza para fusionar celdas en una columna en una tabla HTML?",
-                options: ["rowspan", "colspan", "cellspan", "merge-cols"],
-                correctAnswer: "colspan",
+                question: "¿Qué atributo se utiliza para fusionar celdas en una fila en una tabla HTML?",
+                options: ["rowspan", "colspan", "cellspan", "merge-rows"],
+                correctAnswer: "rowspan",
                 help: "Piensa en la dirección de la fusión."
             },
             {
                 type: "syntax-completion",
-                question: "Completa la etiqueta para un campo de entrada de contraseña.",
-                fragments: ["<input", "type=\"password\"", "name=\"pass\"", ">"],
-                correctOrder: ["<input", "type=\"password\"", "name=\"pass\"", ">"],
-                help: "El tipo 'password' oculta los caracteres."
+                question: "Completa la etiqueta para un campo de entrada de texto simple.",
+                fragments: ["<input", "type=\"text\"", "name=\"nombre\"", ">"],
+                correctOrder: ["<input", "type=\"text\"", "name=\"nombre\"", ">"],
+                help: "El tipo 'text' es el más común para entradas."
             },
             {
                 type: "multiple-choice",
@@ -126,7 +124,7 @@ const quizData = {
             },
             {
                 type: "multiple-choice",
-                question: "¿Qué elemento HTML5 se usa para dibujar gráficos, animaciones o imágenes sobre la marcha?",
+                question: "¿Qué elemento HTML se usa para dibujar gráficos, animaciones o imágenes sobre la marcha?",
                 options: ["<svg>", "<canvas>", "<draw>", "<graphic>"],
                 correctAnswer: "<canvas>",
                 help: "Es un área de dibujo programable con JavaScript."
@@ -147,9 +145,9 @@ const quizData = {
             },
             {
                 type: "syntax-completion",
-                question: "Crea una etiqueta de lista desordenada con dos elementos.",
-                fragments: ["<ul>", "<li>", "Elemento 1", "</li>", "<li>", "Elemento 2", "</li>", "</ul>"],
-                correctOrder: ["<ul>", "<li>", "Elemento 1", "</li>", "<li>", "Elemento 2", "</li>", "</ul>"],
+                question: "Crea una etiqueta de lista desordenada con un elemento.",
+                fragments: ["<ul>", "<li>", "Elemento", "</li>", "</ul>"],
+                correctOrder: ["<ul>", "<li>", "Elemento", "</li>", "</ul>"],
                 help: "Las listas desordenadas usan viñetas."
             },
             {
@@ -193,7 +191,6 @@ const quizData = {
                 correctOrder: ["Abrir la etiqueta <iframe>", "Establecer el atributo src a la URL del video", "Establecer atributos de ancho y alto", "Cerrar la etiqueta <iframe>"],
                 help: "El 'src' es fundamental para el contenido."
             },
-            // Preguntas adicionales para HTML Intermedio (16 más)
             {
                 type: "multiple-choice",
                 question: "¿Qué elemento HTML5 se utiliza para representar un conjunto de enlaces de navegación?",
@@ -352,7 +349,6 @@ const quizData = {
                 correctOrder: ["Definir la lógica del Worker en un archivo JS separado", "Crear una instancia de Worker", "Enviar mensajes al Worker con postMessage()", "Escuchar mensajes del Worker con onmessage"],
                 help: "Los Web Workers se ejecutan en un hilo separado."
             },
-            // Preguntas adicionales para HTML Avanzado (16 más)
             {
                 type: "multiple-choice",
                 question: "¿Qué API de HTML5 permite a las aplicaciones web almacenar datos de forma persistente en el navegador?",
@@ -520,7 +516,6 @@ const quizData = {
                 correctOrder: ["<link", "rel=\"stylesheet\"", "href=\"style.css\"", ">"],
                 help: "Esta etiqueta va en el <head>."
             },
-            // Preguntas adicionales para CSS Básico (15 más)
             {
                 type: "multiple-choice",
                 question: "¿Qué propiedad CSS se usa para cambiar el color de fondo de un elemento?",
@@ -672,7 +667,6 @@ const quizData = {
                 correctOrder: ["display: flex;", "justify-content: center;"],
                 help: "Flexbox es una herramienta poderosa para la alineación."
             },
-            // Preguntas adicionales para CSS Intermedio (16 más)
             {
                 type: "multiple-choice",
                 question: "¿Qué propiedad CSS se usa para añadir una sombra a un texto?",
@@ -801,160 +795,159 @@ const quizData = {
         avanzado: [
             {
                 type: "multiple-choice",
-                question: "¿Cuál es el propósito del atributo 'data-*' en HTML5?",
-                options: ["Almacenar datos privados para el navegador", "Almacenar datos personalizados para el script de la página", "Definir un tipo de dato para formularios", "Indicar que un elemento está deshabilitado"],
-                correctAnswer: "Almacenar datos personalizados para el script de la página",
-                help: "Permite añadir información extra a los elementos HTML."
+                question: "¿Qué propiedad CSS se utiliza para crear animaciones fluidas entre estados de un elemento?",
+                options: ["animation", "transition", "transform", "keyframes"],
+                correctAnswer: "transition",
+                help: "Permite suavizar los cambios de propiedades CSS."
             },
             {
                 type: "syntax-completion",
-                question: "Crea una etiqueta `<picture>` para responsive images con `<source>` y `<img>`.",
-                fragments: ["<picture>", "<source srcset=\"small.jpg\" media=\"(max-width: 600px)\">", "<img src=\"large.jpg\" alt=\"Imagen\">", "</picture>"],
-                correctOrder: ["<picture>", "<source srcset=\"small.jpg\" media=\"(max-width: 600px)\">", "<img src=\"large.jpg\" alt=\"Imagen\">", "</picture>"],
-                help: "La etiqueta `<picture>` permite definir múltiples fuentes de imagen."
+                question: "Crea una animación CSS llamada 'fade-in' que cambie la opacidad de 0 a 1.",
+                fragments: ["@keyframes fade-in {", "from { opacity: 0; }", "to { opacity: 1; }", "}"],
+                correctOrder: ["@keyframes fade-in {", "from { opacity: 0; }", "to { opacity: 1; }", "}"],
+                help: "Las animaciones se definen con @keyframes."
             },
             {
                 type: "drag-match",
-                question: "Arrastra y empareja el elemento semántico HTML5 con su descripción.",
+                question: "Arrastra y empareja el valor de 'display' con su comportamiento.",
                 pairs: [
-                    { drag: "<article>", drop: "Contenido independiente y redistribuible" },
-                    { drag: "<aside>", drop: "Contenido relacionado pero separado del principal" },
-                    { drag: "<section>", drop: "Agrupación temática de contenido" },
-                    { drag: "<nav>", drop: "Sección de enlaces de navegación" }
+                    { drag: "grid", drop: "Layout bidimensional basado en filas y columnas" },
+                    { drag: "flex", drop: "Layout unidimensional para distribuir elementos" },
+                    { drag: "inline-block", drop: "Elemento en línea que acepta ancho y alto" },
+                    { drag: "none", drop: "El elemento no se muestra y no ocupa espacio" }
                 ],
-                help: "Piensa en la estructura y el significado del contenido."
+                help: "La propiedad 'display' es fundamental para el layout."
             },
             {
                 type: "order-execution",
-                question: "Ordena los pasos para implementar Web Workers.",
-                fragments: ["Crear una instancia de Worker", "Enviar mensajes al Worker con postMessage()", "Escuchar mensajes del Worker con onmessage", "Definir la lógica del Worker en un archivo JS separado"],
-                correctOrder: ["Definir la lógica del Worker en un archivo JS separado", "Crear una instancia de Worker", "Enviar mensajes al Worker con postMessage()", "Escuchar mensajes del Worker con onmessage"],
-                help: "Los Web Workers se ejecutan en un hilo separado."
+                question: "Ordena las propiedades para crear un gradiente lineal de arriba a abajo, de rojo a azul.",
+                fragments: ["background-image:", "linear-gradient(to bottom, red, blue);"],
+                correctOrder: ["background-image:", "linear-gradient(to bottom, red, blue);"],
+                help: "Los gradientes son imágenes CSS."
             },
-            // Preguntas adicionales para HTML Avanzado (16 más)
             {
                 type: "multiple-choice",
-                question: "¿Qué API de HTML5 permite a las aplicaciones web almacenar datos de forma persistente en el navegador?",
-                options: ["Geolocation API", "Web Storage API", "Canvas API", "Drag and Drop API"],
-                correctAnswer: "Web Storage API",
-                help: "Incluye localStorage y sessionStorage."
+                question: "¿Qué propiedad CSS se usa para crear un efecto de paralaje con imágenes de fondo?",
+                options: ["background-attachment: fixed;", "background-scroll: fixed;", "background-position: fixed;", "background-origin: fixed;"],
+                correctAnswer: "background-attachment: fixed;",
+                help: "Mantiene la imagen fija mientras el contenido se desplaza."
             },
             {
                 type: "syntax-completion",
-                question: "Crea un elemento `<template>` con un párrafo dentro.",
-                fragments: ["<template>", "<p>", "Contenido del template", "</p>", "</template>"],
-                correctOrder: ["<template>", "<p>", "Contenido del template", "</p>", "</template>"],
-                help: "El contenido de un template no se renderiza inicialmente."
+                question: "Crea una regla CSS para un elemento `div` que use `grid` para tener 3 columnas de igual ancho y 2 filas con alto automático.",
+                fragments: ["div", "{", "display: grid;", "grid-template-columns: repeat(3, 1fr);", "grid-template-rows: auto auto;", "}"],
+                correctOrder: ["div", "{", "display: grid;", "grid-template-columns: repeat(3, 1fr);", "grid-template-rows: auto auto;", "}"],
+                help: "Grid es muy potente para layouts complejos."
             },
             {
                 type: "drag-match",
-                question: "Empareja la etiqueta HTML con su uso en formularios avanzados.",
+                question: "Empareja la propiedad de animación CSS con su función.",
                 pairs: [
-                    { drag: "<fieldset>", drop: "Agrupa elementos relacionados en un formulario" },
-                    { drag: "<legend>", drop: "Define un título para un `<fieldset>`" },
-                    { drag: "<output>", drop: "Muestra el resultado de un cálculo de formulario" },
-                    { drag: "<progress>", drop: "Muestra el progreso de una tarea" }
+                    { drag: "animation-name", drop: "Nombre de la regla @keyframes" },
+                    { drag: "animation-duration", drop: "Duración de la animación" },
+                    { drag: "animation-iteration-count", drop: "Número de veces que se repite la animación" },
+                    { drag: "animation-delay", drop: "Retraso antes de que comience la animación" }
                 ],
-                help: "Mejoran la semántica y la usabilidad de los formularios."
+                help: "Son propiedades fundamentales para controlar animaciones."
             },
             {
                 type: "multiple-choice",
-                question: "¿Qué atributo se utiliza para especificar una función JavaScript que se ejecutará cuando un elemento es arrastrado?",
-                options: ["ondrag", "ondragstart", "onmove", "ondragging"],
-                correctAnswer: "ondragstart",
-                help: "Es un evento específico para el inicio del arrastre."
+                question: "¿Qué pseudo-clase CSS se utiliza para seleccionar elementos basados en su posición en un grupo de hermanos (ej. cada tercer elemento)?",
+                options: [":nth-child()", ":nth-of-type()", ":first-child", ":last-child"],
+                correctAnswer: ":nth-child()",
+                help: "Permite selecciones más complejas en listas."
             },
             {
                 type: "order-execution",
-                question: "Ordena los pasos para usar la Geolocation API para obtener la posición actual.",
-                fragments: ["navigator.geolocation.getCurrentPosition(", "function(position) { ... }", ");"],
-                correctOrder: ["navigator.geolocation.getCurrentPosition(", "function(position) { ... }", ");"],
-                help: "Requiere permiso del usuario."
+                question: "Ordena las propiedades para crear un filtro de desenfoque (blur) de 5px.",
+                fragments: ["filter:", "blur(5px);"],
+                correctOrder: ["filter:", "blur(5px);"],
+                help: "Los filtros CSS aplican efectos gráficos."
             },
             {
                 type: "multiple-choice",
-                question: "¿Cuál es el propósito del atributo `async` en una etiqueta `<script>`?",
-                options: ["Cargar el script de forma síncrona", "Cargar el script de forma asíncrona y ejecutarlo tan pronto como esté disponible sin bloquear el HTML", "Retrasar la ejecución del script hasta que el HTML esté completamente parseado", "Indicar que el script es opcional"],
-                correctAnswer: "Cargar el script de forma asíncrona y ejecutarlo tan pronto como esté disponible sin bloquear el HTML",
-                help: "No garantiza el orden de ejecución."
+                question: "¿Qué valor de `background-size` escala la imagen para cubrir completamente el área del contenedor, recortando si es necesario?",
+                options: ["contain", "cover", "auto", "100%"],
+                correctAnswer: "cover",
+                help: "Asegura que no queden espacios vacíos."
             },
             {
                 type: "syntax-completion",
-                question: "Crea una etiqueta `<details>` con un `<summary>`.",
-                fragments: ["<details>", "<summary>", "Haz clic para ver más", "</summary>", "<p>", "Contenido oculto", "</p>", "</details>"],
-                correctOrder: ["<details>", "<summary>", "Haz clic para ver más", "</summary>", "<p>", "Contenido oculto", "</p>", "</details>"],
-                help: "Crea un widget de divulgación interactivo."
+                question: "Crea una regla CSS para un elemento `p` que use la propiedad `clip-path` para crear una forma de círculo.",
+                fragments: ["p", "{", "clip-path: circle(50%);", "}"],
+                correctOrder: ["p", "{", "clip-path: circle(50%);", "}"],
+                help: "Permite crear formas complejas para recortar elementos."
             },
             {
                 type: "drag-match",
-                question: "Empareja el evento de arrastre y soltar con su descripción.",
+                question: "Empareja la propiedad de Grid Layout con su función.",
                 pairs: [
-                    { drag: "dragstart", drop: "Se dispara cuando el usuario comienza a arrastrar un elemento" },
-                    { drag: "dragover", drop: "Se dispara cuando un elemento arrastrado se mueve sobre un objetivo válido" },
-                    { drag: "drop", drop: "Se dispara cuando un elemento arrastrado se suelta sobre un objetivo válido" },
-                    { drag: "dragleave", drop: "Se dispara cuando un elemento arrastrado sale de un objetivo válido" }
+                    { drag: "grid-gap", drop: "Espacio entre las filas y columnas de la cuadrícula" },
+                    { drag: "grid-template-columns", drop: "Define el número y tamaño de las columnas" },
+                    { drag: "grid-template-rows", drop: "Define el número y tamaño de las filas" },
+                    { drag: "grid-area", drop: "Define el nombre de un área de la cuadrícula" }
                 ],
-                help: "Son eventos clave para la interacción de arrastrar y soltar."
+                help: "Son propiedades fundamentales para Grid."
             },
             {
                 type: "multiple-choice",
-                question: "¿Qué elemento HTML5 se utiliza para representar un rango de valores numéricos?",
-                options: ["<range>", "<meter>", "<output>", "<input type=\"range\">"],
-                correctAnswer: "<meter>",
-                help: "Indica un valor dentro de un rango conocido."
+                question: "¿Qué propiedad CSS se utiliza para controlar la visibilidad de los elementos de una manera que no afecta el diseño (layout)?",
+                options: ["display", "visibility", "opacity", "pointer-events"],
+                correctAnswer: "opacity",
+                help: "Solo afecta la transparencia, no el espacio."
             },
             {
                 type: "order-execution",
-                question: "Ordena los pasos para usar Web Components (Custom Elements).",
-                fragments: ["Definir la clase del Custom Element", "Conectar el Custom Element al DOM", "Registrar el Custom Element con `customElements.define()`"],
-                correctOrder: ["Definir la clase del Custom Element", "Registrar el Custom Element con `customElements.define()`", "Conectar el Custom Element al DOM"],
-                help: "Permiten crear etiquetas HTML personalizadas."
+                question: "Ordena las propiedades para crear una transformación de rotación de 45 grados en el eje Z.",
+                fragments: ["transform:", "rotateZ(45deg);"],
+                correctOrder: ["transform:", "rotateZ(45deg);"],
+                help: "Las transformaciones son muy versátiles."
             },
             {
                 type: "multiple-choice",
-                question: "¿Cuál es la función principal de la etiqueta `<canvas>` en HTML5?",
-                options: ["Reproducir videos", "Crear animaciones 3D complejas", "Dibujar gráficos 2D y animaciones dinámicas con JavaScript", "Insertar contenido de otras páginas web"],
-                correctAnswer: "Dibujar gráficos 2D y animaciones dinámicas con JavaScript",
-                help: "Es un lienzo para dibujar."
+                question: "¿Qué unidad de medida CSS es relativa al ancho de la ventana gráfica?",
+                options: ["vh", "vw", "vmin", "vmax"],
+                correctAnswer: "vw",
+                help: "1vw es el 1% del ancho del viewport."
             },
             {
                 type: "syntax-completion",
-                question: "Crea un `input` para subir archivos que acepte solo imágenes JPG y PNG.",
-                fragments: ["<input", "type=\"file\"", "accept=\".jpg,.png\"", ">"],
-                correctOrder: ["<input", "type=\"file\"", "accept=\".jpg,.png\"", ">"],
-                help: "El atributo `accept` filtra tipos de archivo."
+                question: "Crea una regla CSS para un elemento `::before` que añada contenido de texto.",
+                fragments: ["p::before", "{", "content: \"Prefijo \";", "}"],
+                correctOrder: ["p::before", "{", "content: \"Prefijo \";", "}"],
+                help: "Los pseudo-elementos añaden contenido antes o después."
             },
             {
                 type: "drag-match",
-                question: "Empareja el tipo de entrada de formulario HTML5 con su propósito.",
+                question: "Empareja la propiedad de transición CSS con su función.",
                 pairs: [
-                    { drag: "email", drop: "Campo para direcciones de correo electrónico" },
-                    { drag: "url", drop: "Campo para URLs" },
-                    { drag: "date", drop: "Selector de fecha" },
-                    { drag: "color", drop: "Selector de color" }
+                    { drag: "transition-property", drop: "Propiedad a la que se aplica la transición" },
+                    { drag: "transition-duration", drop: "Duración de la transición" },
+                    { drag: "transition-timing-function", drop: "Curva de velocidad de la transición" },
+                    { drag: "transition-delay", drop: "Retraso antes de que comience la transición" }
                 ],
-                help: "Simplifican la entrada de datos específicos."
+                help: "Permiten controlar el comportamiento de las transiciones."
             },
             {
                 type: "multiple-choice",
-                question: "¿Qué atributo se usa para especificar que un elemento `<script>` debe ser ejecutado después de que el documento ha sido parseado?",
-                options: ["defer", "async", "load", "execute"],
-                correctAnswer: "defer",
-                help: "Garantiza el orden de ejecución y no bloquea el parseo."
+                question: "¿Qué propiedad CSS se utiliza para controlar cómo se ajusta el contenido de una imagen dentro de su contenedor, preservando su relación de aspecto?",
+                options: ["object-fit", "image-fit", "content-fit", "aspect-ratio"],
+                correctAnswer: "object-fit",
+                help: "Similar a `background-size` pero para elementos `<img>` o `<video>`."
             },
             {
                 type: "order-execution",
-                question: "Ordena los pasos para crear un `iframe` con contenido de otra página.",
-                fragments: ["<iframe", "src=\"otra_pagina.html\"", "width=\"500\"", "height=\"300\"", ">", "</iframe>"],
-                correctOrder: ["<iframe", "src=\"otra_pagina.html\"", "width=\"500\"", "height=\"300\"", ">", "</iframe>"],
-                help: "Permite incrustar contenido externo."
+                question: "Ordena las propiedades para crear un `flex-container` que envuelva sus elementos y los alinee al final.",
+                fragments: ["display: flex;", "flex-wrap: wrap;", "justify-content: flex-end;"],
+                correctOrder: ["display: flex;", "flex-wrap: wrap;", "justify-content: flex-end;"],
+                help: "Flexbox es muy versátil para layouts."
             },
             {
                 type: "multiple-choice",
-                question: "¿Cuál es el propósito del atributo `srcset` en la etiqueta `<img>`?",
-                options: ["Especificar el tamaño de la imagen", "Definir múltiples fuentes de imagen para diferentes resoluciones o densidades de píxeles", "Añadir texto alternativo a la imagen", "Cargar la imagen de forma perezosa"],
-                correctAnswer: "Definir múltiples fuentes de imagen para diferentes resoluciones o densidades de píxeles",
-                help: "Es clave para imágenes responsivas."
+                question: "¿Qué propiedad CSS se utiliza para definir el origen de la transformación de un elemento?",
+                options: ["transform-origin", "transform-point", "origin", "pivot"],
+                correctAnswer: "transform-origin",
+                help: "Cambia el punto alrededor del cual rota o escala un elemento."
             }
         ]
     },
@@ -999,7 +992,6 @@ const quizData = {
                 correctOrder: ["let elemento =", "document.getElementById('miId')", ".textContent = 'Nuevo Texto';"],
                 help: "Primero se selecciona el elemento, luego se modifica."
             },
-            // Preguntas adicionales para JavaScript Básico (15 más)
             {
                 type: "multiple-choice",
                 question: "¿Qué tipo de dato representa un valor verdadero o falso en JavaScript?",
@@ -1151,7 +1143,6 @@ const quizData = {
                 correctOrder: ["document.getElementById('miBoton')", "addEventListener('click', ...)", "function() { ... }"],
                 help: "Primero se obtiene el elemento, luego se le añade el 'listener'."
             },
-            // Preguntas adicionales para JavaScript Intermedio (16 más)
             {
                 type: "multiple-choice",
                 question: "¿Qué método de array se utiliza para crear un nuevo array con todos los elementos que pasan una prueba implementada por la función proporcionada?",
@@ -1310,7 +1301,6 @@ const quizData = {
                 correctOrder: ["fetch('https://api.example.com/data')", ".then(response => response.json())", ".then(data => console.log(data))", ".catch(error => console.error(error))"],
                 help: "Fetch devuelve una promesa."
             },
-            // Preguntas adicionales para JavaScript Avanzado (16 más)
             {
                 type: "multiple-choice",
                 question: "¿Qué método de array se utiliza para comprobar si al menos un elemento en el array pasa la prueba implementada por la función proporcionada?",
