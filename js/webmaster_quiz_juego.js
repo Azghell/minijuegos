@@ -490,259 +490,6 @@ const quizData = {
                 codeExample: `<progress value="70" max="100">70%</progress>`
             }
         ],
-        intermedio: [
-            {
-                question: "Atributo para fusionar celdas en fila de tabla:",
-                type: "multiple-choice",
-                options: ["`rowspan`", "`colspan`", "`cellspan`", "`merge-rows`"],
-                correctAnswer: 1,
-                help: "Este atributo se usa para expandir una celda a través de múltiples columnas.",
-                codeExample: `<table>
-    <tr>
-        <td colspan="2">Celdas fusionadas</td>
-    </tr>
-</table>`
-            },
-            {
-                question: "Empareja tipo de input de formulario con uso:",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Campo de texto", drop: `<input type="text">` },
-                    { drag: "Contraseña", drop: `<input type="password">` },
-                    { drag: "Botón de envío", drop: `<input type="submit">` },
-                    { drag: "Casilla de verificación", drop: `<input type="checkbox">` },
-                    { drag: "Botón de radio", drop: `<input type="radio">` }
-                ],
-                help: "Cada tipo de input está diseñado para un tipo específico de interacción del usuario.",
-                codeExample: null
-            },
-            {
-                question: "Etiqueta para incrustar multimedia externa:",
-                type: "multiple-choice",
-                options: ["`<video>`", "`<iframe>`", "`<embed>`", "`<object>`"],
-                correctAnswer: 1,
-                help: "Piensa en cómo se inserta una 'ventana' a otro documento dentro del tuyo.",
-                codeExample: `<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" width="560" height="315" frameborder="0" allowfullscreen></iframe>`
-            },
-            {
-                question: "Ordena para definir formulario HTML básico:",
-                type: "order-execution",
-                fragments: ["<form>", "<label for=\"name\">", "Nombre:</label>", "<input type=\"text\" id=\"name\" name=\"name\">", "<button type=\"submit\">", "Enviar</button>", "</form>"],
-                correctOrder: [0, 1, 2, 3, 4, 5, 6],
-                help: "Un formulario agrupa sus campos y acciones.",
-                codeExample: `<form>
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name">
-    <button type="submit">Enviar</button>
-</form>`
-            },
-            {
-                question: "Significado de 'semántico' en HTML:",
-                type: "multiple-choice",
-                options: ["Estilo de la página", "Significado o propósito del contenido", "Formato visual del texto", "Interactividad del usuario"],
-                correctAnswer: 1,
-                help: "Se refiere a dar un significado claro a las etiquetas, más allá de cómo se ven.",
-                codeExample: "<header>, <nav>, <article>, <section>, <aside>, <footer>"
-            },
-            {
-                question: "Propósito principal de etiqueta `<meta>`:",
-                type: "multiple-choice",
-                options: ["Definir el título de la página", "Proporcionar metadatos sobre el documento HTML", "Vincular hojas de estilo externas", "Insertar scripts de JavaScript"],
-                correctAnswer: 1,
-                help: "Esta etiqueta proporciona información sobre la página, pero no es visible para el usuario.",
-                codeExample: `<meta charset="UTF-8">
-<meta name="description" content="Descripción de la página">`
-            },
-            {
-                question: "Empareja atributos de imagen con función:",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Ruta de la imagen", drop: "`src`" },
-                    { drag: "Texto alternativo", drop: "`alt`" },
-                    { drag: "Ancho de la imagen", drop: "`width`" },
-                    { drag: "Alto de la imagen", drop: "`height`" },
-                    { drag: "Mapa de imagen", drop: "`usemap`" }
-                ],
-                help: "Estos atributos son esenciales para que las imágenes se muestren correctamente y sean accesibles.",
-                codeExample: null
-            },
-            {
-                question: "Ordena para vincular CSS externo:",
-                type: "order-execution",
-                fragments: ["<head>", "<link", "rel=\"stylesheet\"", "href=\"styles.css\"", ">", "</head>"],
-                correctOrder: [0, 1, 2, 3, 4, 5],
-                help: "Las hojas de estilo externas se enlazan en la sección de metadatos del documento.",
-                codeExample: `<head>
-    <link rel="stylesheet" href="styles.css">
-</head>`
-            },
-            {
-                question: "Etiqueta HTML5 para agrupar contenido relacionado (con título):",
-                type: "multiple-choice",
-                options: ["`<group>`", "`<section>`", "`<article>`", "`<aside>`"],
-                correctAnswer: 1,
-                help: "Esta etiqueta define una sección genérica de contenido.",
-                codeExample: `<section>
-    <h2>Acerca de nosotros</h2>
-    <p>Información sobre la empresa.</p>
-</section>`
-            },
-            {
-                question: "Atributo para hacer elemento editable en navegador:",
-                type: "multiple-choice",
-                options: ["`editable`", "`contenteditable`", "`canedit`", "`user-editable`"],
-                correctAnswer: 1,
-                help: "Este atributo permite que el contenido del elemento pueda ser modificado por el usuario.",
-                codeExample: `<div contenteditable="true">Este texto se puede editar.</div>`
-            },
-            {
-                question: "Atributo para valor predeterminado en `<input type=\"text\">`:",
-                type: "multiple-choice",
-                options: ["`default`", "`placeholder`", "`value`", "`initial`"],
-                correctAnswer: 2,
-                help: "Este atributo define el valor inicial de un campo de entrada.",
-                codeExample: `<input type="text" value="Texto predeterminado">`
-            },
-            {
-                question: "Empareja atributo de formulario con función:",
-                type: "drag-match",
-                pairs: [
-                    { drag: "URL a la que se envían los datos", drop: "`action`" },
-                    { drag: "Método HTTP (GET/POST)", drop: "`method`" },
-                    { drag: "Tipo de codificación de datos", drop: "`enctype`" },
-                    { drag: "Habilitar/deshabilitar autocompletado", drop: "`autocomplete`" },
-                    { drag: "Deshabilitar validación del navegador", drop: "`novalidate`" }
-                ],
-                help: "Estos atributos controlan el comportamiento de un formulario HTML.",
-                codeExample: null
-            },
-            {
-                question: "Ordena para crear lista descriptiva (`<dl>`):",
-                type: "order-execution",
-                fragments: ["<dl>", "<dt>", "Término", "</dt>", "<dd>", "Descripción", "</dd>", "</dl>"],
-                correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
-                help: "Las listas descriptivas se usan para definir términos y sus descripciones.",
-                codeExample: `<dl>
-    <dt>Término</dt>
-    <dd>Descripción</dd>
-</dl>`
-            },
-            {
-                question: "Etiquetas HTML5 para contenido principal y navegación:",
-                type: "multiple-choice",
-                options: ["`<content>` y `<menu>`", "`<main>` y `<nav>`", "`<article>` y `<aside>`", "`<section>` y `<header>`"],
-                correctAnswer: 1,
-                help: "HTML5 introdujo etiquetas para mejorar la semántica del documento.",
-                codeExample: `<main>...</main> <nav>...</nav>`
-            },
-            {
-                question: "Propósito del atributo `srcset` en `<img>`:",
-                type: "multiple-choice",
-                options: ["Definir el tamaño máximo de la imagen", "Proporcionar imágenes diferentes para distintas resoluciones o densidades de píxeles", "Especificar la calidad de compresión de la imagen", "Cargar la imagen de forma asíncrona"],
-                correctAnswer: 1,
-                help: "Permite que el navegador elija la imagen más adecuada para el dispositivo del usuario.",
-                codeExample: `<img srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 1500w" src="medium.jpg" alt="Imagen responsive">`
-            },
-            {
-                question: "Etiqueta para incrustar audio en página web:",
-                type: "multiple-choice",
-                options: ["`<sound>`", "`<audio>`", "`<mp3>`", "`<play>`"],
-                correctAnswer: 1,
-                help: "Esta etiqueta permite reproducir archivos de audio con controles nativos del navegador.",
-                codeExample: `<audio controls src="audio.mp3"></audio>`
-            },
-            {
-                question: "Atributo para campo de formulario requerido:",
-                type: "multiple-choice",
-                options: ["`mandatory`", "`required`", "`must-fill`", "`validate`"],
-                correctAnswer: 1,
-                help: "Es un atributo booleano que activa la validación HTML5 del navegador.",
-                codeExample: `<input type="text" required>`
-            },
-            {
-                question: "Empareja etiqueta HTML con uso semántico (HTML5):",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Contenido principal y único", drop: "<main>" },
-                    { drag: "Contenido de navegación", drop: "<nav>" },
-                    { drag: "Contenido autocontenido (artículo)", drop: "<article>" },
-                    { drag: "Contenido relacionado pero aparte", drop: "<aside>" },
-                    { drag: "Pie de página de una sección o documento", drop: "<footer>" }
-                ],
-                help: "Estas etiquetas ayudan a estructurar el contenido de manera significativa para navegadores y herramientas de accesibilidad.",
-                codeExample: null
-            },
-            {
-                question: "Ordena para crear imagen con mapa (`<map>`):",
-                type: "order-execution",
-                fragments: [
-                    "<img src=\"planets.gif\" alt=\"Planetas\" usemap=\"#planetmap\">",
-                    "<map name=\"planetmap\">",
-                    "  <area shape=\"rect\" coords=\"0,0,82,126\" href=\"sun.htm\" alt=\"Sol\">",
-                    "  <area shape=\"circle\" coords=\"90,58,3\" href=\"mercury.htm\" alt=\"Mercurio\">",
-                    "</map>"
-                ],
-                correctOrder: [0, 1, 2, 3, 4],
-                help: "Un mapa de imagen define áreas clicables en una imagen.",
-                codeExample: `<img src="planets.gif" alt="Planetas" usemap="#planetmap">
-<map name="planetmap">
-  <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sol">
-  <area shape="circle" coords="90,58,3" href="mercury.htm" alt="Mercurio">
-</map>`
-            },
-            {
-                question: "¿Qué tipo de `input` se usa para un control deslizante de rango?",
-                type: "multiple-choice",
-                options: ["`type=\"slider\"`", "`type=\"range\"`", "`type=\"scale\"`", "`type=\"level\"`"],
-                correctAnswer: 1,
-                help: "Este input permite al usuario seleccionar un valor de un rango predefinido.",
-                codeExample: `<input type="range" min="0" max="100" value="50">`
-            },
-            {
-                question: "Atributo para agrupar elementos de formulario (con borde):",
-                type: "multiple-choice",
-                options: ["`<group>`", "`<section>`", "`<fieldset>`", "`<formgroup>`"],
-                correctAnswer: 2,
-                help: "La etiqueta `<legend>` se usa a menudo con esta para proporcionar un título al grupo.",
-                codeExample: `<fieldset><legend>Contacto</legend>...</fieldset>`
-            },
-            {
-                question: "Empareja atributo HTML con accesibilidad/usabilidad:",
-                type: "drag-match",
-                pairs: [
-                    { drag: "Orden de navegación con teclado", drop: "`tabindex`" },
-                    { drag: "Texto de ejemplo en campo de entrada", drop: "`placeholder`" },
-                    { drag: "Deshabilita un control de formulario", drop: "`disabled`" },
-                    { drag: "Hace un campo de entrada solo lectura", drop: "`readonly`" }
-                ],
-                help: "Estos atributos mejoran la interacción del usuario y la accesibilidad.",
-                codeExample: null
-            },
-            {
-                question: "Etiqueta HTML para encabezado de tabla:",
-                type: "multiple-choice",
-                options: ["`<th>`", "`<header>`", "`<thead>`", "`<caption>`"],
-                correctAnswer: 2,
-                help: "Esta etiqueta agrupa las filas de encabezado de una tabla.",
-                codeExample: `<thead><tr><th>Encabezado</th></tr></thead>`
-            },
-            {
-                question: "Atributo para especificar charset HTML:",
-                type: "multiple-choice",
-                options: ["`lang`", "`charset`", "`encoding`", "`type`"],
-                correctAnswer: 1,
-                help: "Es fundamental para la correcta visualización de caracteres especiales y acentos.",
-                codeExample: `<meta charset="UTF-8">`
-            },
-            {
-                question: "Ordena para crear barra de progreso HTML5:",
-                type: "order-execution",
-                fragments: ["`<progress`", `value="70"`, `max="100">`, `70%</progress>`],
-                correctOrder: [0, 1, 2, 3],
-                help: "La etiqueta `progress` visualiza el progreso de una tarea.",
-                codeExample: `<progress value="70" max="100">70%</progress>`
-            }
-        ],
         avanzado: [
             {
                 question: "Diferencia entre `localStorage` y `sessionStorage`:",
@@ -2937,45 +2684,45 @@ let inactivityTimer;
 let inactivityCountdownInterval;
 let inactivityCountdown = INACTIVITY_WARNING_DURATION;
 
-const quizStartMenu = document.getElementById('quiz-start-menu');
-const startQuizButton = document.getElementById('start-quiz-button');
-const quizTopicSelectionMenu = document.getElementById('quiz-topic-selection-menu');
-const topicButtons = document.querySelectorAll('.topic-button');
-const backToStartMenuButton = document.getElementById('back-to-start-menu-button');
-const quizDifficultySelectionMenu = document.getElementById('quiz-difficulty-selection-menu');
-const selectedTopicDisplay = document.getElementById('selected-topic-display');
-const difficultyButtons = document.querySelectorAll('.difficulty-button');
-const backToTopicMenuButton = document.getElementById('back-to-topic-menu-button');
-const quizPlayArea = document.getElementById('quiz-play-area');
-const quizTimerDisplay = document.getElementById('quiz-timer');
-const quizScoreDisplay = document.getElementById('quiz-score-display');
-const quizQuestion = document.getElementById('quiz-question');
-const quizHelpText = document.getElementById('quiz-help-text'); // Ahora siempre visible
-const multipleChoiceOptions = document.getElementById('multiple-choice-options');
-const syntaxOrderContainer = document.getElementById('syntax-order-container');
-const syntaxTargetArea = document.getElementById('syntax-target-area');
-const syntaxOptionsArea = document.getElementById('syntax-options-area');
-const checkSyntaxButton = document.getElementById('check-syntax-button');
-const undoSyntaxButton = document.getElementById('undo-syntax-button');
-const dragMatchContainer = document.getElementById('drag-match-container');
-const dragElementsArea = document.getElementById('drag-elements');
-const dropTargetsArea = document.getElementById('drop-targets');
-const checkMatchButton = document.getElementById('check-match-button');
-const undoMatchButton = document.getElementById('undo-match-button');
-const endQuizButton = document.getElementById('end-quiz-button');
-const quizResultScreen = document.getElementById('quiz-result-screen');
-const quizCorrectAnswers = document.getElementById('quiz-correct-answers');
-const quizIncorrectAnswers = document.getElementById('quiz-incorrect-answers');
-const quizFinalScore = document.getElementById('quiz-final-score');
-const quizFinalTime = document.getElementById('quiz-final-time');
-const quizRetryLevelButton = document.getElementById('quiz-retry-level-button');
-const quizNextLevelButton = document.getElementById('quiz-next-level-button');
-const quizChangeTopicButton = document.getElementById('quiz-change-topic-button');
-const quizExitGameButton = document.getElementById('quiz-exit-game-button');
+// Declaring DOM elements as global variables, but assigning them AFTER DOMContentLoaded
+let quizStartMenu;
+let startQuizButton;
+let quizTopicSelectionMenu;
+let topicButtons;
+let backToStartMenuButton;
+let quizDifficultySelectionMenu;
+let selectedTopicDisplay;
+let difficultyButtons;
+let backToTopicMenuButton;
+let quizPlayArea;
+let quizTimerDisplay;
+let quizScoreDisplay;
+let quizQuestion;
+let quizHelpText;
+let multipleChoiceOptions;
+let syntaxOrderContainer;
+let syntaxTargetArea;
+let syntaxOptionsArea;
+let checkSyntaxButton;
+let undoSyntaxButton;
+let dragMatchContainer;
+let dragElementsArea;
+let dropTargetsArea;
+let checkMatchButton;
+let undoMatchButton;
+let endQuizButton;
+let quizResultScreen;
+let quizCorrectAnswers;
+let quizIncorrectAnswers;
+let quizFinalScore;
+let quizFinalTime;
+let quizRetryLevelButton;
+let quizNextLevelButton;
+let quizChangeTopicButton;
+let quizExitGameButton;
+let inactivityWarningModal;
+let inactivityCountdownDisplay;
 
-// Elementos del modal de inactividad
-const inactivityWarningModal = document.getElementById('inactivity-warning-modal');
-const inactivityCountdownDisplay = document.getElementById('inactivity-countdown-display');
 
 // Drag & Drop specific elements and variables
 let draggedItem = null;
@@ -2997,12 +2744,19 @@ function resetInactivityTimer() {
 
 function showInactivityWarning() {
     inactivityCountdown = INACTIVITY_WARNING_DURATION;
-    inactivityWarningModal.classList.remove('hidden');
-    inactivityCountdownDisplay.textContent = inactivityCountdown;
+    if (inactivityWarningModal) { // Check if element exists before trying to access classList
+        inactivityWarningModal.classList.remove('hidden');
+    }
+    if (inactivityCountdownDisplay) { // Check if element exists
+        inactivityCountdownDisplay.textContent = inactivityCountdown;
+    }
+
 
     inactivityCountdownInterval = setInterval(() => {
         inactivityCountdown--;
-        inactivityCountdownDisplay.textContent = inactivityCountdown;
+        if (inactivityCountdownDisplay) { // Check if element exists
+            inactivityCountdownDisplay.textContent = inactivityCountdown;
+        }
         if (inactivityCountdown <= 0) {
             clearInterval(inactivityCountdownInterval);
             resetGameDueToInactivity();
@@ -3011,7 +2765,9 @@ function showInactivityWarning() {
 }
 
 function hideInactivityWarning() {
-    inactivityWarningModal.classList.add('hidden');
+    if (inactivityWarningModal) { // Check if element exists before trying to access classList
+        inactivityWarningModal.classList.add('hidden');
+    }
 }
 
 function resetGameDueToInactivity() {
@@ -3021,15 +2777,24 @@ function resetGameDueToInactivity() {
     currentScore = 0; // Resetear puntuación
     answeredCorrectly = 0;
     answeredIncorrectly = 0;
-    updateScoreDisplay(); // Actualizar display de puntuación
-    quizTimerDisplay.textContent = '00:00'; // Resetear display del tiempo
-    alert('El juego se ha reiniciado debido a la inactividad.'); // Usar un mensaje simple
+    if (quizScoreDisplay) updateScoreDisplay(); // Actualizar display de puntuación
+    if (quizTimerDisplay) quizTimerDisplay.textContent = '00:00'; // Resetear display del tiempo
+    // Using a custom modal or simple text update instead of alert for better UX
+    // For now, keeping alert as per previous instruction, but ideally this would be a custom UI.
+    // alert('El juego se ha reiniciado debido a la inactividad.');
+    // A more user-friendly approach:
+    const inactivityMessageElement = document.getElementById('inactivity-message');
+    if (inactivityMessageElement) {
+        inactivityMessageElement.textContent = 'El juego se ha reiniciado debido a la inactividad.';
+    }
+    // Automatically hide after a short delay or require user interaction
+    setTimeout(() => {
+        hideInactivityWarning();
+        if (inactivityMessageElement) {
+            inactivityMessageElement.textContent = 'Inactividad detectada. El juego se reiniciará en...'; // Reset message
+        }
+    }, 3000); // Hide after 3 seconds
 }
-
-// Event listeners para detectar actividad del usuario
-['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(event => {
-    document.addEventListener(event, resetInactivityTimer);
-});
 
 
 // --- Game Flow Functions ---
@@ -3043,10 +2808,11 @@ function showScreen(screenId) {
         quizResultScreen
     ];
     screens.forEach(screen => {
-        if (screen) {
+        if (screen) { // Ensure screen element exists
             screen.classList.add('hidden');
             screen.classList.remove('flex');
             screen.classList.remove('flex-col'); // Ensure flex-col is removed if not needed
+            screen.classList.remove('animate-fade-in-down'); // Remove animation for next use
         }
     });
 
@@ -3066,7 +2832,9 @@ function startQuiz() {
 
 function selectTopic(topic) {
     selectedTopic = topic;
-    selectedTopicDisplay.textContent = topic.toUpperCase();
+    if (selectedTopicDisplay) { // Check if element exists
+        selectedTopicDisplay.textContent = topic.toUpperCase();
+    }
     showScreen('quiz-difficulty-selection-menu');
 }
 
@@ -3098,9 +2866,12 @@ function startQuestion() {
     updateTimerDisplay();
 
     const question = currentQuestions[currentQuestionIndex];
-    quizQuestion.textContent = question.question;
-    quizHelpText.textContent = question.help || ''; // Set help text, now always visible
-    quizHelpText.classList.remove('hidden'); // Ensure help text is visible
+    if (quizQuestion) quizQuestion.textContent = question.question;
+    if (quizHelpText) {
+        quizHelpText.textContent = question.help || ''; // Set help text, now always visible
+        quizHelpText.classList.remove('hidden'); // Ensure help text is visible
+    }
+
 
     switch (question.type) {
         case "multiple-choice":
@@ -3129,17 +2900,24 @@ function startQuestion() {
 }
 
 function resetQuestionArea() {
-    multipleChoiceOptions.innerHTML = '';
-    multipleChoiceOptions.classList.add('hidden');
-    multipleChoiceOptions.classList.remove('grid'); // Remove grid display for other types
+    if (multipleChoiceOptions) {
+        multipleChoiceOptions.innerHTML = '';
+        multipleChoiceOptions.classList.add('hidden');
+        multipleChoiceOptions.classList.remove('grid'); // Remove grid display for other types
+    }
 
-    syntaxOrderContainer.classList.add('hidden');
-    syntaxTargetArea.innerHTML = '';
-    syntaxOptionsArea.innerHTML = '';
+    if (syntaxOrderContainer) {
+        syntaxOrderContainer.classList.add('hidden');
+        if (syntaxTargetArea) syntaxTargetArea.innerHTML = '';
+        if (syntaxOptionsArea) syntaxOptionsArea.innerHTML = '';
+    }
 
-    dragMatchContainer.classList.add('hidden');
-    dragElementsArea.innerHTML = '';
-    dropTargetsArea.innerHTML = '';
+    if (dragMatchContainer) {
+        dragMatchContainer.classList.add('hidden');
+        if (dragElementsArea) dragElementsArea.innerHTML = '';
+        if (dropTargetsArea) dropTargetsArea.innerHTML = '';
+    }
+
 
     // Reset button states
     if (checkSyntaxButton) checkSyntaxButton.disabled = false;
@@ -3149,66 +2927,74 @@ function resetQuestionArea() {
 }
 
 function setupMultipleChoiceQuestion(question) {
-    multipleChoiceOptions.classList.remove('hidden');
-    multipleChoiceOptions.classList.add('grid'); // Ensure grid display for multiple choice
+    if (multipleChoiceOptions) {
+        multipleChoiceOptions.classList.remove('hidden');
+        multipleChoiceOptions.classList.add('grid'); // Ensure grid display for multiple choice
 
-    question.options.forEach((option, index) => {
-        const button = document.createElement('button');
-        button.classList.add('answer-option-button', 'px-6', 'py-3', 'rounded-xl', 'font-semibold', 'text-lg',
-            'bg-blue-500', 'text-white', 'hover:bg-blue-600',
-            'transition-all', 'duration-300', 'ease-in-out',
-            'shadow-md', 'hover:shadow-lg', 'focus:outline-none', 'focus:ring-4', 'focus:ring-blue-300');
-        button.dataset.option = index;
-        button.textContent = option;
-        button.onclick = () => checkAnswer(index, question.correctAnswer);
-        multipleChoiceOptions.appendChild(button);
-    });
+        question.options.forEach((option, index) => {
+            const button = document.createElement('button');
+            button.classList.add('answer-option-button', 'px-6', 'py-3', 'rounded-xl', 'font-semibold', 'text-lg',
+                'bg-blue-500', 'text-white', 'hover:bg-blue-600',
+                'transition-all', 'duration-300', 'ease-in-out',
+                'shadow-md', 'hover:shadow-lg', 'focus:outline-none', 'focus:ring-4', 'focus:ring-blue-300');
+            button.dataset.option = index;
+            button.textContent = option;
+            button.onclick = () => checkAnswer(index, question.correctAnswer);
+            multipleChoiceOptions.appendChild(button);
+        });
+    }
 }
 
 function setupSyntaxOrderQuestion(question) {
-    syntaxOrderContainer.classList.remove('hidden');
+    if (syntaxOrderContainer) {
+        syntaxOrderContainer.classList.remove('hidden');
 
-    currentSyntaxFragments = shuffleArray([...question.fragments]);
-    currentSyntaxOrder = [];
+        currentSyntaxFragments = shuffleArray([...question.fragments]);
+        currentSyntaxOrder = [];
 
-    renderSyntaxOptions();
-    renderSyntaxTarget();
+        renderSyntaxOptions();
+        renderSyntaxTarget();
 
-    checkSyntaxButton.onclick = checkSyntaxOrder;
-    undoSyntaxButton.onclick = undoSyntaxOrder;
+        if (checkSyntaxButton) checkSyntaxButton.onclick = checkSyntaxOrder;
+        if (undoSyntaxButton) undoSyntaxButton.onclick = undoSyntaxOrder;
+    }
 }
 
 function renderSyntaxOptions() {
-    syntaxOptionsArea.innerHTML = '';
-    currentSyntaxFragments.forEach((fragment, index) => {
-        const fragmentSpan = document.createElement('span');
-        fragmentSpan.classList.add('syntax-fragment', 'bg-gray-200', 'text-gray-800', 'px-3', 'py-1', 'rounded', 'cursor-pointer', 'hover:bg-gray-300', 'transition-colors', 'duration-200');
-        fragmentSpan.textContent = fragment;
-        fragmentSpan.dataset.index = index;
-        fragmentSpan.onclick = () => addSyntaxFragment(fragment, index);
-        syntaxOptionsArea.appendChild(fragmentSpan);
-    });
+    if (syntaxOptionsArea) {
+        syntaxOptionsArea.innerHTML = '';
+        currentSyntaxFragments.forEach((fragment, index) => {
+            const fragmentSpan = document.createElement('span');
+            fragmentSpan.classList.add('syntax-fragment', 'bg-gray-200', 'text-gray-800', 'px-3', 'py-1', 'rounded', 'cursor-pointer', 'hover:bg-gray-300', 'transition-colors', 'duration-200');
+            fragmentSpan.textContent = fragment;
+            fragmentSpan.dataset.index = index;
+            fragmentSpan.onclick = () => addSyntaxFragment(fragment, index);
+            syntaxOptionsArea.appendChild(fragmentSpan);
+        });
+    }
 }
 
 function renderSyntaxTarget() {
-    syntaxTargetArea.innerHTML = '';
-    currentSyntaxOrder.forEach((item) => {
-        const fragmentSpan = document.createElement('span');
-        fragmentSpan.classList.add('syntax-fragment-target', 'bg-purple-200', 'text-purple-800', 'px-3', 'py-1', 'rounded', 'relative', 'cursor-pointer', 'hover:bg-purple-300', 'transition-colors', 'duration-200');
-        fragmentSpan.textContent = item.fragment;
-        fragmentSpan.dataset.originalIndex = item.originalIndex; // Store original index
+    if (syntaxTargetArea) {
+        syntaxTargetArea.innerHTML = '';
+        currentSyntaxOrder.forEach((item) => {
+            const fragmentSpan = document.createElement('span');
+            fragmentSpan.classList.add('syntax-fragment-target', 'bg-purple-200', 'text-purple-800', 'px-3', 'py-1', 'rounded', 'relative', 'cursor-pointer', 'hover:bg-purple-300', 'transition-colors', 'duration-200');
+            fragmentSpan.textContent = item.fragment;
+            fragmentSpan.dataset.originalIndex = item.originalIndex; // Store original index
 
-        // Add a small 'x' button for removal
-        const removeButton = document.createElement('span');
-        removeButton.classList.add('absolute', '-top-1', '-right-1', 'bg-red-500', 'text-white', 'rounded-full', 'w-4', 'h-4', 'flex', 'items-center', 'justify-center', 'text-xs', 'cursor-pointer');
-        removeButton.textContent = 'x';
-        removeButton.onclick = (e) => {
-            e.stopPropagation(); // Prevent parent click
-            removeSyntaxFragment(item.originalIndex);
-        };
-        fragmentSpan.appendChild(removeButton);
-        syntaxTargetArea.appendChild(fragmentSpan);
-    });
+            // Add a small 'x' button for removal
+            const removeButton = document.createElement('span');
+            removeButton.classList.add('absolute', '-top-1', '-right-1', 'bg-red-500', 'text-white', 'rounded-full', 'w-4', 'h-4', 'flex', 'items-center', 'justify-center', 'text-xs', 'cursor-pointer');
+            removeButton.textContent = 'x';
+            removeButton.onclick = (e) => {
+                e.stopPropagation(); // Prevent parent click
+                removeSyntaxFragment(item.originalIndex);
+            };
+            fragmentSpan.appendChild(removeButton);
+            syntaxTargetArea.appendChild(fragmentSpan);
+        });
+    }
 }
 
 function addSyntaxFragment(fragment, originalIndex) {
@@ -3217,9 +3003,11 @@ function addSyntaxFragment(fragment, originalIndex) {
         currentSyntaxOrder.push({ fragment, originalIndex });
         renderSyntaxTarget();
         // Temporarily hide the added fragment from options area
-        const fragmentElement = syntaxOptionsArea.querySelector(`[data-index="${originalIndex}"]`);
-        if (fragmentElement) {
-            fragmentElement.style.visibility = 'hidden';
+        if (syntaxOptionsArea) {
+            const fragmentElement = syntaxOptionsArea.querySelector(`[data-index="${originalIndex}"]`);
+            if (fragmentElement) {
+                fragmentElement.style.visibility = 'hidden';
+            }
         }
     }
 }
@@ -3228,9 +3016,11 @@ function removeSyntaxFragment(originalIndex) {
     currentSyntaxOrder = currentSyntaxOrder.filter(item => item.originalIndex !== originalIndex);
     renderSyntaxTarget();
     // Make the fragment visible again in options area
-    const fragmentElement = syntaxOptionsArea.querySelector(`[data-index="${originalIndex}"]`);
-    if (fragmentElement) {
-        fragmentElement.style.visibility = 'visible';
+    if (syntaxOptionsArea) {
+        const fragmentElement = syntaxOptionsArea.querySelector(`[data-index="${originalIndex}"]`);
+        if (fragmentElement) {
+            fragmentElement.style.visibility = 'visible';
+        }
     }
 }
 
@@ -3242,7 +3032,7 @@ function checkSyntaxOrder() {
     const correctOrderFragments = question.correctOrder.map(idx => question.fragments[idx]);
     const userAnswerFragments = currentSyntaxOrder.map(item => item.fragment);
 
-    quizHelpText.classList.remove('hidden'); // Show help text
+    if (quizHelpText) quizHelpText.classList.remove('hidden'); // Show help text
 
     let isCorrect = true;
     if (userAnswerFragments.length !== correctOrderFragments.length) {
@@ -3263,11 +3053,14 @@ function checkSyntaxOrder() {
     }
     
     // Trigger animation feedback
-    quizPlayArea.classList.add(isCorrect ? 'animate-flash-green' : 'animate-flash-red');
-    setTimeout(() => quizPlayArea.classList.remove('animate-flash-green', 'animate-flash-red'), 500);
+    if (quizPlayArea) {
+        quizPlayArea.classList.add(isCorrect ? 'animate-flash-green' : 'animate-flash-red');
+        setTimeout(() => quizPlayArea.classList.remove('animate-flash-green', 'animate-flash-red'), 500);
+    }
 
-    checkSyntaxButton.disabled = true;
-    undoSyntaxButton.disabled = true;
+
+    if (checkSyntaxButton) checkSyntaxButton.disabled = true;
+    if (undoSyntaxButton) undoSyntaxButton.disabled = true;
     setTimeout(nextQuestion, 1000);
 }
 
@@ -3275,77 +3068,81 @@ function undoSyntaxOrder() {
     if (currentSyntaxOrder.length > 0) {
         const lastItem = currentSyntaxOrder.pop();
         renderSyntaxTarget();
-        const fragmentElement = syntaxOptionsArea.querySelector(`[data-index="${lastItem.originalIndex}"]`);
-        if (fragmentElement) {
-            fragmentElement.style.visibility = 'visible';
+        if (syntaxOptionsArea) {
+            const fragmentElement = syntaxOptionsArea.querySelector(`[data-index="${lastItem.originalIndex}"]`);
+            if (fragmentElement) {
+                fragmentElement.style.visibility = 'visible';
+            }
         }
     }
 }
 
 
 function setupDragMatchQuestion(question) {
-    dragMatchContainer.classList.remove('hidden');
-    dragElementsArea.innerHTML = '';
-    dropTargetsArea.innerHTML = '';
+    if (dragMatchContainer) {
+        dragMatchContainer.classList.remove('hidden');
+        if (dragElementsArea) dragElementsArea.innerHTML = '';
+        if (dropTargetsArea) dropTargetsArea.innerHTML = '';
 
-    currentDragMatchPairs = shuffleArray([...question.pairs]);
-    originalDragMatchState = currentDragMatchPairs.map(pair => ({ drag: pair.drag, drop: pair.drop, dropped: false }));
+        currentDragMatchPairs = shuffleArray([...question.pairs]);
+        originalDragMatchState = currentDragMatchPairs.map(pair => ({ drag: pair.drag, drop: pair.drop, dropped: false }));
 
-    const shuffledDragItems = shuffleArray(currentDragMatchPairs.map(p => p.drag));
-    const shuffledDropItems = shuffleArray(currentDragMatchPairs.map(p => p.drop)); // Use drop values as targets
+        const shuffledDragItems = shuffleArray(currentDragMatchPairs.map(p => p.drag));
+        const shuffledDropItems = shuffleArray(currentDragMatchPairs.map(p => p.drop)); // Use drop values as targets
 
-    shuffledDragItems.forEach((dragText, index) => {
-        const dragItem = document.createElement('div');
-        dragItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800', 'px-4', 'py-2', 'rounded-lg', 'cursor-grab', 'hover:bg-blue-300', 'transition-colors', 'duration-200');
-        dragItem.textContent = dragText;
-        dragItem.setAttribute('draggable', true);
-        dragItem.dataset.originalText = dragText; // Store original text to match later
-        dragItem.addEventListener('dragstart', handleDragStart);
-        dragElementsArea.appendChild(dragItem);
-    });
+        shuffledDragItems.forEach((dragText, index) => {
+            const dragItem = document.createElement('div');
+            dragItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800', 'px-4', 'py-2', 'rounded-lg', 'cursor-grab', 'hover:bg-blue-300', 'transition-colors', 'duration-200');
+            dragItem.textContent = dragText;
+            dragItem.setAttribute('draggable', true);
+            dragItem.dataset.originalText = dragText; // Store original text to match later
+            dragItem.addEventListener('dragstart', handleDragStart);
+            if (dragElementsArea) dragElementsArea.appendChild(dragItem);
+        });
 
-    shuffledDropItems.forEach((dropText, index) => {
-        const dropTarget = document.createElement('div');
-        dropTarget.classList.add('drop-target', 'bg-gray-200', 'text-gray-800', 'border-2', 'border-dashed', 'border-gray-400', 'px-4', 'py-2', 'rounded-lg', 'flex', 'items-center', 'justify-center', 'min-h-[40px]', 'text-center');
-        dropTarget.dataset.correctMatch = dropText; // Store the correct match for this target
+        shuffledDropItems.forEach((dropText, index) => {
+            const dropTarget = document.createElement('div');
+            dropTarget.classList.add('drop-target', 'bg-gray-200', 'text-gray-800', 'border-2', 'border-dashed', 'border-gray-400', 'px-4', 'py-2', 'rounded-lg', 'flex', 'items-center', 'justify-center', 'min-h-[40px]', 'text-center');
+            dropTarget.dataset.correctMatch = dropText; // Store the correct match for this target
 
-        const dropTextSpan = document.createElement('span');
-        dropTextSpan.classList.add('drop-text-placeholder');
-        dropTextSpan.textContent = dropText; // Show the target text initially
-        dropTarget.appendChild(dropTextSpan);
+            const dropTextSpan = document.createElement('span');
+            dropTextSpan.classList.add('drop-text-placeholder');
+            dropTextSpan.textContent = dropText; // Show the target text initially
+            dropTarget.appendChild(dropTextSpan);
 
-        dropTarget.addEventListener('dragover', handleDragOver);
-        dropTarget.addEventListener('drop', handleDrop);
-        dropTarget.addEventListener('dragleave', handleDragLeave);
-        dropTargetsArea.appendChild(dropTarget);
-    });
+            dropTarget.addEventListener('dragover', handleDragOver);
+            dropTarget.addEventListener('drop', handleDrop);
+            dropTarget.addEventListener('dragleave', handleDragLeave);
+            if (dropTargetsArea) dropTargetsArea.appendChild(dropTarget);
+        });
 
-    checkMatchButton.onclick = checkDragMatch;
-    undoMatchButton.onclick = undoDragMatch;
+        if (checkMatchButton) checkMatchButton.onclick = checkDragMatch;
+        if (undoMatchButton) undoMatchButton.onclick = undoDragMatch;
+    }
 }
 
 function handleDragStart(e) {
     draggedItem = e.target;
     e.dataTransfer.setData('text/plain', draggedItem.dataset.originalText);
     setTimeout(() => {
-        draggedItem.classList.add('hidden'); // Hide the original element during drag
+        if (draggedItem) draggedItem.classList.add('hidden'); // Hide the original element during drag
     }, 0);
 }
 
 function handleDragOver(e) {
     e.preventDefault(); // Allow drop
-    e.target.classList.add('border-blue-500', 'bg-blue-100'); // Visual feedback
+    if (e.target) e.target.classList.add('border-blue-500', 'bg-blue-100'); // Visual feedback
 }
 
 function handleDragLeave(e) {
-    e.target.classList.remove('border-blue-500', 'bg-blue-100');
+    if (e.target) e.target.classList.remove('border-blue-500', 'bg-blue-100');
 }
 
 function handleDrop(e) {
     e.preventDefault();
-    e.target.classList.remove('border-blue-500', 'bg-blue-100');
+    if (e.target) e.target.classList.remove('border-blue-500', 'bg-blue-100');
 
-    if (draggedItem && e.target.classList.contains('drop-target')) {
+    if (draggedItem && e.target && e.target.classList.contains('drop-target')) {
         const dropTarget = e.target;
 
         // If the drop target already has a child (an item was dropped here before),
@@ -3353,7 +3150,7 @@ function handleDrop(e) {
         if (dropTarget.querySelector('.drag-item-dropped')) {
             const oldDroppedItem = dropTarget.querySelector('.drag-item-dropped');
             oldDroppedItem.remove(); // Remove from target
-            dragElementsArea.appendChild(oldDroppedItem); // Append back to drag area
+            if (dragElementsArea) dragElementsArea.appendChild(oldDroppedItem); // Append back to drag area
             oldDroppedItem.classList.remove('hidden', 'drag-item-dropped'); // Make visible
             oldDroppedItem.classList.add('drag-item'); // Restore drag-item class
         }
@@ -3372,7 +3169,7 @@ function handleDrop(e) {
         }
 
         dropTarget.appendChild(droppedItem);
-        draggedItem.classList.add('hidden'); // Keep the original hidden after drop
+        if (draggedItem) draggedItem.classList.add('hidden'); // Keep the original hidden after drop
 
         draggedItem = null; // Reset dragged item
     }
@@ -3385,7 +3182,7 @@ function checkDragMatch() {
     let allCorrect = true;
     const dropTargets = document.querySelectorAll('.drop-target');
 
-    quizHelpText.classList.remove('hidden'); // Show help text
+    if (quizHelpText) quizHelpText.classList.remove('hidden'); // Show help text
 
     dropTargets.forEach(target => {
         const droppedItem = target.querySelector('.drag-item-dropped');
@@ -3434,11 +3231,14 @@ function checkDragMatch() {
     }
 
     // Trigger animation feedback
-    quizPlayArea.classList.add(allCorrect ? 'animate-flash-green' : 'animate-flash-red');
-    setTimeout(() => quizPlayArea.classList.remove('animate-flash-green', 'animate-flash-red'), 500);
+    if (quizPlayArea) {
+        quizPlayArea.classList.add(allCorrect ? 'animate-flash-green' : 'animate-flash-red');
+        setTimeout(() => quizPlayArea.classList.remove('animate-flash-green', 'animate-flash-red'), 500);
+    }
 
-    checkMatchButton.disabled = true;
-    undoMatchButton.disabled = true;
+
+    if (checkMatchButton) checkMatchButton.disabled = true;
+    if (undoMatchButton) undoMatchButton.disabled = true;
     setTimeout(nextQuestion, 2000);
 }
 
@@ -3449,7 +3249,7 @@ function undoDragMatch() {
         const droppedItem = target.querySelector('.drag-item-dropped');
         if (droppedItem) {
             droppedItem.remove(); // Remove from target
-            dragElementsArea.appendChild(droppedItem); // Append back to drag area
+            if (dragElementsArea) dragElementsArea.appendChild(droppedItem); // Append back to drag area
             droppedItem.classList.remove('hidden', 'drag-item-dropped', 'bg-green-300', 'text-green-900', 'border-green-600', 'bg-red-300', 'text-red-900', 'border-red-600'); // Clean up styles
             droppedItem.classList.add('drag-item', 'bg-blue-200', 'text-blue-800'); // Restore drag-item class and default styles
             droppedItem.setAttribute('draggable', true); // Make draggable again
@@ -3464,10 +3264,12 @@ function undoDragMatch() {
     });
 
     // Ensure all original drag items are visible in the drag area
-    const originalDragItems = dragElementsArea.querySelectorAll('.drag-item.hidden');
-    originalDragItems.forEach(item => {
-        item.classList.remove('hidden');
-    });
+    if (dragElementsArea) {
+        const originalDragItems = dragElementsArea.querySelectorAll('.drag-item.hidden');
+        originalDragItems.forEach(item => {
+            item.classList.remove('hidden');
+        });
+    }
 }
 
 
@@ -3476,29 +3278,32 @@ function undoDragMatch() {
 function updateTimerDisplay() {
     const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
     const seconds = String(timeLeft % 60).padStart(2, '0');
-    quizTimerDisplay.textContent = `${minutes}:${seconds}`;
+    if (quizTimerDisplay) quizTimerDisplay.textContent = `${minutes}:${seconds}`;
 }
 
 function updateScoreDisplay() {
-    quizScoreDisplay.textContent = currentScore;
+    if (quizScoreDisplay) quizScoreDisplay.textContent = currentScore;
 }
 
 function checkAnswer(selectedIndex, correctAnswer) {
     clearInterval(quizTimer); // Stop the timer
-    quizHelpText.classList.remove('hidden'); // Show help text after answer
+    if (quizHelpText) quizHelpText.classList.remove('hidden'); // Show help text after answer
 
     // Disable all options after answering
-    const buttons = multipleChoiceOptions.querySelectorAll('.answer-option-button');
-    buttons.forEach(button => {
-        button.disabled = true;
-        if (parseInt(button.dataset.option) === correctAnswer) {
-            button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
-            button.classList.add('bg-green-500'); // Correct answer green
-        } else if (parseInt(button.dataset.option) === selectedIndex) {
-            button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
-            button.classList.add('bg-red-500'); // Incorrect selected red
-        }
-    });
+    if (multipleChoiceOptions) {
+        const buttons = multipleChoiceOptions.querySelectorAll('.answer-option-button');
+        buttons.forEach(button => {
+            button.disabled = true;
+            if (parseInt(button.dataset.option) === correctAnswer) {
+                button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                button.classList.add('bg-green-500'); // Correct answer green
+            } else if (parseInt(button.dataset.option) === selectedIndex) {
+                button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                button.classList.add('bg-red-500'); // Incorrect selected red
+            }
+        });
+    }
+
 
     if (selectedIndex === correctAnswer) {
         handleCorrectAnswer();
@@ -3507,8 +3312,11 @@ function checkAnswer(selectedIndex, correctAnswer) {
     }
 
     // Trigger animation feedback
-    quizPlayArea.classList.add(selectedIndex === correctAnswer ? 'animate-flash-green' : 'animate-flash-red');
-    setTimeout(() => quizPlayArea.classList.remove('animate-flash-green', 'animate-flash-red'), 500);
+    if (quizPlayArea) {
+        quizPlayArea.classList.add(selectedIndex === correctAnswer ? 'animate-flash-green' : 'animate-flash-red');
+        setTimeout(() => quizPlayArea.classList.remove('animate-flash-green', 'animate-flash-red'), 500);
+    }
+
 
     setTimeout(nextQuestion, 1000); // Short delay before next question
 }
@@ -3532,10 +3340,10 @@ function nextQuestion() {
 
 function endQuiz() {
     clearInterval(quizTimer);
-    quizCorrectAnswers.textContent = answeredCorrectly;
-    quizIncorrectAnswers.textContent = answeredIncorrectly;
-    quizFinalScore.textContent = currentScore;
-    quizFinalTime.textContent = quizTimerDisplay.textContent; // Display the time left on the last question
+    if (quizCorrectAnswers) quizCorrectAnswers.textContent = answeredCorrectly;
+    if (quizIncorrectAnswers) quizIncorrectAnswers.textContent = answeredIncorrectly;
+    if (quizFinalScore) quizFinalScore.textContent = currentScore;
+    if (quizFinalTime && quizTimerDisplay) quizFinalTime.textContent = quizTimerDisplay.textContent; // Display the time left on the last question
 
     // Check if there's a next level
     const difficultyOrder = ['basico', 'intermedio', 'avanzado'];
@@ -3543,12 +3351,14 @@ function endQuiz() {
     const nextDifficulty = difficultyOrder[currentDifficultyIndex + 1];
 
     if (nextDifficulty && quizData[selectedTopic][nextDifficulty]) {
-        quizNextLevelButton.classList.remove('hidden');
-        quizNextLevelButton.onclick = () => {
-            selectDifficulty(nextDifficulty); // Start next level
-        };
+        if (quizNextLevelButton) {
+            quizNextLevelButton.classList.remove('hidden');
+            quizNextLevelButton.onclick = () => {
+                selectDifficulty(nextDifficulty); // Start next level
+            };
+        }
     } else {
-        quizNextLevelButton.classList.add('hidden');
+        if (quizNextLevelButton) quizNextLevelButton.classList.add('hidden');
     }
 
     showScreen('quiz-result-screen');
@@ -3563,52 +3373,97 @@ function shuffleArray(array) {
     return array;
 }
 
-// --- Event Listeners ---
-if (startQuizButton) {
-    startQuizButton.addEventListener('click', startQuiz);
-}
+// --- DOMContentLoaded Listener for Initialization ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Assign DOM elements after the document is loaded
+    quizStartMenu = document.getElementById('quiz-start-menu');
+    startQuizButton = document.getElementById('start-quiz-button');
+    quizTopicSelectionMenu = document.getElementById('quiz-topic-selection-menu');
+    topicButtons = document.querySelectorAll('.topic-button');
+    backToStartMenuButton = document.getElementById('back-to-start-menu-button');
+    quizDifficultySelectionMenu = document.getElementById('quiz-difficulty-selection-menu');
+    selectedTopicDisplay = document.getElementById('selected-topic-display');
+    difficultyButtons = document.querySelectorAll('.difficulty-button');
+    backToTopicMenuButton = document.getElementById('back-to-topic-menu-button');
+    quizPlayArea = document.getElementById('quiz-play-area');
+    quizTimerDisplay = document.getElementById('quiz-timer');
+    quizScoreDisplay = document.getElementById('quiz-score-display');
+    quizQuestion = document.getElementById('quiz-question');
+    quizHelpText = document.getElementById('quiz-help-text');
+    multipleChoiceOptions = document.getElementById('multiple-choice-options');
+    syntaxOrderContainer = document.getElementById('syntax-order-container');
+    syntaxTargetArea = document.getElementById('syntax-target-area');
+    syntaxOptionsArea = document.getElementById('syntax-options-area');
+    checkSyntaxButton = document.getElementById('check-syntax-button');
+    undoSyntaxButton = document.getElementById('undo-syntax-button');
+    dragMatchContainer = document.getElementById('drag-match-container');
+    dragElementsArea = document.getElementById('drag-elements');
+    dropTargetsArea = document.getElementById('drop-targets');
+    checkMatchButton = document.getElementById('check-match-button');
+    undoMatchButton = document.getElementById('undo-match-button');
+    endQuizButton = document.getElementById('end-quiz-button');
+    quizResultScreen = document.getElementById('quiz-result-screen');
+    quizCorrectAnswers = document.getElementById('quiz-correct-answers');
+    quizIncorrectAnswers = document.getElementById('quiz-incorrect-answers');
+    quizFinalScore = document.getElementById('quiz-final-score');
+    quizFinalTime = document.getElementById('quiz-final-time');
+    quizRetryLevelButton = document.getElementById('quiz-retry-level-button');
+    quizNextLevelButton = document.getElementById('quiz-next-level-button');
+    quizChangeTopicButton = document.getElementById('quiz-change-topic-button');
+    quizExitGameButton = document.getElementById('quiz-exit-game-button');
+    inactivityWarningModal = document.getElementById('inactivity-warning-modal');
+    inactivityCountdownDisplay = document.getElementById('inactivity-countdown-display');
 
-topicButtons.forEach(button => {
-    if (button) {
-        button.addEventListener('click', () => selectTopic(button.dataset.topic));
+    // --- Event Listeners ---
+    if (startQuizButton) {
+        startQuizButton.addEventListener('click', startQuiz);
     }
-});
 
-if (backToStartMenuButton) {
-    backToStartMenuButton.addEventListener('click', () => showScreen('quiz-start-menu'));
-}
-
-difficultyButtons.forEach(button => {
-    if (button) {
-        button.addEventListener('click', () => selectDifficulty(button.dataset.difficulty));
-    }
-});
-
-if (backToTopicMenuButton) {
-    backToTopicMenuButton.addEventListener('click', () => showScreen('quiz-topic-selection-menu'));
-}
-
-if (endQuizButton) {
-    endQuizButton.addEventListener('click', endQuiz);
-}
-
-if (quizRetryLevelButton) {
-    quizRetryLevelButton.addEventListener('click', () => {
-        selectDifficulty(selectedDifficulty); // Re-select current difficulty to restart
+    topicButtons.forEach(button => {
+        if (button) {
+            button.addEventListener('click', () => selectTopic(button.dataset.topic));
+        }
     });
-}
 
-if (quizNextLevelButton) {
-    // This will be set dynamically in endQuiz based on availability
-}
+    if (backToStartMenuButton) {
+        backToStartMenuButton.addEventListener('click', () => showScreen('quiz-start-menu'));
+    }
 
-if (quizChangeTopicButton) {
-    quizChangeTopicButton.addEventListener('click', () => showScreen('quiz-topic-selection-menu'));
-}
+    difficultyButtons.forEach(button => {
+        if (button) {
+            button.addEventListener('click', () => selectDifficulty(button.dataset.difficulty));
+        }
+    });
 
-if (quizExitGameButton) {
-    quizExitGameButton.addEventListener('click', () => showScreen('quiz-start-menu')); // Or close window/redirect
-}
+    if (backToTopicMenuButton) {
+        backToTopicMenuButton.addEventListener('click', () => showScreen('quiz-topic-selection-menu'));
+    }
 
-// Initial screen setup
-showScreen('quiz-start-menu');
+    if (endQuizButton) {
+        endQuizButton.addEventListener('click', endQuiz);
+    }
+
+    if (quizRetryLevelButton) {
+        quizRetryLevelButton.addEventListener('click', () => {
+            selectDifficulty(selectedDifficulty); // Re-select current difficulty to restart
+        });
+    }
+
+    // quizNextLevelButton's click handler is set dynamically in endQuiz
+
+    if (quizChangeTopicButton) {
+        quizChangeTopicButton.addEventListener('click', () => showScreen('quiz-topic-selection-menu'));
+    }
+
+    if (quizExitGameButton) {
+        quizExitGameButton.addEventListener('click', () => showScreen('quiz-start-menu')); // Or close window/redirect
+    }
+
+    // Event listeners para detectar actividad del usuario (solo después de que los elementos existan)
+    ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(event => {
+        document.addEventListener(event, resetInactivityTimer);
+    });
+
+    // Initial screen setup - moved inside DOMContentLoaded
+    showScreen('quiz-start-menu');
+});
