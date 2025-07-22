@@ -1962,6 +1962,8 @@ let currentQuestionIndex = 0;
 let currentScore = 0;
 let quizTimer;
 let timeElapsed = 0; // Cambiado de timeLeft a timeElapsed
+let totalTimeElapsed = 0;
+let isPaused = false;
 let selectedTopic = '';
 let selectedDifficulty = '';
 let currentQuestions = [];
@@ -2026,6 +2028,14 @@ let currentSyntaxOrder = [];    // Orden actual de los fragmentos en el área de
 
 // --- Funciones de control de inactividad ---
 
+function pauseTimer() {
+    isPaused = true;
+}
+
+function resumeTimer() {
+    isPaused = false;
+}
+
 function resetInactivityTimer() {
     clearTimeout(inactivityTimer);
     clearInterval(inactivityCountdownInterval);
@@ -2064,7 +2074,7 @@ function hideInactivityWarning() {
 function resetGameDueToInactivity() {
     clearInterval(quizTimer); // Detener el temporizador del quiz
     clearInterval(inactivityCountdownInterval); // Detener el contador de inactividad
-    showScreen('quiz-start-menu'); // Volver al menú de inicio
+    showScreen('quiz-difficulty-selection-menu'); // Volver al menú de selección de dificultad
     currentScore = 0; // Resetear puntuación
     answeredCorrectly = 0;
     answeredIncorrectly = 0;
@@ -2135,11 +2145,12 @@ function selectDifficulty(difficulty) {
     const allQuestionsForLevel = [...quizData[selectedTopic][selectedDifficulty]];
     shuffleArray(allQuestionsForLevel);
     currentQuestions = allQuestionsForLevel.slice(0, 10);
-    
+
     currentQuestionIndex = 0;
     currentScore = 0;
     answeredCorrectly = 0;
     answeredIncorrectly = 0;
+    totalTimeElapsed = 0;
     updateScoreDisplay(); // Asegurarse de que el score se reinicie visualmente
     startQuestion();
     showScreen('quiz-play-area');
@@ -2152,8 +2163,7 @@ function startQuestion() {
     }
 
     resetQuestionArea();
-    clearInterval(quizTimer); // Clear timer before starting new question
-    timeElapsed = 0; // Reiniciar el contador ascendente
+    resumeTimer();
     updateTimerDisplay();
 
     const question = currentQuestions[currentQuestionIndex];
@@ -2178,11 +2188,15 @@ function startQuestion() {
     }
 
     // Start timer after question setup
-    quizTimer = setInterval(() => {
-        timeElapsed++; // Incrementar el tiempo transcurrido
-        updateTimerDisplay();
-        // La pregunta ya no avanza automáticamente al llegar a un límite
-    }, 1000);
+    if (!quizTimer) {
+        quizTimer = setInterval(() => {
+            if (!isPaused) {
+                timeElapsed++; // Incrementar el tiempo transcurrido
+            }
+            updateTimerDisplay();
+            // La pregunta ya no avanza automáticamente al llegar a un límite
+        }, 1000);
+    }
     resetInactivityTimer(); // Reset inactivity timer on new question
 }
 
@@ -2313,7 +2327,7 @@ function removeSyntaxFragment(originalIndex) {
 
 
 function checkSyntaxOrder() {
-    clearInterval(quizTimer); // Stop the timer
+    pauseTimer();
 
     const question = currentQuestions[currentQuestionIndex];
     const correctOrderFragments = question.correctOrder.map(idx => question.fragments[idx]);
@@ -2348,7 +2362,7 @@ function checkSyntaxOrder() {
     } else {
         handleIncorrectAnswer();
     }
-    
+
     // Trigger animation feedback
     if (quizPlayArea) {
         quizPlayArea.classList.add(isCorrect ? 'animate-flash-green' : 'animate-flash-red');
@@ -2452,10 +2466,9 @@ function handleDragLeave(e) {
 
 function handleDrop(e) {
     e.preventDefault();
-    if (e.target && e.target.classList.contains('drop-target')) {
+    const dropTarget = e.target.closest('.drop-target');
+    if (e.target && dropTarget) {
         e.target.classList.remove('border-blue-500', 'bg-blue-100'); // Remove drag-over feedback
-
-        const dropTarget = e.target;
 
         // If the drop target already has a child (an item was dropped here before),
         // return the old item to the drag area before placing the new one.
@@ -2491,7 +2504,7 @@ function handleDrop(e) {
             if (dropTextPlaceholder) {
                 dropTextPlaceholder.classList.add('hidden');
             }
-            
+
             dropTarget.appendChild(droppedItem);
             draggedItemOriginalElement.classList.add('hidden'); // Hide the original element from the drag area
             draggedItemOriginalElement.classList.remove('opacity-0'); // Reset opacity for next drag if needed
@@ -2522,7 +2535,7 @@ function handleDragEnd(e) {
 
 
 function checkDragMatch() {
-    clearInterval(quizTimer); // Stop the timer
+    pauseTimer();
 
     let allCorrect = true;
     const dropTargets = document.querySelectorAll('.drop-target');
@@ -2642,7 +2655,7 @@ function updateScoreDisplay() {
 }
 
 function checkAnswer(selectedIndex, correctAnswer) {
-    clearInterval(quizTimer); // Stop the timer
+    pauseTimer();
     if (quizHelpText) quizHelpText.classList.remove('hidden'); // Show help text after answer
 
     // Disable all options after answering
@@ -2699,7 +2712,11 @@ function endQuiz() {
     if (quizCorrectAnswers) quizCorrectAnswers.textContent = answeredCorrectly;
     if (quizIncorrectAnswers) quizIncorrectAnswers.textContent = answeredIncorrectly;
     if (quizFinalScore) quizFinalScore.textContent = currentScore;
-    if (quizFinalTime && quizTimerDisplay) quizFinalTime.textContent = quizTimerDisplay.textContent; // Display the time left on the last question
+    if (quizFinalTime) {
+        const minutes = String(Math.floor(totalTimeElapsed / 60)).padStart(2, '0');
+        const seconds = String(totalTimeElapsed % 60).padStart(2, '0');
+        quizFinalTime.textContent = `${minutes}:${seconds}`;
+    }
 
     // Check if there's a next level
     const difficultyOrder = ['basico', 'intermedio', 'avanzado'];
