@@ -2703,6 +2703,8 @@ function handleIncorrectAnswer() {
 }
 
 function nextQuestion() {
+    totalTimeElapsed += timeElapsed;
+    timeElapsed = 0;
     currentQuestionIndex++;
     startQuestion();
 }
