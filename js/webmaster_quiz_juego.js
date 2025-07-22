@@ -33,7 +33,7 @@ const quizData = {
                 type: "order-execution",
                 fragments: ["<table>", "<tr>", "<td>", "Contenido de celda", "</td>", "</tr>", "</table>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6],
-                help: "Recuerda la jerarquía: la tabla contiene filas, y las filas contienen celdas.",
+                help: "Recuerda la jerarquía de las tablas.",
                 codeExample: `<table>
     <tr>
         <td>Contenido de celda</td>
@@ -81,7 +81,7 @@ const quizData = {
                 type: "order-execution",
                 fragments: ["<!DOCTYPE html>", "<html>", "<head>", "<title>", "Título</title>", "</head>", "<body>", "Contenido</body>", "</html>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                help: "Piensa en el orden en que se define un documento web, desde la declaración del tipo hasta el cierre del HTML.",
+                help: "Piensa en el orden en que se define un documento web.",
                 codeExample: `<!DOCTYPE html>
 <html>
 <head>
@@ -121,7 +121,7 @@ const quizData = {
                 type: "order-execution",
                 fragments: ["<ol>", "<li>", "Primer ítem", "</li>", "<li>", "Segundo ítem", "</li>", "</ol>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
-                help: "Las listas ordenadas usan `<ol>` y cada ítem se define con `<li>`.",
+                help: "Recuerda la estructura para listas numeradas.",
                 codeExample: `<ol>
     <li>Primer ítem</li>
     <li>Segundo ítem</li>
@@ -168,7 +168,7 @@ const quizData = {
                 type: "order-execution",
                 fragments: ["<ul>", "<li>", "Café", "</li>", "<li>", "Té", "</li>", "</ul>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
-                help: "Las listas no ordenadas usan `<ul>` y cada ítem se define con `<li>`.",
+                help: "Recuerda la estructura para listas con viñetas.",
                 codeExample: `<ul>
     <li>Café</li>
     <li>Té</li>
@@ -318,7 +318,7 @@ const quizData = {
                 type: "order-execution",
                 fragments: ["<dl>", "<dt>", "Término", "</dt>", "<dd>", "Descripción", "</dd>", "</dl>"],
                 correctOrder: [0, 1, 2, 3, 4, 5, 6, 7],
-                help: "Las listas descriptivas se usan para definir términos y sus descripciones.",
+                help: "Se usan para definir términos y sus descripciones.",
                 codeExample: `<dl>
     <dt>Término</dt>
     <dd>Descripción</dd>
