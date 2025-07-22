@@ -1961,7 +1961,7 @@ const obj = { [id]: 1 };`
 let currentQuestionIndex = 0;
 let currentScore = 0;
 let quizTimer;
-let timeElapsed = 0; // Cambiado de timeLeft a timeElapsed
+let timeElapsed = 0;
 let isPaused = false;
 let selectedTopic = '';
 let selectedDifficulty = '';
@@ -2740,7 +2740,6 @@ function endQuiz() {
     }
 
     showScreen('quiz-result-screen');
-    resetInactivityTimer(); // Reset inactivity timer on quiz end
 }
 
 function shuffleArray(array) {
