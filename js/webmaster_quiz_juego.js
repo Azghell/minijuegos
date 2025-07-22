@@ -1962,7 +1962,6 @@ let currentQuestionIndex = 0;
 let currentScore = 0;
 let quizTimer;
 let timeElapsed = 0; // Cambiado de timeLeft a timeElapsed
-let totalTimeElapsed = 0;
 let isPaused = false;
 let selectedTopic = '';
 let selectedDifficulty = '';
@@ -2124,7 +2123,13 @@ function showScreen(screenId) {
         // Add animation class
         targetScreen.classList.add('animate-fade-in-down');
     }
-    resetInactivityTimer(); // Reset timer on screen change
+    if (screenId === 'quiz-result-screen') {
+        clearTimeout(inactivityTimer);
+        clearInterval(inactivityCountdownInterval);
+        hideInactivityWarning();
+    } else {
+        resetInactivityTimer();
+    }
 }
 
 function startQuiz() {
@@ -2150,7 +2155,7 @@ function selectDifficulty(difficulty) {
     currentScore = 0;
     answeredCorrectly = 0;
     answeredIncorrectly = 0;
-    totalTimeElapsed = 0;
+    timeElapsed = 0; // Reset timer for the new session
     updateScoreDisplay(); // Asegurarse de que el score se reinicie visualmente
     startQuestion();
     showScreen('quiz-play-area');
@@ -2713,8 +2718,8 @@ function endQuiz() {
     if (quizIncorrectAnswers) quizIncorrectAnswers.textContent = answeredIncorrectly;
     if (quizFinalScore) quizFinalScore.textContent = currentScore;
     if (quizFinalTime) {
-        const minutes = String(Math.floor(totalTimeElapsed / 60)).padStart(2, '0');
-        const seconds = String(totalTimeElapsed % 60).padStart(2, '0');
+        const minutes = String(Math.floor(timeElapsed / 60)).padStart(2, '0');
+        const seconds = String(timeElapsed % 60).padStart(2, '0');
         quizFinalTime.textContent = `${minutes}:${seconds}`;
     }
 
