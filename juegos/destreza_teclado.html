@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destreza en el Teclado</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Reduce base font size for overall scaling */
+        html {
+            font-size: 80%; /* Reduces overall size by 20% */
+        }
+
+        /* Custom animations for transitions */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOutUp {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-fade-in-down {
+            animation: fadeInDown 0.5s ease-out forwards;
+        }
+
+        .animate-fade-out-up {
+            animation: fadeOutUp 0.3s ease-in forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* General body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #1a202c; /* gray-900 */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Mobile menu specific styles for height and visibility */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            background-color: white;
+            z-index: 40;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 2rem;
+            animation: fadeInDown 0.5s ease-out forwards;
+        }
+
+        .mobile-menu-item-container {
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+
+        .mobile-menu-item-container.hidden-height {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .mobile-menu-item-container.visible-height {
+            max-height: 1000px; /* Large enough to contain content */
+            opacity: 1;
+        }
+
+        /* Desktop dropdown specific styles */
+        .group .group-hover\:opacity-100 {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            transform: scale(0.95);
+            transform-origin: top;
+        }
+
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .group\/grade .group-hover\/grade\:opacity-100 {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            transform: scale(0.95);
+            transform-origin: left;
+        }
+
+        .group\/grade:hover .group-hover\/grade\:opacity-100 {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .group\/subject .group-hover\/subject\:opacity-100 {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            transform: scale(0.95);
+            transform-origin: left;
+        }
+
+        .group\/subject:hover .group-hover\/subject\:opacity-100 {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        /* Ensure header is at the very top */
+        header {
+            top: 0 !important;
+            transition: transform 0.3s ease-in-out; /* Smooth transition for hiding/showing */
+        }
+
+        /* Class to hide the header */
+        .header-hidden {
+            transform: translateY(-100%); /* Move header completely out of view */
+        }
+
+        /* Game specific styles */
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 9999px; /* Tailwind rounded-full */
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 1.5rem; /* Tailwind mb-6 */
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #3b82f6; /* Tailwind bg-blue-500 */
+            width: 100%; /* Initial width */
+            transition: width 0.1s linear, background-color 0.3s ease-in-out;
+            border-radius: 9999px; /* Tailwind rounded-full */
+        }
+
+        .progress-bar.warning {
+            background-color: #f59e0b; /* Tailwind bg-yellow-500 */
+        }
+
+        .progress-bar.danger {
+            background-color: #ef4444; /* Tailwind bg-red-500 */
+        }
+
+        @keyframes flash-green {
+            0% { background-color: transparent; }
+            50% { background-color: #d1fae5; } /* Tailwind bg-green-100 */
+            100% { background-color: transparent; }
+        }
+
+        @keyframes flash-red {
+            0% { background-color: transparent; }
+            50% { background-color: #fee2e2; } /* Tailwind bg-red-100 */
+            100% { background-color: transparent; }
+        }
+
+        .animate-flash-green {
+            animation: flash-green 0.5s ease-out;
+        }
+
+        .animate-flash-red {
+            animation: flash-red 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="font-inter antialiased text-gray-900">
+
+    <!-- Header (Copied from index.html) -->
+    <header id="main-header" class="bg-white shadow-md py-0 px-1 md:px-3 fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="../index.html" class="flex items-center space-x-4">
+                <img src="../imagenes/logo.png" alt="Logo" width="120" height="auto">
+                <span class="text-2xl font-bold text-blue-800">Area de Informatica</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Inicio</a>
+                <!-- Nested Dropdown for Grados (Cursos) -->
+                <div class="relative group">
+                    <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 focus:outline-none">
+                        Cursos <span class="ml-1 text-xs">&#9662;</span>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform scale-95 group-hover:scale-100 origin-top">
+                        <div id="desktop-grades-menu"></div>
+                    </div>
+                </div>
+                <!-- Nested Dropdown for Recursos Adicionales -->
+                <div class="relative group">
+                    <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 focus:outline-none">
+                        Recursos Adicionales <span class="ml-1 text-xs">&#9662;</span>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform scale-95 group-hover:scale-100 origin-top">
+                        <div id="desktop-additional-resources-menu"></div>
+                    </div>
+                </div>
+                <a href="../pseudocode.html" target="_blank" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Pseudocódigo</a>
+                <a href="https://wa.me/50488422786" target="_blank" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Contacto</a>
+            </nav>
+
+            <!-- Flag Image for Desktop -->
+            <img src="../imagenes/bandera-de-honduras.png" alt="Bandera de Honduras" width="120" height="auto" class="hidden md:block">
+
+            <!-- Mobile Hamburger Menu -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path id="mobile-menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu-overlay" class="hidden">
+            <button id="mobile-menu-close-button" class="absolute top-4 right-6 text-gray-700 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <nav class="flex flex-col space-y-5 mt-12 w-full px-5">
+                <a href="../index.html" class="text-gray-800 hover:text-blue-600 font-semibold text-xl text-center py-2 transition-colors duration-200" onclick="closeMobileMenu()">Inicio</a>
+                <!-- Mobile Grados Menu (Cursos) -->
+                <div class="w-full">
+                    <button id="mobile-courses-toggle" class="w-full text-gray-800 hover:text-blue-600 font-semibold text-xl text-center py-2 flex justify-between items-center transition-colors duration-200 border-b border-gray-200">
+                        Cursos
+                        <span id="mobile-courses-arrow" class="transform transition-transform duration-300">&#9656;</span>
+                    </button>
+                    <div id="mobile-grades-container" class="mobile-menu-item-container hidden-height">
+                        <div class="pl-3 pt-1 flex flex-col space-y-2" id="mobile-grades-menu">
+                            <!-- Grades will be injected here by JS -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Mobile Recursos Adicionales Menu -->
+                <div class="w-full">
+                    <button id="mobile-additional-resources-toggle" class="w-full text-gray-800 hover:text-blue-600 font-semibold text-xl text-center py-2 flex justify-between items-center transition-colors duration-200">
+                        Recursos Adicionales
+                        <span id="mobile-additional-resources-arrow" class="transform transition-transform duration-300">&#9656;</span>
+                    </button>
+                    <div id="mobile-additional-resources-container" class="mobile-menu-item-container hidden-height">
+                        <div class="pl-3 pt-1 flex flex-col space-y-2" id="mobile-additional-resources-menu">
+                            <!-- Additional Resources will be injected here by JS -->
+                        </div>
+                    </div>
+                </div>
+                <a href="../pseudocode.js" target="_blank" class="text-gray-800 hover:text-blue-600 font-semibold text-xl text-center py-2 transition-colors duration-200" onclick="closeMobileMenu()">Pseudocódigo</a>
+                <a href="https://wa.me/50488422786" target="_blank" class="text-gray-800 hover:text-blue-600 font-semibold text-xl text-center py-2 transition-colors duration-200" onclick="closeMobileMenu()">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="mt-[5rem] py-12 md:py-20 bg-gray-50 min-h-screen flex items-center justify-center">
+        <div id="dexterity-game-container" class="w-full max-w-2xl bg-white p-6 rounded-2xl shadow-xl border border-gray-200 text-center animate-fade-in-down">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">
+                Destreza en el Teclado
+            </h3>
+
+            <!-- Start Menu -->
+            <div id="game-start-menu" class="flex flex-col items-center justify-center min-h-[300px]">
+                <p class="text-xl text-gray-700 mb-6">Mejora tu velocidad y precisión al escribir.</p>
+                <button id="start-game-button" class="px-8 py-4 rounded-xl font-bold text-xl
+                            bg-blue-600 text-white hover:bg-blue-700
+                            transition-all duration-300 ease-in-out
+                            shadow-lg hover:shadow-xl transform hover:-translate-y-1
+                            focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    Comenzar Juego
+                </button>
+            </div>
+
+            <!-- Game Play Area -->
+            <div id="game-play-area" class="hidden flex-col items-center">
+                <div class="w-full flex justify-between items-center mb-6">
+                    <span class="text-lg font-semibold text-gray-700">Palabras Correctas: <span id="correct-words-display" class="text-green-600">0</span></span>
+                    <span class="text-lg font-semibold text-gray-700">Errores Consecutivos: <span id="consecutive-errors-display" class="text-red-600">0</span></span>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div id="time-bar" class="progress-bar"></div>
+                </div>
+
+                <div id="word-display-card" class="bg-blue-100 p-6 rounded-2xl shadow-lg border-2 border-blue-300 w-full max-w-xl min-h-[120px] flex flex-col justify-center items-center mb-6">
+                    <p id="current-word-display" class="text-4xl md:text-5xl font-extrabold text-blue-800 tracking-wide mb-2"></p>
+                    <p id="special-char-hint" class="text-sm text-gray-600 font-mono hidden"></p>
+                </div>
+
+                <input type="text" id="word-input" class="w-full max-w-xl p-4 text-2xl text-center rounded-xl border-2 border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-md mb-6" placeholder="Escribe la palabra aquí..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+                <button id="exit-game-button" class="px-6 py-3 rounded-xl font-bold text-lg
+                            bg-gray-600 text-white hover:bg-gray-700
+                            transition-all duration-300 ease-in-out
+                            shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-gray-300">
+                    Salir del Juego
+                </button>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="game-result-screen" class="hidden flex-col items-center justify-center min-h-[300px]">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">¡Juego Terminado!</h2>
+                <p class="text-xl text-gray-700 mb-2">Palabras Correctas: <span id="final-correct-words" class="text-green-600 font-bold">0</span></p>
+                <p class="text-xl text-gray-700 mb-4">Errores: <span id="final-errors" class="text-red-600 font-bold">0</span></p>
+                <p class="text-2xl text-blue-700 mb-6">Palabras por Minuto (WPM): <span id="final-wpm" class="font-extrabold">0</span></p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mt-6 w-full max-w-lg">
+                    <button id="retry-game-button" class="px-6 py-3 rounded-xl font-bold text-lg
+                                bg-blue-600 text-white hover:bg-blue-700
+                                transition-all duration-300 ease-in-out
+                                shadow-lg hover:shadow-xl transform hover:-translate-y-1
+                                focus:outline-none focus:ring-4 focus:ring-blue-300 flex-grow">
+                        Reintentar
+                    </button>
+                    <button id="exit-results-button" class="px-6 py-3 rounded-xl font-bold text-lg
+                                bg-gray-600 text-white hover:bg-gray-700
+                                transition-all duration-300 ease-in-out
+                                shadow-lg hover:shadow-xl transform hover:-translate-y-1
+                                focus:outline-none focus:ring-4 focus:ring-gray-300 flex-grow">
+                        Salir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Copied from index.html) -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-5 text-center">
+            <p class="text-base mb-3">
+                &copy; <span id="current-year"></span> Instituto Maria Auxiliadora - Area de Informatica ISEMED. Todos los derechos reservados.
+            </p>
+            <div class="flex justify-center space-x-5">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Privacidad</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Términos</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Soporte</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data for presentations (HTML files for menus)
+        const presentationData = [
+            {
+                grade: "Décimo",
+                subjects: [
+                    {
+                        name: "Informática I",
+                        topics: [
+                            { title: "Historia de la Computación", file: "../Informatica_I/historia_computacion.htm" },
+                            { title: "Partes y Tipos de Computadora", file: "../Informatica_I/Partes_Computadora.html" },
+                            { title: "Periféricos Entrada/Salida", file: "../Informatica_I/perifericos_entrada_salida.html" } // Nueva entrada
+                        ]
+                    }
+                ]
+            },
+            {
+                grade: "Undécimo",
+                subjects: [
+                    {
+                        name: "Informática Aplicada I",
+                        topics: [
+                            { title: "Dispositivos de Almacenamiento", file: "../II_BTP_A/Informatica_Aplicada_I/dipositivos_almac.html" },
+                            { title: "Fundamentos de Sistemas Operativos", file: "../II_BTP_A/Informatica_Aplicada_I/sistemas_operativos.html" },
+                            { title: "Terminal de Comandos", file: "../II_BTP_A/Informatica_Aplicada_I/terminal_comando.html" }
+                        ]
+                    },
+                    {
+                        name: "Ofimática I",
+                        topics: [
+                            { title: "Procesadores de Texto", file: "../II_BTP_A/Ofimatica_I/procesadores_texto.html" },
+                            { title: "Hojas de Calculo", file: "../II_BTP_A/Ofimatica_I/hojas_calculo.html" }
+                        ]
+                    },
+                    {
+                        name: "Análisis y Diseño de Sistemas",
+                        topics: [
+                            { title: "Análisis y Diseño de Sistemas", file: "../II_BTP_A/analisis_diseno/analisis_y_diseno_s.html" },
+                            { title: "Rol del Analista de Sistemas", file: "../II_BTP_A/analisis_diseno/rol_analista_sistemas.html" },
+                            { title: "Ciclo de Vida del Desarrollo de Software", file: "../II_BTP_A/analisis_diseno/ciclo_desarrollo.html" },
+                            { title: "Gestión de Proyectos de Software", file: "../II_BTP_A/analisis_diseno/gestion_proyectos_software.html" } // Nueva entrada
+                        ]
+                    }
+                ]
+            },
+            {
+                grade: "Duodécimo",
+                subjects: [
+                    {
+                        name: "Diseño Web II",
+                        topics: [
+                            { title: "Backend y Frontend", file: "../III_BTP_A/dw_II/backend_frontend.html" },
+                            { title: "Fundamentos de JavaScript", file: "../III_BTP_A/dw_II/fundamentos_js.html" }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Data for additional resources (HTML files, separate menu)
+        const additionalResourcesData = [
+            {
+                category: "Articulos",
+                items: [
+                    { title: "Destreza en el teclado", file: "../II_BTP_A/Ofimatica_I/articulo-destreza.html" },
+                    { title: "Línea de tiempo de la computación", file: "../Informatica_I/articulo_lineadetiempo.html" }
+                ]
+            },
+            {
+                category: "Actividades Practicas",
+                items: [
+                    { title: "Periféricos Entrada/Salida", action: "load-peripherals-game" }, // Action to load the game dynamically
+                    { title: "WebMaster Quiz", action: "load-webmaster-quiz" }, // Existing game
+                    { title: "Destreza en el Teclado", action: "load-dexterity-game" } // New game
+                ]
+            }
+        ];
+
+        // Data for downloads (PDF files for download section)
+        const downloadContentData = [
+            {
+                grade: "Décimo",
+                subjects: [
+                    {
+                        name: "Informática I",
+                        topics: [
+                            { title: "Historia de la Computación", file: "../Informatica_I/historia_de_la_computacion.pdf" },
+                            { title: "Partes y Tipos de Computadora", file: "../Informatica_I/partes_y_tipos_de_computadora.pdf" },
+                            { title: "Periféricos Entrada/Salida", file: "../Informatica_I/perifericos_entrada_salida.pdf" } // Nueva entrada para descarga
+                        ]
+                    }
+                ]
+            },
+            {
+                grade: "Undécimo",
+                subjects: [
+                    {
+                        name: "Informática Aplicada I",
+                        topics: [
+                            { title: "Dispositivos de Almacenamiento", file: "../II_BTP_A/Informatica_Aplicada_I/dispositivos_de_almacenamiento.pdf" },
+                            { title: "Fundamentos de Sistemas Operativos", file: "../II_BTP_A/Informatica_Aplicada_I/fundamentos_de_sistemas_operativos.pdf" },
+                            { title: "Terminal de Comandos", file: "../II_BTP_A/Informatica_Aplicada_I/terminal_comando.pdf" } // PDF for download
+                        ]
+                    },
+                    {
+                        name: "Ofimática I",
+                        topics: [
+                            { title: "Procesadores de Texto", file: "../II_BTP_A/Ofimatica_I/procesadores_de_texto.pdf" },
+                            { title: "Hojas de Calculo", file: "../II_BTP_A/Ofimatica_I/hojas_calculo.pdf" } // Assuming PDF for download
+                        ]
+                    },
+                    {
+                        name: "Análisis y Diseño de Sistemas",
+                        topics: [
+                            { title: "Análisis y Diseño de Sistemas", file: "../II_BTP_A/analisis_diseno/analisis_y_diseno_de_sistemas.pdf" },
+                            { title: "Rol del Analista de Sistemas", file: "../II_BTP_A/analisis_diseno/rol_del_analista_de_sistemas.pdf" },
+                            { title: "Ciclo de Vida del Desarrollo de Software", file: "../II_BTP_A/analisis_diseno/ciclo_desarrollo.pdf" }, // PDF for download
+                            { title: "Gestión de Proyectos de Software", file: "../II_BTP_A/analisis_diseno/gestion_proyectos_software.pdf" } // Nueva entrada para descarga
+                        ]
+                    }
+                ]
+            },
+            {
+                grade: "Duodécimo",
+                subjects: [
+                    {
+                        name: "Diseño Web II",
+                        topics: [
+                            { title: "Backend y Frontend", file: "../III_BTP_A/dw_II/front_end_vs_back_end.pdf" },
+                            { title: "Fundamentos de JavaScript", file: "../III_BTP_A/dw_II/fundamentos_de_js.pdf" }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // --- Global State for Content Section ---
+        let currentContentView = 'initial'; // 'initial', 'grades', 'subjects', 'topics'
+        let selectedGradeData = null;
+        let selectedSubjectData = null;
+
+        // --- Utility function to create a custom button ---
+        function createCustomButton(text, onClickHandler, className = '') {
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.onclick = onClickHandler;
+            button.className = `
+                px-5 py-2.5 rounded-xl font-semibold text-base
+                bg-blue-600 text-white hover:bg-blue-700
+                transition-all duration-300 ease-in-out
+                shadow-lg hover:shadow-xl transform hover:-translate-y-1
+                focus:outline-none focus:ring-4 focus:ring-blue-300
+                ${className}
+            `;
+            return button;
+        }
+
+        // --- Header (Mobile Menu) Logic ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+
+        const mobileCoursesToggle = document.getElementById('mobile-courses-toggle');
+        const mobileCoursesArrow = document.getElementById('mobile-courses-arrow');
+        const mobileGradesContainer = document.getElementById('mobile-grades-container');
+        const mobileGradesMenu = document.getElementById('mobile-grades-menu');
+
+        const mobileAdditionalResourcesToggle = document.getElementById('mobile-additional-resources-toggle');
+        const mobileAdditionalResourcesArrow = document.getElementById('mobile-additional-resources-arrow');
+        const mobileAdditionalResourcesContainer = document.getElementById('mobile-additional-resources-container');
+        const mobileAdditionalResourcesMenu = document.getElementById('mobile-additional-resources-menu');
+
+
+        let activeMobileGradeElement = null; // Stores the currently open grade container in mobile menu
+        let activeMobileSubjectElement = null; // Stores the currently open subject container in mobile menu
+
+        function toggleMobileMenu() {
+            mobileMenuOverlay.classList.toggle('hidden');
+            mobileMenuOverlay.classList.toggle('mobile-menu-overlay'); // Apply overlay styles
+            mobileMenuIcon.setAttribute('d', mobileMenuOverlay.classList.contains('hidden') ? 'M4 6h16M4 12h16M4 18h16' : 'M6 18L18 6M6 6l12 12');
+
+            // Reset mobile menu state when closing
+            if (mobileMenuOverlay.classList.contains('hidden')) {
+                mobileGradesContainer.classList.remove('visible-height');
+                mobileGradesContainer.classList.add('hidden-height');
+                mobileCoursesArrow.classList.remove('rotate-90');
+                mobileCoursesArrow.classList.add('rotate-0');
+
+                mobileAdditionalResourcesContainer.classList.remove('visible-height');
+                mobileAdditionalResourcesContainer.classList.add('hidden-height');
+                mobileAdditionalResourcesArrow.classList.remove('rotate-90');
+                mobileAdditionalResourcesArrow.classList.add('rotate-0');
+
+                // Close any open sub-menus
+                if (activeMobileGradeElement) {
+                    activeMobileGradeElement.classList.remove('visible-height');
+                    activeMobileGradeElement.classList.add('hidden-height');
+                    activeMobileGradeElement.previousElementSibling.querySelector('span').classList.remove('rotate-90');
+                    activeMobileGradeElement.previousElementSibling.querySelector('span').classList.add('rotate-0');
+                    activeMobileGradeElement = null;
+                }
+                if (activeMobileSubjectElement) {
+                    activeMobileSubjectElement.classList.remove('visible-height');
+                    activeMobileSubjectElement.classList.add('hidden-height');
+                    activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.remove('rotate-90');
+                    activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.add('rotate-0');
+                    activeMobileSubjectElement = null;
+                }
+            }
+        }
+
+        function closeMobileMenu() {
+            mobileMenuOverlay.classList.add('hidden');
+            mobileMenuOverlay.classList.remove('mobile-menu-overlay');
+            mobileMenuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            // Reset mobile menu state
+            mobileGradesContainer.classList.remove('visible-height');
+            mobileGradesContainer.classList.add('hidden-height');
+            mobileCoursesArrow.classList.remove('rotate-90');
+            mobileCoursesArrow.classList.add('rotate-0');
+
+            mobileAdditionalResourcesContainer.classList.remove('visible-height');
+            mobileAdditionalResourcesContainer.classList.add('hidden-height');
+            mobileAdditionalResourcesArrow.classList.remove('rotate-90');
+            mobileAdditionalResourcesArrow.classList.add('rotate-0');
+
+            if (activeMobileGradeElement) {
+                activeMobileGradeElement.classList.remove('visible-height');
+                activeMobileGradeElement.classList.add('hidden-height');
+                activeMobileGradeElement.previousElementSibling.querySelector('span').classList.remove('rotate-90');
+                activeMobileGradeElement.previousElementSibling.querySelector('span').classList.add('rotate-0');
+                activeMobileGradeElement = null;
+            }
+            if (activeMobileSubjectElement) {
+                activeMobileSubjectElement.classList.remove('visible-height');
+                activeMobileSubjectElement.classList.add('hidden-height');
+                activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.remove('rotate-90');
+                activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.add('rotate-0');
+                activeMobileSubjectElement = null;
+            }
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        mobileMenuCloseButton.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('mousedown', (event) => {
+            if (!mobileMenuOverlay.classList.contains('hidden') && !mobileMenuOverlay.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        mobileCoursesToggle.addEventListener('click', () => {
+            mobileGradesContainer.classList.toggle('hidden-height');
+            mobileGradesContainer.classList.toggle('visible-height');
+            mobileCoursesArrow.classList.toggle('rotate-90');
+            mobileCoursesArrow.classList.toggle('rotate-0');
+            // Close other top-level mobile menus
+            mobileAdditionalResourcesContainer.classList.remove('visible-height');
+            mobileAdditionalResourcesContainer.classList.add('hidden-height');
+            mobileAdditionalResourcesArrow.classList.remove('rotate-90');
+            mobileAdditionalResourcesArrow.classList.add('rotate-0');
+        });
+
+        mobileAdditionalResourcesToggle.addEventListener('click', () => {
+            mobileAdditionalResourcesContainer.classList.toggle('hidden-height');
+            mobileAdditionalResourcesContainer.classList.toggle('visible-height');
+            mobileAdditionalResourcesArrow.classList.toggle('rotate-90');
+            mobileAdditionalResourcesArrow.classList.toggle('rotate-0');
+            // Close other top-level mobile menus
+            mobileGradesContainer.classList.remove('visible-height');
+            mobileGradesContainer.classList.add('hidden-height');
+            mobileCoursesArrow.classList.remove('rotate-90');
+            mobileCoursesArrow.classList.add('rotate-0');
+        });
+
+
+        // Function to render desktop navigation menu (Presentations)
+        function renderDesktopNav() {
+            const desktopGradesMenu = document.getElementById('desktop-grades-menu');
+            desktopGradesMenu.innerHTML = ''; // Clear previous content
+
+            // Render 'Cursos' from presentationData
+            presentationData.forEach(gradeData => {
+                let gradeDiv = document.createElement('div');
+                gradeDiv.className = 'relative group/grade';
+                let gradeButton = document.createElement('button');
+                gradeButton.className = 'block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200 focus:outline-none';
+                gradeButton.innerHTML = `${gradeData.grade} <span class="float-right text-xs">&#9656;</span>`;
+                gradeDiv.appendChild(gradeButton);
+
+                let subjectDiv = document.createElement('div');
+                subjectDiv.className = 'absolute left-full top-0 mt-0 w-56 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/grade:opacity-100 group-hover/grade:visible transition-all duration-300 ease-in-out transform scale-95 group-hover/grade:scale-100 origin-left';
+                
+                gradeData.subjects.forEach(subjectData => {
+                    let subjectSubDiv = document.createElement('div');
+                    subjectSubDiv.className = 'relative group/subject';
+                    let subjectButton = document.createElement('button');
+                    subjectButton.className = 'block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200 focus:outline-none';
+                    subjectButton.innerHTML = `${subjectData.name} <span class="float-right text-xs">&#9656;</span>`;
+                    subjectSubDiv.appendChild(subjectButton);
+
+                    let topicDiv = document.createElement('div');
+                    topicDiv.className = 'absolute left-full top-0 mt-0 w-64 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/subject:opacity-100 group-hover/subject:visible transition-all duration-300 ease-in-out transform scale-95 group-hover/subject:scale-100 origin-left';
+                    
+                    subjectData.topics.forEach(topic => {
+                        let topicLink = document.createElement('a');
+                        topicLink.href = topic.file; // Use topic.file (HTML) for presentations
+                        // topicLink.target = '_blank'; // REMOVED: No longer opens in new tab
+                        topicLink.className = 'block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200';
+                        topicLink.textContent = topic.title;
+                        topicDiv.appendChild(topicLink);
+                    });
+                    subjectSubDiv.appendChild(topicDiv);
+                    subjectDiv.appendChild(subjectSubDiv);
+                });
+                gradeDiv.appendChild(subjectDiv);
+                desktopGradesMenu.appendChild(gradeDiv);
+            });
+
+            // Render 'Recursos Adicionales'
+            const desktopAdditionalResourcesMenu = document.getElementById('desktop-additional-resources-menu');
+            desktopAdditionalResourcesMenu.innerHTML = ''; // Clear previous content
+            additionalResourcesData.forEach(resourceCategory => {
+                let categoryDiv = document.createElement('div');
+                categoryDiv.className = 'relative group/resource-cat';
+                let categoryButton = document.createElement('button');
+                categoryButton.className = 'block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200 focus:outline-none';
+                categoryButton.innerHTML = `${resourceCategory.category} <span class="float-right text-xs">&#9656;</span>`;
+                categoryDiv.appendChild(categoryButton);
+
+                let itemsDiv = document.createElement('div');
+                itemsDiv.className = 'absolute left-full top-0 mt-0 w-64 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/resource-cat:opacity-100 group-hover/resource-cat:visible transition-all duration-300 ease-in-out transform scale-95 group-hover/resource-cat:scale-100 origin-left';
+                
+                resourceCategory.items.forEach(item => {
+                    let itemLink = document.createElement('a');
+                    if (item.action === 'load-peripherals-game') {
+                        itemLink.href = '#'; // Prevent default navigation
+                        itemLink.dataset.action = 'load-peripherals-game';
+                        itemLink.onclick = (e) => {
+                            e.preventDefault();
+                            loadPeripheralsGameFromHeader(); // Call function to load game from header
+                            closeMobileMenu(); // Close menu after selection
+                        };
+                    } else if (item.action === 'load-webmaster-quiz') { // Nuevo juego
+                        itemLink.href = '#';
+                        itemLink.dataset.action = 'load-webmaster-quiz';
+                        itemLink.onclick = (e) => {
+                            e.preventDefault();
+                            loadWebMasterQuizFromHeader(); // Call function to load new game from header
+                            closeMobileMenu(); // Close menu after selection
+                        };
+                    } else if (item.action === 'load-dexterity-game') { // New game
+                        itemLink.href = '#';
+                        itemLink.dataset.action = 'load-dexterity-game';
+                        itemLink.onclick = (e) => {
+                            e.preventDefault();
+                            loadDexterityGameFromHeader(); // Call function to load new game from header
+                            closeMobileMenu(); // Close menu after selection
+                        };
+                    }
+                    else {
+                        itemLink.href = item.file;
+                        itemLink.target = '_blank';
+                    }
+                    itemLink.className = 'block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200';
+                    itemLink.textContent = item.title;
+                    itemsDiv.appendChild(itemLink);
+                });
+                categoryDiv.appendChild(itemsDiv);
+                desktopAdditionalResourcesMenu.appendChild(categoryDiv);
+            });
+        }
+
+        // Function to render mobile navigation menu (Presentations)
+        function renderMobileNav() {
+            mobileGradesMenu.innerHTML = ''; // Clear previous content
+            mobileAdditionalResourcesMenu.innerHTML = ''; // Clear previous content
+
+            // Render 'Cursos' from presentationData
+            presentationData.forEach(gradeData => {
+                const gradeToggle = document.createElement('button');
+                gradeToggle.className = 'w-full text-gray-700 hover:text-blue-600 font-semibold text-lg text-left py-2 flex justify-between items-center transition-colors duration-200 border-b border-gray-200';
+                gradeToggle.innerHTML = `${gradeData.grade} <span class="transform transition-transform duration-300">&#9656;</span>`;
+                mobileGradesMenu.appendChild(gradeToggle);
+
+                const subjectsContainer = document.createElement('div');
+                subjectsContainer.className = 'mobile-menu-item-container hidden-height pl-4';
+                mobileGradesMenu.appendChild(subjectsContainer);
+
+                gradeToggle.addEventListener('click', () => {
+                    // Close currently active grade element if different
+                    if (activeMobileGradeElement && activeMobileGradeElement !== subjectsContainer) {
+                        activeMobileGradeElement.classList.remove('visible-height');
+                        activeMobileGradeElement.classList.add('hidden-height');
+                        activeMobileGradeElement.previousElementSibling.querySelector('span').classList.remove('rotate-90');
+                        activeMobileGradeElement.previousElementSibling.querySelector('span').classList.add('rotate-0');
+                    }
+                    // Toggle current grade element
+                    subjectsContainer.classList.toggle('hidden-height');
+                    subjectsContainer.classList.toggle('visible-height');
+                    gradeToggle.querySelector('span').classList.toggle('rotate-90');
+                    gradeToggle.querySelector('span').classList.toggle('rotate-0');
+                    activeMobileGradeElement = subjectsContainer.classList.contains('visible-height') ? subjectsContainer : null;
+
+                    // Close other top-level mobile menus
+                    mobileAdditionalResourcesContainer.classList.remove('visible-height');
+                    mobileAdditionalResourcesContainer.classList.add('hidden-height');
+                    mobileAdditionalResourcesArrow.classList.remove('rotate-90');
+                    mobileAdditionalResourcesArrow.classList.add('rotate-0');
+
+                    // Close any open subject sub-menus when a grade is closed or a new grade is opened
+                    if (activeMobileSubjectElement) {
+                        activeMobileSubjectElement.classList.remove('visible-height');
+                        activeMobileSubjectElement.classList.add('hidden-height');
+                        activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.remove('rotate-90');
+                        activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.add('rotate-0');
+                        activeMobileSubjectElement = null;
+                    }
+                });
+
+                gradeData.subjects.forEach(subjectData => {
+                    const subjectToggle = document.createElement('button');
+                    subjectToggle.className = 'w-full text-gray-600 hover:text-blue-500 font-medium text-base text-left py-2 flex justify-between items-center transition-colors duration-200 border-b border-gray-100';
+                    subjectToggle.innerHTML = `${subjectData.name} <span class="transform transition-transform duration-300">&#9656;</span>`;
+                    subjectsContainer.appendChild(subjectToggle);
+
+                    const topicsContainer = document.createElement('div');
+                    topicsContainer.className = 'mobile-menu-item-container hidden-height pl-4';
+                    subjectsContainer.appendChild(topicsContainer);
+
+                    subjectToggle.addEventListener('click', () => {
+                        // Close currently active subject element if different
+                        if (activeMobileSubjectElement && activeMobileSubjectElement !== topicsContainer) {
+                            activeMobileSubjectElement.classList.remove('visible-height');
+                            activeMobileSubjectElement.classList.add('hidden-height');
+                            activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.remove('rotate-90');
+                            activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.add('rotate-0');
+                        }
+                        // Toggle current subject element
+                        topicsContainer.classList.toggle('hidden-height');
+                        topicsContainer.classList.toggle('visible-height');
+                        subjectToggle.querySelector('span').classList.toggle('rotate-90');
+                        subjectToggle.querySelector('span').classList.toggle('rotate-0');
+                        activeMobileSubjectElement = topicsContainer.classList.contains('visible-height') ? topicsContainer : null;
+                    });
+
+                    subjectData.topics.forEach(topic => {
+                        const topicLink = document.createElement('a');
+                        topicLink.href = topic.file; // Use topic.file (HTML) for presentations
+                        // topicLink.target = '_blank'; // REMOVED: No longer opens in new tab
+                        topicLink.className = 'block px-2 py-1 text-gray-500 hover:text-blue-400 text-sm transition-colors duration-200';
+                        topicLink.textContent = topic.title;
+                        topicLink.onclick = closeMobileMenu; // Close menu when a topic is clicked
+                        topicsContainer.appendChild(topicLink);
+                    });
+                });
+            });
+
+            // Render 'Recursos Adicionales' for mobile
+            additionalResourcesData.forEach(resourceCategory => {
+                const categoryToggle = document.createElement('button');
+                categoryToggle.className = 'w-full text-gray-700 hover:text-blue-600 font-semibold text-lg text-left py-2 flex justify-between items-center transition-colors duration-200 border-b border-gray-200';
+                categoryToggle.innerHTML = `${resourceCategory.category} <span class="transform transition-transform duration-300">&#9656;</span>`;
+                mobileAdditionalResourcesMenu.appendChild(categoryToggle);
+
+                const itemsContainer = document.createElement('div');
+                itemsContainer.className = 'mobile-menu-item-container hidden-height pl-4';
+                mobileAdditionalResourcesMenu.appendChild(itemsContainer);
+
+                categoryToggle.addEventListener('click', () => {
+                    // Close currently active category element if different
+                    if (activeMobileGradeElement && activeMobileGradeElement !== itemsContainer) {
+                        activeMobileGradeElement.classList.remove('visible-height');
+                        activeMobileGradeElement.classList.add('hidden-height');
+                        activeMobileGradeElement.previousElementSibling.querySelector('span').classList.remove('rotate-90');
+                        activeMobileGradeElement.previousElementSibling.querySelector('span').classList.add('rotate-0');
+                    }
+                    // Toggle current category element
+                    itemsContainer.classList.toggle('hidden-height');
+                    itemsContainer.classList.toggle('visible-height');
+                    categoryToggle.querySelector('span').classList.toggle('rotate-90');
+                    categoryToggle.querySelector('span').classList.toggle('rotate-0');
+                    activeMobileGradeElement = itemsContainer.classList.contains('visible-height') ? itemsContainer : null;
+
+                    // Close other top-level mobile menus
+                    mobileGradesContainer.classList.remove('visible-height');
+                    mobileGradesContainer.classList.add('hidden-height');
+                    mobileCoursesArrow.classList.remove('rotate-90');
+                    mobileCoursesArrow.classList.add('rotate-0');
+
+                    // Close any open sub-menus
+                    if (activeMobileSubjectElement) {
+                        activeMobileSubjectElement.classList.remove('visible-height');
+                        activeMobileSubjectElement.classList.add('hidden-height');
+                        activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.remove('rotate-90');
+                        activeMobileSubjectElement.previousElementSibling.querySelector('span').classList.add('rotate-0');
+                        activeMobileSubjectElement = null;
+                    }
+                });
+
+                resourceCategory.items.forEach(item => {
+                    const itemLink = document.createElement('a');
+                    if (item.action === 'load-peripherals-game') {
+                        itemLink.href = '#';
+                        itemLink.dataset.action = 'load-peripherals-game';
+                        itemLink.onclick = (e) => {
+                            e.preventDefault();
+                            loadPeripheralsGameFromHeader();
+                            closeMobileMenu();
+                        };
+                    } else if (item.action === 'load-webmaster-quiz') { // Nuevo juego
+                        itemLink.href = '#';
+                        itemLink.dataset.action = 'load-webmaster-quiz';
+                        itemLink.onclick = (e) => {
+                            e.preventDefault();
+                            loadWebMasterQuizFromHeader();
+                            closeMobileMenu();
+                        };
+                    } else if (item.action === 'load-dexterity-game') { // New game
+                        itemLink.href = '#';
+                        itemLink.dataset.action = 'load-dexterity-game';
+                        itemLink.onclick = (e) => {
+                            e.preventDefault();
+                            loadDexterityGameFromHeader();
+                            closeMobileMenu();
+                        };
+                    }
+                    else {
+                        itemLink.href = item.file;
+                        itemLink.target = '_blank';
+                    }
+                    itemLink.className = 'block px-2 py-1 text-gray-500 hover:text-blue-400 text-sm transition-colors duration-200';
+                    itemLink.textContent = item.title;
+                    itemLink.onclick = closeMobileMenu; // Close menu when a topic is clicked
+                    itemsContainer.appendChild(itemLink);
+                });
+            });
+        }
+
+        // --- Content Download Section Logic ---
+        const contentDisplayArea = document.getElementById('content-display-area');
+        const contentBackButtonContainer = document.getElementById('content-back-button-container');
+        const contentBackButton = document.getElementById('content-back-button');
+        const downloadSection = document.getElementById('download-section');
+
+        function animateContentTransition(callback) {
+            contentDisplayArea.classList.add('animate-fade-out-up');
+            contentDisplayArea.addEventListener('animationend', () => {
+                contentDisplayArea.classList.remove('animate-fade-out-up');
+                contentDisplayArea.innerHTML = ''; // Clear content after fade out
+                callback();
+                contentDisplayArea.classList.add('animate-fade-in-down');
+                contentDisplayArea.addEventListener('animationend', () => {
+                    contentDisplayArea.classList.remove('animate-fade-in-down');
+                }, { once: true });
+            }, { once: true });
+        }
+
+        function renderInitialContentButton() {
+            contentBackButtonContainer.classList.add('hidden');
+            contentDisplayArea.innerHTML = '';
+            contentDisplayArea.appendChild(createCustomButton('Ver Contenido para Descargar', renderDownloadGrades));
+            currentContentView = 'initial';
+        }
+
+        function renderDownloadGrades() {
+            contentBackButtonContainer.classList.add('hidden');
+            contentDisplayArea.innerHTML = '';
+            const gridDiv = document.createElement('div');
+            gridDiv.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-lg'; // Adjust grid layout as needed
+            downloadContentData.forEach(gradeData => {
+                const button = createCustomButton(gradeData.grade, () => {
+                    selectedGradeData = gradeData;
+                    animateContentTransition(renderDownloadSubjects);
+                }, 'w-full');
+                gridDiv.appendChild(button);
+            });
+            contentDisplayArea.appendChild(gridDiv);
+            currentContentView = 'grades';
+        }
+
+        function renderDownloadSubjects() {
+            if (!selectedGradeData) {
+                renderDownloadGrades(); // Fallback if no subject is selected
+                return;
+            }
+            contentBackButtonContainer.classList.remove('hidden');
+            contentDisplayArea.innerHTML = '';
+            const gridDiv = document.createElement('div');
+            gridDiv.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg'; // Adjust grid layout as needed
+            selectedGradeData.subjects.forEach(subjectData => { // Corrected: iterate over selectedGradeData.subjects
+                const button = createCustomButton(subjectData.name, () => {
+                    selectedSubjectData = subjectData;
+                    animateContentTransition(renderDownloadTopics);
+                }, 'w-full');
+                gridDiv.appendChild(button);
+            });
+            contentDisplayArea.appendChild(gridDiv);
+            currentContentView = 'subjects';
+        }
+
+        function renderDownloadTopics() {
+            if (!selectedSubjectData) {
+                renderDownloadSubjects(); // Fallback if no subject is selected
+                return;
+            }
+            contentBackButtonContainer.classList.remove('hidden');
+            contentDisplayArea.innerHTML = '';
+            const gridDiv = document.createElement('div');
+            gridDiv.className = 'grid grid-cols-1 gap-3 w-full max-w-lg'; // Adjust grid layout as needed
+            selectedSubjectData.topics.forEach(topic => {
+                const link = document.createElement('a');
+                link.href = topic.file; // Use topic.file (PDF) for downloads
+                link.target = '_blank'; // Ensure PDF opens in a new tab
+                link.className = `
+                    flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl font-semibold text-base
+                    bg-green-600 text-white hover:bg-green-700
+                    transition-all duration-300 ease-in-out
+                    shadow-lg hover:shadow-xl transform hover:-translate-y-1
+                    focus:outline-none focus:ring-4 focus:ring-green-300
+                    w-full
+                `;
+                link.textContent = topic.title;
+                link.innerHTML += `
+                    <svg class="w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l3-3m-3 3l-3-3m0 6h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                `;
+                gridDiv.appendChild(link);
+            });
+            contentDisplayArea.appendChild(gridDiv);
+            currentContentView = 'topics';
+        }
+
+        contentBackButton.addEventListener('click', () => {
+            animateContentTransition(() => {
+                if (currentContentView === 'subjects') {
+                    renderDownloadGrades(); // Go back to download grades
+                    selectedGradeData = null;
+                } else if (currentContentView === 'topics') {
+                    renderDownloadSubjects(); // Go back to download subjects
+                    selectedSubjectData = null;
+                } else {
+                    renderInitialContentButton(); // Should go back to initial download button
+                }
+            });
+        });
+
+        // --- DOM Elements for Main Content & Activity Section ---
+        const mainContentSections = document.getElementById('main-content-sections');
+        const mainContentTitle = document.getElementById('main-content-title'); // Title above both sections
+
+        const activitySection = document.getElementById('activity-section');
+        const initialActivityMenu = document.getElementById('initial-activity-menu');
+        const showActivitiesButton = document.getElementById('show-activities-button');
+        const gameListMenu = document.getElementById('game-list-menu');
+        const selectPeripheralsGameButton = document.getElementById('select-peripherals-game-button');
+        const selectWebMasterQuizButton = document.getElementById('select-webmaster-quiz-button'); // Existing button
+        const selectDexterityGameButton = document.getElementById('select-dexterity-game-button'); // New button
+        const backToMainActivitiesButton = document.getElementById('back-to-main-activities-button');
+        const dynamicallyLoadedGameContainer = document.getElementById('dynamically-loaded-game-container');
+
+        // --- Game Data Storage Logic ---
+        const gameDataStorage = {
+            localStorageKey: 'gameProgressData',
+            
+            // Loads all game data from Local Storage
+            loadAllGameData() {
+                try {
+                    const data = localStorage.getItem(this.localStorageKey);
+                    return data ? JSON.parse(data) : {};
+                } catch (e) {
+                    console.error("Error loading game data from localStorage:", e);
+                    return {};
+                }
+            },
+
+            // Saves all game data to Local Storage
+            saveAllGameData(data) {
+                try {
+                    localStorage.setItem(this.localStorageKey, JSON.stringify(data));
+                } catch (e) {
+                    console.error("Error saving game data to localStorage:", e);
+                }
+            },
+
+            // Saves a single game session for a specific gameId
+            saveGameSession(gameId, sessionData) {
+                const allGameData = this.loadAllGameData();
+                if (!allGameData[gameId]) {
+                    allGameData[gameId] = [];
+                }
+                allGameData[gameId].push(sessionData);
+                this.saveAllGameData(allGameData);
+            },
+
+            // Gets the history of sessions for a specific gameId
+            getGameHistory(gameId) {
+                const allGameData = this.loadAllGameData();
+                return allGameData[gameId] || [];
+            },
+
+            // Gets the total number of attempts for a specific gameId
+            getTotalAttempts(gameId) {
+                return this.getGameHistory(gameId).length;
+            },
+
+            // Gets the best score for a specific gameId
+            getBestScore(gameId) {
+                const history = this.getGameHistory(gameId);
+                if (history.length === 0) {
+                    return 0;
+                }
+                return Math.max(...history.map(session => session.score));
+            }
+        };
+
+        // --- Functions for Activity Section Flow ---
+        function showMainContentSections() {
+            mainContentSections.classList.remove('hidden');
+            mainContentSections.classList.add('flex');
+            dynamicallyLoadedGameContainer.classList.add('hidden');
+            mainContentTitle.textContent = 'Contenido y Actividades';
+            renderInitialActivityButton(); // Ensure activity menu is reset
+        }
+
+        // Function to load the peripherals game HTML and JS
+        async function loadPeripheralsGame() {
+            // Hide the header immediately when loading the game
+            mainHeader.classList.add('header-hidden');
+
+            mainContentSections.classList.add('hidden'); // Hide both download and initial activity sections
+            mainContentSections.classList.remove('flex');
+            dynamicallyLoadedGameContainer.classList.remove('hidden'); // Show only the game container
+            mainContentTitle.textContent = 'Juego de Periféricos'; // Update main title
+
+            try {
+                const htmlResponse = await fetch('juegos/perifericos.html');
+                const gameHtml = await htmlResponse.text();
+                dynamicallyLoadedGameContainer.innerHTML = gameHtml;
+
+                // Dynamically load the game's JavaScript
+                const script = document.createElement('script');
+                script.src = 'js/perifericos_juego.js';
+                script.onload = () => {
+                    // Once the script is loaded, initialize the game elements and pass gameDataStorage
+                    if (window.initializePeripheralsGame) {
+                        window.initializePeripheralsGame(gameDataStorage); // Pass the storage object
+                    }
+                };
+                // Append the script to the body or the game container
+                dynamicallyLoadedGameContainer.appendChild(script);
+
+            } catch (error) {
+                console.error('Error al cargar el juego de periféricos:', error);
+                dynamicallyLoadedGameContainer.innerHTML = '<p class="text-red-500">Error al cargar el juego. Por favor, inténtalo de nuevo más tarde.</p>';
+                // Optionally, provide a button to return to main content
+                const errorButton = createCustomButton('Volver al Inicio', showMainContentSections, 'mt-4');
+                dynamicallyLoadedGameContainer.appendChild(errorButton);
+            }
+        }
+
+        // Function to load the WebMaster Quiz HTML and JS
+        async function loadWebMasterQuiz() {
+            // Hide the header immediately when loading the game
+            mainHeader.classList.add('header-hidden');
+
+            mainContentSections.classList.add('hidden'); // Hide both download and initial activity sections
+            mainContentSections.classList.remove('flex');
+            dynamicallyLoadedGameContainer.classList.remove('hidden'); // Show only the game container
+            mainContentTitle.textContent = 'WebMaster Quiz'; // Update main title
+
+            try {
+                const htmlResponse = await fetch('juegos/webmaster_quiz.html');
+                const gameHtml = await htmlResponse.text();
+                dynamicallyLoadedGameContainer.innerHTML = gameHtml;
+
+                // Dynamically load the game's JavaScript
+                const script = document.createElement('script');
+                script.src = 'js/webmaster_quiz_juego.js';
+                script.onload = () => {
+                    // Once the script is loaded, initialize the game elements and pass gameDataStorage
+                    if (window.initQuizGame) {
+                        window.initQuizGame(gameDataStorage); // Pass the storage object
+                    }
+                };
+                // Append the script to the body or the game container
+                dynamicallyLoadedGameContainer.appendChild(script);
+
+            } catch (error) {
+                console.error('Error al cargar el WebMaster Quiz:', error);
+                dynamicallyLoadedGameContainer.innerHTML = '<p class="text-red-500">Error al cargar el quiz. Por favor, inténtalo de nuevo más tarde.</p>';
+                // Optionally, provide a button to return to main content
+                const errorButton = createCustomButton('Volver al Inicio', showMainContentSections, 'mt-4');
+                dynamicallyLoadedGameContainer.appendChild(errorButton);
+            }
+        }
+
+        // Function to load the new Keyboard Dexterity Game HTML and JS
+        async function loadDexterityGame() {
+            // Hide the header immediately when loading the game
+            mainHeader.classList.add('header-hidden');
+
+            mainContentSections.classList.add('hidden'); // Hide both download and initial activity sections
+            mainContentSections.classList.remove('flex');
+            dynamicallyLoadedGameContainer.classList.remove('hidden'); // Show only the game container
+            mainContentTitle.textContent = 'Destreza en el Teclado'; // Update main title
+
+            try {
+                const htmlResponse = await fetch('juegos/destreza_teclado.html'); // Path to the new game HTML
+                const gameHtml = await htmlResponse.text();
+                dynamicallyLoadedGameContainer.innerHTML = gameHtml;
+
+                // Dynamically load the game's JavaScript
+                const script = document.createElement('script');
+                script.src = 'js/destreza_teclado.js'; // Path to the new game JS
+                script.onload = () => {
+                    // Once the script is loaded, initialize the game elements
+                    if (window.initDexterityGame) {
+                        window.initDexterityGame(); // Call the initialization function for the new game
+                    }
+                };
+                // Append the script to the body or the game container
+                dynamicallyLoadedGameContainer.appendChild(script);
+
+            } catch (error) {
+                console.error('Error al cargar el juego de Destreza en el Teclado:', error);
+                dynamicallyLoadedGameContainer.innerHTML = '<p class="text-red-500">Error al cargar el juego. Por favor, inténtalo de nuevo más tarde.</p>';
+                // Optionally, provide a button to return to main content
+                const errorButton = createCustomButton('Volver al Inicio', showMainContentSections, 'mt-4');
+                dynamicallyLoadedGameContainer.appendChild(errorButton);
+            }
+        }
+
+
+        // This function will be called from the header menu to load the peripherals game
+        function loadPeripheralsGameFromHeader() {
+            showMainContentSections(); // Ensure main content areas are visible first
+            loadPeripheralsGame(); // Then load the game itself
+        }
+
+        // This function will be called from the header menu to load the WebMaster Quiz
+        function loadWebMasterQuizFromHeader() {
+            showMainContentSections(); // Ensure main content areas are visible first
+            loadWebMasterQuiz(); // Then load the game itself
+        }
+
+        // This function will be called from the header menu to load the new game (Dexterity Game)
+        function loadDexterityGameFromHeader() {
+            showMainContentSections(); // Ensure main content areas are visible first
+            loadDexterityGame(); // Then load the game itself
+        }
+
+        // This function will be called by the game's JavaScript to return to the main content
+        window.returnToMainContent = function() {
+            // Show the header immediately when returning to main content
+            mainHeader.classList.remove('header-hidden');
+
+            dynamicallyLoadedGameContainer.innerHTML = ''; // Clear game content
+            // Remove any dynamically added script tags to prevent re-initialization issues
+            const oldPeripheralScript = document.querySelector('script[src="js/perifericos_juego.js"]');
+            if (oldPeripheralScript) {
+                oldPeripheralScript.remove();
+            }
+            const oldWebMasterQuizScript = document.querySelector('script[src="js/webmaster_quiz_juego.js"]');
+            if (oldWebMasterQuizScript) {
+                oldWebMasterQuizScript.remove();
+            }
+            const oldDexterityScript = document.querySelector('script[src="js/destreza_teclado.js"]'); // New game script
+            if (oldDexterityScript) {
+                oldDexterityScript.remove();
+            }
+
+            showMainContentSections(); // Return to the main content layout
+            renderInitialActivityButton(); // Show the initial "Ver Actividades Prácticas" button
+        };
+
+        function renderInitialActivityButton() {
+            initialActivityMenu.classList.remove('hidden');
+            initialActivityMenu.classList.add('flex');
+            gameListMenu.classList.add('hidden');
+            gameListMenu.classList.remove('flex');
+            // dynamicallyLoadedGameContainer.classList.add('hidden'); // This is handled by showMainContentSections
+        }
+
+        function renderActivityList() {
+            initialActivityMenu.classList.add('hidden');
+            initialActivityMenu.classList.remove('flex');
+            gameListMenu.classList.remove('hidden');
+            gameListMenu.classList.add('flex');
+            dynamicallyLoadedGameContainer.classList.add('hidden'); // Ensure game is hidden
+            mainContentTitle.textContent = 'Actividades'; // Update main title
+        }
+
+        // Event Listeners for Activity Section Navigation
+        showActivitiesButton.addEventListener('click', renderActivityList);
+        selectPeripheralsGameButton.addEventListener('click', loadPeripheralsGame); // Call load function
+        selectWebMasterQuizButton.addEventListener('click', loadWebMasterQuiz); // Call load function for WebMaster Quiz
+        selectDexterityGameButton.addEventListener('click', loadDexterityGame); // NEW: Call load function for Dexterity Game
+        backToMainActivitiesButton.addEventListener('click', renderInitialActivityButton);
+
+        // --- Header Hide/Show on Scroll Logic ---
+        const mainHeader = document.getElementById('main-header');
+        let lastScrollTop = 0;
+        const scrollThreshold = 50; // Pixels to scroll before header hides/shows
+
+        window.addEventListener('scroll', () => {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScrollTop > lastScrollTop && currentScrollTop > mainHeader.offsetHeight + scrollThreshold) {
+                // Scrolling down
+                mainHeader.classList.add('header-hidden');
+            } else if (currentScrollTop < lastScrollTop) {
+                // Scrolling up
+                mainHeader.classList.remove('header-hidden');
+            }
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
+        });
+
+
+        // --- Initialize on DOMContentLoaded ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Render desktop and mobile navigation menus
+            renderDesktopNav();
+            renderMobileNav();
+
+            // Initialize content sections: show download initial button and activity initial button
+            renderInitialContentButton();
+            renderInitialActivityButton(); // This will also ensure main content sections are visible
+        });
+    </script>
+</body>
+</html>
