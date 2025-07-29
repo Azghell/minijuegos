@@ -66,10 +66,17 @@ let totalErrors = 0;
 let gameStartTime;
 let gameTimerInterval;
 let timeRemainingSeconds; // Usaremos segundos con decimales para mayor precisión
-let initialTimePerWord = 5; // Segundos iniciales por palabra
-let timeDecreaseFactor = 0.005; // Factor para reducir el tiempo por palabra a medida que avanza (0.5% por palabra)
 const MAX_CONSECUTIVE_ERRORS = 3;
 const UPDATE_INTERVAL_MS = 50; // Intervalo de actualización de la barra de tiempo en milisegundos
+
+// Configuración de tiempo por longitud de palabra
+const timeSettings = {
+    3: { initial: 10, min: 3 }, // Palabras de 3 letras: inicia en 10s, mínimo 3s
+    4: { initial: 10, min: 4 }, // Palabras de 4 letras: inicia en 10s, mínimo 4s
+    5: { initial: 10, min: 5 }, // Palabras de 5 letras: inicia en 10s, mínimo 5s
+    default: { initial: 5, min: 5 } // Para palabras > 5 letras o tipos especiales
+};
+const REDUCTION_WORDS_THRESHOLD = 20; // Número de palabras correctas para alcanzar el tiempo mínimo
 
 // --- Referencias a Elementos del DOM ---
 let gameStartMenu;
@@ -202,14 +209,21 @@ function resetGame() {
     consecutiveErrors = 0;
     totalErrors = 0;
     wordIndex = 0;
-    timeRemainingSeconds = initialTimePerWord; // Reiniciar tiempo
+    // timeRemainingSeconds se inicializa en loadNewWord basado en la palabra
 
     // Reiniciar los displays
     if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount;
     if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
-    if (wordInput) wordInput.value = '';
+    if (wordInput) {
+        wordInput.value = '';
+        wordInput.disabled = false; // Habilitar el input al reiniciar
+        wordInput.classList.remove('border-success', 'border-error'); // Limpiar clases de feedback
+    }
     if (timeBar) timeBar.style.width = '100%';
     if (specialCharHint) specialCharHint.classList.add('hidden');
+    if (currentWordDisplay && currentWordDisplay.parentElement) {
+        currentWordDisplay.parentElement.classList.remove('border-success', 'border-error'); // Limpiar clases de feedback
+    }
 
     // Cargar palabras para la primera dificultad
     loadDifficultyWords();
@@ -225,7 +239,7 @@ function loadDifficultyWords() {
     } else if (currentDifficultyLevel === 2) {
         difficultyKey = 'avanzado';
     } else { // Después de avanzado, se mezclan palabras y especiales
-        difficultyKey = 'especial'; // O una mezcla de avanzado y especial
+        difficultyKey = 'especial';
     }
 
     availableWords = shuffleArray([...gameWords[difficultyKey]]);
@@ -250,6 +264,9 @@ function loadNewWord() {
         if (currentDifficultyLevel < 3) { // Asumiendo 0, 1, 2, 3 son los niveles
             currentDifficultyLevel++;
             loadDifficultyWords(); // Cargar palabras para la nueva dificultad
+            // Si se cambia de dificultad, reiniciar el índice de palabras correctas para la reducción de tiempo
+            // Esto asegura que cada nueva dificultad empiece con el tiempo inicial alto.
+            correctWordsCount = 0; 
         } else {
             // Si no hay más dificultades, terminar el juego
             endGame();
@@ -258,16 +275,28 @@ function loadNewWord() {
     }
 
     currentWord = availableWords[wordIndex];
-    // Calcular el tiempo límite basado en la longitud de la palabra y el factor de dificultad
-    // Palabras más largas o complejas (avanzado/especial) tendrán menos tiempo relativo
-    let baseTime = initialTimePerWord;
-    if (currentDifficultyLevel === 1) baseTime = 4; // Intermedio
-    if (currentDifficultyLevel === 2) baseTime = 3; // Avanzado
-    if (currentDifficultyLevel === 3) baseTime = 5; // Especiales pueden ser más lentos para dar tiempo a la pista
+    
+    let baseTimeSetting;
+    if (currentWord.type === "word") {
+        const wordLength = currentWord.word.length;
+        if (wordLength >= 3 && wordLength <= 5) {
+            baseTimeSetting = timeSettings[wordLength];
+        } else {
+            baseTimeSetting = timeSettings.default; // Para palabras > 5 letras
+        }
+    } else { // Caracteres especiales/atajos
+        baseTimeSetting = timeSettings.default; // Tiempo fijo para especiales
+    }
 
-    // Ajustar el tiempo basado en el número de palabras correctas (el juego avanza más rápido)
-    const speedFactor = 1 - (correctWordsCount * timeDecreaseFactor); // Reduce 0.5% por palabra correcta
-    currentWord.timeLimit = Math.max(1, Math.round(baseTime * speedFactor)); // Mínimo 1 segundo
+    // Calcular el tiempo de reducción por palabra
+    const timeRange = baseTimeSetting.initial - baseTimeSetting.min;
+    const reductionPerWord = timeRange / REDUCTION_WORDS_THRESHOLD;
+
+    // Calcular el tiempo actual, limitado por el mínimo
+    let calculatedTime = baseTimeSetting.initial - (correctWordsCount * reductionPerWord);
+    currentWord.timeLimit = Math.max(baseTimeSetting.min, calculatedTime);
+    currentWord.timeLimit = parseFloat(currentWord.timeLimit.toFixed(2)); // Mantener 2 decimales para precisión
+
     timeRemainingSeconds = currentWord.timeLimit; // Inicializar tiempo restante para la nueva palabra
 
     if (currentWordDisplay) currentWordDisplay.textContent = currentWord.word;
@@ -282,6 +311,10 @@ function loadNewWord() {
     if (wordInput) {
         wordInput.value = ''; // Limpiar el input
         wordInput.focus(); // Asegurar que el input esté enfocado
+        wordInput.classList.remove('border-success', 'border-error'); // Limpiar clases de feedback
+    }
+    if (currentWordDisplay && currentWordDisplay.parentElement) {
+        currentWordDisplay.parentElement.classList.remove('border-success', 'border-error'); // Limpiar clases de feedback
     }
 
     updateTimeBar();
@@ -291,7 +324,7 @@ function loadNewWord() {
 // Inicia el temporizador de la palabra actual
 function startTimer() {
     clearInterval(gameTimerInterval); // Detener cualquier temporizador existente
-    timeRemainingSeconds = currentWord.timeLimit; // Reiniciar el tiempo restante para la nueva palabra
+    // timeRemainingSeconds ya se inicializa en loadNewWord
 
     gameTimerInterval = setInterval(() => {
         timeRemainingSeconds -= (UPDATE_INTERVAL_MS / 1000); // Decrementar por la fracción de segundo
@@ -348,10 +381,14 @@ function handleCorrectInput() {
     if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount;
     if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
 
-    // Feedback visual de éxito
-    if (gamePlayArea) {
-        gamePlayArea.classList.add('animate-flash-green');
-        setTimeout(() => gamePlayArea.classList.remove('animate-flash-green'), 500);
+    // Feedback visual de éxito en el input y la tarjeta
+    if (wordInput) {
+        wordInput.classList.add('border-success');
+        setTimeout(() => wordInput.classList.remove('border-success'), 200);
+    }
+    if (currentWordDisplay && currentWordDisplay.parentElement) {
+        currentWordDisplay.parentElement.classList.add('border-success');
+        setTimeout(() => currentWordDisplay.parentElement.classList.remove('border-success'), 200);
     }
 }
 
@@ -361,10 +398,14 @@ function handleIncorrectInput() {
     consecutiveErrors++;
     if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
 
-    // Feedback visual de error
-    if (gamePlayArea) {
-        gamePlayArea.classList.add('animate-flash-red');
-        setTimeout(() => gamePlayArea.classList.remove('animate-flash-red'), 500);
+    // Feedback visual de error en el input y la tarjeta
+    if (wordInput) {
+        wordInput.classList.add('border-error');
+        setTimeout(() => wordInput.classList.remove('border-error'), 200);
+    }
+    if (currentWordDisplay && currentWordDisplay.parentElement) {
+        currentWordDisplay.parentElement.classList.add('border-error');
+        setTimeout(() => currentWordDisplay.parentElement.classList.remove('border-error'), 200);
     }
 
     if (consecutiveErrors >= MAX_CONSECUTIVE_ERRORS) {
@@ -375,6 +416,10 @@ function handleIncorrectInput() {
 // Termina el juego y muestra los resultados
 function endGame() {
     clearInterval(gameTimerInterval); // Detener el temporizador
+    if (wordInput) {
+        wordInput.disabled = true; // Deshabilitar el input
+        wordInput.value = ''; // Limpiar el texto
+    }
     showScreen('game-result-screen');
 
     if (finalCorrectWords) finalCorrectWords.textContent = correctWordsCount;
@@ -392,8 +437,3 @@ function exitGame() {
         showScreen('game-start-menu'); // Fallback to game start menu
     }
 }
-
-// La inicialización de este juego ahora se maneja directamente desde index.html
-// a través de la función window.initDexterityGame() que se llama en el script.onload
-// del script cargado dinámicamente.
-// No se necesita document.addEventListener('DOMContentLoaded') aquí.
