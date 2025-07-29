@@ -65,10 +65,11 @@ let consecutiveErrors = 0;
 let totalErrors = 0;
 let gameStartTime;
 let gameTimerInterval;
-let timeRemaining;
+let timeRemainingSeconds; // Usaremos segundos con decimales para mayor precisión
 let initialTimePerWord = 5; // Segundos iniciales por palabra
-let timeDecreaseFactor = 0.95; // Factor para reducir el tiempo por palabra a medida que avanza
+let timeDecreaseFactor = 0.005; // Factor para reducir el tiempo por palabra a medida que avanza (0.5% por palabra)
 const MAX_CONSECUTIVE_ERRORS = 3;
+const UPDATE_INTERVAL_MS = 50; // Intervalo de actualización de la barra de tiempo en milisegundos
 
 // --- Referencias a Elementos del DOM ---
 let gameStartMenu;
@@ -125,9 +126,9 @@ function showScreen(screenId) {
 
 // Actualiza la barra de tiempo visualmente
 function updateTimeBar() {
-    const percentage = (timeRemaining / currentWord.timeLimit) * 100;
+    const percentage = (timeRemainingSeconds / currentWord.timeLimit) * 100;
     if (timeBar) {
-        timeBar.style.width = `${percentage}%`;
+        timeBar.style.width = `${Math.max(0, percentage)}%`; // Asegura que no baje de 0%
         timeBar.classList.remove('warning', 'danger');
         if (percentage < 30) {
             timeBar.classList.add('danger');
@@ -151,7 +152,7 @@ function calculateWPM() {
 
 // Inicializa el juego al cargar la página o al volver a jugar
 window.initDexterityGame = function() {
-    console.log('initDexterityGame called'); // Debugging log
+    console.log('initDexterityGame called'); // Log de depuración
     // Asignar elementos del DOM
     gameStartMenu = document.getElementById('game-start-menu');
     startGameButton = document.getElementById('start-game-button');
@@ -170,7 +171,7 @@ window.initDexterityGame = function() {
     retryGameButton = document.getElementById('retry-game-button');
     exitResultsButton = document.getElementById('exit-results-button');
 
-    console.log('startGameButton:', startGameButton); // Debugging log
+    console.log('startGameButton:', startGameButton); // Log de depuración
 
     // Configurar Event Listeners
     if (startGameButton) startGameButton.addEventListener('click', startGame);
@@ -185,7 +186,7 @@ window.initDexterityGame = function() {
 
 // Inicia un nuevo juego
 function startGame() {
-    console.log('startGame function called'); // Debugging log
+    console.log('startGame function called'); // Log de depuración
     resetGame();
     showScreen('game-play-area');
     gameStartTime = Date.now();
@@ -201,7 +202,7 @@ function resetGame() {
     consecutiveErrors = 0;
     totalErrors = 0;
     wordIndex = 0;
-    timeRemaining = initialTimePerWord;
+    timeRemainingSeconds = initialTimePerWord; // Reiniciar tiempo
 
     // Reiniciar los displays
     if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount;
@@ -265,9 +266,9 @@ function loadNewWord() {
     if (currentDifficultyLevel === 3) baseTime = 5; // Especiales pueden ser más lentos para dar tiempo a la pista
 
     // Ajustar el tiempo basado en el número de palabras correctas (el juego avanza más rápido)
-    const speedFactor = 1 - (correctWordsCount * 0.005); // Reduce 0.5% por palabra correcta
+    const speedFactor = 1 - (correctWordsCount * timeDecreaseFactor); // Reduce 0.5% por palabra correcta
     currentWord.timeLimit = Math.max(1, Math.round(baseTime * speedFactor)); // Mínimo 1 segundo
-    timeRemaining = currentWord.timeLimit;
+    timeRemainingSeconds = currentWord.timeLimit; // Inicializar tiempo restante para la nueva palabra
 
     if (currentWordDisplay) currentWordDisplay.textContent = currentWord.word;
     if (specialCharHint) {
@@ -289,15 +290,20 @@ function loadNewWord() {
 
 // Inicia el temporizador de la palabra actual
 function startTimer() {
+    clearInterval(gameTimerInterval); // Detener cualquier temporizador existente
+    timeRemainingSeconds = currentWord.timeLimit; // Reiniciar el tiempo restante para la nueva palabra
+
     gameTimerInterval = setInterval(() => {
-        timeRemaining--;
+        timeRemainingSeconds -= (UPDATE_INTERVAL_MS / 1000); // Decrementar por la fracción de segundo
         updateTimeBar();
-        if (timeRemaining <= 0) {
+
+        if (timeRemainingSeconds <= 0) {
             clearInterval(gameTimerInterval);
             handleIncorrectInput(); // Si el tiempo se acaba, cuenta como error
+            wordIndex++; // Avanzar al siguiente índice
             loadNewWord(); // Pasa a la siguiente palabra
         }
-    }, 1000);
+    }, UPDATE_INTERVAL_MS);
 }
 
 // Maneja la entrada del usuario
@@ -305,23 +311,33 @@ function handleInput() {
     const inputText = wordInput.value;
     const targetWord = currentWord.word;
 
-    // Si el usuario ha escrito la palabra completa (correcta o incorrecta)
-    if (inputText.length >= targetWord.length) {
+    // Si el texto ingresado es más largo que la palabra objetivo, es un error inmediato
+    if (inputText.length > targetWord.length) {
+        handleIncorrectInput();
+        wordIndex++; // Avanzar al siguiente índice
+        loadNewWord();
+        return;
+    }
+
+    // Verificar si el texto ingresado es un prefijo válido de la palabra objetivo
+    if (targetWord.substring(0, inputText.length) !== inputText) {
+        // Si no coincide con el prefijo, es un error
+        handleIncorrectInput();
+        wordIndex++; // Avanzar al siguiente índice
+        loadNewWord();
+        return;
+    }
+
+    // Si el texto ingresado coincide con la palabra completa
+    if (inputText.length === targetWord.length) {
         if (inputText === targetWord) {
             handleCorrectInput();
         } else {
+            // Esto debería ser capturado por la comprobación de prefijo, pero como respaldo
             handleIncorrectInput();
         }
-        loadNewWord(); // Siempre avanza a la siguiente palabra
-    }
-    // Si el usuario ha cometido un error en algún punto, también avanza a la siguiente palabra
-    // Esto se maneja en el siguiente bloque para permitir la corrección en vivo
-    if (inputText !== targetWord.substring(0, inputText.length)) {
-        // Si el texto ingresado no coincide con el inicio de la palabra objetivo,
-        // se considera un error y se avanza a la siguiente palabra.
-        // Esto evita que el usuario siga escribiendo una palabra incorrecta.
-        handleIncorrectInput();
-        loadNewWord();
+        wordIndex++; // Avanzar al siguiente índice
+        loadNewWord(); // Siempre avanza después de un intento de palabra completa
     }
 }
 
@@ -380,3 +396,4 @@ function exitGame() {
 // La inicialización de este juego ahora se maneja directamente desde index.html
 // a través de la función window.initDexterityGame() que se llama en el script.onload
 // del script cargado dinámicamente.
+// No se necesita document.addEventListener('DOMContentLoaded') aquí.
