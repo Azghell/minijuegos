@@ -350,6 +350,7 @@ function startTimer() {
 function handleInput() {
     // Si el input está deshabilitado o el juego no está activo, ignorar cualquier entrada
     if (!gameActive || (wordInput && wordInput.disabled)) {
+        console.log("handleInput: Game not active or input disabled. Returning."); // Log de depuración
         return;
     }
 
@@ -436,34 +437,46 @@ function handleInput() {
 
 // Lógica para manejar una entrada correcta (actualiza contadores)
 function handleCorrectInputLogic() {
-    if (!gameActive) return; // No actualizar si el juego no está activo
+    if (!gameActive) {
+        console.log("handleCorrectInputLogic: Game not active, skipping update."); // Log de depuración
+        return; // No actualizar si el juego no está activo
+    }
     correctWordsCount++;
     consecutiveErrors = 0; // Reiniciar errores consecutivos
     if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount;
     if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
-
+    console.log(`Correct word! Correct count: ${correctWordsCount}, Consecutive errors: ${consecutiveErrors}`); // Log de depuración
     // El feedback visual se maneja en handleInput
 }
 
 // Lógica para manejar una entrada incorrecta (actualiza contadores)
 function handleIncorrectInputLogic() {
-    if (!gameActive) return; // No actualizar si el juego no está activo
+    if (!gameActive) {
+        console.log("handleIncorrectInputLogic: Game not active, skipping update."); // Log de depuración
+        return; // No actualizar si el juego no está activo
+    }
     totalErrors++;
     consecutiveErrors++;
     if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
+    console.log(`Incorrect word! Total errors: ${totalErrors}, Consecutive errors: ${consecutiveErrors}`); // Log de depuración
 
     // El feedback visual se maneja en handleInput
 
     if (consecutiveErrors >= MAX_CONSECUTIVE_ERRORS) {
+        console.log("Max consecutive errors reached. Ending game."); // Log de depuración
         endGame();
     }
 }
 
 // Termina el juego y muestra los resultados
 function endGame() {
-    if (!gameActive) return; // Evitar llamadas múltiples
+    if (!gameActive) {
+        console.log("endGame called but game is already inactive. Returning."); // Log de depuración
+        return; // Evitar llamadas múltiples
+    }
     gameActive = false; // El juego ya no está activo
     clearInterval(gameTimerInterval); // Detener el temporizador
+    console.log("Game ended. Finalizing scores. Timer cleared, input disabled."); // Log de depuración
     if (wordInput) {
         wordInput.disabled = true; // Deshabilitar el input para evitar más errores
         wordInput.value = ''; // Limpiar el texto
@@ -477,6 +490,9 @@ function endGame() {
     if (finalCorrectWords) finalCorrectWords.textContent = correctWordsCount;
     if (finalErrors) finalErrors.textContent = totalErrors;
     if (finalWPM) finalWPM.textContent = calculateWPM();
+    console.log(`Final Correct Words: ${correctWordsCount}`); // Log de depuración
+    console.log(`Final Errors: ${totalErrors}`); // Log de depuración
+    console.log(`Final WPM: ${calculateWPM()}`); // Log de depuración
 }
 
 // Sale del juego y regresa al menú principal de actividades
