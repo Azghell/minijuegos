@@ -68,6 +68,7 @@ let gameTimerInterval;
 let timeRemainingSeconds; // Usaremos segundos con decimales para mayor precisión
 const MAX_CONSECUTIVE_ERRORS = 3;
 const UPDATE_INTERVAL_MS = 50; // Intervalo de actualización de la barra de tiempo en milisegundos
+let gameActive = false; // Nueva bandera para controlar el estado del juego
 
 // Configuración de tiempo por longitud de palabra
 const timeSettings = {
@@ -200,6 +201,7 @@ window.initDexterityGame = function() {
 function startGame() {
     console.log('startGame function called'); // Log de depuración
     resetGame();
+    gameActive = true; // El juego está activo
     showScreen('game-play-area');
     gameStartTime = Date.now();
     loadNewWord();
@@ -346,8 +348,8 @@ function startTimer() {
 
 // Maneja la entrada del usuario
 function handleInput() {
-    // Si el input está deshabilitado, ignorar cualquier entrada
-    if (wordInput && wordInput.disabled) {
+    // Si el input está deshabilitado o el juego no está activo, ignorar cualquier entrada
+    if (!gameActive || (wordInput && wordInput.disabled)) {
         return;
     }
 
@@ -375,8 +377,22 @@ function handleInput() {
     }
 
     // Caso 2: La entrada actual (normalizada) no coincide con el prefijo de la palabra objetivo (normalizada)
-    // Esto captura errores de tecleo fundamentales (ej: "caxa" para "casa")
-    if (!normalizedTargetWord.startsWith(normalizedInputText)) {
+    // Esto captura errores de tecleo fundamentales (ej: "caxa" para "casa"), ignorando acentos por ahora.
+    // Importante: No se usa startsWith para permitir la entrada de teclas muertas.
+    let isPartialMatch = true;
+    for (let i = 0; i < inputText.length; i++) {
+        const inputChar = inputText[i];
+        const targetChar = targetWord[i];
+
+        // Compara los caracteres normalizados. Esto permite "a" vs "á" como match parcial.
+        if (normalizeString(inputChar) !== normalizeString(targetChar)) {
+            isPartialMatch = false;
+            break;
+        }
+    }
+
+    if (!isPartialMatch) {
+        // Si no es un prefijo válido (incluso ignorando acentos), es un error de tecleo
         wordInput.classList.add('border-error');
         if (currentWordDisplay && currentWordDisplay.parentElement) {
             currentWordDisplay.parentElement.classList.add('border-error');
@@ -387,13 +403,12 @@ function handleInput() {
         return;
     }
 
-    // Si llegamos aquí, el prefijo es válido (incluso si faltan acentos).
+    // Si llegamos aquí, es un prefijo válido (o una palabra completa con o sin acento)
     // Aplicar feedback visual de que se está escribiendo correctamente hasta ahora.
-    wordInput.classList.add('border-success'); // Asume que se está escribiendo bien
+    wordInput.classList.add('border-success');
     if (currentWordDisplay && currentWordDisplay.parentElement) {
         currentWordDisplay.parentElement.classList.add('border-success');
     }
-
 
     // Caso 3: La longitud de la entrada coincide con la longitud de la palabra objetivo
     if (inputText.length === targetWord.length) {
@@ -401,9 +416,15 @@ function handleInput() {
             // Coincidencia exacta (incluyendo acentos)
             handleCorrectInputLogic(); // Incrementa contador de palabras correctas
         } else {
-            // Coincidencia normalizada pero no exacta (ej: "casa" vs "cása"), o error en la última letra
+            // Coincidencia normalizada pero no exacta (ej: "casa" vs "cása")
             // Se cuenta como error y se avanza
             handleIncorrectInputLogic(); // Incrementa contadores de error
+            wordInput.classList.remove('border-success'); // Quitar verde si no fue exacto
+            wordInput.classList.add('border-error'); // Poner rojo
+            if (currentWordDisplay && currentWordDisplay.parentElement) {
+                currentWordDisplay.parentElement.classList.remove('border-success');
+                currentWordDisplay.parentElement.classList.add('border-error');
+            }
         }
         // Siempre avanza a la siguiente palabra después de un intento de palabra completa
         wordIndex++;
@@ -415,6 +436,7 @@ function handleInput() {
 
 // Lógica para manejar una entrada correcta (actualiza contadores)
 function handleCorrectInputLogic() {
+    if (!gameActive) return; // No actualizar si el juego no está activo
     correctWordsCount++;
     consecutiveErrors = 0; // Reiniciar errores consecutivos
     if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount;
@@ -425,6 +447,7 @@ function handleCorrectInputLogic() {
 
 // Lógica para manejar una entrada incorrecta (actualiza contadores)
 function handleIncorrectInputLogic() {
+    if (!gameActive) return; // No actualizar si el juego no está activo
     totalErrors++;
     consecutiveErrors++;
     if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
@@ -438,6 +461,8 @@ function handleIncorrectInputLogic() {
 
 // Termina el juego y muestra los resultados
 function endGame() {
+    if (!gameActive) return; // Evitar llamadas múltiples
+    gameActive = false; // El juego ya no está activo
     clearInterval(gameTimerInterval); // Detener el temporizador
     if (wordInput) {
         wordInput.disabled = true; // Deshabilitar el input para evitar más errores
@@ -456,6 +481,7 @@ function endGame() {
 
 // Sale del juego y regresa al menú principal de actividades
 function exitGame() {
+    gameActive = false; // Asegurarse de que el juego esté inactivo al salir
     clearInterval(gameTimerInterval);
     if (window.returnToMainContent) {
         window.returnToMainContent();
@@ -464,3 +490,8 @@ function exitGame() {
         showScreen('game-start-menu'); // Fallback to game start menu
     }
 }
+
+// La inicialización de este juego ahora se maneja directamente desde index.html
+// a través de la función window.initDexterityGame() que se llama en el script.onload
+// del script cargado dinámicamente.
+// No se necesita document.addEventListener('DOMContentLoaded') aquí.
