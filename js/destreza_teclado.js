@@ -131,6 +131,11 @@ function showScreen(screenId) {
     }
 }
 
+// Normaliza una cadena eliminando acentos y diacríticos
+function normalizeString(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 // Actualiza la barra de tiempo visualmente
 function updateTimeBar() {
     const percentage = (timeRemainingSeconds / currentWord.timeLimit) * 100;
@@ -332,7 +337,7 @@ function startTimer() {
 
         if (timeRemainingSeconds <= 0) {
             clearInterval(gameTimerInterval);
-            handleIncorrectInput(); // Si el tiempo se acaba, cuenta como error
+            handleIncorrectInputLogic(); // Si el tiempo se acaba, cuenta como error
             wordIndex++; // Avanzar al siguiente índice
             loadNewWord(); // Pasa a la siguiente palabra
         }
@@ -341,72 +346,90 @@ function startTimer() {
 
 // Maneja la entrada del usuario
 function handleInput() {
+    // Si el input está deshabilitado, ignorar cualquier entrada
+    if (wordInput && wordInput.disabled) {
+        return;
+    }
+
     const inputText = wordInput.value;
     const targetWord = currentWord.word;
+    const normalizedInputText = normalizeString(inputText);
+    const normalizedTargetWord = normalizeString(targetWord);
 
-    // Si el texto ingresado es más largo que la palabra objetivo, es un error inmediato
+    // Limpiar clases de feedback anteriores para una transición suave
+    wordInput.classList.remove('border-success', 'border-error');
+    if (currentWordDisplay && currentWordDisplay.parentElement) {
+        currentWordDisplay.parentElement.classList.remove('border-success', 'border-error');
+    }
+
+    // Caso 1: La entrada es más larga que la palabra objetivo (error fundamental)
     if (inputText.length > targetWord.length) {
-        handleIncorrectInput();
-        wordIndex++; // Avanzar al siguiente índice
-        loadNewWord();
+        wordInput.classList.add('border-error');
+        if (currentWordDisplay && currentWordDisplay.parentElement) {
+            currentWordDisplay.parentElement.classList.add('border-error');
+        }
+        handleIncorrectInputLogic(); // Incrementa contadores de error
+        wordIndex++;
+        loadNewWord(); // Avanza a la siguiente palabra
         return;
     }
 
-    // Verificar si el texto ingresado es un prefijo válido de la palabra objetivo
-    if (targetWord.substring(0, inputText.length) !== inputText) {
-        // Si no coincide con el prefijo, es un error
-        handleIncorrectInput();
-        wordIndex++; // Avanzar al siguiente índice
-        loadNewWord();
+    // Caso 2: La entrada actual (normalizada) no coincide con el prefijo de la palabra objetivo (normalizada)
+    // Esto captura errores de tecleo fundamentales (ej: "caxa" para "casa")
+    if (!normalizedTargetWord.startsWith(normalizedInputText)) {
+        wordInput.classList.add('border-error');
+        if (currentWordDisplay && currentWordDisplay.parentElement) {
+            currentWordDisplay.parentElement.classList.add('border-error');
+        }
+        handleIncorrectInputLogic(); // Incrementa contadores de error
+        wordIndex++;
+        loadNewWord(); // Avanza a la siguiente palabra
         return;
     }
 
-    // Si el texto ingresado coincide con la palabra completa
+    // Si llegamos aquí, el prefijo es válido (incluso si faltan acentos).
+    // Aplicar feedback visual de que se está escribiendo correctamente hasta ahora.
+    wordInput.classList.add('border-success'); // Asume que se está escribiendo bien
+    if (currentWordDisplay && currentWordDisplay.parentElement) {
+        currentWordDisplay.parentElement.classList.add('border-success');
+    }
+
+
+    // Caso 3: La longitud de la entrada coincide con la longitud de la palabra objetivo
     if (inputText.length === targetWord.length) {
         if (inputText === targetWord) {
-            handleCorrectInput();
+            // Coincidencia exacta (incluyendo acentos)
+            handleCorrectInputLogic(); // Incrementa contador de palabras correctas
         } else {
-            // Esto debería ser capturado por la comprobación de prefijo, pero como respaldo
-            handleIncorrectInput();
+            // Coincidencia normalizada pero no exacta (ej: "casa" vs "cása"), o error en la última letra
+            // Se cuenta como error y se avanza
+            handleIncorrectInputLogic(); // Incrementa contadores de error
         }
-        wordIndex++; // Avanzar al siguiente índice
-        loadNewWord(); // Siempre avanza después de un intento de palabra completa
+        // Siempre avanza a la siguiente palabra después de un intento de palabra completa
+        wordIndex++;
+        loadNewWord();
     }
+    // Si la entrada es una palabra parcial válida, no hacemos nada más aquí,
+    // el usuario sigue escribiendo y el temporizador sigue corriendo.
 }
 
-// Maneja una entrada correcta
-function handleCorrectInput() {
+// Lógica para manejar una entrada correcta (actualiza contadores)
+function handleCorrectInputLogic() {
     correctWordsCount++;
     consecutiveErrors = 0; // Reiniciar errores consecutivos
     if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount;
     if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
 
-    // Feedback visual de éxito en el input y la tarjeta
-    if (wordInput) {
-        wordInput.classList.add('border-success');
-        setTimeout(() => wordInput.classList.remove('border-success'), 200);
-    }
-    if (currentWordDisplay && currentWordDisplay.parentElement) {
-        currentWordDisplay.parentElement.classList.add('border-success');
-        setTimeout(() => currentWordDisplay.parentElement.classList.remove('border-success'), 200);
-    }
+    // El feedback visual se maneja en handleInput
 }
 
-// Maneja una entrada incorrecta
-function handleIncorrectInput() {
+// Lógica para manejar una entrada incorrecta (actualiza contadores)
+function handleIncorrectInputLogic() {
     totalErrors++;
     consecutiveErrors++;
     if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
 
-    // Feedback visual de error en el input y la tarjeta
-    if (wordInput) {
-        wordInput.classList.add('border-error');
-        setTimeout(() => wordInput.classList.remove('border-error'), 200);
-    }
-    if (currentWordDisplay && currentWordDisplay.parentElement) {
-        currentWordDisplay.parentElement.classList.add('border-error');
-        setTimeout(() => currentWordDisplay.parentElement.classList.remove('border-error'), 200);
-    }
+    // El feedback visual se maneja en handleInput
 
     if (consecutiveErrors >= MAX_CONSECUTIVE_ERRORS) {
         endGame();
@@ -417,8 +440,12 @@ function handleIncorrectInput() {
 function endGame() {
     clearInterval(gameTimerInterval); // Detener el temporizador
     if (wordInput) {
-        wordInput.disabled = true; // Deshabilitar el input
+        wordInput.disabled = true; // Deshabilitar el input para evitar más errores
         wordInput.value = ''; // Limpiar el texto
+        wordInput.classList.remove('border-success', 'border-error'); // Limpiar feedback final
+    }
+    if (currentWordDisplay && currentWordDisplay.parentElement) {
+        currentWordDisplay.parentElement.classList.remove('border-success', 'border-error'); // Limpiar feedback final
     }
     showScreen('game-result-screen');
 
