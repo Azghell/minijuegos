@@ -45,7 +45,7 @@ const gameWords = {
         { word: "¡", type: "special", hint: "Alt+173" },
         { word: "€", type: "special", hint: "Alt+0128" },
         { word: "Ctrl+C", type: "shortcut", hint: "Copiar" },
-        { word: "Ctrl+V", type: "shortcut", hint: "Pegar" },
+        { word: "Ctrl+V", type: "shortcut", "hint": "Pegar" },
         { word: "Ctrl+X", type: "shortcut", hint: "Cortar" },
         { word: "Ctrl+Z", type: "shortcut", hint: "Deshacer" },
         { word: "Ctrl+S", type: "shortcut", hint: "Guardar" },
@@ -60,7 +60,8 @@ let currentWord = {}; // Objeto que contiene { word: "...", type: "...", hint: "
 let currentDifficultyLevel = 0; // 0: básico, 1: intermedio, 2: avanzado, 3: especial
 let availableWords = []; // Palabras para la dificultad actual
 let wordIndex = 0; // Índice de la palabra actual en availableWords
-let correctWordsCount = 0;
+let correctWordsCount = 0; // Contador acumulativo de palabras correctas (global)
+let wordsCorrectInCurrentDifficulty = 0; // Contador de palabras correctas en el nivel de dificultad actual (para ajuste de tiempo)
 let consecutiveErrors = 0;
 let totalErrors = 0;
 let gameStartTime;
@@ -212,7 +213,8 @@ function startGame() {
 function resetGame() {
     clearInterval(gameTimerInterval);
     currentDifficultyLevel = 0;
-    correctWordsCount = 0;
+    correctWordsCount = 0; // Reiniciar contador global de palabras correctas
+    wordsCorrectInCurrentDifficulty = 0; // Reiniciar contador para el ajuste de tiempo
     consecutiveErrors = 0;
     totalErrors = 0;
     wordIndex = 0;
@@ -254,6 +256,7 @@ function loadDifficultyWords() {
     if (availableWords.length === 0 && currentDifficultyLevel < 3) {
         currentDifficultyLevel++;
         loadDifficultyWords(); // Recargar con la nueva dificultad
+        wordsCorrectInCurrentDifficulty = 0; // Reiniciar este contador al cambiar de dificultad
     } else if (availableWords.length === 0 && currentDifficultyLevel === 3) {
         // Si no hay más palabras en la última dificultad, el juego termina
         endGame();
@@ -271,9 +274,7 @@ function loadNewWord() {
         if (currentDifficultyLevel < 3) { // Asumiendo 0, 1, 2, 3 son los niveles
             currentDifficultyLevel++;
             loadDifficultyWords(); // Cargar palabras para la nueva dificultad
-            // Si se cambia de dificultad, reiniciar el índice de palabras correctas para la reducción de tiempo
-            // Esto asegura que cada nueva dificultad empiece con el tiempo inicial alto.
-            correctWordsCount = 0; 
+            wordsCorrectInCurrentDifficulty = 0; // Reiniciar este contador al cambiar de dificultad
         } else {
             // Si no hay más dificultades, terminar el juego
             endGame();
@@ -295,12 +296,12 @@ function loadNewWord() {
         baseTimeSetting = timeSettings.default; // Tiempo fijo para especiales
     }
 
-    // Calcular el tiempo de reducción por palabra
+    // Calcular el tiempo de reducción por palabra utilizando wordsCorrectInCurrentDifficulty
     const timeRange = baseTimeSetting.initial - baseTimeSetting.min;
     const reductionPerWord = timeRange / REDUCTION_WORDS_THRESHOLD;
 
     // Calcular el tiempo actual, limitado por el mínimo
-    let calculatedTime = baseTimeSetting.initial - (correctWordsCount * reductionPerWord);
+    let calculatedTime = baseTimeSetting.initial - (wordsCorrectInCurrentDifficulty * reductionPerWord);
     currentWord.timeLimit = Math.max(baseTimeSetting.min, calculatedTime);
     currentWord.timeLimit = parseFloat(currentWord.timeLimit.toFixed(2)); // Mantener 2 decimales para precisión
 
@@ -441,7 +442,8 @@ function handleCorrectInputLogic() {
         console.log("handleCorrectInputLogic: Game not active, skipping update."); // Log de depuración
         return; // No actualizar si el juego no está activo
     }
-    correctWordsCount++;
+    correctWordsCount++; // Siempre acumulativo
+    wordsCorrectInCurrentDifficulty++; // Solo para el ajuste de tiempo en el nivel actual
     consecutiveErrors = 0; // Reiniciar errores consecutivos
     if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount;
     if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
