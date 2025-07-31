@@ -63,7 +63,7 @@ let wordIndex = 0; // Índice de la palabra actual en availableWords
 let correctWordsCount = 0; // Contador acumulativo de palabras correctas (global)
 let wordsCorrectInCurrentDifficulty = 0; // Contador de palabras correctas en el nivel de dificultad actual (para ajuste de tiempo)
 let consecutiveErrors = 0;
-let totalErrors = 0;
+let totalErrors = 0; // Contador global de errores
 let gameStartTime;
 let gameTimerInterval;
 let timeRemainingSeconds; // Usaremos segundos con decimales para mayor precisión
@@ -85,7 +85,8 @@ let gameStartMenu;
 let startGameButton;
 let gamePlayArea;
 let correctWordsDisplay;
-let consecutiveErrorsDisplay;
+// Referencia actualizada para mostrar errores totales
+let totalErrorsDisplay;
 let timeBar;
 let currentWordDisplay;
 let specialCharHint;
@@ -133,9 +134,14 @@ function showScreen(screenId) {
     }
 }
 
-// Normaliza una cadena eliminando acentos y diacríticos
+// Normaliza una cadena eliminando acentos y diacríticos, y la convierte a minúsculas
 function normalizeString(str) {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+// Normaliza una cadena de atajo de teclado para comparación (ej. "Ctrl+C" a "CTRL+C")
+function normalizeShortcut(shortcutStr) {
+    return shortcutStr.toUpperCase().replace(/\s/g, ''); // Convertir a mayúsculas y quitar espacios
 }
 
 // Actualiza la barra de tiempo visualmente
@@ -172,7 +178,8 @@ window.initDexterityGame = function() {
     startGameButton = document.getElementById('start-game-button');
     gamePlayArea = document.getElementById('game-play-area');
     correctWordsDisplay = document.getElementById('correct-words-display');
-    consecutiveErrorsDisplay = document.getElementById('consecutive-errors-display');
+    // Referencia actualizada
+    totalErrorsDisplay = document.getElementById('total-errors-display');
     timeBar = document.getElementById('time-bar');
     currentWordDisplay = document.getElementById('current-word-display');
     specialCharHint = document.getElementById('special-char-hint');
@@ -189,7 +196,10 @@ window.initDexterityGame = function() {
 
     // Configurar Event Listeners
     if (startGameButton) startGameButton.addEventListener('click', startGame);
+    // El listener 'input' es para palabras normales
     if (wordInput) wordInput.addEventListener('input', handleInput);
+    // El listener 'keydown' es para atajos de teclado
+    if (wordInput) wordInput.addEventListener('keydown', handleKeyDown);
     if (exitGameButton) exitGameButton.addEventListener('click', exitGame);
     if (retryGameButton) retryGameButton.addEventListener('click', startGame);
     if (exitResultsButton) exitResultsButton.addEventListener('click', exitGame);
@@ -222,7 +232,8 @@ function resetGame() {
 
     // Reiniciar los displays
     if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount;
-    if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
+    // Actualizar display de errores totales
+    if (totalErrorsDisplay) totalErrorsDisplay.textContent = totalErrors;
     if (wordInput) {
         wordInput.value = '';
         wordInput.disabled = false; // Habilitar el input al reiniciar
@@ -312,8 +323,17 @@ function loadNewWord() {
         if (currentWord.type === "special" || currentWord.type === "shortcut") {
             specialCharHint.textContent = `Pista: ${currentWord.hint}`;
             specialCharHint.classList.remove('hidden');
+            // Para atajos, limpiar el input y deshabilitar para que solo keydown lo maneje
+            if (wordInput) {
+                wordInput.value = '';
+                wordInput.disabled = true; // Deshabilitar input para atajos
+            }
         } else {
             specialCharHint.classList.add('hidden');
+            // Para palabras normales, asegurar que el input esté habilitado
+            if (wordInput) {
+                wordInput.disabled = false; // Habilitar input para palabras normales
+            }
         }
     }
     if (wordInput) {
@@ -347,16 +367,23 @@ function startTimer() {
     }, UPDATE_INTERVAL_MS);
 }
 
-// Maneja la entrada del usuario
+// Maneja la entrada del usuario para palabras normales y caracteres especiales (no atajos)
 function handleInput() {
     // Si el input está deshabilitado o el juego no está activo, ignorar cualquier entrada
-    if (!gameActive || (wordInput && wordInput.disabled)) {
-        console.log("handleInput: Game not active or input disabled. Returning."); // Log de depuración
+    // También ignorar si la palabra actual es un atajo (manejo por keydown)
+    if (!gameActive || (wordInput && wordInput.disabled) || currentWord.type === "shortcut") {
+        console.log("handleInput: Game not active, input disabled, or current word is a shortcut. Returning."); // Log de depuración
         return;
     }
 
     const inputText = wordInput.value;
     const targetWord = currentWord.word;
+    
+    // Convertir ambos a minúsculas para la comparación general
+    const inputLower = inputText.toLowerCase();
+    const targetLower = targetWord.toLowerCase();
+
+    // Normalizar ambos a minúsculas y sin acentos para la comparación tolerante a acentos
     const normalizedInputText = normalizeString(inputText);
     const normalizedTargetWord = normalizeString(targetWord);
 
@@ -378,23 +405,19 @@ function handleInput() {
         return;
     }
 
-    // Caso 2: La entrada actual (normalizada) no coincide con el prefijo de la palabra objetivo (normalizada)
-    // Esto captura errores de tecleo fundamentales (ej: "caxa" para "casa"), ignorando acentos por ahora.
-    // Importante: No se usa startsWith para permitir la entrada de teclas muertas.
+    // Caso 2: La entrada actual (normalizada y en minúsculas) no coincide con el prefijo de la palabra objetivo (normalizada y en minúsculas)
+    // Esto captura errores de tecleo fundamentales.
     let isPartialMatch = true;
     for (let i = 0; i < inputText.length; i++) {
-        const inputChar = inputText[i];
-        const targetChar = targetWord[i];
-
-        // Compara los caracteres normalizados. Esto permite "a" vs "á" como match parcial.
-        if (normalizeString(inputChar) !== normalizeString(targetChar)) {
+        // Compara los caracteres normalizados y en minúsculas
+        if (normalizeString(inputText[i]) !== normalizeString(targetWord[i])) {
             isPartialMatch = false;
             break;
         }
     }
 
     if (!isPartialMatch) {
-        // Si no es un prefijo válido (incluso ignorando acentos), es un error de tecleo
+        // Si no es un prefijo válido (incluso ignorando acentos y caso), es un error de tecleo
         wordInput.classList.add('border-error');
         if (currentWordDisplay && currentWordDisplay.parentElement) {
             currentWordDisplay.parentElement.classList.add('border-error');
@@ -414,12 +437,18 @@ function handleInput() {
 
     // Caso 3: La longitud de la entrada coincide con la longitud de la palabra objetivo
     if (inputText.length === targetWord.length) {
-        if (inputText === targetWord) {
-            // Coincidencia exacta (incluyendo acentos)
+        // Para la coincidencia final, comparamos el input y el target en minúsculas.
+        // Esto permite que "Ctrl+Z" y "ctrl+z" sean correctos.
+        // Si el input original coincide exactamente con el target original (incluyendo acentos y caso)
+        // O si el input en minúsculas coincide con el target en minúsculas Y normalizados son iguales
+        // Esto cubre casos como "área" (target) vs "área" (input) -> Correcto
+        // y "Ctrl+Z" (target) vs "ctrl+z" (input) -> Correcto
+        if (inputText === targetWord || inputLower === targetLower) {
             handleCorrectInputLogic(); // Incrementa contador de palabras correctas
         } else {
-            // Coincidencia normalizada pero no exacta (ej: "casa" vs "cása")
-            // Se cuenta como error y se avanza
+            // Esto se activará si, por ejemplo, target es "área" y input es "area".
+            // normalized("área") === normalized("area") es true, pero "área" !== "area".
+            // Se cuenta como error y se avanza.
             handleIncorrectInputLogic(); // Incrementa contadores de error
             wordInput.classList.remove('border-success'); // Quitar verde si no fue exacto
             wordInput.classList.add('border-error'); // Poner rojo
@@ -436,6 +465,71 @@ function handleInput() {
     // el usuario sigue escribiendo y el temporizador sigue corriendo.
 }
 
+// Maneja la entrada del usuario para atajos de teclado (keydown)
+function handleKeyDown(event) {
+    // Solo procesar si el juego está activo y la palabra actual es un atajo
+    if (!gameActive || currentWord.type !== "shortcut") {
+        return;
+    }
+
+    // Prevenir el comportamiento predeterminado del navegador para los atajos
+    // Esto es crucial para que el navegador no realice su acción por defecto (ej. Alt+Tab)
+    event.preventDefault();
+
+    let pressedShortcut = '';
+    if (event.ctrlKey) pressedShortcut += 'CTRL+';
+    if (event.altKey) pressedShortcut += 'ALT+';
+    if (event.shiftKey) pressedShortcut += 'SHIFT+';
+    // Para la tecla "Windows" o "Command" (Meta key)
+    if (event.metaKey) pressedShortcut += 'WIN+';
+
+    // Mapear event.key a los nombres de atajo que usamos
+    let mainKey = event.key.toUpperCase();
+    // Casos especiales para teclas que tienen nombres diferentes en event.key vs. el nombre común
+    if (mainKey === ' ') mainKey = 'SPACE'; // Para la barra espaciadora si fuera un atajo
+    if (mainKey === 'ARROWUP') mainKey = 'UP';
+    if (mainKey === 'ARROWDOWN') mainKey = 'DOWN';
+    if (mainKey === 'ARROWLEFT') mainKey = 'LEFT';
+    if (mainKey === 'ARROWRIGHT') mainKey = 'RIGHT';
+    if (mainKey === 'DELETE') mainKey = 'SUPR'; // Mapear 'Delete' a 'Supr'
+
+    // Añadir la tecla principal si no es solo un modificador
+    // Evitar añadir modificadores solos como la "tecla principal" (ej. si solo presionas Ctrl, no queremos "CTRL+CONTROL")
+    if (!['CONTROL', 'ALT', 'SHIFT', 'META'].includes(mainKey)) {
+        pressedShortcut += mainKey;
+    } else if (pressedShortcut.endsWith('+')) {
+        // Si solo se presionó un modificador y no hay otra tecla, quitar el '+' final
+        // Esto es para que si solo presionas Ctrl, el string sea "CTRL" y no "CTRL+"
+        pressedShortcut = pressedShortcut.slice(0, -1);
+    }
+
+    // Normalizar el atajo presionado para la comparación
+    const normalizedPressed = normalizeShortcut(pressedShortcut);
+    const normalizedTarget = normalizeShortcut(currentWord.word);
+
+    console.log(`Pressed: ${pressedShortcut} (Normalized: ${normalizedPressed}), Target: ${currentWord.word} (Normalized: ${normalizedTarget})`);
+
+    // Comparar el atajo presionado con la palabra objetivo
+    if (normalizedPressed === normalizedTarget) {
+        wordInput.classList.add('border-success');
+        if (currentWordDisplay && currentWordDisplay.parentElement) {
+            currentWordDisplay.parentElement.classList.add('border-success');
+        }
+        handleCorrectInputLogic();
+    } else {
+        wordInput.classList.add('border-error');
+        if (currentWordDisplay && currentWordDisplay.parentElement) {
+            currentWordDisplay.parentElement.classList.add('border-error');
+        }
+        handleIncorrectInputLogic();
+    }
+
+    // Siempre avanzar a la siguiente palabra después de un intento de atajo
+    wordIndex++;
+    loadNewWord();
+}
+
+
 // Lógica para manejar una entrada correcta (actualiza contadores)
 function handleCorrectInputLogic() {
     if (!gameActive) {
@@ -446,9 +540,10 @@ function handleCorrectInputLogic() {
     wordsCorrectInCurrentDifficulty++; // Solo para el ajuste de tiempo en el nivel actual
     consecutiveErrors = 0; // Reiniciar errores consecutivos
     if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount;
-    if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
+    // totalErrorsDisplay no se actualiza aquí, solo en handleIncorrectInputLogic y resetGame
+    if (totalErrorsDisplay) totalErrorsDisplay.textContent = totalErrors; // Asegurarse de que se mantenga actualizado si no hay error
     console.log(`Correct word! Correct count: ${correctWordsCount}, Consecutive errors: ${consecutiveErrors}`); // Log de depuración
-    // El feedback visual se maneja en handleInput
+    // El feedback visual se maneja en handleInput o handleKeyDown
 }
 
 // Lógica para manejar una entrada incorrecta (actualiza contadores)
@@ -457,12 +552,13 @@ function handleIncorrectInputLogic() {
         console.log("handleIncorrectInputLogic: Game not active, skipping update."); // Log de depuración
         return; // No actualizar si el juego no está activo
     }
-    totalErrors++;
+    totalErrors++; // Siempre acumulativo
     consecutiveErrors++;
-    if (consecutiveErrorsDisplay) consecutiveErrorsDisplay.textContent = consecutiveErrors;
+    if (totalErrorsDisplay) totalErrorsDisplay.textContent = totalErrors; // Actualizar display de errores totales
+    if (correctWordsDisplay) correctWordsDisplay.textContent = correctWordsCount; // Asegurarse de que se mantenga actualizado
     console.log(`Incorrect word! Total errors: ${totalErrors}, Consecutive errors: ${consecutiveErrors}`); // Log de depuración
 
-    // El feedback visual se maneja en handleInput
+    // El feedback visual se maneja en handleInput o handleKeyDown
 
     if (consecutiveErrors >= MAX_CONSECUTIVE_ERRORS) {
         console.log("Max consecutive errors reached. Ending game."); // Log de depuración
